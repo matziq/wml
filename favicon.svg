@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    :root {
+      --cp-bg: #f3f0e6;
+      --cp-surface: #ffffff;
+      --cp-text: #0f2d45;
+      --cp-accent: #b38a1f;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --cp-bg: #071b2b;
+        --cp-surface: #0f2f46;
+        --cp-text: #f2efe6;
+        --cp-accent: #e4bd54;
+      }
+    }
+    .frame {
+      fill: var(--cp-text);
+      stroke: var(--cp-accent);
+      stroke-width: 2.5;
+    }
+    .letters {
+      fill: var(--cp-bg);
+      font: 700 20px Georgia, "Times New Roman", serif;
+      letter-spacing: -1.5px;
+    }
+    .path {
+      fill: none;
+      stroke: var(--cp-accent);
+      stroke-linecap: round;
+      stroke-width: 2;
+    }
+    .node { fill: var(--cp-accent); }
+  </style>
+  <rect width="64" height="64" rx="14" fill="var(--cp-bg)"/>
+  <circle class="frame" cx="32" cy="32" r="24"/>
+  <text class="letters" x="32" y="36" text-anchor="middle">LSI</text>
+  <path class="path" d="M22 44h20"/>
+  <circle class="node" cx="22" cy="44" r="2.5"/>
+  <circle class="node" cx="32" cy="44" r="2.5"/>
+  <circle class="node" cx="42" cy="44" r="2.5"/>
+</svg>

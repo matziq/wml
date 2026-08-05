@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Practical gospel-sharing tips for the Beacon missionary style.">
+  <meta name="theme-color" content="#b11f4b">
+  <title>The Beacon Tips | Missionary Styles</title>
+  <script>
+    (() => {
+      const param = new URLSearchParams(window.location.search).get("scoutTheme");
+      const theme =
+        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <link rel="stylesheet" href="personality.css">
+</head>
+<body data-type="beacon">
+  <main class="shell">
+    <a class="site-link" href="personality.html">&larr; Retake the quiz</a>
+    <p class="eyebrow">Your missionary style</p>
+    <div class="type-mark" id="profile-mark" aria-hidden="true"></div>
+    <h1 id="profile-name">The Beacon</h1>
+    <p class="lede" id="profile-tagline"></p>
+    <section class="card" aria-labelledby="strength-title">
+      <h2 id="strength-title">Your superpower</h2>
+      <p id="profile-strength"></p>
+      <h3>Your growth edge</h3>
+      <p id="profile-challenge"></p>
+    </section>
+    <h2 class="eyebrow">Six ways to share naturally</h2>
+    <section class="tip-grid" id="tip-grid" aria-label="Tips for the Beacon"></section>
+    <div class="result-actions">
+      <a class="button" href="./">Explore all activity ideas</a>
+      <a class="button button-secondary" href="personality.html">Retake quiz</a>
+    </div>
+    <footer class="footer">Use what feels natural. Practice one small stretch.</footer>
+  </main>
+  <script src="personality-tips.js"></script>
+</body>
+</html>
