@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Take a quick, strengths-based quiz to discover your natural way of sharing the gospel.">
+  <meta name="theme-color" content="#b11f4b">
+  <title>What's Your Missionary Style?</title>
+  <script>
+    (() => {
+      const param = new URLSearchParams(window.location.search).get("scoutTheme");
+      const theme =
+        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <link rel="stylesheet" href="personality.css">
+</head>
+<body>
+  <main class="shell">
+    <a class="site-link" href="./" aria-label="Back to Love, Share, Invite">&larr; Love &middot; Share &middot; Invite</a>
+
+    <section id="intro" aria-labelledby="intro-title">
+      <p class="eyebrow">2-minute activity</p>
+      <h1 id="intro-title">What's your missionary style?</h1>
+      <p class="lede">There is no single right way to share the gospel. Pick the answer that feels most like you&mdash;not the answer you think you should choose.</p>
+
+      <div class="card">
+        <div class="details" aria-label="Quiz details">
+          <div class="detail"><strong>8</strong><span>questions</span></div>
+          <div class="detail"><strong>4</strong><span>styles</span></div>
+          <div class="detail"><strong>0</strong><span>wrong answers</span></div>
+        </div>
+        <button class="button button-block" id="start-button" type="button">Find my style</button>
+        <p class="privacy">Your answers stay on this device. Nothing is collected or submitted.</p>
+      </div>
+    </section>
+
+    <section id="quiz" class="card" aria-labelledby="question" hidden>
+      <div class="progress-label">
+        <span id="progress-text">Question 1 of 8</span>
+        <span id="progress-percent">13%</span>
+      </div>
+      <div class="progress" aria-hidden="true">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+      <h2 class="question" id="question" tabindex="-1"></h2>
+      <div class="answers" id="answers"></div>
+      <div class="quiz-actions">
+        <button class="button button-secondary" id="back-button" type="button">Back</button>
+        <button class="button" id="next-button" type="button" disabled>Next</button>
+      </div>
+    </section>
+
+    <section id="result" aria-live="polite" hidden>
+      <p class="eyebrow">Your natural style</p>
+      <div class="type-mark" id="result-mark" aria-hidden="true"></div>
+      <h1 id="result-title" tabindex="-1"></h1>
+      <p class="lede" id="result-summary"></p>
+      <div class="group-callout">
+        <strong id="group-name"></strong>
+        Find the table or sign with your group name.
+      </div>
+      <div class="result-actions">
+        <a class="button" id="tips-link" href="#">See my tip cards</a>
+        <button class="button button-secondary" id="retake-button" type="button">Retake</button>
+      </div>
+    </section>
+
+    <footer class="footer">Different styles. One shared purpose: love, share, and invite.</footer>
+  </main>
+  <script src="personality.js"></script>
+</body>
+</html>
