@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    .bg { fill: #242424; }
+    .mark { fill: #f7f4ef; font: 700 30px "Segoe UI", sans-serif; }
+    .heart { fill: #b11f4b; }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #dedede; }
+      .mark { fill: #292929; }
+      .heart { fill: #fd8ea1; }
+    }
+  </style>
+  <rect class="bg" width="64" height="64" rx="14"/>
+  <text class="mark" x="30" y="43" text-anchor="middle">W</text>
+  <path class="heart" d="M48 14c-4-4-11 1-7 6l7 7 7-7c4-5-3-10-7-6Z"/>
+</svg>
