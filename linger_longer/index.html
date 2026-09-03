@@ -1,0 +1,2372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Linger Longer Potluck Sign-Up Sheet</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <style>
+        :root {
+            --bg: #f4f7ff;
+            --paper: #ffffff;
+            --ink: #1c2440;
+            --muted: #5b6680;
+            --line: #dfe4f2;
+            --primary: #c8102e;
+            --primary-dark: #9c0c24;
+            --primary-soft: #fbdfe3;
+            --accent: #1d3461;
+            --accent-soft: #dce6f7;
+            --danger: #a93535;
+            --danger-soft: #ffe8e8;
+            --success: #2d7a3f;
+            --success-soft: #e9f7ec;
+            --shadow: 0 18px 45px rgba(29, 52, 97, 0.16);
+            --radius: 18px;
+            --font: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        img,
+        svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at top left, rgba(91, 141, 255, 0.20), transparent 36rem),
+                radial-gradient(circle at top right, rgba(200, 16, 46, 0.16), transparent 34rem),
+                linear-gradient(135deg, #ffffff 0%, var(--bg) 56%, #e7edff 100%);
+            color: var(--ink);
+            font-family: var(--font);
+            line-height: 1.5;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font: inherit;
+        }
+
+        button {
+            border: 0;
+            border-radius: 999px;
+            padding: 0.72rem 1rem;
+            background: var(--primary);
+            color: #fff;
+            cursor: pointer;
+            font-weight: 700;
+            max-width: 100%;
+            line-height: 1.2;
+            white-space: normal;
+            box-shadow: 0 8px 18px rgba(111, 54, 15, 0.18);
+            transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+        }
+
+        button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            cursor: not-allowed;
+            opacity: 0.52;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-secondary {
+            background: #ffffff;
+            color: var(--primary-dark);
+            border: 1px solid var(--line);
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background: #fff7ed;
+        }
+
+        .btn-accent {
+            background: var(--accent);
+        }
+
+        .btn-accent:hover {
+            background: #245f55;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+        }
+
+        .btn-danger:hover {
+            background: #842929;
+        }
+
+        .btn-small {
+            padding: 0.45rem 0.7rem;
+            font-size: 0.86rem;
+        }
+
+        .btn-icon {
+            min-width: 2.35rem;
+            padding-inline: 0.65rem;
+        }
+
+        .page {
+            width: min(1180px, calc(100% - 28px));
+            margin: 20px auto 42px;
+            overflow-x: clip;
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(200, 16, 46, 0.94), rgba(29, 52, 97, 0.92));
+            color: #fff;
+            border-radius: 28px;
+            box-shadow: var(--shadow);
+            min-height: 270px;
+        }
+
+        .hero.has-image::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: var(--hero-image);
+            background-position: center 55%;
+            background-size: cover;
+            filter: saturate(1.08);
+            opacity: 0.7;
+            transform: scale(1.04);
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(12, 22, 48, 0.92), rgba(16, 28, 60, 0.72) 42%, rgba(120, 16, 36, 0.26));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: clamp(1.45rem, 4vw, 3.2rem);
+            display: grid;
+            gap: 1rem;
+            align-content: center;
+            min-height: 270px;
+            text-shadow: 0 2px 16px rgba(0, 0, 0, 0.38);
+        }
+
+        .eyebrow {
+            margin: 0;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            font-weight: 800;
+            opacity: 0.88;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(2.2rem, 7vw, 5.2rem);
+            line-height: 0.95;
+            letter-spacing: -0.06em;
+            max-width: 860px;
+            overflow-wrap: anywhere;
+        }
+
+        .title-row {
+            display: flex;
+            align-items: center;
+            gap: clamp(0.5rem, 2vw, 1.1rem);
+            flex-wrap: wrap;
+        }
+
+        .title-flag {
+            flex: 0 0 auto;
+            width: clamp(2rem, 5vw, 3.4rem);
+            height: clamp(1.33rem, 3.33vw, 2.27rem);
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            display: block;
+        }
+
+        .title-flag svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+            border-radius: inherit;
+        }
+
+        .hero-details {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.7rem;
+            margin-top: 0.25rem;
+        }
+
+        .hero-print-btn {
+            margin-left: auto;
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.96);
+            color: var(--primary-dark, #5b2f12);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .hero-print-btn:hover {
+            background: #ffffff;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.5rem 0.82rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.16);
+            border: 1px solid rgba(255, 255, 255, 0.26);
+            backdrop-filter: blur(8px);
+            font-weight: 700;
+            min-width: 0;
+            overflow-wrap: anywhere;
+        }
+
+        .pill-provided {
+            background: linear-gradient(135deg, rgba(200, 16, 46, 0.92), rgba(232, 122, 34, 0.92));
+            border-color: rgba(255, 255, 255, 0.55);
+            color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+            letter-spacing: 0.01em;
+        }
+
+        .hero-note {
+            margin: 0;
+            max-width: 760px;
+            font-size: clamp(1rem, 2vw, 1.17rem);
+            opacity: 0.95;
+        }
+
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            align-items: center;
+            justify-content: space-between;
+            margin: 18px 0;
+        }
+
+        .toolbar-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            min-width: 0;
+        }
+
+        .notice {
+            flex: 1 1 320px;
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.94rem;
+        }
+
+        .dismissible-notice {
+            display: flex;
+            align-items: start;
+            justify-content: space-between;
+            gap: 0.7rem;
+            min-width: 0;
+        }
+
+        .dismissible-notice[hidden] {
+            display: none;
+        }
+
+        .notice-dismiss {
+            flex: 0 0 auto;
+            padding: 0.38rem 0.62rem;
+            background: #ffffff;
+            color: var(--primary-dark);
+            border: 1px solid var(--line);
+            box-shadow: none;
+            font-size: 0.8rem;
+        }
+
+        .panel-heading-row {
+            display: flex;
+            align-items: start;
+            justify-content: space-between;
+            gap: 0.7rem;
+        }
+
+        .panel-heading-row h2,
+        .panel-heading-row h3 {
+            margin-bottom: 0;
+        }
+
+        .needs-banner {
+            display: grid;
+            gap: 0.75rem;
+            margin: 18px 0;
+            padding: 0.95rem;
+            border: 1px solid rgba(234, 223, 206, 0.95);
+            border-radius: var(--radius);
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow: 0 10px 28px rgba(97, 62, 28, 0.08);
+        }
+
+        .needs-banner[hidden] {
+            display: none;
+        }
+
+        .needs-banner-head {
+            display: flex;
+            align-items: start;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+
+        .needs-banner-title {
+            margin: 0;
+            color: var(--primary-dark);
+            font-size: 1rem;
+            font-weight: 900;
+            letter-spacing: -0.01em;
+        }
+
+        .needs-banner-note {
+            margin: 0.15rem 0 0;
+            color: var(--muted);
+            font-size: 0.86rem;
+            font-weight: 700;
+        }
+
+        .needs-dismiss {
+            flex: 0 0 auto;
+            padding: 0.42rem 0.7rem;
+            background: #fff7ed;
+            color: var(--primary-dark);
+            border: 1px solid var(--line);
+            box-shadow: none;
+            font-size: 0.84rem;
+        }
+
+        .needs-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .need-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.38rem;
+            min-width: 0;
+            padding: 0.44rem 0.62rem;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: #fffdf9;
+            color: var(--muted);
+            font-weight: 900;
+            font-size: 0.9rem;
+            line-height: 1.2;
+        }
+
+        .need-chip strong {
+            color: inherit;
+            font-size: 1.02em;
+        }
+
+        .need-chip.need-high {
+            color: #b3261e;
+            border-color: rgba(179, 38, 30, 0.28);
+            background: #fff3f1;
+        }
+
+        .need-chip.need-medium {
+            color: #b45309;
+            border-color: rgba(180, 83, 9, 0.3);
+            background: #fff7ed;
+        }
+
+        .need-chip.need-low {
+            color: #a16207;
+            border-color: rgba(161, 98, 7, 0.34);
+            background: #fffbeb;
+        }
+
+        .need-chip.need-full {
+            color: var(--success);
+            border-color: rgba(45, 122, 63, 0.24);
+            background: var(--success-soft);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: minmax(280px, 390px) 1fr;
+            gap: 18px;
+            align-items: start;
+            min-width: 0;
+        }
+
+        .signup-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .signup-top {
+            order: -1;
+        }
+
+        .signup-top #signup-form {
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            align-items: end;
+        }
+
+        .signup-top #signup-form button[type="submit"] {
+            min-height: 3rem;
+        }
+
+        .grid>* {
+            min-width: 0;
+        }
+
+        .panel,
+        .category-card {
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(234, 223, 206, 0.9);
+            border-radius: var(--radius);
+            box-shadow: 0 10px 28px rgba(97, 62, 28, 0.08);
+        }
+
+        .panel {
+            padding: 1rem;
+        }
+
+        .panel+.panel {
+            margin-top: 14px;
+        }
+
+        .panel h2,
+        .panel h3 {
+            margin: 0 0 0.8rem;
+            color: var(--primary-dark);
+            letter-spacing: -0.02em;
+        }
+
+        .panel h2 {
+            font-size: 1.16rem;
+        }
+
+        .panel h3 {
+            font-size: 1rem;
+        }
+
+        .form-grid {
+            display: grid;
+            gap: 0.78rem;
+        }
+
+        .two-col {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        label {
+            display: grid;
+            gap: 0.28rem;
+            color: var(--muted);
+            font-size: 0.82rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        label[hidden] {
+            display: none;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            min-width: 0;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 0.74rem 0.82rem;
+            background: #fffdf9;
+            color: var(--ink);
+            outline: none;
+            text-transform: none;
+            letter-spacing: normal;
+            font-weight: 600;
+        }
+
+        textarea {
+            min-height: 82px;
+            resize: vertical;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(46, 125, 111, 0.12);
+        }
+
+        .hint {
+            margin: 0.4rem 0 0;
+            color: var(--muted);
+            font-size: 0.86rem;
+        }
+
+        .settings-area {
+            display: none;
+        }
+
+        .settings-area.open {
+            display: block;
+        }
+
+        .category-editor {
+            display: grid;
+            gap: 0.65rem;
+            max-height: 440px;
+            overflow: auto;
+            padding-right: 0.2rem;
+        }
+
+        .category-edit-row {
+            display: grid;
+            grid-template-columns: 3.5rem 1fr 5rem auto;
+            gap: 0.45rem;
+            align-items: end;
+            padding: 0.55rem;
+            background: #fffaf2;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+        }
+
+        .category-edit-row label {
+            font-size: 0.68rem;
+        }
+
+        .category-edit-row input {
+            padding: 0.55rem;
+            border-radius: 10px;
+        }
+
+        .signup-status {
+            margin: 0.85rem 0 0;
+            padding: 0.75rem 0.85rem;
+            border-radius: 14px;
+            background: var(--accent-soft);
+            color: #1e5d52;
+            font-weight: 700;
+            display: none;
+        }
+
+        .signup-status.error {
+            background: var(--danger-soft);
+            color: var(--danger);
+        }
+
+        .signup-status.success {
+            background: var(--success-soft);
+            color: var(--success);
+        }
+
+        .signup-status.visible {
+            display: block;
+        }
+
+        .summary-strip {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .stat {
+            padding: 0.9rem;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.86);
+            border: 1px solid var(--line);
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 1.55rem;
+            color: var(--primary-dark);
+            line-height: 1;
+        }
+
+        .stat span {
+            color: var(--muted);
+            font-weight: 700;
+            font-size: 0.86rem;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: 14px;
+        }
+
+        .category-card {
+            overflow: hidden;
+            min-width: 0;
+        }
+
+        .category-head {
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr) auto;
+            gap: 0.75rem;
+            align-items: center;
+            padding: 1rem;
+            background: linear-gradient(135deg, #fff8ec, #ffffff);
+            border-bottom: 1px solid var(--line);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .category-head:focus-visible {
+            outline: 3px solid rgba(46, 125, 111, 0.28);
+            outline-offset: -3px;
+        }
+
+        .cat-icon {
+            width: 3.1rem;
+            height: 3.1rem;
+            display: grid;
+            place-items: center;
+            border-radius: 16px;
+            background: var(--primary-soft);
+            font-size: 1.8rem;
+            box-shadow: inset 0 0 0 1px rgba(139, 69, 19, 0.08);
+        }
+
+        .category-head h3 {
+            margin: 0;
+            font-size: 1.12rem;
+            color: var(--primary-dark);
+            overflow-wrap: anywhere;
+        }
+
+        .category-head p {
+            margin: 0.12rem 0 0;
+            color: var(--muted);
+            font-size: 0.88rem;
+            font-weight: 700;
+            overflow-wrap: anywhere;
+        }
+
+        .count-badge {
+            border-radius: 999px;
+            padding: 0.45rem 0.7rem;
+            background: var(--accent-soft);
+            color: #1f5f55;
+            font-size: 0.84rem;
+            font-weight: 900;
+            white-space: nowrap;
+        }
+
+        .count-badge.full {
+            background: var(--success-soft);
+            color: var(--success);
+        }
+
+        .category-meta {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 0.45rem;
+            min-width: 0;
+        }
+
+        .collapse-indicator {
+            width: 1.85rem;
+            height: 1.85rem;
+            display: inline-grid;
+            place-items: center;
+            border-radius: 999px;
+            background: #fffaf2;
+            border: 1px solid var(--line);
+            color: var(--primary-dark);
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .slots {
+            padding: 0.8rem;
+            display: grid;
+            gap: 0.55rem;
+        }
+
+        .category-card.collapsed .slots {
+            display: none;
+        }
+
+        .slot {
+            display: grid;
+            grid-template-columns: 2rem minmax(0, 1fr) auto;
+            gap: 0.65rem;
+            align-items: center;
+            padding: 0.68rem;
+            border: 1px dashed #d8c5aa;
+            border-radius: 14px;
+            background: #fffdf9;
+            min-height: 72px;
+        }
+
+        .slot.filled {
+            border-style: solid;
+            background: #fffaf0;
+        }
+
+        .slot-number {
+            width: 2rem;
+            height: 2rem;
+            display: grid;
+            place-items: center;
+            border-radius: 999px;
+            background: #f1e4d3;
+            color: var(--primary-dark);
+            font-weight: 900;
+        }
+
+        .slot-empty {
+            color: var(--muted);
+            font-weight: 800;
+        }
+
+        .slot-name {
+            font-weight: 900;
+            color: var(--ink);
+            overflow-wrap: anywhere;
+        }
+
+        .slot-item {
+            color: var(--primary-dark);
+            font-weight: 800;
+            overflow-wrap: anywhere;
+        }
+
+        .slot-contact {
+            color: var(--muted);
+            font-size: 0.84rem;
+            word-break: break-word;
+        }
+
+        .slot-actions {
+            display: flex;
+            gap: 0.35rem;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .empty-state {
+            padding: 2rem;
+            text-align: center;
+            color: var(--muted);
+            border: 2px dashed var(--line);
+            border-radius: var(--radius);
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        .file-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            align-items: center;
+        }
+
+        .file-row input[type="file"] {
+            display: none;
+        }
+
+        .footer-note {
+            margin: 22px 0 0;
+            color: var(--muted);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 900px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .panel-stack {
+                order: -1;
+            }
+
+            .summary-strip {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 560px) {
+            body {
+                background: linear-gradient(180deg, #fffdf8 0%, var(--bg) 100%);
+            }
+
+            .page {
+                width: min(100% - 12px, 1180px);
+                margin-top: 6px;
+            }
+
+            .hero {
+                border-radius: 18px;
+                min-height: auto;
+            }
+
+            .hero.has-image::before {
+                background-position: center bottom;
+                filter: saturate(0.8) blur(2px);
+                opacity: 0.08;
+                transform: scale(1.08);
+            }
+
+            .hero::after {
+                background: linear-gradient(180deg, rgba(12, 22, 48, 0.97), rgba(12, 22, 48, 0.9));
+            }
+
+            .hero-content {
+                min-height: auto;
+                padding: 1.25rem;
+                gap: 0.85rem;
+            }
+
+            .eyebrow {
+                font-size: 0.72rem;
+                letter-spacing: 0.12em;
+            }
+
+            h1 {
+                font-size: clamp(2rem, 13vw, 3.2rem);
+                line-height: 1;
+                letter-spacing: -0.04em;
+                max-width: 100%;
+            }
+
+            .hero-note {
+                font-size: 0.98rem;
+            }
+
+            .hero-details {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 0.45rem;
+            }
+
+            .pill {
+                width: 100%;
+                justify-content: flex-start;
+                border-radius: 14px;
+                padding: 0.48rem 0.65rem;
+            }
+
+            .toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .notice {
+                flex: none;
+                width: 100%;
+            }
+
+            .toolbar-actions {
+                display: grid;
+                grid-template-columns: 1fr;
+                width: 100%;
+            }
+
+            .dismissible-notice,
+            .panel-heading-row {
+                display: grid;
+            }
+
+            .notice-dismiss {
+                width: 100%;
+            }
+
+            .needs-banner-head {
+                display: grid;
+            }
+
+            .needs-dismiss {
+                width: 100%;
+            }
+
+            .needs-list {
+                display: grid;
+                grid-template-columns: 1fr;
+            }
+
+            .need-chip {
+                border-radius: 14px;
+                justify-content: space-between;
+            }
+
+            .toolbar-actions button,
+            .file-row button,
+            .file-row label.btn-secondary {
+                width: 100%;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .signup-top #signup-form {
+                grid-template-columns: 1fr;
+            }
+
+            .panel {
+                padding: 0.9rem;
+                border-radius: 16px;
+            }
+
+            .two-col,
+            .category-edit-row {
+                grid-template-columns: 1fr;
+            }
+
+            .category-edit-row {
+                align-items: stretch;
+            }
+
+            .summary-strip {
+                gap: 8px;
+            }
+
+            .stat {
+                padding: 0.75rem;
+            }
+
+            .category-head {
+                grid-template-columns: 2.55rem minmax(0, 1fr);
+                gap: 0.65rem;
+                align-items: start;
+                padding: 0.85rem;
+            }
+
+            .cat-icon {
+                width: 2.55rem;
+                height: 2.55rem;
+                border-radius: 13px;
+                font-size: 1.45rem;
+            }
+
+            .count-badge {
+                justify-self: start;
+                white-space: normal;
+                text-align: center;
+            }
+
+            .category-meta {
+                grid-column: 1 / -1;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+            }
+
+            .slots {
+                padding: 0.65rem;
+            }
+
+            .slot {
+                grid-template-columns: 1.8rem minmax(0, 1fr);
+                align-items: start;
+                gap: 0.55rem;
+                padding: 0.62rem;
+            }
+
+            .slot-number {
+                width: 1.8rem;
+                height: 1.8rem;
+            }
+
+            .slot-actions {
+                grid-column: 1 / -1;
+                justify-content: flex-start;
+                padding-left: 2.35rem;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .page {
+                width: min(100% - 8px, 1180px);
+            }
+
+            .hero-content {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: clamp(1.8rem, 12vw, 2.65rem);
+            }
+
+            .category-head {
+                grid-template-columns: 1fr;
+            }
+
+            .cat-icon {
+                width: 2.4rem;
+                height: 2.4rem;
+            }
+
+            .slot {
+                grid-template-columns: 1fr;
+            }
+
+            .slot-actions {
+                padding-left: 0;
+            }
+        }
+
+        @media print {
+            @page {
+                margin: 0.45in;
+            }
+
+            body {
+                background: #fff;
+                color: #000;
+            }
+
+            .page {
+                width: 100%;
+                margin: 0;
+            }
+
+            .hero {
+                color: #000;
+                background: #fff;
+                box-shadow: none;
+                border: 2px solid #000;
+                border-radius: 0;
+                min-height: auto;
+                break-inside: avoid;
+            }
+
+            .hero::before,
+            .hero::after {
+                display: none;
+            }
+
+            .hero-content {
+                min-height: auto;
+                padding: 0.35in;
+            }
+
+            h1 {
+                font-size: 34pt;
+                letter-spacing: -0.03em;
+            }
+
+            .pill {
+                color: #000;
+                background: #fff;
+                border: 1px solid #000;
+            }
+
+            .pill-provided {
+                background: #fff;
+                border: 2px solid #000;
+                box-shadow: none;
+                font-weight: 800;
+            }
+
+            .toolbar,
+            .needs-banner,
+            .panel-stack,
+            .slot-actions,
+            .footer-note,
+            .notice {
+                display: none !important;
+            }
+
+            .grid {
+                display: block;
+            }
+
+            .summary-strip {
+                grid-template-columns: repeat(3, 1fr);
+                margin: 0.18in 0;
+            }
+
+            .stat,
+            .category-card {
+                box-shadow: none;
+                border: 1px solid #222;
+                background: #fff;
+            }
+
+            .cards {
+                display: block;
+            }
+
+            .category-card.collapsed .slots {
+                display: grid;
+            }
+
+            .category-card {
+                margin: 0 0 0.18in;
+                break-inside: avoid;
+                border-radius: 0;
+            }
+
+            .category-head {
+                background: #fff;
+                border-bottom: 1px solid #222;
+                padding: 0.12in;
+            }
+
+            .cat-icon {
+                background: #fff;
+                border: 1px solid #222;
+                box-shadow: none;
+            }
+
+            .count-badge {
+                color: #000;
+                background: #fff;
+                border: 1px solid #222;
+            }
+
+            .slots {
+                padding: 0;
+                gap: 0;
+            }
+
+            .slot {
+                border: 0;
+                border-bottom: 1px solid #bbb;
+                border-radius: 0;
+                min-height: 0.48in;
+                padding: 0.08in 0.12in;
+                background: #fff;
+            }
+
+            .slot-number {
+                background: #fff;
+                border: 1px solid #222;
+                color: #000;
+            }
+
+            .slot-empty {
+                color: #222;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="page">
+        <section id="hero" class="hero" aria-label="Potluck sign-up header">
+            <div class="hero-content">
+                <p class="eyebrow" id="event-eyebrow">Linger Longer Potluck</p>
+                <div class="title-row">
+                    <span class="title-flag" aria-hidden="true" title="American flag"><svg viewBox="0 0 38 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <rect width="38" height="20" fill="#fff" />
+                            <g fill="#c8102e">
+                                <rect width="38" height="1.54" y="0" />
+                                <rect width="38" height="1.54" y="3.08" />
+                                <rect width="38" height="1.54" y="6.16" />
+                                <rect width="38" height="1.54" y="9.24" />
+                                <rect width="38" height="1.54" y="12.32" />
+                                <rect width="38" height="1.54" y="15.4" />
+                                <rect width="38" height="1.54" y="18.46" />
+                            </g>
+                            <rect width="16" height="10.77" fill="#1d3461" />
+                            <g fill="#fff">
+                                <circle cx="3" cy="2" r="0.9" />
+                                <circle cx="7" cy="2" r="0.9" />
+                                <circle cx="11" cy="2" r="0.9" />
+                                <circle cx="5" cy="4.2" r="0.9" />
+                                <circle cx="9" cy="4.2" r="0.9" />
+                                <circle cx="13" cy="4.2" r="0.9" />
+                                <circle cx="3" cy="6.4" r="0.9" />
+                                <circle cx="7" cy="6.4" r="0.9" />
+                                <circle cx="11" cy="6.4" r="0.9" />
+                                <circle cx="5" cy="8.6" r="0.9" />
+                                <circle cx="9" cy="8.6" r="0.9" />
+                                <circle cx="13" cy="8.6" r="0.9" />
+                            </g>
+                        </svg></span>
+                    <h1 id="event-title-display">September Linger Longer Potluck Sign-Up</h1>
+                    <span class="title-flag" aria-hidden="true" title="American flag"><svg viewBox="0 0 38 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <rect width="38" height="20" fill="#fff" />
+                            <g fill="#c8102e">
+                                <rect width="38" height="1.54" y="0" />
+                                <rect width="38" height="1.54" y="3.08" />
+                                <rect width="38" height="1.54" y="6.16" />
+                                <rect width="38" height="1.54" y="9.24" />
+                                <rect width="38" height="1.54" y="12.32" />
+                                <rect width="38" height="1.54" y="15.4" />
+                                <rect width="38" height="1.54" y="18.46" />
+                            </g>
+                            <rect width="16" height="10.77" fill="#1d3461" />
+                            <g fill="#fff">
+                                <circle cx="3" cy="2" r="0.9" />
+                                <circle cx="7" cy="2" r="0.9" />
+                                <circle cx="11" cy="2" r="0.9" />
+                                <circle cx="5" cy="4.2" r="0.9" />
+                                <circle cx="9" cy="4.2" r="0.9" />
+                                <circle cx="13" cy="4.2" r="0.9" />
+                                <circle cx="3" cy="6.4" r="0.9" />
+                                <circle cx="7" cy="6.4" r="0.9" />
+                                <circle cx="11" cy="6.4" r="0.9" />
+                                <circle cx="5" cy="8.6" r="0.9" />
+                                <circle cx="9" cy="8.6" r="0.9" />
+                                <circle cx="13" cy="8.6" r="0.9" />
+                            </g>
+                        </svg></span>
+                </div>
+                <p class="hero-note" id="event-note-display">September's theme is a Macaroni &amp; Cheese Bar. Bring a
+                    big batch of macaroni &amp; cheese or a favorite topping to pile on top, plus desserts and beverages
+                    to round out the meal!</p>
+                <div class="hero-details">
+                    <span class="pill pill-provided" id="event-provided-display">Macaroni &amp; Cheese Bar</span>
+                    <span class="pill" id="event-date-display">📅 Sun, Sep 06, 2026</span>
+                    <span class="pill" id="event-time-display">🕑 2 PM</span>
+                    <span class="pill" id="event-location-display">📍 Sundance 1st Ward Cultural Hall</span>
+                    <button type="button" id="print-sheet" class="hero-print-btn no-print">🖨️ Print</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="needs-banner" class="needs-banner no-print" aria-label="Remaining dish type needs"
+            aria-live="polite" hidden></section>
+
+        <div class="toolbar no-print">
+            <div class="notice dismissible-notice" id="mode-notice">
+                <span id="mode-notice-text"><strong>Static page note:</strong> GitHub Pages cannot save shared
+                    sign-ups by itself.
+                    This page saves entries in this browser/device and includes export/import/print tools for
+                    low-traffic
+                    coordination.</span>
+                <button type="button" class="notice-dismiss" data-dismiss-mode-notice>Dismiss</button>
+            </div>
+            <div class="toolbar-actions">
+                <button type="button" id="settings-toggle" class="btn-secondary" data-owner-control>Customize</button>
+                <button type="button" id="export-json" class="btn-secondary" data-owner-control>Export JSON</button>
+                <button type="button" id="export-csv" class="btn-secondary" data-owner-control>Export CSV</button>
+                <button type="button" id="import-json" class="btn-secondary" data-owner-control>Import</button>
+            </div>
+        </div>
+
+        <section id="settings-area" class="settings-area no-print" aria-label="Customize sign-up sheet">
+            <div class="grid" style="margin-bottom: 18px;">
+                <div class="panel">
+                    <h2>Event details</h2>
+                    <div class="form-grid">
+                        <label>Title <input id="event-title" type="text" /></label>
+                        <label>Subtitle / note <textarea id="event-note"></textarea></label>
+                        <div class="two-col form-grid">
+                            <label>Date <input id="event-date" type="text" placeholder="September 6, 2026" /></label>
+                            <label>Time <input id="event-time" type="text" placeholder="2 PM" /></label>
+                        </div>
+                        <div class="two-col form-grid">
+                            <label>Location <input id="event-location" type="text"
+                                    placeholder="Cultural Hall" /></label>
+                            <label>Hero image URL <input id="event-hero-image" type="text"
+                                    placeholder="lingerlonger.png or https://..." /></label>
+                        </div>
+                        <label>Organizer email (optional, for mailto reminders) <input id="organizer-email" type="email"
+                                placeholder="name@example.com" /></label>
+                        <div class="file-row">
+                            <label for="hero-image-upload" class="btn-secondary"
+                                style="display:inline-flex; cursor:pointer;">Add top image</label>
+                            <input id="hero-image-upload" type="file" accept="image/*" />
+                            <button type="button" id="clear-hero-image" class="btn-secondary">Clear image</button>
+                        </div>
+                        <button type="button" id="save-event-settings">Save event details</button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h2>Categories &amp; needed sign-ups</h2>
+                    <div id="category-editor" class="category-editor"></div>
+                    <div class="toolbar-actions" style="margin-top: 0.8rem;">
+                        <button type="button" id="add-category" class="btn-secondary">Add category</button>
+                        <button type="button" id="reset-categories" class="btn-danger">Reset defaults</button>
+                    </div>
+                    <p class="hint">Icons can be emoji or short text. Increase/decrease needed sign-ups anytime;
+                        existing names are preserved.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid signup-layout" aria-label="Potluck sign-up form and list">
+            <aside class="panel-stack signup-top no-print">
+                <div class="panel">
+                    <h2>Sign up</h2>
+                    <form id="signup-form" class="form-grid">
+                        <label>Dish type <select id="signup-category" required></select></label>
+                        <label>Your name <input id="signup-name" type="text" autocomplete="name" required /></label>
+                        <label>Email <input id="signup-email" type="email" autocomplete="email" required /></label>
+                        <label>Phone <input id="signup-phone" type="tel" autocomplete="tel" required /></label>
+                        <label id="signup-item-choice-label">What are you bringing? <select
+                                id="signup-item-choice"></select></label>
+                        <label id="signup-item-custom-label" hidden>Describe your dish <input id="signup-item"
+                                type="text"
+                                placeholder="e.g., white cheddar mac, crispy bacon, roasted broccoli, brownies" /></label>
+                        <button type="submit" id="signup-submit">Add my sign-up</button>
+                    </form>
+                    <div id="signup-status" class="signup-status" role="status" aria-live="polite"></div>
+                    <p class="hint">Choose a dish type first, then fill out your name, contact info, and what you are
+                        bringing. Pick an idea from the list or choose &ldquo;Something else&rdquo; to describe your own.
+                        Full dish types are hidden from the dropdown.
+                    </p>
+                </div>
+
+                <div class="panel" id="workflow-panel">
+                    <div class="panel-heading-row">
+                        <h3>Low-traffic workflow</h3>
+                        <button type="button" class="notice-dismiss no-print"
+                            data-dismiss-workflow-notice>Dismiss</button>
+                    </div>
+                    <p class="hint" id="workflow-note">For a shared online list, export the JSON after collecting
+                        entries and upload the
+                        updated file, or use this at a signup table/kiosk. Static GitHub Pages does not provide a shared
+                        database.</p>
+                </div>
+            </aside>
+
+            <section aria-label="Current sign-ups">
+                <div class="summary-strip" id="summary-strip"></div>
+                <div id="category-cards" class="cards"></div>
+            </section>
+        </section>
+
+        <p class="footer-note">Made for a Linger Longer Potluck • Printable, responsive, and ready for GitHub Pages.</p>
+    </main>
+
+    <input id="import-file" type="file" accept="application/json,.json" hidden />
+
+    <script>
+        const STORAGE_KEY = "linger-longer-potluck-signup-v1";
+        const SHARED_CACHE_KEY = "linger-longer-potluck-shared-cache-v1";
+        const REMAINING_BANNER_DISMISS_KEY = "linger-longer-remaining-banner-dismissed-v1";
+        const MODE_NOTICE_DISMISS_KEY = "linger-longer-mode-notice-dismissed-v1";
+        const WORKFLOW_NOTICE_DISMISS_KEY = "linger-longer-workflow-notice-dismissed-v1";
+        // Paste your deployed Google Apps Script Web app /exec URL here to enable shared Google Sheet sign-ups.
+        // Example: const SHARED_BACKEND_URL = "https://script.google.com/macros/s/AKfycb.../exec";
+        const SHARED_BACKEND_URL = "https://script.google.com/macros/s/AKfycbwZt-lr6VcrglwwyfHsqIW_an3_NZe9gaUHWm1UunIfuLGkAevqTMYvRll18W9KAq87GQ/exec";
+
+        const CUSTOM_ITEM_VALUE = "__custom__";
+
+        // Dish ideas offered per category. Keyed by category id; a category with no
+        // entry here simply falls back to the free-text box.
+        const ITEM_SUGGESTIONS = {
+            "macaroni-cheese": [
+                "Classic Mac & Cheese",
+                "White Cheddar Mac & Cheese",
+                "Three-Cheese Mac & Cheese",
+                "Baked Mac & Cheese",
+                "Creamy Stovetop Mac & Cheese",
+                "Smoked Gouda Mac & Cheese",
+                "Pepper Jack Mac & Cheese (spicy)",
+                "Buffalo Mac & Cheese",
+                "Gluten-Free Mac & Cheese",
+                "Dairy-Free Mac & Cheese"
+            ],
+            "toppings-meat": [
+                "Crispy Bacon Bits",
+                "Diced Ham",
+                "Pulled Pork",
+                "Shredded Chicken",
+                "Buffalo Chicken",
+                "Sliced Smoked Sausage",
+                "Crumbled Italian Sausage",
+                "Seasoned Ground Beef"
+            ],
+            "toppings-veggie": [
+                "Steamed Broccoli",
+                "Diced Tomatoes",
+                "Sauteed Mushrooms",
+                "Caramelized Onions",
+                "Sliced Green Onions",
+                "Roasted Red Peppers",
+                "Sliced Jalapenos",
+                "Baby Spinach",
+                "Sweet Peas"
+            ],
+            "toppings-crunchy": [
+                "Buttered Breadcrumbs",
+                "Crushed Ritz Crackers",
+                "French Fried Onions",
+                "Crushed Potato Chips",
+                "Toasted Panko",
+                "Extra Shredded Cheddar",
+                "Grated Parmesan",
+                "Garlic Croutons"
+            ],
+            "desserts": [
+                "Brownies",
+                "Chocolate Chip Cookies",
+                "Cupcakes",
+                "Apple Crisp",
+                "Rice Krispie Treats",
+                "Cheesecake Bars",
+                "Fruit Salad",
+                "Gluten-Free Dessert"
+            ],
+            "beverages": [
+                "Lemonade",
+                "Fruit Punch",
+                "Ice Water with Lemon",
+                "Sparkling Water",
+                "Apple Juice",
+                "Root Beer",
+                "Iced Herbal Tea",
+                "Hot Cocoa"
+            ]
+        };
+
+        const DEFAULT_STATE = {
+            event: {
+                eyebrow: "Linger Longer Potluck",
+                title: "Linger Longer Potluck Sign-Up",
+                note: "September's theme is a Macaroni & Cheese Bar. Bring a big batch of macaroni & cheese or a favorite topping to pile on top, plus desserts and beverages to round out the meal!",
+                date: "September 6, 2026",
+                time: "2 PM",
+                location: "Sundance 1st Ward Cultural Hall",
+                organizerEmail: "",
+                heroImage: "MacAndCheese_Hero_Image.svg"
+            },
+            categories: [
+                { id: "macaroni-cheese", name: "Macaroni & Cheese", needed: 8, icon: "🧀" },
+                { id: "toppings-meat", name: "Meat Toppings (Bacon, Ham)", needed: 4, icon: "🥓" },
+                { id: "toppings-veggie", name: "Veggie Toppings (Broccoli, Tomato)", needed: 4, icon: "🥦" },
+                { id: "toppings-crunchy", name: "Crunchy & Cheesy Toppings", needed: 4, icon: "🍞" },
+                { id: "desserts", name: "Desserts", needed: 6, icon: "🍰" },
+                { id: "beverages", name: "Beverages", needed: 4, icon: "🥤" }
+            ],
+            signups: []
+        };
+
+        let state = loadInitialState();
+        const expandedCategories = new Set();
+
+        const $ = (id) => document.getElementById(id);
+        const els = {
+            hero: $("hero"),
+            eventTitleDisplay: $("event-title-display"),
+            eventNoteDisplay: $("event-note-display"),
+            eventDateDisplay: $("event-date-display"),
+            eventTimeDisplay: $("event-time-display"),
+            eventLocationDisplay: $("event-location-display"),
+            eventTitle: $("event-title"),
+            eventNote: $("event-note"),
+            eventDate: $("event-date"),
+            eventTime: $("event-time"),
+            eventLocation: $("event-location"),
+            eventHeroImage: $("event-hero-image"),
+            organizerEmail: $("organizer-email"),
+            signupCategory: $("signup-category"),
+            signupForm: $("signup-form"),
+            signupName: $("signup-name"),
+            signupEmail: $("signup-email"),
+            signupPhone: $("signup-phone"),
+            signupItem: $("signup-item"),
+            signupItemChoice: $("signup-item-choice"),
+            signupItemChoiceLabel: $("signup-item-choice-label"),
+            signupItemCustomLabel: $("signup-item-custom-label"),
+            signupSubmit: $("signup-submit"),
+            signupStatus: $("signup-status"),
+            needsBanner: $("needs-banner"),
+            categoryCards: $("category-cards"),
+            categoryEditor: $("category-editor"),
+            summaryStrip: $("summary-strip"),
+            modeNotice: $("mode-notice"),
+            modeNoticeText: $("mode-notice-text"),
+            workflowPanel: $("workflow-panel"),
+            workflowNote: $("workflow-note"),
+            settingsArea: $("settings-area"),
+            importFile: $("import-file")
+        };
+
+        function cloneDefaultState() {
+            return JSON.parse(JSON.stringify(DEFAULT_STATE));
+        }
+
+        function loadState() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) return cloneDefaultState();
+                const saved = JSON.parse(raw);
+                return normalizeState(saved);
+            } catch (error) {
+                console.warn("Could not load saved sign-up sheet:", error);
+                return cloneDefaultState();
+            }
+        }
+
+        function loadInitialState() {
+            if (!isSharedMode()) return loadState();
+            return loadSharedCache() || cloneDefaultState();
+        }
+
+        function loadSharedCache() {
+            try {
+                const raw = localStorage.getItem(SHARED_CACHE_KEY);
+                if (!raw) return null;
+                const cached = JSON.parse(raw);
+                return normalizeState({
+                    // Event details (title/date/note/hero) are owned by this HTML, not the
+                    // Google Sheet — so the published page controls them each month.
+                    event: DEFAULT_STATE.event,
+                    categories: cached.categories || DEFAULT_STATE.categories,
+                    signups: cached.signups || []
+                });
+            } catch (error) {
+                console.warn("Could not load cached shared sign-up sheet:", error);
+                return null;
+            }
+        }
+
+        function saveSharedCache(nextState) {
+            if (!isSharedMode()) return;
+            try {
+                localStorage.setItem(SHARED_CACHE_KEY, JSON.stringify({
+                    cachedAt: new Date().toISOString(),
+                    event: nextState.event,
+                    categories: nextState.categories,
+                    signups: nextState.signups
+                }));
+            } catch (error) {
+                console.warn("Could not cache shared sign-up sheet:", error);
+            }
+        }
+
+        function normalizeState(input) {
+            const base = cloneDefaultState();
+            const next = { ...base, ...(input || {}) };
+            next.event = { ...base.event, ...(input && input.event ? input.event : {}) };
+            next.event.time = String(next.event.time || base.event.time).trim() || base.event.time;
+            if (/^time\s+tbd$/i.test(next.event.time)) next.event.time = base.event.time;
+            next.event.heroImage = String(next.event.heroImage || base.event.heroImage).trim() || base.event.heroImage;
+            // Migrate cached state from previous default hero images to the current Macaroni & Cheese Bar theme image.
+            if (next.event.heroImage === "lingerlonger.png" || next.event.heroImage === "June_Hero_Image.jpg" || next.event.heroImage === "July_Hero_Image.svg" || next.event.heroImage === "August_Hero_Image.svg" || next.event.heroImage === "September_Hero_Image.svg") next.event.heroImage = base.event.heroImage;
+            next.categories = Array.isArray(next.categories) && next.categories.length ? next.categories : base.categories;
+            next.signups = Array.isArray(next.signups) ? next.signups : [];
+            next.categories = next.categories.map((cat, index) => ({
+                id: cat.id || slugify(cat.name || `category-${index + 1}`),
+                name: String(cat.name || `Category ${index + 1}`).trim() || `Category ${index + 1}`,
+                needed: Math.max(0, parseInt(cat.needed, 10) || 0),
+                icon: String(cat.icon || "🍽️").trim() || "🍽️"
+            }));
+            next.signups = next.signups.map((entry) => ({
+                id: entry.id || cryptoId(),
+                categoryId: entry.categoryId,
+                name: String(entry.name || "").trim(),
+                email: String(entry.email || "").trim(),
+                phone: String(entry.phone || "").trim(),
+                item: String(entry.item || "").trim(),
+                createdAt: entry.createdAt || new Date().toISOString()
+            })).filter((entry) => entry.categoryId && entry.name && entry.item);
+            return next;
+        }
+
+        function saveState() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+            } catch (error) {
+                console.warn("Could not save sign-up sheet locally:", error);
+            }
+        }
+
+        function isSharedMode() {
+            return /^https:\/\//i.test(SHARED_BACKEND_URL.trim());
+        }
+
+        function slugify(value) {
+            const slug = String(value || "")
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, "-")
+                .replace(/^-+|-+$/g, "");
+            return slug || `category-${Date.now()}`;
+        }
+
+        function cryptoId() {
+            if (window.crypto && window.crypto.randomUUID) return window.crypto.randomUUID();
+            return `id-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+        }
+
+        function escapeHtml(value) {
+            return String(value ?? "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#39;");
+        }
+
+        function formatEventDate(value) {
+            const text = String(value || "").trim();
+            if (!text || /^date\s+tbd$/i.test(text)) return "Date TBD";
+            const parsed = new Date(text);
+            if (!Number.isNaN(parsed.getTime()) && /\b\d{4}\b/.test(text)) {
+                return parsed.toLocaleDateString(undefined, {
+                    weekday: "short",
+                    month: "short",
+                    day: "2-digit",
+                    year: "numeric"
+                });
+            }
+            return text;
+        }
+
+        function eventMonthName(value) {
+            const text = String(value || "").trim();
+            if (!text || /^date\s+tbd$/i.test(text)) return "";
+            const parsed = new Date(text);
+            if (Number.isNaN(parsed.getTime())) return "";
+            return parsed.toLocaleDateString(undefined, { month: "long" });
+        }
+
+        function titleWithEventMonth(title, dateValue) {
+            const baseTitle = String(title || DEFAULT_STATE.event.title).trim() || DEFAULT_STATE.event.title;
+            const month = eventMonthName(dateValue);
+            if (!month) return baseTitle;
+            const titleWithoutMonth = baseTitle.replace(/^(January|February|March|April|May|June|July|August|September|October|November|December)\s+/i, "");
+            return `${month} ${titleWithoutMonth}`;
+        }
+
+        function signupsFor(categoryId) {
+            return state.signups.filter((entry) => entry.categoryId === categoryId);
+        }
+
+        function openSlots(category) {
+            return Math.max(0, Number(category.needed || 0) - signupsFor(category.id).length);
+        }
+
+        function noticeModeKey() {
+            return isSharedMode() ? "shared" : "static";
+        }
+
+        function isNoticeDismissed(storageKey, value = noticeModeKey()) {
+            try {
+                return localStorage.getItem(storageKey) === value;
+            } catch (error) {
+                return false;
+            }
+        }
+
+        function dismissNotice(storageKey, element, value = noticeModeKey()) {
+            try {
+                localStorage.setItem(storageKey, value);
+            } catch (error) {
+                console.warn("Could not save notice dismissal:", error);
+            }
+            if (element) element.hidden = true;
+        }
+
+        function render() {
+            setControlsForMode();
+            renderEvent();
+            renderSummary();
+            renderRemainingBanner();
+            renderSignupCategoryOptions();
+            renderCategoryCards();
+            renderCategoryEditor();
+        }
+
+        function setControlsForMode() {
+            const shared = isSharedMode();
+            const modeKey = shared ? "shared" : "static";
+            if (els.modeNoticeText) {
+                els.modeNoticeText.innerHTML = shared
+                    ? `<strong>Shared mode:</strong> Visitors can add sign-ups, but only the organizer can customize the page from the private Google Sheet. Public view shows name and item only; email and phone stay private in the sheet.`
+                    : `<strong>Static page note:</strong> GitHub Pages cannot save shared sign-ups by itself. This page saves entries in this browser/device and includes export/import/print tools for low-traffic coordination.`;
+            }
+
+            if (els.modeNotice) {
+                els.modeNotice.hidden = isNoticeDismissed(MODE_NOTICE_DISMISS_KEY, modeKey);
+            }
+
+            if (els.workflowNote) {
+                els.workflowNote.textContent = shared
+                    ? "Organizer-only settings live in the private Google Sheet. Visitors can only add sign-ups and print the public sheet."
+                    : "For a shared online list, export the JSON after collecting entries and upload the updated file, or use this at a signup table/kiosk. Static GitHub Pages does not provide a shared database.";
+            }
+
+            if (els.workflowPanel) {
+                els.workflowPanel.hidden = isNoticeDismissed(WORKFLOW_NOTICE_DISMISS_KEY, modeKey);
+            }
+
+            document.querySelectorAll("[data-owner-control]").forEach((element) => {
+                element.hidden = shared;
+            });
+
+            if (shared) {
+                els.settingsArea.classList.remove("open");
+                $("settings-toggle").textContent = "Customize";
+            }
+
+            ["add-category", "reset-categories", "import-json", "save-event-settings", "clear-hero-image"].forEach((id) => {
+                const element = $(id);
+                if (element) element.disabled = shared;
+            });
+            [els.eventTitle, els.eventNote, els.eventDate, els.eventTime, els.eventLocation, els.eventHeroImage, els.organizerEmail, $("hero-image-upload")]
+                .filter(Boolean)
+                .forEach((element) => { element.disabled = shared; });
+        }
+
+        function renderEvent() {
+            const event = state.event;
+            els.eventTitleDisplay.textContent = titleWithEventMonth(event.title, event.date);
+            els.eventNoteDisplay.textContent = event.note || DEFAULT_STATE.event.note;
+            els.eventDateDisplay.textContent = `📅 ${formatEventDate(event.date)}`;
+            els.eventTimeDisplay.textContent = `🕑 ${event.time || DEFAULT_STATE.event.time}`;
+            els.eventLocationDisplay.textContent = `📍 ${event.location || "Location TBD"}`;
+            els.eventTitle.value = event.title || "";
+            els.eventNote.value = event.note || "";
+            els.eventDate.value = event.date || "";
+            els.eventTime.value = event.time || "";
+            els.eventLocation.value = event.location || "";
+            els.eventHeroImage.value = event.heroImage || "";
+            els.organizerEmail.value = event.organizerEmail || "";
+
+            if (event.heroImage) {
+                els.hero.classList.add("has-image");
+                els.hero.style.setProperty("--hero-image", `url(${event.heroImage})`);
+            } else {
+                els.hero.classList.remove("has-image");
+                els.hero.style.removeProperty("--hero-image");
+            }
+        }
+
+        function renderSummary() {
+            const totalNeeded = state.categories.reduce((sum, cat) => sum + Number(cat.needed || 0), 0);
+            const filled = state.signups.length;
+            const remaining = Math.max(0, totalNeeded - filled);
+            els.summaryStrip.innerHTML = `
+				<div class="stat"><strong>${filled}</strong><span>Signed up</span></div>
+				<div class="stat"><strong>${remaining}</strong><span>Open slots</span></div>
+				<div class="stat"><strong>${state.categories.length}</strong><span>Categories</span></div>
+			`;
+        }
+
+        function remainingBannerSignature() {
+            return state.categories.map((cat) => `${cat.id}:${openSlots(cat)}`).join("|");
+        }
+
+        function isRemainingBannerDismissed(signature) {
+            try {
+                return localStorage.getItem(REMAINING_BANNER_DISMISS_KEY) === signature;
+            } catch (error) {
+                return false;
+            }
+        }
+
+        function needToneClass(remaining) {
+            if (remaining <= 0) return "need-full";
+            if (remaining <= 2) return "need-low";
+            if (remaining <= 4) return "need-medium";
+            return "need-high";
+        }
+
+        function renderRemainingBanner() {
+            if (!els.needsBanner) return;
+            if (!state.categories.length) {
+                els.needsBanner.hidden = true;
+                els.needsBanner.innerHTML = "";
+                return;
+            }
+
+            const signature = remainingBannerSignature();
+            if (isRemainingBannerDismissed(signature)) {
+                els.needsBanner.hidden = true;
+                return;
+            }
+
+            const chips = state.categories.map((cat) => {
+                const remaining = openSlots(cat);
+                const label = remaining === 0 ? "Full" : `${remaining} item${remaining === 1 ? "" : "s"} left`;
+                return `
+                    <span class="need-chip ${needToneClass(remaining)}" title="${escapeHtml(cat.name)}: ${escapeHtml(label)}">
+                        <span>${escapeHtml(cat.icon)} ${escapeHtml(cat.name)}</span>
+                        <strong>${escapeHtml(label)}</strong>
+                    </span>
+                `;
+            }).join("");
+
+            els.needsBanner.hidden = false;
+            els.needsBanner.innerHTML = `
+                <div class="needs-banner-head">
+                    <div>
+                        <p class="needs-banner-title">Still needed for the potluck</p>
+                        <p class="needs-banner-note">Red = 5+ open, orange = 3–4 open, yellow = 1–2 open.</p>
+                    </div>
+                    <button type="button" class="needs-dismiss" data-dismiss-needs-banner>Dismiss</button>
+                </div>
+                <div class="needs-list">${chips}</div>
+            `;
+        }
+
+        function dismissRemainingBanner() {
+            const signature = remainingBannerSignature();
+            try {
+                localStorage.setItem(REMAINING_BANNER_DISMISS_KEY, signature);
+            } catch (error) {
+                console.warn("Could not save banner dismissal:", error);
+            }
+            if (els.needsBanner) els.needsBanner.hidden = true;
+        }
+
+        function suggestionsFor(categoryId) {
+            const list = ITEM_SUGGESTIONS[categoryId];
+            return Array.isArray(list) ? list : [];
+        }
+
+        function renderSignupItemOptions() {
+            const categoryId = els.signupCategory.value;
+            const suggestions = suggestionsFor(categoryId);
+
+            if (!suggestions.length) {
+                // No ideas for this category, so go straight to the free-text box.
+                els.signupItemChoice.innerHTML = "";
+                els.signupItemChoiceLabel.hidden = true;
+                els.signupItemCustomLabel.hidden = false;
+                els.signupItemCustomLabel.firstChild.nodeValue = "What are you bringing? ";
+                return;
+            }
+
+            els.signupItemChoiceLabel.hidden = false;
+            els.signupItemCustomLabel.firstChild.nodeValue = "Describe your dish ";
+            els.signupItemChoice.innerHTML = `<option value="">Choose or add your own...</option>`
+                + suggestions.map((name) => `<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`).join("")
+                + `<option value="${CUSTOM_ITEM_VALUE}">Something else (type my own)</option>`;
+            els.signupItemChoice.value = "";
+            syncItemFromChoice();
+        }
+
+        function syncItemFromChoice() {
+            const choice = els.signupItemChoice.value;
+            const isCustom = choice === CUSTOM_ITEM_VALUE;
+            const usingDropdown = !els.signupItemChoiceLabel.hidden;
+
+            els.signupItemCustomLabel.hidden = usingDropdown && !isCustom;
+
+            if (isCustom) {
+                els.signupItem.value = "";
+            } else if (usingDropdown) {
+                els.signupItem.value = choice;
+            }
+        }
+
+        function renderSignupCategoryOptions() {
+            const available = state.categories.filter((cat) => openSlots(cat) > 0);
+            if (!available.length) {
+                els.signupCategory.innerHTML = `<option value="">All categories are full</option>`;
+                els.signupSubmit.disabled = true;
+                renderSignupItemOptions();
+                updateSignupFieldState();
+                return;
+            }
+            const current = els.signupCategory.value;
+            els.signupCategory.innerHTML = `<option value="">Choose a dish type...</option>` + available
+                .map((cat) => `<option value="${escapeHtml(cat.id)}">${escapeHtml(cat.icon)} ${escapeHtml(cat.name)} (${openSlots(cat)} open)</option>`)
+                .join("");
+            const keep = available.some((cat) => cat.id === current);
+            els.signupCategory.value = keep ? current : "";
+            if (!keep) renderSignupItemOptions();
+            updateSignupFieldState();
+        }
+
+        function updateSignupFieldState() {
+            const hasCategory = Boolean(els.signupCategory.value);
+            [els.signupName, els.signupEmail, els.signupPhone, els.signupItem, els.signupItemChoice].forEach((field) => {
+                field.disabled = !hasCategory;
+            });
+            // Only require the control the person can actually see.
+            els.signupItemChoice.required = hasCategory && !els.signupItemChoiceLabel.hidden;
+            els.signupItem.required = hasCategory && !els.signupItemCustomLabel.hidden;
+            els.signupSubmit.disabled = !hasCategory;
+        }
+
+        function renderCategoryCards() {
+            if (!state.categories.length) {
+                els.categoryCards.innerHTML = `<div class="empty-state">Add categories to begin building the sign-up sheet.</div>`;
+                return;
+            }
+
+            els.categoryCards.innerHTML = state.categories.map((cat) => {
+                const entries = signupsFor(cat.id);
+                const needed = Number(cat.needed || 0);
+                const isFull = entries.length >= needed && needed > 0;
+                const isExpanded = expandedCategories.has(cat.id);
+                const cardClass = isExpanded ? "category-card" : "category-card collapsed";
+                const slots = [];
+                for (let index = 0; index < Math.max(needed, entries.length); index += 1) {
+                    const entry = entries[index];
+                    slots.push(renderSlot(cat, entry, index));
+                }
+                return `
+					<article class="${cardClass}">
+						<header class="category-head" role="button" tabindex="0" aria-expanded="${isExpanded ? "true" : "false"}" data-toggle-category="${escapeHtml(cat.id)}">
+							<div class="cat-icon" aria-hidden="true">${escapeHtml(cat.icon)}</div>
+							<div>
+								<h3>${escapeHtml(cat.name)}</h3>
+								<p>${needed} sign-up${needed === 1 ? "" : "s"} needed • ${isExpanded ? "Tap to collapse" : "Tap to expand"}</p>
+							</div>
+							<div class="category-meta">
+								<span class="count-badge ${isFull ? "full" : ""}">${entries.length}/${needed}${isFull ? " Full" : ""}</span>
+								<span class="collapse-indicator" aria-hidden="true">${isExpanded ? "−" : "+"}</span>
+							</div>
+						</header>
+						<div class="slots">${slots.join("") || `<div class="slot"><span class="slot-number">–</span><span class="slot-empty">No slots configured.</span></div>`}</div>
+					</article>
+				`;
+            }).join("");
+
+            els.categoryCards.querySelectorAll("[data-toggle-category]").forEach((header) => {
+                header.addEventListener("click", () => toggleCategory(header.dataset.toggleCategory));
+                header.addEventListener("keydown", (event) => {
+                    if (event.key !== "Enter" && event.key !== " ") return;
+                    event.preventDefault();
+                    toggleCategory(header.dataset.toggleCategory);
+                });
+            });
+
+            els.categoryCards.querySelectorAll("[data-delete]").forEach((button) => {
+                button.addEventListener("click", () => deleteSignup(button.dataset.delete));
+            });
+            els.categoryCards.querySelectorAll("[data-email]").forEach((button) => {
+                button.addEventListener("click", () => emailSignup(button.dataset.email));
+            });
+        }
+
+        function toggleCategory(id) {
+            if (!id) return;
+            if (expandedCategories.has(id)) expandedCategories.delete(id);
+            else expandedCategories.add(id);
+            renderCategoryCards();
+        }
+
+        function renderSlot(cat, entry, index) {
+            if (!entry) {
+                return `
+					<div class="slot">
+						<span class="slot-number">${index + 1}</span>
+						<span class="slot-empty">Open slot for ${escapeHtml(cat.name)}</span>
+					</div>
+				`;
+            }
+            const contact = [entry.email, entry.phone].filter(Boolean).map(escapeHtml).join(" • ");
+            const actions = isSharedMode() ? "" : `
+                    <div class="slot-actions no-print">
+                        <button type="button" class="btn-secondary btn-small btn-icon" title="Email this sign-up" data-email="${escapeHtml(entry.id)}">✉</button>
+                        <button type="button" class="btn-danger btn-small btn-icon" title="Remove this sign-up" data-delete="${escapeHtml(entry.id)}">×</button>
+                    </div>
+            `;
+            return `
+				<div class="slot filled">
+					<span class="slot-number">${index + 1}</span>
+					<div>
+						<div class="slot-name">${escapeHtml(entry.name)}</div>
+						<div class="slot-item">${escapeHtml(entry.item)}</div>
+                        ${contact ? `<div class="slot-contact">${contact}</div>` : ""}
+					</div>
+                    ${actions}
+				</div>
+			`;
+        }
+
+        function renderCategoryEditor() {
+            const shared = isSharedMode();
+            els.categoryEditor.innerHTML = state.categories.map((cat) => `
+				<div class="category-edit-row" data-category-row="${escapeHtml(cat.id)}">
+                    <label>Icon <input type="text" value="${escapeHtml(cat.icon)}" data-cat-field="icon" maxlength="8" ${shared ? "disabled" : ""} /></label>
+                    <label>Name <input type="text" value="${escapeHtml(cat.name)}" data-cat-field="name" ${shared ? "disabled" : ""} /></label>
+                    <label>Needed <input type="number" min="0" max="99" value="${Number(cat.needed || 0)}" data-cat-field="needed" ${shared ? "disabled" : ""} /></label>
+                    ${shared ? `<span class="hint">Sheet-managed</span>` : `<button type="button" class="btn-danger btn-small" data-remove-category="${escapeHtml(cat.id)}">Remove</button>`}
+				</div>
+            `).join("") + (shared ? `<p class="hint"><strong>Shared mode:</strong> categories and limits are managed in the Google Sheet's <em>Categories</em> tab.</p>` : "");
+
+            els.categoryEditor.querySelectorAll("[data-cat-field]").forEach((input) => {
+                input.addEventListener("change", handleCategoryChange);
+            });
+            els.categoryEditor.querySelectorAll("[data-remove-category]").forEach((button) => {
+                button.addEventListener("click", () => removeCategory(button.dataset.removeCategory));
+            });
+        }
+
+        function handleCategoryChange(event) {
+            const row = event.target.closest("[data-category-row]");
+            const cat = state.categories.find((item) => item.id === row.dataset.categoryRow);
+            if (!cat) return;
+            const field = event.target.dataset.catField;
+            if (field === "needed") {
+                cat.needed = Math.max(0, Math.min(99, parseInt(event.target.value, 10) || 0));
+            } else if (field === "name") {
+                cat.name = event.target.value.trim() || cat.name;
+            } else if (field === "icon") {
+                cat.icon = event.target.value.trim() || "🍽️";
+            }
+            saveState();
+            render();
+        }
+
+        function showStatus(message, type = "success") {
+            els.signupStatus.textContent = message;
+            els.signupStatus.className = `signup-status visible ${type}`;
+            window.clearTimeout(showStatus.timer);
+            showStatus.timer = window.setTimeout(() => {
+                els.signupStatus.classList.remove("visible");
+            }, 5200);
+        }
+
+        function addSignup(event) {
+            event.preventDefault();
+            const categoryId = els.signupCategory.value;
+            const category = state.categories.find((cat) => cat.id === categoryId);
+            if (!category) return showStatus("Please choose a category.", "error");
+            if (openSlots(category) <= 0) return showStatus(`${category.name} is full. Please choose another category.`, "error");
+
+            const entry = {
+                id: cryptoId(),
+                categoryId,
+                name: els.signupName.value.trim(),
+                email: els.signupEmail.value.trim(),
+                phone: els.signupPhone.value.trim(),
+                item: els.signupItem.value.trim(),
+                createdAt: new Date().toISOString()
+            };
+            if (!entry.name || !entry.email || !entry.phone || !entry.item) {
+                return showStatus("Please fill in name, email, phone, and item.", "error");
+            }
+
+            if (isSharedMode()) {
+                submitSharedSignup(entry);
+                return;
+            }
+
+            state.signups.push(entry);
+            saveState();
+            els.signupForm.reset();
+            renderSignupItemOptions();
+            render();
+            showStatus(`Thanks, ${entry.name}! You are signed up for ${category.name}.`, "success");
+            if (state.event.organizerEmail) emailSignup(entry.id, true);
+        }
+
+        function deleteSignup(id) {
+            const entry = state.signups.find((item) => item.id === id);
+            if (!entry) return;
+            if (!confirm(`Remove ${entry.name}'s sign-up for ${entry.item}?`)) return;
+            state.signups = state.signups.filter((item) => item.id !== id);
+            saveState();
+            render();
+            showStatus("Sign-up removed.", "success");
+        }
+
+        function emailSignup(id, optional = false) {
+            const entry = state.signups.find((item) => item.id === id);
+            if (!entry) return;
+            const category = state.categories.find((cat) => cat.id === entry.categoryId);
+            const to = state.event.organizerEmail || "";
+            if (!to && optional) return;
+            const subject = encodeURIComponent(`${state.event.title}: ${entry.name} signed up`);
+            const body = encodeURIComponent([
+                `${entry.name} signed up for ${category ? category.name : "Potluck"}.`,
+                "",
+                `Item: ${entry.item}`,
+                `Email: ${entry.email}`,
+                `Phone: ${entry.phone}`,
+                `Event: ${state.event.title}`,
+                `Date: ${state.event.date}`,
+                `Time: ${state.event.time}`,
+                `Location: ${state.event.location}`
+            ].join("\n"));
+            window.location.href = `mailto:${encodeURIComponent(to)}?subject=${subject}&body=${body}`;
+        }
+
+        function removeCategory(id) {
+            const cat = state.categories.find((item) => item.id === id);
+            if (!cat) return;
+            const existing = signupsFor(id).length;
+            const warning = existing ? ` This will also remove ${existing} sign-up${existing === 1 ? "" : "s"}.` : "";
+            if (!confirm(`Remove category "${cat.name}"?${warning}`)) return;
+            state.categories = state.categories.filter((item) => item.id !== id);
+            state.signups = state.signups.filter((entry) => entry.categoryId !== id);
+            saveState();
+            render();
+        }
+
+        function addCategory() {
+            const baseName = "New Category";
+            const id = `${slugify(baseName)}-${Date.now()}`;
+            state.categories.push({ id, name: baseName, needed: 3, icon: "🍽️" });
+            saveState();
+            render();
+        }
+
+        function resetCategories() {
+            if (!confirm("Reset categories to the defaults? Existing sign-ups will be kept only where category names still match.")) return;
+            const oldSignups = state.signups;
+            const defaults = cloneDefaultState().categories;
+            state.categories = defaults;
+            state.signups = oldSignups.filter((entry) => defaults.some((cat) => cat.id === entry.categoryId));
+            saveState();
+            render();
+        }
+
+        function saveEventSettings() {
+            state.event.title = els.eventTitle.value.trim() || DEFAULT_STATE.event.title;
+            state.event.note = els.eventNote.value.trim() || DEFAULT_STATE.event.note;
+            state.event.date = els.eventDate.value.trim() || "Date TBD";
+            state.event.time = els.eventTime.value.trim() || DEFAULT_STATE.event.time;
+            state.event.location = els.eventLocation.value.trim() || "Location TBD";
+            state.event.heroImage = els.eventHeroImage.value.trim();
+            state.event.organizerEmail = els.organizerEmail.value.trim();
+            saveState();
+            render();
+            showStatus("Event details saved.", "success");
+        }
+
+        function handleHeroImage(file) {
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = () => {
+                state.event.heroImage = reader.result;
+                saveState();
+                render();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function exportJson() {
+            downloadFile("linger-longer-signup.json", JSON.stringify(state, null, 2), "application/json");
+        }
+
+        function exportCsv() {
+            const rows = [["Category", "Name", "Email", "Phone", "Item", "Signed Up At"]];
+            state.signups.forEach((entry) => {
+                const cat = state.categories.find((item) => item.id === entry.categoryId);
+                rows.push([cat ? cat.name : entry.categoryId, entry.name, entry.email, entry.phone, entry.item, entry.createdAt]);
+            });
+            const csv = rows.map((row) => row.map((cell) => `"${String(cell ?? "").replace(/"/g, '""')}"`).join(",")).join("\n");
+            downloadFile("linger-longer-signups.csv", csv, "text/csv");
+        }
+
+        function downloadFile(filename, content, type) {
+            const blob = new Blob([content], { type });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            URL.revokeObjectURL(url);
+        }
+
+        function importJsonFile(file) {
+            if (isSharedMode()) {
+                showStatus("Import is disabled in shared mode. Edit the Google Sheet directly instead.", "error");
+                return;
+            }
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = () => {
+                try {
+                    state = normalizeState(JSON.parse(reader.result));
+                    saveState();
+                    render();
+                    showStatus("Imported sign-up sheet data.", "success");
+                } catch (error) {
+                    showStatus("Could not import that JSON file.", "error");
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function buildSharedUrl(params = {}) {
+            const url = new URL(SHARED_BACKEND_URL.trim());
+            Object.entries(params).forEach(([key, value]) => url.searchParams.set(key, value));
+            return url.toString();
+        }
+
+        function loadSharedData(options = {}) {
+            if (!isSharedMode()) return;
+            const callbackName = `lingerLongerShared_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+            const script = document.createElement("script");
+
+            window[callbackName] = (response) => {
+                delete window[callbackName];
+                script.remove();
+
+                if (!response || response.success === false) {
+                    showStatus(response && response.error ? response.error : "Could not load shared sign-ups.", "error");
+                    return;
+                }
+
+                applySharedPayload(response);
+                if (!options.quiet) showStatus("Loaded shared sign-ups from Google Sheets.", "success");
+            };
+
+            script.onerror = () => {
+                delete window[callbackName];
+                script.remove();
+                showStatus("Could not reach the Google Sheets backend. Local fallback data is still visible.", "error");
+            };
+
+            script.src = buildSharedUrl({ action: "list", callback: callbackName, _: Date.now() });
+            document.body.appendChild(script);
+        }
+
+        function applySharedPayload(payload) {
+            state = normalizeState({
+                // Event details (title/date/note/hero) come from this published HTML,
+                // not the Google Sheet; only categories and sign-ups are shared.
+                event: DEFAULT_STATE.event,
+                categories: payload.categories || DEFAULT_STATE.categories,
+                signups: payload.signups || []
+            });
+            saveSharedCache(state);
+            render();
+        }
+
+        function appendHiddenInput(form, name, value) {
+            const input = document.createElement("input");
+            input.type = "hidden";
+            input.name = name;
+            input.value = value == null ? "" : String(value);
+            form.appendChild(input);
+        }
+
+        function cleanupSharedSubmitForms() {
+            document.querySelectorAll("[data-shared-submit]").forEach((element) => element.remove());
+        }
+
+        function submitSharedSignup(entry) {
+            cleanupSharedSubmitForms();
+            showStatus("Submitting your shared sign-up...", "success");
+            els.signupSubmit.disabled = true;
+
+            const frameName = `shared-signup-frame-${Date.now()}`;
+            const iframe = document.createElement("iframe");
+            iframe.name = frameName;
+            iframe.hidden = true;
+            iframe.dataset.sharedSubmit = "true";
+
+            const form = document.createElement("form");
+            form.method = "POST";
+            form.action = SHARED_BACKEND_URL.trim();
+            form.target = frameName;
+            form.hidden = true;
+            form.dataset.sharedSubmit = "true";
+
+            appendHiddenInput(form, "action", "signup");
+            appendHiddenInput(form, "categoryId", entry.categoryId);
+            appendHiddenInput(form, "name", entry.name);
+            appendHiddenInput(form, "email", entry.email);
+            appendHiddenInput(form, "phone", entry.phone);
+            appendHiddenInput(form, "item", entry.item);
+            appendHiddenInput(form, "userAgent", navigator.userAgent || "");
+
+            document.body.appendChild(iframe);
+            document.body.appendChild(form);
+            form.submit();
+        }
+
+        function handleSharedMessage(event) {
+            let data = event.data;
+            if (typeof data === "string") {
+                try { data = JSON.parse(data); } catch (error) { return; }
+            }
+            if (!data || data.source !== "linger-longer-potluck") return;
+
+            cleanupSharedSubmitForms();
+            els.signupSubmit.disabled = false;
+
+            if (data.success) {
+                els.signupForm.reset();
+                renderSignupItemOptions();
+                if (data.payload) applySharedPayload(data.payload);
+                else loadSharedData({ quiet: true });
+                showStatus(data.message || "Your shared sign-up was saved.", "success");
+            } else {
+                if (data.payload) applySharedPayload(data.payload);
+                else loadSharedData({ quiet: true });
+                showStatus(data.error || "Could not save that sign-up.", "error");
+            }
+        }
+
+        $("settings-toggle").addEventListener("click", () => {
+            els.settingsArea.classList.toggle("open");
+            $("settings-toggle").textContent = els.settingsArea.classList.contains("open") ? "Hide customize" : "Customize";
+        });
+        $("save-event-settings").addEventListener("click", saveEventSettings);
+        $("hero-image-upload").addEventListener("change", (event) => handleHeroImage(event.target.files[0]));
+        $("clear-hero-image").addEventListener("click", () => { state.event.heroImage = ""; saveState(); render(); });
+        $("add-category").addEventListener("click", addCategory);
+        $("reset-categories").addEventListener("click", resetCategories);
+        $("export-json").addEventListener("click", exportJson);
+        $("export-csv").addEventListener("click", exportCsv);
+        $("import-json").addEventListener("click", () => els.importFile.click());
+        els.importFile.addEventListener("change", (event) => importJsonFile(event.target.files[0]));
+        $("print-sheet").addEventListener("click", () => window.print());
+        els.needsBanner.addEventListener("click", (event) => {
+            if (event.target.closest("[data-dismiss-needs-banner]")) dismissRemainingBanner();
+        });
+        els.modeNotice.addEventListener("click", (event) => {
+            if (event.target.closest("[data-dismiss-mode-notice]")) dismissNotice(MODE_NOTICE_DISMISS_KEY, els.modeNotice);
+        });
+        els.workflowPanel.addEventListener("click", (event) => {
+            if (event.target.closest("[data-dismiss-workflow-notice]")) dismissNotice(WORKFLOW_NOTICE_DISMISS_KEY, els.workflowPanel);
+        });
+        els.signupCategory.addEventListener("change", () => {
+            renderSignupItemOptions();
+            updateSignupFieldState();
+            if (els.signupCategory.value) {
+                expandedCategories.add(els.signupCategory.value);
+                renderCategoryCards();
+            }
+        });
+        els.signupItemChoice.addEventListener("change", () => {
+            syncItemFromChoice();
+            updateSignupFieldState();
+            if (els.signupItemChoice.value === CUSTOM_ITEM_VALUE) els.signupItem.focus();
+        });
+        els.signupForm.addEventListener("submit", addSignup);
+        window.addEventListener("message", handleSharedMessage);
+
+        render();
+        loadSharedData({ quiet: true });
+    </script>
+</body>
+
+</html>

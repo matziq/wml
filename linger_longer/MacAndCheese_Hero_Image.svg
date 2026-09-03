@@ -1,0 +1,358 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="A macaroni and cheese bar: a bubbling baked mac and cheese casserole with a cheese pull, elbow macaroni, cheese wedges and a grater, bowls of bacon, broccoli, tomato and breadcrumb toppings, a dessert stand, and a drink dispenser">
+  <defs>
+    <linearGradient id="mc-wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6b3417"/>
+      <stop offset="0.45" stop-color="#b96f2b"/>
+      <stop offset="1" stop-color="#f0b95a"/>
+    </linearGradient>
+    <linearGradient id="mc-cheese" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd968"/>
+      <stop offset="1" stop-color="#e78f22"/>
+    </linearGradient>
+    <linearGradient id="mc-cheese-deep" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f7bb3e"/>
+      <stop offset="1" stop-color="#d2761a"/>
+    </linearGradient>
+    <linearGradient id="mc-cloth" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8d2338"/>
+      <stop offset="0.5" stop-color="#bb4048"/>
+      <stop offset="1" stop-color="#7d2038"/>
+    </linearGradient>
+    <linearGradient id="mc-dish" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3f4a60"/>
+      <stop offset="1" stop-color="#222939"/>
+    </linearGradient>
+    <linearGradient id="mc-steel" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#cfd6e2"/>
+      <stop offset="0.35" stop-color="#f4f7fb"/>
+      <stop offset="0.7" stop-color="#b9c2d1"/>
+      <stop offset="1" stop-color="#8f99ab"/>
+    </linearGradient>
+    <linearGradient id="mc-glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/>
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.42"/>
+    </linearGradient>
+
+    <pattern id="mc-check" width="120" height="120" patternUnits="userSpaceOnUse">
+      <rect width="120" height="120" fill="url(#mc-cloth)"/>
+      <path d="M0 60h120M60 0v120" stroke="#f8e6c6" stroke-width="10" opacity="0.85"/>
+      <path d="M0 30h120M30 0v120M0 90h120M90 0v120" stroke="#fbf1dc" stroke-width="2.5" opacity="0.55"/>
+    </pattern>
+
+    <filter id="mc-soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+    <filter id="mc-steam" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="9"/>
+    </filter>
+    <filter id="mc-drop" x="-25%" y="-25%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#3a1b08" flood-opacity="0.35"/>
+    </filter>
+
+    <!-- One elbow macaroni noodle, drawn as a stacked-stroke tube. -->
+    <g id="mc-elbow">
+      <path d="M-17 13 A 21 21 0 1 1 17 13" fill="none" stroke="#d98e22" stroke-width="17" stroke-linecap="round"/>
+      <path d="M-17 13 A 21 21 0 1 1 17 13" fill="none" stroke="#f6bb44" stroke-width="12" stroke-linecap="round"/>
+      <path d="M-17 13 A 21 21 0 1 1 17 13" fill="none" stroke="#ffe08a" stroke-width="5" stroke-linecap="round" opacity="0.75"/>
+      <circle cx="-17" cy="13" r="6.5" fill="#c97c18"/>
+      <circle cx="17" cy="13" r="6.5" fill="#c97c18"/>
+      <circle cx="-17" cy="13" r="3" fill="#8f5410"/>
+      <circle cx="17" cy="13" r="3" fill="#8f5410"/>
+    </g>
+
+    <clipPath id="mc-dish-clip">
+      <path d="M556 470 h486 a26 26 0 0 1 26 26 v58 a70 70 0 0 1 -70 70 h-398 a70 70 0 0 1 -70 -70 v-58 a26 26 0 0 1 26 -26 z"/>
+    </clipPath>
+    <clipPath id="mc-bowl1"><path d="M1112 636 a76 46 0 0 0 152 0 z"/></clipPath>
+    <clipPath id="mc-bowl2"><path d="M1296 636 a76 46 0 0 0 152 0 z"/></clipPath>
+    <clipPath id="mc-bowl3"><path d="M1112 742 a76 46 0 0 0 152 0 z"/></clipPath>
+    <clipPath id="mc-bowl4"><path d="M1296 742 a76 46 0 0 0 152 0 z"/></clipPath>
+    <clipPath id="mc-jar-clip"><rect x="1332" y="196" width="132" height="176" rx="16"/></clipPath>
+  </defs>
+
+  <!-- Backdrop -->
+  <rect width="1600" height="900" fill="url(#mc-wall)"/>
+  <circle cx="1210" cy="150" r="120" fill="#ffeab4" opacity="0.55" filter="url(#mc-soft)"/>
+  <circle cx="360" cy="120" r="96" fill="#ffe3a6" opacity="0.35" filter="url(#mc-soft)"/>
+
+  <!-- Floating macaroni confetti in the background -->
+  <g opacity="0.5">
+    <use href="#mc-elbow" transform="translate(196 250) rotate(-22) scale(0.85)"/>
+    <use href="#mc-elbow" transform="translate(1454 316) rotate(28) scale(0.7)"/>
+    <use href="#mc-elbow" transform="translate(806 132) rotate(-8) scale(0.62)"/>
+    <use href="#mc-elbow" transform="translate(1104 236) rotate(46) scale(0.55)"/>
+    <use href="#mc-elbow" transform="translate(470 330) rotate(14) scale(0.5)"/>
+  </g>
+
+  <!-- Bunting -->
+  <g>
+    <path d="M-10 92 Q 400 168 800 104 Q 1200 40 1610 116" fill="none" stroke="#ffeec4" stroke-width="6" opacity="0.9"/>
+    <g>
+      <path d="M120 116 l44 8 -16 54 z" fill="#f6c343"/>
+      <path d="M244 134 l44 6 -18 54 z" fill="#e3603f"/>
+      <path d="M368 146 l44 4 -20 53 z" fill="#f6e0b0"/>
+      <path d="M492 152 l44 1 -22 53 z" fill="#f6c343"/>
+      <path d="M616 150 l44 -2 -24 52 z" fill="#e3603f"/>
+      <path d="M740 140 l44 -6 -25 51 z" fill="#f6e0b0"/>
+      <path d="M864 122 l44 -9 -26 50 z" fill="#f6c343"/>
+      <path d="M988 100 l44 -11 -27 49 z" fill="#e3603f"/>
+      <path d="M1112 78 l44 -10 -27 48 z" fill="#f6e0b0"/>
+      <path d="M1236 62 l44 -5 -27 48 z" fill="#f6c343"/>
+      <path d="M1360 60 l44 3 -26 49 z" fill="#e3603f"/>
+      <path d="M1484 76 l44 10 -25 50 z" fill="#f6e0b0"/>
+    </g>
+  </g>
+
+  <!-- Back shelf with dessert stand and drink dispenser -->
+  <rect x="0" y="404" width="1600" height="18" fill="#5d2f14" opacity="0.35"/>
+
+  <!-- Drink dispenser (back right) -->
+  <g filter="url(#mc-drop)">
+    <rect x="1326" y="176" width="144" height="30" rx="10" fill="#b7c1cf"/>
+    <rect x="1332" y="196" width="132" height="176" rx="16" fill="#c9451f"/>
+    <g clip-path="url(#mc-jar-clip)">
+      <rect x="1332" y="196" width="132" height="176" fill="#d8542a"/>
+      <circle cx="1372" cy="286" r="16" fill="#ffb27a" opacity="0.5"/>
+      <circle cx="1420" cy="248" r="11" fill="#ffb27a" opacity="0.45"/>
+      <circle cx="1432" cy="318" r="13" fill="#ffb27a" opacity="0.4"/>
+    </g>
+    <rect x="1332" y="196" width="132" height="176" rx="16" fill="url(#mc-glass)"/>
+    <rect x="1332" y="196" width="132" height="176" rx="16" fill="none" stroke="#eef3f8" stroke-width="5" opacity="0.85"/>
+    <rect x="1378" y="372" width="40" height="22" fill="#9aa4b3"/>
+    <path d="M1386 394 h24 v16 a12 12 0 0 1 -24 0 z" fill="#7d8899"/>
+    <rect x="1350" y="404" width="96" height="14" rx="6" fill="#8f99ab"/>
+  </g>
+
+  <!-- Dessert stand (back left) -->
+  <g filter="url(#mc-drop)">
+    <ellipse cx="286" cy="404" rx="86" ry="16" fill="#c9d2df"/>
+    <rect x="278" y="330" width="16" height="76" fill="#b3bdcc"/>
+    <ellipse cx="286" cy="330" rx="112" ry="22" fill="#e8eef6"/>
+    <ellipse cx="286" cy="326" rx="112" ry="22" fill="#f7fafd"/>
+    <!-- brownies -->
+    <g>
+      <rect x="212" y="292" width="52" height="34" rx="6" fill="#5b3218"/>
+      <rect x="212" y="292" width="52" height="12" rx="6" fill="#74421f"/>
+      <rect x="272" y="286" width="52" height="40" rx="6" fill="#4e2b14"/>
+      <rect x="272" y="286" width="52" height="12" rx="6" fill="#6b3c1c"/>
+      <rect x="332" y="294" width="48" height="32" rx="6" fill="#5b3218"/>
+      <rect x="332" y="294" width="48" height="11" rx="6" fill="#74421f"/>
+      <circle cx="238" cy="286" r="7" fill="#f4d9b0"/>
+      <circle cx="298" cy="280" r="7" fill="#f4d9b0"/>
+      <circle cx="356" cy="288" r="6" fill="#f4d9b0"/>
+    </g>
+  </g>
+
+  <!-- Table -->
+  <rect x="0" y="560" width="1600" height="340" fill="url(#mc-check)"/>
+  <rect x="0" y="560" width="1600" height="20" fill="#ffffff" opacity="0.18"/>
+
+  <!-- ================= Cheese station (left) ================= -->
+  <g filter="url(#mc-drop)">
+    <!-- board -->
+    <rect x="140" y="612" width="330" height="34" rx="16" fill="#a9713c"/>
+    <rect x="140" y="612" width="330" height="14" rx="7" fill="#c88a4c"/>
+
+    <!-- cheese wedge stack -->
+    <g>
+      <path d="M170 612 l108 -74 62 74 z" fill="url(#mc-cheese-deep)"/>
+      <path d="M170 612 l108 -74 20 0 -88 74 z" fill="#ffd76a" opacity="0.55"/>
+      <circle cx="236" cy="586" r="8" fill="#e0921f"/>
+      <circle cx="266" cy="600" r="6" fill="#e0921f"/>
+      <circle cx="212" cy="602" r="5" fill="#e0921f"/>
+    </g>
+    <g>
+      <path d="M300 612 l86 -56 54 56 z" fill="url(#mc-cheese)"/>
+      <path d="M300 612 l86 -56 16 0 -70 56 z" fill="#fff0b4" opacity="0.5"/>
+      <circle cx="352" cy="592" r="7" fill="#e8a52c"/>
+      <circle cx="392" cy="601" r="5" fill="#e8a52c"/>
+    </g>
+
+    <!-- box grater -->
+    <g transform="translate(452 470)">
+      <path d="M22 0 h56 l30 150 h-116 z" fill="url(#mc-steel)"/>
+      <path d="M22 0 h56 l6 30 h-68 z" fill="#e9eef5"/>
+      <g fill="#8b95a6" opacity="0.9">
+        <circle cx="8" cy="52" r="4"/><circle cx="34" cy="52" r="4"/><circle cx="60" cy="52" r="4"/><circle cx="86" cy="52" r="4"/>
+        <circle cx="4" cy="84" r="4"/><circle cx="32" cy="84" r="4"/><circle cx="62" cy="84" r="4"/><circle cx="90" cy="84" r="4"/>
+        <circle cx="0" cy="116" r="4"/><circle cx="30" cy="116" r="4"/><circle cx="64" cy="116" r="4"/><circle cx="94" cy="116" r="4"/>
+      </g>
+      <rect x="34" y="-26" width="32" height="28" rx="12" fill="none" stroke="#aab4c3" stroke-width="8"/>
+    </g>
+    <!-- shredded cheese pile at grater base -->
+    <g>
+      <ellipse cx="500" cy="628" rx="70" ry="18" fill="#f0a92e"/>
+      <g stroke="#ffd066" stroke-width="7" stroke-linecap="round">
+        <path d="M462 624 l30 -6"/><path d="M482 634 l34 -5"/><path d="M508 620 l32 -4"/><path d="M498 640 l30 -3"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- ================= Casserole (center hero) ================= -->
+  <!-- steam -->
+  <g fill="#fff6de" opacity="0.5" filter="url(#mc-steam)">
+    <path d="M660 452 c-30 -56 22 -80 -6 -140 c-8 -18 6 -36 22 -44 c-22 42 22 66 0 118 c-8 22 -6 46 -16 66 z"/>
+    <path d="M800 438 c-34 -64 24 -92 -8 -160 c-9 -20 8 -40 26 -50 c-26 48 24 76 0 136 c-9 24 -6 52 -18 74 z"/>
+    <path d="M944 452 c-30 -56 22 -80 -6 -140 c-8 -18 6 -36 22 -44 c-22 42 22 66 0 118 c-8 22 -6 46 -16 66 z"/>
+  </g>
+
+  <g filter="url(#mc-drop)">
+    <!-- dish body -->
+    <path d="M556 470 h486 a26 26 0 0 1 26 26 v58 a70 70 0 0 1 -70 70 h-398 a70 70 0 0 1 -70 -70 v-58 a26 26 0 0 1 26 -26 z" fill="url(#mc-dish)"/>
+    <!-- handles -->
+    <path d="M530 500 h-46 a20 20 0 0 0 0 40 h46 z" fill="#333c50"/>
+    <path d="M1070 500 h46 a20 20 0 0 1 0 40 h-46 z" fill="#333c50"/>
+    <!-- rim -->
+    <ellipse cx="800" cy="470" rx="270" ry="46" fill="#4a556c"/>
+    <ellipse cx="800" cy="466" rx="256" ry="38" fill="#39435a"/>
+
+    <!-- cheese sauce surface -->
+    <ellipse cx="800" cy="468" rx="244" ry="34" fill="url(#mc-cheese)"/>
+    <ellipse cx="800" cy="464" rx="244" ry="34" fill="#ffc94f"/>
+
+    <!-- macaroni packed into the dish -->
+    <g clip-path="url(#mc-dish-clip)">
+      <ellipse cx="800" cy="470" rx="250" ry="40" fill="#f5b336"/>
+      <g>
+        <use href="#mc-elbow" transform="translate(626 452) rotate(-24) scale(0.82)"/>
+        <use href="#mc-elbow" transform="translate(700 442) rotate(12) scale(0.86)"/>
+        <use href="#mc-elbow" transform="translate(776 436) rotate(-40) scale(0.8)"/>
+        <use href="#mc-elbow" transform="translate(852 440) rotate(30) scale(0.84)"/>
+        <use href="#mc-elbow" transform="translate(928 448) rotate(-14) scale(0.8)"/>
+        <use href="#mc-elbow" transform="translate(990 458) rotate(38) scale(0.74)"/>
+        <use href="#mc-elbow" transform="translate(590 474) rotate(20) scale(0.72)"/>
+        <use href="#mc-elbow" transform="translate(664 478) rotate(-34) scale(0.86)"/>
+        <use href="#mc-elbow" transform="translate(742 472) rotate(44) scale(0.8)"/>
+        <use href="#mc-elbow" transform="translate(818 474) rotate(-18) scale(0.88)"/>
+        <use href="#mc-elbow" transform="translate(896 478) rotate(26) scale(0.82)"/>
+        <use href="#mc-elbow" transform="translate(966 486) rotate(-30) scale(0.78)"/>
+        <use href="#mc-elbow" transform="translate(614 506) rotate(-10) scale(0.8)"/>
+        <use href="#mc-elbow" transform="translate(692 512) rotate(36) scale(0.84)"/>
+        <use href="#mc-elbow" transform="translate(770 506) rotate(-42) scale(0.8)"/>
+        <use href="#mc-elbow" transform="translate(848 510) rotate(16) scale(0.86)"/>
+        <use href="#mc-elbow" transform="translate(926 514) rotate(-26) scale(0.8)"/>
+        <use href="#mc-elbow" transform="translate(1000 518) rotate(34) scale(0.72)"/>
+        <use href="#mc-elbow" transform="translate(650 542) rotate(24) scale(0.76)"/>
+        <use href="#mc-elbow" transform="translate(730 546) rotate(-20) scale(0.8)"/>
+        <use href="#mc-elbow" transform="translate(810 544) rotate(40) scale(0.78)"/>
+        <use href="#mc-elbow" transform="translate(890 548) rotate(-36) scale(0.76)"/>
+        <use href="#mc-elbow" transform="translate(960 552) rotate(10) scale(0.72)"/>
+      </g>
+      <!-- toasted breadcrumb crust flecks -->
+      <g fill="#c9761d" opacity="0.75">
+        <circle cx="640" cy="430" r="5"/><circle cx="742" cy="424" r="4"/><circle cx="864" cy="428" r="5"/>
+        <circle cx="948" cy="436" r="4"/><circle cx="700" cy="560" r="5"/><circle cx="880" cy="566" r="4"/>
+      </g>
+      <ellipse cx="800" cy="596" rx="250" ry="46" fill="#8a4c12" opacity="0.28"/>
+    </g>
+
+    <!-- dish shine -->
+    <path d="M566 546 a70 70 0 0 0 34 66 h-24 a70 70 0 0 1 -44 -66 z" fill="#ffffff" opacity="0.12"/>
+  </g>
+
+  <!-- Serving spoon lifting a cheese pull -->
+  <g filter="url(#mc-drop)">
+    <g transform="rotate(-18 1046 372)">
+      <rect x="1036" y="228" width="18" height="150" rx="9" fill="url(#mc-steel)"/>
+      <ellipse cx="1045" cy="392" rx="52" ry="34" fill="#c3ccda"/>
+      <ellipse cx="1045" cy="386" rx="52" ry="34" fill="url(#mc-steel)"/>
+      <ellipse cx="1045" cy="384" rx="42" ry="26" fill="#f6bb44"/>
+      <use href="#mc-elbow" transform="translate(1030 378) rotate(-16) scale(0.6)"/>
+      <use href="#mc-elbow" transform="translate(1064 384) rotate(22) scale(0.55)"/>
+    </g>
+    <!-- stretchy cheese strands back to the dish -->
+    <g fill="none" stroke="#ffd061" stroke-linecap="round" opacity="0.95">
+      <path d="M1000 432 C 986 490, 960 502, 946 470" stroke-width="13"/>
+      <path d="M1024 440 C 1014 506, 986 522, 972 486" stroke-width="9"/>
+    </g>
+    <g fill="none" stroke="#fff0bb" stroke-linecap="round" opacity="0.6">
+      <path d="M1002 436 C 990 488, 966 498, 952 470" stroke-width="4"/>
+    </g>
+  </g>
+
+  <!-- ================= Topping bowls (right) ================= -->
+  <g filter="url(#mc-drop)">
+    <!-- bacon -->
+    <ellipse cx="1188" cy="636" rx="76" ry="24" fill="#f3f7fc"/>
+    <path d="M1112 636 a76 46 0 0 0 152 0 z" fill="#dde5ef"/>
+    <g clip-path="url(#mc-bowl1)">
+      <g stroke="#a83c22" stroke-width="11" stroke-linecap="round">
+        <path d="M1132 640 q16 -12 34 0 q16 12 32 0"/>
+        <path d="M1146 656 q16 -12 34 0 q16 12 32 0"/>
+        <path d="M1128 626 q14 -10 30 0"/>
+      </g>
+      <g stroke="#f0d3c2" stroke-width="4" stroke-linecap="round" opacity="0.8">
+        <path d="M1136 638 q14 -10 30 0"/>
+        <path d="M1150 654 q14 -10 30 0"/>
+      </g>
+    </g>
+    <ellipse cx="1188" cy="636" rx="76" ry="24" fill="none" stroke="#ffffff" stroke-width="6" opacity="0.85"/>
+
+    <!-- broccoli -->
+    <ellipse cx="1372" cy="636" rx="76" ry="24" fill="#f3f7fc"/>
+    <path d="M1296 636 a76 46 0 0 0 152 0 z" fill="#dde5ef"/>
+    <g clip-path="url(#mc-bowl2)">
+      <g>
+        <circle cx="1332" cy="638" r="19" fill="#2f7d3f"/>
+        <circle cx="1366" cy="630" r="22" fill="#3a9a4c"/>
+        <circle cx="1404" cy="640" r="18" fill="#2f7d3f"/>
+        <circle cx="1348" cy="658" r="16" fill="#46ad57"/>
+        <circle cx="1388" cy="662" r="15" fill="#3a9a4c"/>
+        <g fill="#9ed3a4" opacity="0.7">
+          <circle cx="1326" cy="632" r="4"/><circle cx="1362" cy="622" r="4"/><circle cx="1400" cy="634" r="4"/>
+        </g>
+      </g>
+    </g>
+    <ellipse cx="1372" cy="636" rx="76" ry="24" fill="none" stroke="#ffffff" stroke-width="6" opacity="0.85"/>
+
+    <!-- tomatoes -->
+    <ellipse cx="1188" cy="742" rx="76" ry="24" fill="#f3f7fc"/>
+    <path d="M1112 742 a76 46 0 0 0 152 0 z" fill="#dde5ef"/>
+    <g clip-path="url(#mc-bowl3)">
+      <g>
+        <circle cx="1140" cy="744" r="15" fill="#d33f34"/>
+        <circle cx="1174" cy="738" r="17" fill="#e14b3c"/>
+        <circle cx="1210" cy="746" r="15" fill="#d33f34"/>
+        <circle cx="1156" cy="762" r="14" fill="#e8574a"/>
+        <circle cx="1196" cy="766" r="13" fill="#d33f34"/>
+        <g fill="#ffb1a4" opacity="0.75">
+          <circle cx="1136" cy="739" r="4"/><circle cx="1170" cy="732" r="4"/><circle cx="1206" cy="741" r="4"/>
+        </g>
+      </g>
+    </g>
+    <ellipse cx="1188" cy="742" rx="76" ry="24" fill="none" stroke="#ffffff" stroke-width="6" opacity="0.85"/>
+
+    <!-- crunchy breadcrumb topping -->
+    <ellipse cx="1372" cy="742" rx="76" ry="24" fill="#f3f7fc"/>
+    <path d="M1296 742 a76 46 0 0 0 152 0 z" fill="#dde5ef"/>
+    <g clip-path="url(#mc-bowl4)">
+      <ellipse cx="1372" cy="748" rx="70" ry="26" fill="#e0a856"/>
+      <g fill="#f6d79a">
+        <circle cx="1334" cy="742" r="6"/><circle cx="1356" cy="752" r="5"/><circle cx="1378" cy="740" r="6"/>
+        <circle cx="1400" cy="750" r="5"/><circle cx="1346" cy="762" r="5"/><circle cx="1390" cy="764" r="6"/>
+        <circle cx="1412" cy="736" r="4"/><circle cx="1322" cy="754" r="4"/>
+      </g>
+      <g fill="#c98a34">
+        <circle cx="1344" cy="748" r="3"/><circle cx="1368" cy="760" r="3"/><circle cx="1394" cy="744" r="3"/>
+      </g>
+    </g>
+    <ellipse cx="1372" cy="742" rx="76" ry="24" fill="none" stroke="#ffffff" stroke-width="6" opacity="0.85"/>
+  </g>
+
+  <!-- ================= Foreground macaroni scatter ================= -->
+  <g>
+    <use href="#mc-elbow" transform="translate(300 726) rotate(-18) scale(1.05)"/>
+    <use href="#mc-elbow" transform="translate(392 772) rotate(26) scale(0.9)"/>
+    <use href="#mc-elbow" transform="translate(214 800) rotate(8) scale(0.8)"/>
+    <use href="#mc-elbow" transform="translate(560 806) rotate(-32) scale(0.95)"/>
+    <use href="#mc-elbow" transform="translate(700 762) rotate(16) scale(0.85)"/>
+    <use href="#mc-elbow" transform="translate(880 800) rotate(-12) scale(1)"/>
+    <use href="#mc-elbow" transform="translate(1020 754) rotate(34) scale(0.82)"/>
+    <use href="#mc-elbow" transform="translate(1512 690) rotate(-24) scale(0.9)"/>
+  </g>
+
+  <!-- Warm vignette -->
+  <rect width="1600" height="900" fill="none"/>
+  <rect x="0" y="0" width="1600" height="900" fill="url(#mc-glass)" opacity="0.05"/>
+</svg>

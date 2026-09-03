@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="Late-summer August picnic with sunflowers, watermelon and a spread of finger foods on a checkered blanket">
+  <defs>
+    <linearGradient id="sky-aug" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd97a"/>
+      <stop offset="0.45" stop-color="#ffb457"/>
+      <stop offset="1" stop-color="#ff8a5c"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff6d6"/>
+      <stop offset="1" stop-color="#ffdd6b"/>
+    </radialGradient>
+    <linearGradient id="cloth-aug" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2e7d5b"/>
+      <stop offset="1" stop-color="#1f5c41"/>
+    </linearGradient>
+    <pattern id="gingham-aug" width="120" height="120" patternUnits="userSpaceOnUse">
+      <rect width="120" height="120" fill="#2e7d5b"/>
+      <rect width="60" height="120" fill="#3d9670"/>
+      <rect width="120" height="60" fill="#3d9670" opacity="0.55"/>
+      <rect width="60" height="60" fill="#ffffff" opacity="0.92"/>
+    </pattern>
+    <g id="sunflower">
+      <g fill="#ffcd3c">
+        <ellipse cx="0" cy="-24" rx="9" ry="16"/>
+        <ellipse cx="0" cy="24" rx="9" ry="16"/>
+        <ellipse cx="24" cy="0" rx="16" ry="9"/>
+        <ellipse cx="-24" cy="0" rx="16" ry="9"/>
+        <ellipse cx="17" cy="-17" rx="9" ry="16" transform="rotate(45 17 -17)"/>
+        <ellipse cx="-17" cy="-17" rx="9" ry="16" transform="rotate(-45 -17 -17)"/>
+        <ellipse cx="17" cy="17" rx="9" ry="16" transform="rotate(-45 17 17)"/>
+        <ellipse cx="-17" cy="17" rx="9" ry="16" transform="rotate(45 -17 17)"/>
+      </g>
+      <circle cx="0" cy="0" r="14" fill="#7a4a24"/>
+      <circle cx="0" cy="0" r="14" fill="url(#seedhead)"/>
+    </g>
+    <radialGradient id="seedhead" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#8a5a30"/>
+      <stop offset="1" stop-color="#6b431f"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Warm late-summer sky -->
+  <rect width="1600" height="900" fill="url(#sky-aug)"/>
+
+  <!-- Sun -->
+  <circle cx="1300" cy="150" r="110" fill="url(#sun)" opacity="0.95"/>
+  <g stroke="#fff2c2" stroke-width="6" opacity="0.55" stroke-linecap="round">
+    <line x1="1300" y1="-10" x2="1300" y2="30"/>
+    <line x1="1300" y1="270" x2="1300" y2="310"/>
+    <line x1="1060" y1="150" x2="1100" y2="150"/>
+    <line x1="1500" y1="150" x2="1540" y2="150"/>
+    <line x1="1130" y1="-20" x2="1160" y2="10"/>
+    <line x1="1440" y1="290" x2="1470" y2="320"/>
+    <line x1="1470" y1="-20" x2="1440" y2="10"/>
+    <line x1="1160" y1="290" x2="1130" y2="320"/>
+  </g>
+
+  <!-- Soft clouds -->
+  <g fill="#ffffff" opacity="0.5">
+    <ellipse cx="260" cy="120" rx="90" ry="26"/>
+    <ellipse cx="330" cy="105" rx="70" ry="22"/>
+    <ellipse cx="720" cy="90" rx="70" ry="20"/>
+    <ellipse cx="780" cy="105" rx="55" ry="18"/>
+  </g>
+
+  <!-- Rolling hills -->
+  <path d="M0,520 Q400,460 800,500 Q1200,540 1600,480 L1600,900 L0,900 Z" fill="#c7de6a" opacity="0.9"/>
+  <path d="M0,560 Q420,520 800,550 Q1200,580 1600,540 L1600,900 L0,900 Z" fill="#a9cf5c" opacity="0.85"/>
+
+  <!-- Sunflower row along the hill -->
+  <g stroke="#3f7d3a" stroke-width="8">
+    <line x1="120" y1="470" x2="120" y2="560"/>
+    <line x1="1480" y1="450" x2="1480" y2="540"/>
+    <line x1="200" y1="430" x2="200" y2="530"/>
+  </g>
+  <use href="#sunflower" x="120" y="460" transform="scale(1.1)" transform-origin="120 460"/>
+  <use href="#sunflower" x="200" y="420" transform="scale(0.9)" transform-origin="200 420"/>
+  <use href="#sunflower" x="1480" y="440" transform="scale(1.15)" transform-origin="1480 440"/>
+
+  <!-- Picnic checkered blanket foreground -->
+  <g>
+    <path d="M0,660 Q400,616 800,644 Q1200,672 1600,628 L1600,900 L0,900 Z" fill="url(#gingham-aug)"/>
+    <path d="M0,660 Q400,616 800,644 Q1200,672 1600,628" fill="none" stroke="#ffffff" stroke-width="6" opacity="0.85"/>
+  </g>
+
+  <!-- Watermelon slice -->
+  <g transform="translate(210,700)">
+    <ellipse cx="90" cy="86" rx="98" ry="20" fill="#000000" opacity="0.16"/>
+    <path d="M0,60 A100,100 0 0 1 180,60 Z" fill="#2e7d3a"/>
+    <path d="M8,58 A92,92 0 0 1 172,58 Z" fill="#ffffff"/>
+    <path d="M16,56 A84,84 0 0 1 164,56 Z" fill="#ff5b6e"/>
+    <g fill="#2b1a2b">
+      <circle cx="60" cy="42" r="4"/>
+      <circle cx="90" cy="30" r="4"/>
+      <circle cx="120" cy="42" r="4"/>
+      <circle cx="75" cy="20" r="4"/>
+      <circle cx="105" cy="20" r="4"/>
+    </g>
+  </g>
+
+  <!-- Sandwich / finger-food platter -->
+  <g transform="translate(650,720)">
+    <ellipse cx="130" cy="70" rx="150" ry="22" fill="#000000" opacity="0.16"/>
+    <ellipse cx="130" cy="58" rx="145" ry="26" fill="#ffffff"/>
+    <g>
+      <rect x="20" y="18" width="70" height="26" rx="6" fill="#e8b873"/>
+      <rect x="20" y="18" width="70" height="8" rx="4" fill="#f3cd8e"/>
+      <rect x="24" y="30" width="62" height="7" fill="#7a9a3e"/>
+      <rect x="24" y="24" width="62" height="6" fill="#c8544a"/>
+    </g>
+    <g transform="translate(100,0)">
+      <rect x="20" y="14" width="70" height="30" rx="8" fill="#e8b873"/>
+      <rect x="20" y="14" width="70" height="8" rx="4" fill="#f3cd8e"/>
+      <rect x="24" y="34" width="62" height="6" fill="#7a9a3e"/>
+      <rect x="24" y="27" width="62" height="7" fill="#d98c3f"/>
+    </g>
+    <g transform="translate(210,10)" fill="#f2c14e">
+      <circle cx="10" cy="10" r="9"/>
+      <circle cx="30" cy="4" r="9"/>
+      <circle cx="46" cy="16" r="9"/>
+      <circle cx="18" cy="26" r="9"/>
+    </g>
+  </g>
+
+  <!-- Lemonade jar -->
+  <g transform="translate(1150,690)">
+    <ellipse cx="60" cy="96" rx="60" ry="14" fill="#000000" opacity="0.16"/>
+    <path d="M16,10 h88 a10,10 0 0 1 10,10 v70 a18,18 0 0 1 -18,18 h-72 a18,18 0 0 1 -18,-18 v-70 a10,10 0 0 1 10,-10 z" fill="#ffe27a" opacity="0.92"/>
+    <rect x="16" y="6" width="88" height="14" rx="6" fill="#2e7d5b"/>
+    <circle cx="60" cy="60" r="16" fill="#fff4c2" opacity="0.8"/>
+    <rect x="52" y="-14" width="6" height="30" fill="#ffffff" opacity="0.9" rx="3"/>
+  </g>
+
+  <!-- Picnic basket -->
+  <g transform="translate(1330,720)">
+    <ellipse cx="90" cy="14" rx="108" ry="18" fill="#000000" opacity="0.18"/>
+    <path d="M14,6 q76,-30 152,0 l-12,108 q-64,20 -128,0 z" fill="#a9682f"/>
+    <path d="M14,6 q76,-30 152,0 l-4,26 q-72,-26 -144,0 z" fill="#c98a4b"/>
+    <path d="M36,4 q54,-64 108,0" fill="none" stroke="#8a531f" stroke-width="9"/>
+    <rect x="54" y="-26" width="72" height="40" rx="9" fill="#ffffff"/>
+    <rect x="54" y="-26" width="72" height="40" rx="9" fill="url(#gingham-aug)" opacity="0.6"/>
+  </g>
+
+  <!-- Butterflies for a summery touch -->
+  <g fill="#ff9f4a" opacity="0.9">
+    <path d="M900,300 q-24,-30 -6,-46 q18,14 6,46 z"/>
+    <path d="M900,300 q24,-30 6,-46 q-18,14 -6,46 z"/>
+  </g>
+  <g fill="#ff9f4a" opacity="0.75">
+    <path d="M1000,380 q-16,-20 -4,-32 q12,10 4,32 z"/>
+    <path d="M1000,380 q16,-20 4,-32 q-12,10 -4,32 z"/>
+  </g>
+</svg>

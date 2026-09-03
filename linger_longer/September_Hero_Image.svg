@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="September Himalayan harvest scene with prayer flags, mountains, momos, and Tibetan tea">
+  <defs>
+    <linearGradient id="sky-sep" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#243b6b"/>
+      <stop offset="0.53" stop-color="#86659b"/>
+      <stop offset="1" stop-color="#e39a64"/>
+    </linearGradient>
+    <linearGradient id="mountain-sep" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8fa9c1"/>
+      <stop offset="1" stop-color="#3b5577"/>
+    </linearGradient>
+    <linearGradient id="table-sep" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#751f35"/>
+      <stop offset="0.5" stop-color="#a4363f"/>
+      <stop offset="1" stop-color="#6b1f37"/>
+    </linearGradient>
+    <pattern id="cloth-sep" width="100" height="100" patternUnits="userSpaceOnUse">
+      <rect width="100" height="100" fill="url(#table-sep)"/>
+      <path d="M0 50h100M50 0v100" stroke="#e0a838" stroke-width="7" opacity="0.82"/>
+      <path d="M0 25h100M25 0v100M0 75h100M75 0v100" stroke="#f6d77a" stroke-width="2" opacity="0.7"/>
+      <circle cx="50" cy="50" r="11" fill="#1c5573" opacity="0.9"/>
+    </pattern>
+    <filter id="glow-sep" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#sky-sep)"/>
+  <circle cx="1270" cy="184" r="103" fill="#ffe3a3" opacity="0.95"/>
+  <circle cx="1270" cy="184" r="134" fill="#ffe3a3" opacity="0.23" filter="url(#glow-sep)"/>
+
+  <g fill="#fff" opacity="0.47">
+    <ellipse cx="220" cy="205" rx="120" ry="25"/>
+    <ellipse cx="325" cy="190" rx="84" ry="21"/>
+    <ellipse cx="675" cy="140" rx="86" ry="18"/>
+    <ellipse cx="750" cy="155" rx="66" ry="20"/>
+  </g>
+
+  <path d="M0 588 220 325 400 536 655 240 900 550 1110 350 1375 564 1600 382V900H0Z" fill="url(#mountain-sep)"/>
+  <path d="M220 325 156 402 274 378 340 454 400 536 350 405Z" fill="#edf4f5" opacity="0.88"/>
+  <path d="M655 240 550 378 683 330 764 418 805 375 900 550 814 356Z" fill="#f5f6ed" opacity="0.91"/>
+  <path d="M1110 350 1015 460 1137 416 1214 492 1270 448 1375 564 1247 392Z" fill="#edf4f5" opacity="0.78"/>
+  <path d="M0 590Q340 525 640 574T1200 556T1600 590V900H0Z" fill="#2f5e54"/>
+  <path d="M0 640Q300 595 720 632T1600 610V900H0Z" fill="#23493f" opacity="0.92"/>
+
+  <g stroke="#28344f" stroke-width="6" fill="none" opacity="0.9">
+    <path d="M60 84Q410 155 780 106T1515 104"/>
+  </g>
+  <g>
+    <path d="M170 103l58 15-40 69-58-15z" fill="#be3342"/>
+    <path d="M258 119l58 10-32 70-58-10z" fill="#e1b53d"/>
+    <path d="M346 132l58 6-25 70-58-6z" fill="#2d6e87"/>
+    <path d="M434 140l58 1-16 70-58-1z" fill="#3c824f"/>
+    <path d="M522 141l58-4-8 70-58 4z" fill="#efe7cf"/>
+    <path d="M610 136l58-9 2 70-58 9z" fill="#be3342"/>
+    <path d="M698 126l58-13 10 69-58 13z" fill="#e1b53d"/>
+    <path d="M1012 115l58-10 16 69-58 10z" fill="#2d6e87"/>
+    <path d="M1100 102l58-14 24 68-58 14z" fill="#3c824f"/>
+    <path d="M1188 86l58-17 31 67-58 17z" fill="#efe7cf"/>
+    <path d="M1276 70l58-19 38 66-58 19z" fill="#be3342"/>
+  </g>
+
+  <path d="M0 664Q400 617 800 650T1600 627V900H0Z" fill="url(#cloth-sep)"/>
+  <path d="M0 664Q400 617 800 650T1600 627" fill="none" stroke="#f6d77a" stroke-width="6" opacity="0.85"/>
+
+  <g transform="translate(220 680)">
+    <ellipse cx="164" cy="118" rx="177" ry="30" fill="#111b2a" opacity="0.22"/>
+    <ellipse cx="164" cy="102" rx="172" ry="34" fill="#f8ead4"/>
+    <ellipse cx="164" cy="96" rx="160" ry="25" fill="#fff9eb"/>
+    <g fill="#e9d5ab" stroke="#bc8d55" stroke-width="4">
+      <path d="M32 92q12-76 45-6q-22 27-45 6z"/>
+      <path d="M86 82q12-76 45-6q-22 27-45 6z"/>
+      <path d="M140 90q12-76 45-6q-22 27-45 6z"/>
+      <path d="M194 81q12-76 45-6q-22 27-45 6z"/>
+      <path d="M248 90q12-76 45-6q-22 27-45 6z"/>
+    </g>
+    <g stroke="#a56f3f" stroke-width="3" opacity="0.75">
+      <path d="M40 72l27 12M94 63l27 12M148 71l27 12M202 62l27 12M256 71l27 12"/>
+    </g>
+  </g>
+
+  <g transform="translate(815 686)">
+    <ellipse cx="104" cy="112" rx="111" ry="22" fill="#111b2a" opacity="0.22"/>
+    <path d="M20 24h168l-14 100q-70 28-140 0z" fill="#c78943"/>
+    <ellipse cx="104" cy="24" rx="84" ry="22" fill="#e2ae64"/>
+    <ellipse cx="104" cy="24" rx="69" ry="14" fill="#6e3e2b"/>
+    <path d="M188 43q66 0 48 53q-11 24-53 10" fill="none" stroke="#c78943" stroke-width="15"/>
+    <path d="M77 2q-22-38 5-58M111 1q26-38-2-61M141 5q32-30 12-57" fill="none" stroke="#f7edd3" stroke-width="7" opacity="0.74" stroke-linecap="round"/>
+  </g>
+
+  <g transform="translate(1200 680)">
+    <ellipse cx="112" cy="117" rx="127" ry="24" fill="#111b2a" opacity="0.22"/>
+    <ellipse cx="112" cy="101" rx="121" ry="29" fill="#f8ead4"/>
+    <g fill="#d55d44">
+      <circle cx="50" cy="80" r="18"/><circle cx="92" cy="69" r="18"/><circle cx="135" cy="80" r="18"/><circle cx="176" cy="69" r="18"/>
+    </g>
+    <g fill="#4f8d48">
+      <path d="M42 54q12-22 24 0z"/><path d="M84 43q12-22 24 0z"/><path d="M127 54q12-22 24 0z"/><path d="M168 43q12-22 24 0z"/>
+    </g>
+  </g>
+</svg>

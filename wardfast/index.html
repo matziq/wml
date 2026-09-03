@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Sundance 1st Ward September 2026 missionary fast sign-up.">
+  <title>September Fast for Missionary Work</title>
+  <script>
+    (() => {
+      const param = new URLSearchParams(window.location.search).get("scoutTheme");
+      const theme =
+        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --cp-bg: #f7f4ef;
+      --cp-bg-elevated: #fcfbf8;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #f5f5f5;
+      --cp-border: #dedede;
+      --cp-border-strong: #919191;
+      --cp-text: #242424;
+      --cp-text-muted: #5c5c5c;
+      --cp-text-soft: #6f6f6f;
+      --cp-accent: #b11f4b;
+      --cp-accent-hover: #9a1a41;
+      --cp-accent-soft: rgba(177, 31, 75, 0.08);
+      --cp-accent-fg: #ffffff;
+      --cp-success: #16a34a;
+      --cp-danger: #dc2626;
+      --cp-warning: #f59e0b;
+      --cp-link: #0078d4;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+      --cp-overlay: rgba(255, 255, 255, 0.8);
+      --cp-panel: rgba(255, 255, 255, 0.86);
+      --cp-panel-strong: rgba(255, 255, 255, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.55);
+      --cp-highlight: rgba(177, 31, 75, 0.12);
+    }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --cp-bg: #3d3b3a;
+      --cp-bg-elevated: #343231;
+      --cp-surface: #292929;
+      --cp-surface-soft: #2e2e2e;
+      --cp-border: #474747;
+      --cp-border-strong: #5f5f5f;
+      --cp-text: #dedede;
+      --cp-text-muted: #919191;
+      --cp-text-soft: #b0b0b0;
+      --cp-accent: #fd8ea1;
+      --cp-accent-hover: #fb7b91;
+      --cp-accent-soft: rgba(253, 142, 161, 0.14);
+      --cp-accent-fg: #1a1a1a;
+      --cp-success: #4ade80;
+      --cp-danger: #f87171;
+      --cp-warning: #fbbf24;
+      --cp-link: #4da6ff;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+      --cp-overlay: rgba(41, 41, 41, 0.88);
+      --cp-panel: rgba(41, 41, 41, 0.72);
+      --cp-panel-strong: rgba(41, 41, 41, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.04);
+      --cp-highlight: rgba(253, 142, 161, 0.12);
+    }
+  </style>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="eyebrow">Sundance 1st Ward</p>
+      <h1>September Fast for Missionary Work</h1>
+      <p class="hero-copy">Choose one day in September to fast and pray for missionary work. Together, we can cover the month one day at a time.</p>
+      <blockquote>“The intensity of our desire to share the gospel is a great indicator of the extent of our personal conversion.” <cite>— Dallin H. Oaks</cite></blockquote>
+      <div class="hero-actions">
+        <a class="button" href="#calendar">Choose a day</a>
+        <button class="button secondary" id="print-button" type="button">Print</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="stats" aria-label="Fast coverage progress">
+      <article class="stat"><strong id="covered-count">0</strong><span>days covered</span></article>
+      <article class="stat urgent"><strong id="open-count">29</strong><span>days still need someone</span></article>
+      <article class="stat"><strong id="signup-count">0</strong><span>total sign-ups</span></article>
+      <article class="stat"><strong id="coverage-percent">0%</strong><span>month covered</span></article>
+    </section>
+
+    <section class="progress-card" aria-labelledby="progress-title">
+      <div>
+        <p class="section-kicker">Our shared goal</p>
+        <h2 id="progress-title"><span id="progress-message">29 days left to fill</span></h2>
+      </div>
+      <div class="progress-track" role="progressbar" aria-label="September fast coverage" aria-valuemin="0" aria-valuemax="29" aria-valuenow="0">
+        <span id="progress-fill"></span>
+      </div>
+      <p>Every available day needs at least one person or family. September 6 is the regular ward fast and is already set aside.</p>
+    </section>
+
+    <div id="setup-notice" class="notice" hidden>
+      <strong>Sign-up setup is being finalized.</strong>
+      The calendar is ready, but shared submissions will open after the private sign-up sheet is connected.
+    </div>
+    <div id="status" class="notice status" role="status" aria-live="polite" hidden></div>
+
+    <section id="calendar" class="calendar-section" aria-labelledby="calendar-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">September 2026</p>
+          <h2 id="calendar-title">Pick a day to fast</h2>
+        </div>
+        <div class="legend" aria-label="Calendar legend">
+          <span><i class="dot open"></i>Needs someone</span>
+          <span><i class="dot covered"></i>Covered</span>
+        </div>
+      </div>
+      <div class="weekday-row" aria-hidden="true">
+        <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+      </div>
+      <div id="calendar-grid" class="calendar-grid"></div>
+    </section>
+
+    <section id="print-list" class="print-list" aria-labelledby="list-title">
+      <h2 id="list-title">September Fast Sign-ups</h2>
+      <p>Sundance 1st Ward · September 1–30, 2026 · September 6 excluded</p>
+      <div id="list-days"></div>
+    </section>
+
+    <section class="share-card">
+      <div>
+        <p class="section-kicker">Share the sign-up</p>
+        <h2>Scan or send the direct link</h2>
+        <p><a href="https://wardmission.org/wf/">wardmission.org/wf/</a></p>
+      </div>
+      <img src="wardfast-qr.svg" alt="QR code for the ward fast sign-up">
+    </section>
+  </main>
+
+  <footer>
+    <p>Names are shown so the ward can see which days are covered. Phone numbers and reminder email addresses remain private for organizers.</p>
+  </footer>
+
+  <dialog id="signup-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-head">
+      <div>
+        <p class="section-kicker">September 2026</p>
+        <h2 id="dialog-title">Choose a day</h2>
+      </div>
+      <button class="icon-button" id="close-dialog" type="button" aria-label="Close">×</button>
+    </div>
+    <div id="day-signups" class="day-signups"></div>
+    <form id="signup-form">
+      <input type="hidden" id="signup-date" name="date">
+      <label>Name or family name
+        <input id="signup-name" name="name" autocomplete="name" maxlength="100" required placeholder="e.g., The Garcia Family">
+      </label>
+      <label>Phone number
+        <input id="signup-phone" name="phone" type="tel" autocomplete="tel" maxlength="30" required placeholder="(555) 555-0123">
+      </label>
+      <label class="check-row">
+        <input id="signup-reminder" name="reminderOptIn" type="checkbox" value="true">
+        <span>Email me a reminder the day before</span>
+      </label>
+      <label id="email-row" hidden>Reminder email
+        <input id="signup-email" name="email" type="email" autocomplete="email" maxlength="150" placeholder="you@example.com">
+      </label>
+      <p class="privacy-note">Missionaries will use your private phone number to call the night before. If selected, the email reminder is sent automatically one day before your fast.</p>
+      <button class="button submit-button" type="submit">Sign up for this day</button>
+    </form>
+  </dialog>
+
+  <dialog id="print-dialog" aria-labelledby="print-title">
+    <div class="dialog-head">
+      <h2 id="print-title">Choose a print layout</h2>
+      <button class="icon-button close-print" type="button" aria-label="Close">×</button>
+    </div>
+    <div class="print-options">
+      <button class="button" type="button" data-print-mode="calendar">One-page calendar</button>
+      <button class="button secondary" type="button" data-print-mode="list">List by day with names</button>
+    </div>
+  </dialog>
+</body>
+</html>

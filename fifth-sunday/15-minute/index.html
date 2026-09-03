@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A single 15-minute, highly interactive fifth Sunday lesson on missionary work: the whole class discovers the Love, Share, Invite pattern, finds their missionary style, and leaves with one written commitment.">
+  <meta name="theme-color" content="#b11f4b">
+  <title>15-Minute Lesson | You Already Know How</title>
+  <link rel="icon" type="image/svg+xml" sizes="any" href="../../favicon.svg">
+  <script>
+    (() => {
+      const param = new URLSearchParams(window.location.search).get("scoutTheme");
+      const theme =
+        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --cp-bg: #f7f4ef;
+      --cp-bg-elevated: #fcfbf8;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #f5f5f5;
+      --cp-border: #dedede;
+      --cp-border-strong: #919191;
+      --cp-text: #242424;
+      --cp-text-muted: #5c5c5c;
+      --cp-text-soft: #6f6f6f;
+      --cp-accent: #b11f4b;
+      --cp-accent-hover: #9a1a41;
+      --cp-accent-soft: rgba(177, 31, 75, 0.08);
+      --cp-accent-fg: #ffffff;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.10);
+      --spark: #C0392B;  --spark-soft: #FBEDEB;
+      --bridge: #1D4ED8; --bridge-soft: #EAEFFC;
+      --beacon: #A16207; --beacon-soft: #FAF2E3;
+      --seed: #15803D;   --seed-soft: #E9F5EE;
+    }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --cp-bg: #3d3b3a;
+      --cp-bg-elevated: #343231;
+      --cp-surface: #292929;
+      --cp-surface-soft: #2e2e2e;
+      --cp-border: #474747;
+      --cp-border-strong: #5f5f5f;
+      --cp-text: #dedede;
+      --cp-text-muted: #919191;
+      --cp-text-soft: #b0b0b0;
+      --cp-accent: #fd8ea1;
+      --cp-accent-hover: #fb7b91;
+      --cp-accent-soft: rgba(253, 142, 161, 0.14);
+      --cp-accent-fg: #1a1a1a;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+      --spark: #F08A7C;  --spark-soft: rgba(240, 138, 124, 0.14);
+      --bridge: #8FB0FA; --bridge-soft: rgba(143, 176, 250, 0.14);
+      --beacon: #E0B44E; --beacon-soft: rgba(224, 180, 78, 0.14);
+      --seed: #6BCB8E;   --seed-soft: rgba(107, 203, 142, 0.14);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: var(--cp-bg);
+      color: var(--cp-text);
+      font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---------------- header + nav ---------------- */
+    header {
+      background: var(--cp-bg-elevated);
+      border-bottom: 1px solid var(--cp-border);
+      position: sticky; top: 0; z-index: 20;
+    }
+    .header-inner {
+      width: min(1080px, 100% - 40px); margin: auto;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; padding: 14px 0; flex-wrap: wrap;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+    .brand-mark {
+      width: 40px; height: 40px; border-radius: 12px; flex: 0 0 auto;
+      background: var(--cp-accent); color: var(--cp-accent-fg);
+      display: grid; place-items: center; font: 700 13.5px/1 Georgia, serif; letter-spacing: .04em;
+    }
+    .brand strong { display: block; font-size: 13.5px; letter-spacing: .01em; }
+    .brand small { display: block; font-size: 10.5px; letter-spacing: .04em; color: var(--cp-text-muted); }
+    .navlinks { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+    .navlinks a, .navlinks button {
+      font-size: 13.5px; font-family: inherit; text-decoration: none; color: var(--cp-text-muted);
+      border: 1px solid var(--cp-border); border-radius: 999px; padding: 6px 13px;
+      background: var(--cp-surface); white-space: nowrap; cursor: pointer;
+    }
+    .navlinks a:hover, .navlinks button:hover { border-color: var(--cp-accent); color: var(--cp-accent); }
+    .navlinks a.print { background: var(--cp-accent); color: var(--cp-accent-fg); border-color: var(--cp-accent); }
+    .navlinks button.timer { font-variant-numeric: tabular-nums; min-width: 104px; }
+    .navlinks button.timer.running { background: var(--cp-accent); color: var(--cp-accent-fg); border-color: var(--cp-accent); }
+
+    main { width: min(1080px, 100% - 40px); margin: 0 auto 72px; }
+
+    /* ---------------- hero ---------------- */
+    .hero { padding: 52px 0 30px; }
+    .eyebrow {
+      margin: 0 0 8px; font-size: 10.5px; font-weight: 700;
+      letter-spacing: .14em; text-transform: uppercase; color: var(--cp-accent);
+    }
+    .hero h1 { margin: 0 0 12px; font: 600 clamp(31px, 5vw, 42px)/1.14 Georgia, "Times New Roman", serif; }
+    .hero p.lede { margin: 0; max-width: 66ch; font-size: 17px; color: var(--cp-text-muted); }
+
+    .at-a-glance {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px; margin: 26px 0 0;
+    }
+    .glance {
+      background: var(--cp-surface); border: 1px solid var(--cp-border);
+      border-radius: 12px; padding: 14px 16px;
+    }
+    .glance strong { display: block; font: 600 21px/1.2 Georgia, serif; color: var(--cp-accent); }
+    .glance span { display: block; font-size: 13.5px; color: var(--cp-text-muted); margin-top: 2px; }
+
+    /* ---------------- sections ---------------- */
+    section.block {
+      background: var(--cp-surface); border: 1px solid var(--cp-border);
+      border-radius: 16px; padding: 34px; margin-top: 26px;
+      box-shadow: var(--cp-shadow);
+      --c: var(--cp-accent); --soft: var(--cp-accent-soft);
+    }
+    section.block.spark  { --c: var(--spark);  --soft: var(--spark-soft); }
+    section.block.bridge { --c: var(--bridge); --soft: var(--bridge-soft); }
+    section.block.beacon { --c: var(--beacon); --soft: var(--beacon-soft); }
+    section.block.seed   { --c: var(--seed);   --soft: var(--seed-soft); }
+
+    .block-head { display: flex; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+    .mark {
+      width: 52px; height: 52px; flex: 0 0 auto; border-radius: 14px;
+      background: var(--c); color: #fff; display: grid; place-items: center;
+      font: 700 27px/1 Georgia, serif;
+    }
+    html[data-theme="dark"] .mark { color: #1a1a1a; }
+    .block-head .titles { flex: 1 1 240px; min-width: 0; }
+    .block-head h2 { margin: 0; font: 600 27px/1.2 Georgia, serif; color: var(--c); }
+    .block-head .tagline { margin: 4px 0 0; font: italic 17px Georgia, serif; color: var(--cp-text-muted); }
+    .stamp {
+      flex: 0 0 auto; align-self: flex-start;
+      border: 1px solid var(--c); color: var(--c); background: var(--soft);
+      border-radius: 999px; padding: 5px 14px;
+      font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    }
+
+    .anchor {
+      margin: 20px 0 0; background: var(--soft);
+      border: 1px solid var(--cp-border); border-radius: 10px; padding: 14px 18px;
+    }
+    .anchor b {
+      display: block; font-size: 10.5px; letter-spacing: .11em;
+      text-transform: uppercase; color: var(--c); margin-bottom: 4px;
+    }
+    .anchor p { margin: 0; font: italic 17px/1.55 Georgia, serif; }
+
+    .verses {
+      margin: 18px 0 0; border: 1px solid var(--cp-border);
+      border-radius: 10px; padding: 14px 18px 16px;
+    }
+    .verses > b {
+      display: block; font-size: 10.5px; letter-spacing: .11em;
+      text-transform: uppercase; color: var(--c); margin-bottom: 10px;
+    }
+    .verses .ref {
+      display: block; font-size: 10.5px; font-weight: 700; letter-spacing: .06em;
+      text-transform: uppercase; color: var(--cp-text-muted); margin: 14px 0 3px;
+    }
+    .verses .ref:first-of-type { margin-top: 0; }
+    .verses p { margin: 0; font: 13.5px/1.6 Georgia, serif; }
+    .verses p .v {
+      font-size: 10.5px; font-weight: 700; color: var(--c);
+      vertical-align: 2px; margin-right: 3px;
+    }
+
+    /* ---------------- timing table ---------------- */
+    .timing { margin: 24px 0 0; border: 1px solid var(--cp-border); border-radius: 12px; overflow: hidden; }
+    .timing-row {
+      display: grid; grid-template-columns: 116px 1fr 104px;
+      border-top: 1px solid var(--cp-border); font-size: 13.5px;
+    }
+    .timing-row:first-child { border-top: 0; }
+    .timing-row.head {
+      background: var(--soft); font-weight: 700; font-size: 10.5px;
+      letter-spacing: .1em; text-transform: uppercase; color: var(--c);
+    }
+    .timing-row > span { padding: 9px 14px; }
+    .timing-row > span:first-child {
+      border-right: 1px solid var(--cp-border);
+      font-variant-numeric: tabular-nums; color: var(--cp-text-muted); font-weight: 600;
+      white-space: nowrap;
+    }
+    .timing-row > span:last-child {
+      border-left: 1px solid var(--cp-border); font-size: 10.5px; font-weight: 700;
+      letter-spacing: .07em; text-transform: uppercase; color: var(--cp-text-muted);
+    }
+    .timing-row.head > span:first-child, .timing-row.head > span:last-child { color: var(--c); }
+    .timing-row .who-class { color: var(--c) !important; }
+    @media (max-width: 620px) {
+      .timing-row { grid-template-columns: 104px 1fr; }
+      .timing-row > span:last-child { display: none; }
+    }
+
+    /* ---------------- beats ---------------- */
+    .beat { margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--cp-border); }
+    .beat:first-of-type { border-top: 0; }
+    .beat-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+    .clock {
+      flex: 0 0 auto; background: var(--c); color: #fff;
+      border-radius: 6px; padding: 3px 10px;
+      font: 700 10.5px/1.5 "Segoe UI", sans-serif; letter-spacing: .05em;
+      font-variant-numeric: tabular-nums;
+    }
+    html[data-theme="dark"] .clock { color: #1a1a1a; }
+    .beat-head h3 { margin: 0; font: 600 21px/1.3 "Segoe UI", sans-serif; }
+    .beat-head .who {
+      margin-left: auto; flex: 0 0 auto; border-radius: 999px; padding: 2px 11px;
+      font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      border: 1px solid var(--cp-border-strong); color: var(--cp-text-muted); background: var(--cp-surface-soft);
+    }
+    .beat-head .who.class { border-color: var(--c); color: var(--c); background: var(--soft); }
+    .beat p { margin: 0 0 12px; }
+    .beat p:last-child { margin-bottom: 0; }
+
+    .say {
+      margin: 0 0 14px; border-left: 2px solid var(--c);
+      background: var(--soft); padding: 14px 18px; border-radius: 0 10px 10px 0;
+    }
+    .say b {
+      display: block; font-size: 10.5px; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--c); margin-bottom: 6px;
+    }
+    .say p { margin: 0 0 10px; font: 17px/1.62 Georgia, "Times New Roman", serif; }
+    .say p:last-child { margin-bottom: 0; }
+
+    .do {
+      margin: 0 0 14px; border: 1px dashed var(--cp-border-strong);
+      border-radius: 10px; padding: 13px 17px; background: var(--cp-surface-soft);
+    }
+    .do b {
+      display: block; font-size: 10.5px; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--cp-text-muted); margin-bottom: 5px;
+    }
+    .do p, .do ul, .do ol { margin: 0; font-size: 13.5px; line-height: 1.55; }
+    .do ul, .do ol { padding-left: 20px; }
+    .do li { margin: 3px 0; }
+
+    /* ---------------- activity block (the interactive beats) ---------------- */
+    .act {
+      margin: 0 0 14px; border: 2px solid var(--c); background: var(--soft);
+      border-radius: 12px; padding: 15px 19px;
+    }
+    .act > b {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--c); margin-bottom: 8px;
+    }
+    .act > b::before {
+      content: ""; width: 9px; height: 9px; border-radius: 50%;
+      background: var(--c); flex: 0 0 auto;
+    }
+    .act p { margin: 0 0 9px; font-size: 15px; line-height: 1.55; }
+    .act p:last-child, .act ol:last-child, .act ul:last-child { margin-bottom: 0; }
+    .act ol, .act ul { margin: 0 0 9px; padding-left: 21px; font-size: 15px; line-height: 1.55; }
+    .act li { margin: 4px 0; }
+    .act .cue {
+      display: block; margin: 9px 0 0; padding: 9px 13px;
+      background: var(--cp-surface); border: 1px solid var(--cp-border); border-radius: 8px;
+      font: italic 15px/1.5 Georgia, serif;
+    }
+    .act .cue b { font-style: normal; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--cp-text-muted); display: block; margin-bottom: 3px; }
+
+    /* ---------------- call-and-response sort ---------------- */
+    .sort { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; counter-reset: sortline; }
+    .sort li {
+      display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center;
+      border: 1px solid var(--cp-border); border-radius: 10px; padding: 10px 14px;
+      background: var(--cp-surface); font: italic 15px/1.45 Georgia, serif;
+    }
+    .sort li .ans {
+      font: 700 10.5px/1 "Segoe UI", sans-serif; letter-spacing: .09em; text-transform: uppercase;
+      border-radius: 999px; padding: 5px 11px; white-space: nowrap;
+      border: 1px solid var(--c); color: var(--c); background: var(--soft);
+    }
+
+    /* ---------------- tip cards ---------------- */
+    .tips { display: grid; grid-template-columns: repeat(auto-fit, minmax(258px, 1fr)); gap: 12px; margin: 6px 0 0; }
+    .tip {
+      border: 1px solid var(--cp-border); border-radius: 11px;
+      padding: 14px 16px; background: var(--cp-bg-elevated); position: relative;
+    }
+    .tip .n {
+      position: absolute; top: 12px; right: 14px;
+      font: 700 21px/1 Georgia, serif; color: var(--c); opacity: .32;
+    }
+    .tip h4 { margin: 0 0 5px; padding-right: 28px; font: 600 17px/1.3 "Segoe UI", sans-serif; color: var(--c); }
+    .tip p { margin: 0 0 9px; font-size: 13.5px; line-height: 1.5; color: var(--cp-text-muted); }
+    .tip .phrase {
+      margin: 0; padding: 8px 11px; background: var(--soft);
+      border-radius: 7px; font: italic 13.5px/1.45 Georgia, serif; color: var(--cp-text);
+    }
+
+    /* ---------------- corner cards (4 styles side by side) ---------------- */
+    .corners { display: grid; grid-template-columns: repeat(auto-fit, minmax(238px, 1fr)); gap: 14px; margin: 4px 0 0; }
+    .corner {
+      border: 1px solid var(--cp-border); border-top: 5px solid var(--sc);
+      border-radius: 12px; padding: 15px 17px; background: var(--cp-bg-elevated);
+    }
+    .corner.s1 { --sc: var(--spark);  --ss: var(--spark-soft); }
+    .corner.s2 { --sc: var(--bridge); --ss: var(--bridge-soft); }
+    .corner.s3 { --sc: var(--beacon); --ss: var(--beacon-soft); }
+    .corner.s4 { --sc: var(--seed);   --ss: var(--seed-soft); }
+    .corner h4 { margin: 0; font: 600 21px/1.2 Georgia, serif; color: var(--sc); }
+    .corner .who-line { margin: 3px 0 10px; font: italic 13.5px Georgia, serif; color: var(--cp-text); }
+    .corner .lab {
+      display: block; font-size: 10.5px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--cp-text-muted); margin: 11px 0 3px;
+    }
+    .corner p { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--cp-text-muted); }
+    .corner ol { margin: 3px 0 0; padding-left: 19px; font-size: 13.5px; line-height: 1.45; }
+    .corner ol li { margin: 3px 0; color: var(--cp-text-muted); }
+    .corner ol li b { color: var(--cp-text); font-weight: 600; }
+    .corner .say-this {
+      margin: 10px 0 0; padding: 9px 12px; background: var(--ss);
+      border-radius: 8px; font: italic 13.5px/1.45 Georgia, serif; color: var(--cp-text);
+    }
+
+    /* ---------------- style preview grid ---------------- */
+    .styles { display: grid; grid-template-columns: repeat(auto-fit, minmax(228px, 1fr)); gap: 12px; margin: 4px 0 0; }
+    .style-mini {
+      border: 1px solid var(--cp-border); border-top: 4px solid var(--sc);
+      border-radius: 10px; padding: 13px 15px; background: var(--cp-bg-elevated);
+    }
+    .style-mini.s1 { --sc: var(--spark); }
+    .style-mini.s2 { --sc: var(--bridge); }
+    .style-mini.s3 { --sc: var(--beacon); }
+    .style-mini.s4 { --sc: var(--seed); }
+    .style-mini strong { display: block; font: 600 17px/1.2 Georgia, serif; color: var(--sc); }
+    .style-mini em { display: block; font: italic 13.5px Georgia, serif; color: var(--cp-text); margin: 3px 0 6px; }
+    .style-mini span { display: block; font-size: 13.5px; line-height: 1.45; color: var(--cp-text-muted); }
+
+    /* ---------------- prep checklist ---------------- */
+    .prep { margin-top: 26px; }
+    .prep h3 { margin: 0 0 12px; font: 600 21px/1.3 "Segoe UI", sans-serif; }
+    .prep ul { margin: 0; padding-left: 0; list-style: none; display: grid; gap: 8px; }
+    .prep li { padding-left: 30px; position: relative; font-size: 17px; line-height: 1.5; }
+    .prep li::before {
+      content: ""; position: absolute; left: 0; top: .35em;
+      width: 17px; height: 17px; border: 1.5px solid var(--cp-border-strong); border-radius: 4px;
+    }
+    .prep li.plain { padding-left: 0; }
+    .prep li.plain::before { content: none; }
+
+    .callout {
+      margin-top: 22px; border: 1px solid var(--cp-accent);
+      background: var(--cp-accent-soft); border-radius: 12px; padding: 16px 20px;
+    }
+    .callout b { color: var(--cp-accent); }
+    .callout p { margin: 0; font-size: 13.5px; line-height: 1.6; }
+    .callout p + p { margin-top: 9px; }
+
+    footer {
+      border-top: 1px solid var(--cp-border); padding: 26px 0 60px;
+      font-size: 13.5px; color: var(--cp-text-muted);
+      display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    }
+    footer a { color: var(--cp-accent); }
+
+    /* ---------------- print ---------------- */
+    @media print {
+      @page { size: letter; margin: .55in; }
+      html, body { background: #fff; color: #1a1a1a; font-size: 11pt; line-height: 1.48; }
+      header, .navlinks, .at-a-glance { display: none !important; }
+      main { width: auto; margin: 0; }
+      .hero { padding: 0 0 14px; }
+      .hero h1 { font-size: 24pt; }
+      .hero p.lede { font-size: 11pt; }
+      section.block {
+        box-shadow: none; border: 0; border-radius: 0; padding: 0;
+        margin: 0; break-before: page; page-break-before: always;
+      }
+      section.block:first-of-type { break-before: auto; page-break-before: auto; }
+      .block-head { border-bottom: 2px solid var(--c); padding-bottom: 10px; }
+      .beat, .tip, .say, .do, .act, .timing, .starters li, .verses, .anchor, .corner, .sort li {
+        break-inside: avoid; page-break-inside: avoid;
+      }
+      .tips { grid-template-columns: repeat(2, 1fr); }
+      .styles { grid-template-columns: repeat(2, 1fr); }
+      .corners { grid-template-columns: repeat(2, 1fr); }
+      footer { display: none !important; }
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="brand" href="../../">
+      <span class="brand-mark" aria-hidden="true">LSI</span>
+      <span><strong>15-Minute Fifth Sunday Lesson</strong><small>Love &middot; Share &middot; Invite &middot; August 30</small></span>
+    </a>
+    <nav class="navlinks" aria-label="Jump to a section">
+      <a href="#runsheet">Run sheet</a>
+      <a href="#lesson">The 15 minutes</a>
+      <a href="#corners">Corner cards</a>
+      <a href="#prep">Prep</a>
+      <button class="timer" id="timerBtn" type="button" aria-live="polite">Start 15:00</button>
+      <a class="print" href="#" onclick="window.print();return false;">Print</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <div class="hero">
+    <p class="eyebrow">Fifth Sunday &middot; Missionary work</p>
+    <h1>You Already Know How</h1>
+    <p class="lede">One 15-minute lesson for the whole class &mdash; not a talk with questions bolted on. The class discovers the pattern in the scriptures, sorts real sentences out loud, finds their missionary style, moves to a corner, practices on a real person, and writes one commitment before they stand up. The leader talks for about four minutes total. Everything else is the class.</p>
+    <div class="at-a-glance">
+      <div class="glance"><strong>15 min</strong><span>Start to finish</span></div>
+      <div class="glance"><strong>~4 min</strong><span>Leader talking</span></div>
+      <div class="glance"><strong>~11 min</strong><span>Class doing</span></div>
+      <div class="glance"><strong>7</strong><span>Interactive beats</span></div>
+    </div>
+  </div>
+
+  <!-- ==================== RUN SHEET ==================== -->
+  <section class="block" id="runsheet">
+    <div class="block-head">
+      <div class="mark" aria-hidden="true">&#9678;</div>
+      <div class="titles">
+        <h2>Run sheet</h2>
+        <p class="tagline">The whole lesson on one screen. Tape this to the podium.</p>
+      </div>
+      <span class="stamp">15 minutes</span>
+    </div>
+
+    <div class="anchor">
+      <b>Scripture anchor</b>
+      <p>&ldquo;Philip findeth Nathanael, and saith unto him, We have found him, of whom Moses in the law, and the prophets, did write, Jesus of Nazareth, the son of Joseph. And Nathanael said unto him, Can there any good thing come out of Nazareth? Philip saith unto him, Come and see.&rdquo; &mdash; John 1:45&ndash;46</p>
+    </div>
+
+    <div class="timing">
+      <div class="timing-row head"><span>Time</span><span>Beat</span><span>Who works</span></div>
+      <div class="timing-row"><span>0:00&ndash;1:00</span><span>Hands up, then tell your neighbor the invitation you never made</span><span class="who-class">Class</span></div>
+      <div class="timing-row"><span>1:00&ndash;3:00</span><span>Scripture hunt in pairs: how did Andrew and Philip actually do it?</span><span class="who-class">Class</span></div>
+      <div class="timing-row"><span>3:00&ndash;4:30</span><span>Call it out: Love, Share, or Invite? (six sentences, whole room)</span><span class="who-class">Class</span></div>
+      <div class="timing-row"><span>4:30&ndash;6:30</span><span>Take the quiz &mdash; two minutes, phones out</span><span class="who-class">Class</span></div>
+      <div class="timing-row"><span>6:30&ndash;7:00</span><span>Stand up and go to your corner</span><span class="who-class">Class</span></div>
+      <div class="timing-row"><span>7:00&ndash;10:00</span><span>Corner huddle: read the card, claim one line, say it out loud</span><span class="who-class">Class</span></div>
+      <div class="timing-row"><span>10:00&ndash;11:30</span><span>Cross the room: trade one line with a different style</span><span class="who-class">Class</span></div>
+      <div class="timing-row"><span>11:30&ndash;13:00</span><span>Write it: one name, one step, one day &mdash; then say it to a partner</span><span class="who-class">Class</span></div>
+      <div class="timing-row"><span>13:00&ndash;14:00</span><span>Popcorn: four people say the step and the day out loud</span><span class="who-class">Class</span></div>
+      <div class="timing-row"><span>14:00&ndash;15:00</span><span>Close and testify &mdash; sixty seconds, then stop</span><span>Leader</span></div>
+    </div>
+
+    <div class="callout">
+      <p><b>The one rule for this lesson:</b> every time you finish a sentence, hand the room back. If you catch yourself explaining a beat that the class is already doing, stop mid-sentence and let them work. Silence in this lesson is not a problem to solve &mdash; it is people thinking of a name.</p>
+    </div>
+  </section>
+
+  <!-- ==================== THE LESSON ==================== -->
+  <section class="block" id="lesson">
+    <div class="block-head">
+      <div class="mark" aria-hidden="true">&#9654;</div>
+      <div class="titles">
+        <h2>The 15 minutes</h2>
+        <p class="tagline">Say the bold part. Do the boxed part. Then get out of the way.</p>
+      </div>
+      <span class="stamp">Beat by beat</span>
+    </div>
+
+    <div class="beat">
+      <div class="beat-head"><span class="clock">0:00</span><h3>Hands up &mdash; then turn and talk</h3><span class="who class">Class works</span></div>
+      <div class="say">
+        <b>Say</b>
+        <p>&ldquo;Hands up if you have ever felt a nudge to invite someone to something &mdash; church, an activity, dinner, anything &mdash; and then talked yourself out of it before you said a word.&rdquo;</p>
+        <p>&ldquo;Look around. That is almost every hand in the room, and mine is up too.&rdquo;</p>
+      </div>
+      <div class="act">
+        <b>Activity &middot; 40 seconds &middot; pairs</b>
+        <p>&ldquo;Turn to the person next to you. Twenty seconds each. Tell them the invitation you almost made and the reason you gave yourself for not making it. Go.&rdquo;</p>
+        <p>Let the room get loud. At twenty seconds say &ldquo;switch.&rdquo; At forty seconds bring them back with one sentence:</p>
+        <span class="cue"><b>Bring them back with</b>&ldquo;Everybody just said a version of the same reason: I&rsquo;m not the missionary type. Hold that thought &mdash; we are going to take it apart with two verses.&rdquo;</span>
+      </div>
+      <div class="do">
+        <b>Do</b>
+        <p>Raise your own hand first and leave it up while you scan the room. Do not call on anyone and do not collect answers &mdash; the pairs are the point. Starting with talking, not listening, sets the rule for the next fifteen minutes.</p>
+      </div>
+    </div>
+
+    <div class="beat">
+      <div class="beat-head"><span class="clock">1:00</span><h3>Scripture hunt in pairs</h3><span class="who class">Class works</span></div>
+      <div class="act">
+        <b>Activity &middot; 90 seconds &middot; same pairs</b>
+        <p>&ldquo;Same pairs. Open to John chapter 1. One of you takes verses 40 to 42, the other takes verses 45 and 46. You have ninety seconds and three questions:&rdquo;</p>
+        <ol>
+          <li>Who did your person go find &mdash; a stranger or somebody they already knew?</li>
+          <li>How many words did they use?</li>
+          <li>When the other person pushed back, what did they do about it?</li>
+        </ol>
+        <span class="cue"><b>Post this on the board</b>John 1:40&ndash;42 &middot; John 1:45&ndash;46 &middot; Doctrine and Covenants 4:3</span>
+        <div class="verses">
+          <b>Scripture text &mdash; for this beat</b>
+          <span class="ref">John 1:40&ndash;42 (KJV) &mdash; Andrew brings his brother</span>
+          <p>
+            <span class="v">40</span>One of the two which heard John speak, and followed him, was Andrew, Simon Peter&rsquo;s brother.
+            <span class="v">41</span>He first findeth his own brother Simon, and saith unto him, We have found the Messias, which is, being interpreted, the Christ.
+            <span class="v">42</span>And he brought him to Jesus. And when Jesus beheld him, he said, Thou art Simon the son of Jona: thou shalt be called Cephas, which is by interpretation, A stone.
+          </p>
+          <span class="ref">John 1:45&ndash;46 (KJV) &mdash; &ldquo;Come and see&rdquo;</span>
+          <p>
+            <span class="v">45</span>Philip findeth Nathanael, and saith unto him, We have found him, of whom Moses in the law, and the prophets, did write, Jesus of Nazareth, the son of Joseph.
+            <span class="v">46</span>And Nathanael said unto him, Can there any good thing come out of Nazareth? Philip saith unto him, Come and see.
+          </p>
+          <span class="ref">Doctrine and Covenants 4:3, 5 &mdash; desire qualifies you</span>
+          <p>
+            <span class="v">3</span>Therefore, if ye have desires to serve God ye are called to the work;
+            <span class="v">5</span>And faith, hope, charity and love, with an eye single to the glory of God, qualify him for the work.
+          </p>
+        </div>
+      </div>
+      <div class="do">
+        <b>Do &middot; harvest, do not lecture</b>
+        <ul>
+          <li>Take exactly three answers from three different pairs. Do not add to them.</li>
+          <li>If nobody says it, ask: &ldquo;Nathanael said &lsquo;can any good thing come out of Nazareth.&rsquo; What did Philip say back?&rdquo; Let them say &ldquo;come and see.&rdquo; Do not say it for them.</li>
+          <li>Then read Doctrine and Covenants 4:3 aloud and ask one question: <b>&ldquo;What is the qualification in that verse?&rdquo;</b> Wait for the room to say <i>desire</i>.</li>
+        </ul>
+      </div>
+      <div class="say">
+        <b>Say &middot; 20 seconds, then move</b>
+        <p>&ldquo;So: somebody they already knew, three words, and no argument. That is the whole New Testament pattern, and the qualification is desire. Nothing on that list is about being outgoing or knowing the scriptures better than you do.&rdquo;</p>
+      </div>
+    </div>
+
+    <div class="beat">
+      <div class="beat-head"><span class="clock">3:00</span><h3>Call it out: Love, Share, or Invite?</h3><span class="who class">Class works</span></div>
+      <div class="say">
+        <b>Say &middot; 20 seconds</b>
+        <p>&ldquo;The Church boils this down to three words: <b>Love. Share. Invite.</b> I am going to read six real sentences. You call out which one it is. Out loud, all together, no hands.&rdquo;</p>
+      </div>
+      <div class="act">
+        <b>Activity &middot; 70 seconds &middot; whole room, out loud</b>
+        <p>Read each line, pause one beat, and let the room answer. Some lines will split the room &mdash; that is the good part, not a mistake.</p>
+        <ol class="sort">
+          <li><span>&ldquo;I brought your family dinner because I heard this week was hard.&rdquo;</span><span class="ans">Love</span></li>
+          <li><span>&ldquo;That hymn honestly got me through a rough week.&rdquo;</span><span class="ans">Share</span></li>
+          <li><span>&ldquo;We&rsquo;re serving at ten on Saturday &mdash; want to ride with me?&rdquo;</span><span class="ans">Invite</span></li>
+          <li><span>&ldquo;I prayed about it and I just felt calmer.&rdquo;</span><span class="ans">Share</span></li>
+          <li><span>&ldquo;I saved you a seat.&rdquo;</span><span class="ans">Love</span></li>
+          <li><span>&ldquo;Would you like to come with me &mdash; and no worries either way?&rdquo;</span><span class="ans">Invite</span></li>
+        </ol>
+        <span class="cue"><b>Ask after the last one</b>&ldquo;Line six had four extra words on the end. What were they, and why do they matter?&rdquo; Someone will say &ldquo;no worries either way.&rdquo; Answer in one sentence: &ldquo;That half is what makes the first half safe enough to say out loud.&rdquo;</span>
+      </div>
+      <div class="do">
+        <b>Land it in one sentence, then stop</b>
+        <p>&ldquo;Here is the part we miss: you do not have to do all three, in order, equally well. The Lord put different people in this ward on purpose &mdash; so let&rsquo;s find out which one is already yours.&rdquo; <i>(Reference: Alma 17:11 &middot; Alma 37:6)</i></p>
+        <div class="verses">
+          <b>Scripture text &mdash; for this beat</b>
+          <span class="ref">Alma 17:11 &mdash; show forth good examples</span>
+          <p><span class="v">11</span>And the Lord said unto them also: Go forth among the Lamanites, thy brethren, and establish my word; yet ye shall be patient in long-suffering and afflictions, that ye may show forth good examples unto them in me, and I will make an instrument of thee in my hands unto the salvation of many souls.</p>
+          <span class="ref">Alma 37:6 &mdash; small and simple things</span>
+          <p><span class="v">6</span>Now ye may suppose that this is foolishness in me; but behold I say unto you, that by small and simple things are great things brought to pass; and small means in many instances doth confound the wise.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="beat">
+      <div class="beat-head"><span class="clock">4:30</span><h3>Take the quiz</h3><span class="who class">Class works</span></div>
+      <div class="say">
+        <b>Say</b>
+        <p>&ldquo;Phones out. Scan the code, or go to <b>wardmission.org</b> and tap &lsquo;Personality Test.&rsquo; Eight questions, two minutes. Pick what feels most like you &mdash; not the answer you think you are supposed to pick. Nothing is collected and there are no wrong answers.&rdquo;</p>
+      </div>
+      <div class="do">
+        <b>Do</b>
+        <ul>
+          <li>Hold up the QR poster and leave it up the whole time.</li>
+          <li>Pair anyone without a phone with a neighbor, or hand them a paper copy.</li>
+          <li>Give a 30-second warning. Do not fill this time with talking &mdash; let it be quiet.</li>
+          <li><b>Protect this beat.</b> If the class is running long, cut from the scripture hunt instead.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="beat">
+      <div class="beat-head"><span class="clock">6:30</span><h3>Stand up and go to your corner</h3><span class="who class">Class works</span></div>
+      <div class="say">
+        <b>Say</b>
+        <p>&ldquo;Your result is a group name: <b>Spark, Bridge, Beacon,</b> or <b>Seed.</b> Stand up, find your sign, and go stand with your people. Take a pen.&rdquo;</p>
+      </div>
+      <div class="styles">
+        <div class="style-mini s1"><strong>The Spark</strong><em>You make the first move.</em><span>Philip: &ldquo;Come and see.&rdquo;</span></div>
+        <div class="style-mini s2"><strong>The Bridge</strong><em>You connect people through trust.</em><span>Andrew, who went and got his brother.</span></div>
+        <div class="style-mini s3"><strong>The Beacon</strong><em>You create a safe place to belong.</em><span>&ldquo;Let your light so shine.&rdquo;</span></div>
+        <div class="style-mini s4"><strong>The Seed</strong><em>You take quiet, sincere steps.</em><span>Alma&rsquo;s seed: small, planted, given time.</span></div>
+      </div>
+      <div class="do">
+        <b>Do</b>
+        <p>Say the four names slowly, point to each sign, then stop talking and let the room move. Once everyone has landed, say one line: <i>&ldquo;Look at how many of you are not in the corner you assumed you&rsquo;d be in.&rdquo;</i></p>
+      </div>
+    </div>
+
+    <div class="beat">
+      <div class="beat-head"><span class="clock">7:00</span><h3>Corner huddle</h3><span class="who class">Class works</span></div>
+      <div class="act">
+        <b>Activity &middot; 3 minutes &middot; four corners at once</b>
+        <p>Each corner has a printed card (below). One person reads, everybody works. Give the whole room the same three instructions before they start:</p>
+        <ol>
+          <li><b>Read the top of the card out loud</b> &mdash; who you are, your superpower, your growth edge. Thirty seconds.</li>
+          <li><b>Everyone picks one line from the six</b> and says it to the group in their own words. Not the card&rsquo;s words &mdash; yours. Fifteen seconds each.</li>
+          <li><b>The group answers one question:</b> &ldquo;Who did that line just make you think of?&rdquo; Nobody says the name out loud. Everybody writes it down.</li>
+        </ol>
+        <span class="cue"><b>Call this out at 8:30</b>&ldquo;Ninety seconds left &mdash; make sure every person in your corner has said a line out loud.&rdquo;</span>
+      </div>
+      <div class="do">
+        <b>Do</b>
+        <p>Walk the room. Do not teach. If a corner stalls, ask one question and leave: &ldquo;Which of these six would you actually say out loud?&rdquo; The corner cards are printed in the next section &mdash; one per corner.</p>
+      </div>
+    </div>
+
+    <div class="beat">
+      <div class="beat-head"><span class="clock">10:00</span><h3>Cross the room</h3><span class="who class">Class works</span></div>
+      <div class="act">
+        <b>Activity &middot; 90 seconds &middot; mixed pairs</b>
+        <p>&ldquo;Leave your corner. Find one person from a <b>different</b> corner &mdash; look at the signs, not at your friends. Thirty seconds each:&rdquo;</p>
+        <ol>
+          <li>Say your style out loud and the one line you claimed.</li>
+          <li>Ask them: &ldquo;What would you do that I would never think of?&rdquo;</li>
+        </ol>
+        <span class="cue"><b>Bring them back with</b>&ldquo;A ward of all Sparks would wear people out. A ward of all Seeds would never quite say it out loud. And a Beacon is the reason a Spark&rsquo;s invitation works at all &mdash; because the friend walks in and somebody saved them a seat. You just met the person who covers your blind spot. That is not an accident, and that is why we need all four.&rdquo;</span>
+      </div>
+    </div>
+
+    <div class="beat">
+      <div class="beat-head"><span class="clock">11:30</span><h3>Write it, then say it</h3><span class="who class">Class works</span></div>
+      <div class="say">
+        <b>Say</b>
+        <p>&ldquo;Turn your card over. Three things, and be specific enough that you could not talk yourself out of it later: <b>one name, one step, one day.</b> Not &lsquo;sometime.&rsquo; A day.&rdquo;</p>
+      </div>
+      <div class="act">
+        <b>Activity &middot; 90 seconds &middot; write, then pairs</b>
+        <ol>
+          <li><b>Sixty seconds of silence.</b> Everybody writes. Do not talk over this &mdash; not even to encourage them.</li>
+          <li><b>Thirty seconds:</b> &ldquo;Turn to the person beside you and read them your step and your day. Keep the name to yourself if you want. Saying it out loud is what makes it real.&rdquo;</li>
+        </ol>
+        <span class="cue"><b>Seeds get one extra instruction</b>&ldquo;If you are a Seed, do not write the idea &mdash; write the exact words you are going to send. Then all you have to be is brave enough to press send.&rdquo;</span>
+      </div>
+    </div>
+
+    <div class="beat">
+      <div class="beat-head"><span class="clock">13:00</span><h3>Popcorn out loud</h3><span class="who class">Class works</span></div>
+      <div class="act">
+        <b>Activity &middot; 60 seconds &middot; four voices</b>
+        <p>&ldquo;Four people, no names, ten seconds each: just the step and the day. Who has one?&rdquo;</p>
+        <p>Take one from each corner if you can &mdash; ask for &ldquo;a Beacon&rdquo; or &ldquo;a Seed&rdquo; by name if the same corner keeps answering. Say &ldquo;thank you&rdquo; after each one and nothing else. Do not comment, improve, or expand on anybody&rsquo;s commitment.</p>
+      </div>
+    </div>
+
+    <div class="beat">
+      <div class="beat-head"><span class="clock">14:00</span><h3>Close and testify</h3><span class="who">Leader</span></div>
+      <div class="say">
+        <b>Say &middot; sixty seconds, then stop</b>
+        <p>&ldquo;Fifteen minutes ago almost every hand in this room went up for an invitation we never made. Right now every person here is holding a name and a day.&rdquo;</p>
+        <p>&ldquo;Nobody is asking you to convert anybody. You are not responsible for the answer &mdash; only for the offer. A kind invitation that gets turned down is not a failure. It is a completed assignment.&rdquo;</p>
+        <p>&ldquo;I believe the Lord already knows who is waiting on you. He is not asking you to become a different person by next Sunday. He is asking you to be who you already are &mdash; on purpose, toward one person, this week. That is missionary work.&rdquo;</p>
+      </div>
+      <div class="do">
+        <b>Do</b>
+        <p>Bear a short, plain testimony of the Savior, then close. Do not add a summary of the lesson &mdash; they just lived it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CORNER CARDS ==================== -->
+  <section class="block" id="corners">
+    <div class="block-head">
+      <div class="mark" aria-hidden="true">&#9635;</div>
+      <div class="titles">
+        <h2>Corner cards</h2>
+        <p class="tagline">Print one per corner. These run the 3-minute huddle without a leader.</p>
+      </div>
+      <span class="stamp">Handout</span>
+    </div>
+
+    <div class="corners">
+      <div class="corner s1">
+        <h4>The Spark</h4>
+        <p class="who-line">You make the first move. &mdash; John 1:46, &ldquo;Come and see.&rdquo;</p>
+        <span class="lab">Read this out loud</span>
+        <p>If you landed here, your instinct is to act on a good feeling before you have worked out the details. Half this ward is waiting for somebody to go first. That is you &mdash; not because you are fearless, but because you move before the fear finishes its sentence.</p>
+        <span class="lab">Superpower</span>
+        <p>Your enthusiasm lowers the barrier for everyone else.</p>
+        <span class="lab">Growth edge</span>
+        <p>Your risk is not fear &mdash; it is speed. Invite, then stop talking. Let the silence belong to them.</p>
+        <span class="lab">Claim one and say it your way</span>
+        <ol>
+          <li><b>The 10-second invitation.</b> &ldquo;I&rsquo;m going Sunday. Want to sit with me?&rdquo;</li>
+          <li><b>Offer one clear next step.</b> &ldquo;We&rsquo;re serving at 10. I can pick you up at 9:45.&rdquo;</li>
+          <li><b>Ask, then listen.</b> &ldquo;Would that interest you?&rdquo; Then wait.</li>
+          <li><b>Make &lsquo;no&rsquo; safe.</b> &ldquo;No worries at all &mdash; I&rsquo;m glad I asked.&rdquo;</li>
+          <li><b>Bring a partner.</b> &ldquo;Will you come invite the Johnsons with me?&rdquo;</li>
+          <li><b>Notice the quieter person.</b> &ldquo;Come join us. I&rsquo;ll introduce you around.&rdquo;</li>
+        </ol>
+        <p class="say-this">Write on the back: one name, one step, one day. Sparks work best with a deadline &mdash; put a date on it.</p>
+      </div>
+
+      <div class="corner s2">
+        <h4>The Bridge</h4>
+        <p class="who-line">You connect people through trust. &mdash; John 1:41&ndash;42, Andrew brought his brother.</p>
+        <span class="lab">Read this out loud</span>
+        <p>You do not lead with an invitation &mdash; you lead with the person. You remember what somebody told you a month ago. You notice when a name stops coming up. When you finally do invite, it lands, because they already knew you meant it.</p>
+        <span class="lab">Superpower</span>
+        <p>Nobody feels like a project around you. Your invitations are personal, never promotional.</p>
+        <span class="lab">Growth edge</span>
+        <p>Do not wait for a friendship to feel perfect. Waiting can start to feel like the loving thing when it is really just the comfortable thing.</p>
+        <span class="lab">Claim one and say it your way</span>
+        <ol>
+          <li><b>Start with their world.</b> &ldquo;How has your family been doing lately?&rdquo;</li>
+          <li><b>Connect the invitation.</b> &ldquo;You mentioned wanting more community, and this came to mind.&rdquo;</li>
+          <li><b>Share a small why.</b> &ldquo;Church has helped me feel less alone this year.&rdquo;</li>
+          <li><b>Use ordinary moments.</b> &ldquo;Can I tell you something that helped me this week?&rdquo;</li>
+          <li><b>Follow up as a friend.</b> &ldquo;How did that appointment go?&rdquo;</li>
+          <li><b>Set a gentle deadline.</b> &ldquo;I&rsquo;m going to text Maya before Friday.&rdquo;</li>
+        </ol>
+        <p class="say-this">Write on the back: one name, one step, one day. The name is already in your head &mdash; it has been for a while. Write it anyway.</p>
+      </div>
+
+      <div class="corner s3">
+        <h4>The Beacon</h4>
+        <p class="who-line">You create a safe place to belong. &mdash; Matthew 5:16, &ldquo;Let your light so shine.&rdquo;</p>
+        <span class="lab">Read this out loud</span>
+        <p>You show what you believe long before you say it. You spot the need and quietly handle it, save the seat, show up with a meal nobody asked for. People experience the gospel through you before they have words for it.</p>
+        <span class="lab">Superpower</span>
+        <p>Consistency. Anybody can be impressive once &mdash; you are believable week after week. When a Spark invites a friend, you are the reason that friend stays.</p>
+        <span class="lab">Growth edge</span>
+        <p>Do not make people guess why you serve. If you never say why, they will decide you are just a nice person and miss the point entirely.</p>
+        <span class="lab">Claim one and say it your way</span>
+        <ol>
+          <li><b>Name your motivation.</b> &ldquo;My faith teaches me that nobody should carry this alone.&rdquo;</li>
+          <li><b>Be the welcome plan.</b> &ldquo;I&rsquo;ll wait outside and we can walk in together.&rdquo;</li>
+          <li><b>Support someone else&rsquo;s invitation.</b> &ldquo;You invite them; I&rsquo;ll make sure they feel at home.&rdquo;</li>
+          <li><b>Share what sustains you.</b> &ldquo;Prayer has been helping me take this one day at a time.&rdquo;</li>
+          <li><b>Serve side by side.</b> &ldquo;Would you help us pack these kits Saturday?&rdquo;</li>
+          <li><b>Let consistency work.</b> &ldquo;I was thinking about you &mdash; how can I help this week?&rdquo;</li>
+        </ol>
+        <p class="say-this">Write on the back: one name, one act of service, one day &mdash; <b>plus the sentence you will say about why you did it.</b> Do not skip that last line.</p>
+      </div>
+
+      <div class="corner s4">
+        <h4>The Seed</h4>
+        <p class="who-line">You take quiet, sincere steps. &mdash; Alma 37:6 &middot; Alma 32:28</p>
+        <span class="lab">Read this out loud</span>
+        <p>Loud is not your language. You think before you speak and would rather say one true thing than five impressive ones. In missionary work that is not a weakness to overcome &mdash; it is very often the reason people believe you.</p>
+        <span class="lab">Superpower</span>
+        <p>People who put their guard up around confident personalities will open up to you. Some people are only ever going to be reached by somebody quiet.</p>
+        <span class="lab">Growth edge</span>
+        <p>Fear shrinks when the next step is specific and tiny. You are not responsible for the answer &mdash; only for the offer.</p>
+        <span class="lab">Claim one and say it your way</span>
+        <ol>
+          <li><b>Use a prepared sentence.</b> &ldquo;No pressure, but I&rsquo;d love to have you come with me.&rdquo;</li>
+          <li><b>Choose the smallest brave step.</b> &ldquo;Would it be okay if I sent you something that helped me?&rdquo;</li>
+          <li><b>Invite by text.</b> &ldquo;I&rsquo;m going to this Sunday and thought of you. Interested?&rdquo;</li>
+          <li><b>Borrow courage.</b> &ldquo;Could you sit with me while I text Alex?&rdquo;</li>
+          <li><b>Practice out loud.</b> Say it three times before you use it.</li>
+          <li><b>Count the attempt.</b> &ldquo;Thanks for hearing me. Our friendship matters either way.&rdquo;</li>
+        </ol>
+        <p class="say-this">Write on the back: one name, one day, and <b>the exact words you will send</b> &mdash; not the idea, the actual words.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p><b>Corner captains:</b> you are a timekeeper, not a teacher. Read the top block, then make sure every single person says one line out loud in their own words. If your corner has fewer than three people, merge with the nearest corner and run both cards at once &mdash; the mixed conversation is better anyway.</p>
+    </div>
+  </section>
+
+  <!-- ==================== PREP ==================== -->
+  <section class="block" id="prep">
+    <div class="block-head">
+      <div class="mark" aria-hidden="true">&#10003;</div>
+      <div class="titles">
+        <h2>Before class</h2>
+        <p class="tagline">Setup, handouts, and the &ldquo;we&rsquo;re running long&rdquo; plan.</p>
+      </div>
+      <span class="stamp">Leader notes</span>
+    </div>
+
+    <div class="prep">
+      <h3>Print and prepare</h3>
+      <ul>
+        <li>QR poster for the quiz, large enough to read from the back row.</li>
+        <li>Four corner signs: SPARK, BRIDGE, BEACON, SEED &mdash; hung high enough to see from a standing crowd.</li>
+        <li>Style cards &mdash; one identity card per person, blank on the back for the commitment.</li>
+        <li>One corner card printed per corner (the four cards above), handed to a corner captain.</li>
+        <li>Pens or pencils on every chair. Nobody can finish this lesson without one.</li>
+        <li>Paper backup copies of the quiz for anyone without a phone.</li>
+        <li>The six sort sentences in large type, or read straight from this page.</li>
+      </ul>
+    </div>
+
+    <div class="prep">
+      <h3>Room setup</h3>
+      <ul>
+        <li>Hang the four corner signs before anyone arrives &mdash; people will read them during the opening and start guessing.</li>
+        <li>Leave the aisles clear. Two beats require the whole class to stand and move.</li>
+        <li>Seat your four corner captains near their corner so they can get there fast.</li>
+        <li>Test the quiz on the building&rsquo;s guest network beforehand.</li>
+        <li>Write John 1:40&ndash;42 &middot; John 1:45&ndash;46 &middot; D&amp;C 4:3 on the board before class starts.</li>
+      </ul>
+    </div>
+
+    <div class="prep" style="margin-top:26px;">
+      <h3>Scripture text for the four corner cards</h3>
+      <p style="margin:0 0 4px;font-size:13.5px;color:var(--cp-text-muted);">Each corner card names a verse. The full wording is here so no one has to look anything up mid-lesson.</p>
+      <div class="verses">
+        <span class="ref">Spark &mdash; John 1:46 (KJV)</span>
+        <p><span class="v">46</span>And Nathanael said unto him, Can there any good thing come out of Nazareth? Philip saith unto him, Come and see.</p>
+        <span class="ref">Bridge &mdash; John 1:41&ndash;42 (KJV)</span>
+        <p>
+          <span class="v">41</span>He first findeth his own brother Simon, and saith unto him, We have found the Messias, which is, being interpreted, the Christ.
+          <span class="v">42</span>And he brought him to Jesus. And when Jesus beheld him, he said, Thou art Simon the son of Jona: thou shalt be called Cephas, which is by interpretation, A stone.
+        </p>
+        <span class="ref">Beacon &mdash; Matthew 5:14&ndash;16 (KJV)</span>
+        <p>
+          <span class="v">14</span>Ye are the light of the world. A city that is set on an hill cannot be hid.
+          <span class="v">15</span>Neither do men light a candle, and put it under a bushel, but on a candlestick; and it giveth light unto all that are in the house.
+          <span class="v">16</span>Let your light so shine before men, that they may see your good works, and glorify your Father which is in heaven.
+        </p>
+        <span class="ref">Seed &mdash; Alma 37:6</span>
+        <p><span class="v">6</span>Now ye may suppose that this is foolishness in me; but behold I say unto you, that by small and simple things are great things brought to pass; and small means in many instances doth confound the wise.</p>
+        <span class="ref">Seed &mdash; Alma 32:28</span>
+        <p><span class="v">28</span>Now, we will compare the word unto a seed. Now, if ye give place, that a seed may be planted in your heart, behold, if it be a true seed, or a good seed, if ye do not cast it out by your unbelief, that ye will resist the Spirit of the Lord, behold, it will begin to swell within your breasts; and when you feel these swelling motions, ye will begin to say within yourselves&mdash;It must needs be that this is a good seed, or that the word is good, for it beginneth to enlarge my soul; yea, it beginneth to enlighten my understanding, yea, it beginneth to be delicious to me.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p><b>If you are running long:</b> protect the quiz, the corner huddle, and the writing beat &mdash; those three are the lesson. Cut the scripture hunt to sixty seconds by assigning only John 1:45&ndash;46, and drop the popcorn beat entirely. Never cut the writing.</p>
+      <p><b>If you are running short:</b> extend the cross-the-room beat to three minutes and add a second question &mdash; &ldquo;What is one thing that would make it easier for you to actually do your step this week?&rdquo;</p>
+      <p><b>If the room will not talk:</b> do not fill it. Restate the instruction in fewer words, then count to five in your head. The second silence always breaks.</p>
+    </div>
+
+    <div class="prep" style="margin-top:26px;">
+      <h3>Where everything lives</h3>
+      <ul>
+        <li class="plain"><a href="../../personality.html">Missionary style quiz</a> &mdash; 8 questions, 4 styles, results stay on the device</li>
+        <li class="plain"><a href="../../love-share-invite.html">Love &middot; Share &middot; Invite idea generator</a> &mdash; 36 ideas sorted by focus and time</li>
+        <li class="plain"><a href="../../personality-spark.html">Spark tips</a> &middot; <a href="../../personality-bridge.html">Bridge tips</a> &middot; <a href="../../personality-beacon.html">Beacon tips</a> &middot; <a href="../../personality-seed.html">Seed tips</a></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>An unofficial teaching aid inspired by the Church&rsquo;s <a href="https://www.churchofjesuschrist.org/comeuntochrist/love-share-invite" target="_blank" rel="noopener noreferrer">Love, Share, Invite</a> principles. Created for local missionary coordination.</span>
+  <a href="../../">&larr; WML Resources</a>
+</footer>
+
+<script>
+  (() => {
+    const btn = document.getElementById("timerBtn");
+    if (!btn) return;
+    const TOTAL = 15 * 60;
+    let remaining = TOTAL, id = null;
+
+    const face = (s) => {
+      const m = Math.floor(Math.abs(s) / 60);
+      const r = String(Math.abs(s) % 60).padStart(2, "0");
+      return (s < 0 ? "-" : "") + m + ":" + r;
+    };
+    const paint = () => { btn.textContent = face(remaining); };
+
+    btn.addEventListener("click", () => {
+      if (id) {
+        clearInterval(id);
+        id = null;
+        btn.classList.remove("running");
+        btn.textContent = "Resume " + face(remaining);
+        return;
+      }
+      btn.classList.add("running");
+      paint();
+      id = setInterval(() => { remaining -= 1; paint(); }, 1000);
+    });
+
+    btn.addEventListener("dblclick", () => {
+      clearInterval(id); id = null;
+      remaining = TOTAL;
+      btn.classList.remove("running");
+      btn.textContent = "Start 15:00";
+    });
+  })();
+</script>
+
+</body>
+</html>
