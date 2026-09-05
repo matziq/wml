@@ -1384,6 +1384,11 @@
         const SHARED_BACKEND_URL = "https://script.google.com/macros/s/AKfycbwZt-lr6VcrglwwyfHsqIW_an3_NZe9gaUHWm1UunIfuLGkAevqTMYvRll18W9KAq87GQ/exec";
 
         const CUSTOM_ITEM_VALUE = "__custom__";
+        const TOPPING_CATEGORY_LABELS = {
+            "toppings-meat": "Meat Toppings (Bacon, Ham, Pulled Pork, Chicken)",
+            "toppings-veggie": "Veggie Toppings (Broccoli, Tomatoes, Mushrooms, Onions)",
+            "toppings-crunchy": "Crunchy & Cheesy Toppings (Breadcrumbs, Ritz Crackers, Cheddar, Parmesan)"
+        };
 
         // Dish ideas offered per category. Keyed by category id; a category with no
         // entry here simply falls back to the free-text box.
@@ -1466,9 +1471,9 @@
             },
             categories: [
                 { id: "macaroni-cheese", name: "Macaroni & Cheese", needed: 8, icon: "🧀" },
-                { id: "toppings-meat", name: "Meat Toppings (Bacon, Ham)", needed: 4, icon: "🥓" },
-                { id: "toppings-veggie", name: "Veggie Toppings (Broccoli, Tomato)", needed: 4, icon: "🥦" },
-                { id: "toppings-crunchy", name: "Crunchy & Cheesy Toppings", needed: 4, icon: "🍞" },
+                { id: "toppings-meat", name: TOPPING_CATEGORY_LABELS["toppings-meat"], needed: 4, icon: "🥓" },
+                { id: "toppings-veggie", name: TOPPING_CATEGORY_LABELS["toppings-veggie"], needed: 4, icon: "🥦" },
+                { id: "toppings-crunchy", name: TOPPING_CATEGORY_LABELS["toppings-crunchy"], needed: 4, icon: "🍞" },
                 { id: "desserts", name: "Desserts", needed: 6, icon: "🍰" },
                 { id: "beverages", name: "Beverages", needed: 4, icon: "🥤" }
             ],
@@ -1582,7 +1587,7 @@
             next.signups = Array.isArray(next.signups) ? next.signups : [];
             next.categories = next.categories.map((cat, index) => ({
                 id: cat.id || slugify(cat.name || `category-${index + 1}`),
-                name: String(cat.name || `Category ${index + 1}`).trim() || `Category ${index + 1}`,
+                name: TOPPING_CATEGORY_LABELS[cat.id] || String(cat.name || `Category ${index + 1}`).trim() || `Category ${index + 1}`,
                 needed: Math.max(0, parseInt(cat.needed, 10) || 0),
                 icon: String(cat.icon || "🍽️").trim() || "🍽️"
             }));
