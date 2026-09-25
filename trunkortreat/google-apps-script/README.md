@@ -1,8 +1,15 @@
 # Trunk or Treat shared sign-up setup
 
-The page at `/trunkortreat/` works right now in **static mode**: entries save in the visitor's own
-browser, and the organizer can export/import/print. To collect sign-ups in one shared Google Sheet,
-deploy this backend once.
+The page at `/trunkortreat/` now runs in **shared mode**, backed by a dedicated Google Sheet and
+Apps Script web app. Current deployment:
+
+- Google Sheet: <https://docs.google.com/spreadsheets/d/19x467lLR5lADb1AF3jHVY9JISv4F41XvTdG91qwqybY/edit>
+- Apps Script project: <https://script.google.com/d/1jPnusHRuAmUzb2OvunS442_RAHSr6CZZ4y2rPlnGBdJTVg9M-dR1RHTD/edit>
+- Web app `/exec` URL (set as `SHARED_BACKEND_URL` in `../index.html`):
+  `https://script.google.com/macros/s/AKfycbwr67nyGwbaY8v393ZueGupBq7NDEqLEXYWnid-jTVvJwg9SXq2NHH2mNIx3uKhMN8_/exec`
+
+The steps below describe how this deployment was set up and how to redeploy after backend code
+changes.
 
 > **Do not point this page at the Linger Longer `/exec` URL.** That deployment ignores `event` and
 > `sheet` parameters and always returns Linger Longer data, so sharing it would mix Trunk or Treat
