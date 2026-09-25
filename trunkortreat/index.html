@@ -277,144 +277,6 @@
             min-width: 0;
         }
 
-        .notice {
-            flex: 1 1 320px;
-            margin: 0;
-            color: var(--muted);
-            font-size: 0.94rem;
-        }
-
-        .dismissible-notice {
-            display: flex;
-            align-items: start;
-            justify-content: space-between;
-            gap: 0.7rem;
-            min-width: 0;
-        }
-
-        .dismissible-notice[hidden] {
-            display: none;
-        }
-
-        .notice-dismiss {
-            flex: 0 0 auto;
-            padding: 0.38rem 0.62rem;
-            background: #ffffff;
-            color: var(--primary-dark);
-            border: 1px solid var(--line);
-            box-shadow: none;
-            font-size: 0.8rem;
-        }
-
-        .panel-heading-row {
-            display: flex;
-            align-items: start;
-            justify-content: space-between;
-            gap: 0.7rem;
-        }
-
-        .panel-heading-row h2,
-        .panel-heading-row h3 {
-            margin-bottom: 0;
-        }
-
-        .needs-banner {
-            display: grid;
-            gap: 0.75rem;
-            margin: 18px 0;
-            padding: 0.95rem;
-            border: 1px solid rgba(234, 223, 206, 0.95);
-            border-radius: var(--radius);
-            background: rgba(255, 255, 255, 0.94);
-            box-shadow: 0 10px 28px rgba(97, 62, 28, 0.08);
-        }
-
-        .needs-banner[hidden] {
-            display: none;
-        }
-
-        .needs-banner-head {
-            display: flex;
-            align-items: start;
-            justify-content: space-between;
-            gap: 0.75rem;
-        }
-
-        .needs-banner-title {
-            margin: 0;
-            color: var(--primary-dark);
-            font-size: 1rem;
-            font-weight: 900;
-            letter-spacing: -0.01em;
-        }
-
-        .needs-banner-note {
-            margin: 0.15rem 0 0;
-            color: var(--muted);
-            font-size: 0.86rem;
-            font-weight: 700;
-        }
-
-        .needs-dismiss {
-            flex: 0 0 auto;
-            padding: 0.42rem 0.7rem;
-            background: #fff7ed;
-            color: var(--primary-dark);
-            border: 1px solid var(--line);
-            box-shadow: none;
-            font-size: 0.84rem;
-        }
-
-        .needs-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .need-chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.38rem;
-            min-width: 0;
-            padding: 0.44rem 0.62rem;
-            border: 1px solid var(--line);
-            border-radius: 999px;
-            background: #fffdf9;
-            color: var(--muted);
-            font-weight: 900;
-            font-size: 0.9rem;
-            line-height: 1.2;
-        }
-
-        .need-chip strong {
-            color: inherit;
-            font-size: 1.02em;
-        }
-
-        .need-chip.need-high {
-            color: #b3261e;
-            border-color: rgba(179, 38, 30, 0.28);
-            background: #fff3f1;
-        }
-
-        .need-chip.need-medium {
-            color: #b45309;
-            border-color: rgba(180, 83, 9, 0.3);
-            background: #fff7ed;
-        }
-
-        .need-chip.need-low {
-            color: #a16207;
-            border-color: rgba(161, 98, 7, 0.34);
-            background: #fffbeb;
-        }
-
-        .need-chip.need-full {
-            color: var(--success);
-            border-color: rgba(45, 122, 63, 0.24);
-            background: var(--success-soft);
-        }
-
         .grid {
             display: grid;
             grid-template-columns: minmax(280px, 390px) 1fr;
@@ -621,8 +483,8 @@
 
         .cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-            gap: 14px;
+            grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+            gap: 12px;
         }
 
         .category-card {
@@ -632,10 +494,10 @@
 
         .category-head {
             display: grid;
-            grid-template-columns: auto minmax(0, 1fr) auto;
-            gap: 0.75rem;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 0.5rem;
             align-items: center;
-            padding: 1rem;
+            padding: 0.7rem 0.8rem;
             background: linear-gradient(135deg, #fff8ec, #ffffff);
             border-bottom: 1px solid var(--line);
             cursor: pointer;
@@ -647,20 +509,9 @@
             outline-offset: -3px;
         }
 
-        .cat-icon {
-            width: 3.1rem;
-            height: 3.1rem;
-            display: grid;
-            place-items: center;
-            border-radius: 16px;
-            background: var(--primary-soft);
-            font-size: 1.8rem;
-            box-shadow: inset 0 0 0 1px rgba(139, 69, 19, 0.08);
-        }
-
         .category-head h3 {
             margin: 0;
-            font-size: 1.12rem;
+            font-size: 1.02rem;
             color: var(--primary-dark);
             overflow-wrap: anywhere;
         }
@@ -884,42 +735,10 @@
                 align-items: stretch;
             }
 
-            .notice {
-                flex: none;
-                width: 100%;
-            }
-
             .toolbar-actions {
                 display: grid;
                 grid-template-columns: 1fr;
                 width: 100%;
-            }
-
-            .dismissible-notice,
-            .panel-heading-row {
-                display: grid;
-            }
-
-            .notice-dismiss {
-                width: 100%;
-            }
-
-            .needs-banner-head {
-                display: grid;
-            }
-
-            .needs-dismiss {
-                width: 100%;
-            }
-
-            .needs-list {
-                display: grid;
-                grid-template-columns: 1fr;
-            }
-
-            .need-chip {
-                border-radius: 14px;
-                justify-content: space-between;
             }
 
             .toolbar-actions button,
@@ -957,17 +776,10 @@
             }
 
             .category-head {
-                grid-template-columns: 2.55rem minmax(0, 1fr);
-                gap: 0.65rem;
-                align-items: start;
-                padding: 0.85rem;
-            }
-
-            .cat-icon {
-                width: 2.55rem;
-                height: 2.55rem;
-                border-radius: 13px;
-                font-size: 1.45rem;
+                grid-template-columns: minmax(0, 1fr) auto;
+                gap: 0.5rem;
+                align-items: center;
+                padding: 0.7rem;
             }
 
             .count-badge {
@@ -977,9 +789,7 @@
             }
 
             .category-meta {
-                grid-column: 1 / -1;
-                justify-content: flex-start;
-                flex-wrap: wrap;
+                justify-content: flex-end;
             }
 
             .slots {
@@ -1020,15 +830,6 @@
 
             h1 {
                 font-size: clamp(1.8rem, 12vw, 2.65rem);
-            }
-
-            .category-head {
-                grid-template-columns: 1fr;
-            }
-
-            .cat-icon {
-                width: 2.4rem;
-                height: 2.4rem;
             }
 
             .slot {
@@ -1094,11 +895,9 @@
             }
 
             .toolbar,
-            .needs-banner,
             .panel-stack,
             .slot-actions,
-            .footer-note,
-            .notice {
+            .footer-note {
                 display: none !important;
             }
 
@@ -1136,12 +935,6 @@
                 background: #fff;
                 border-bottom: 1px solid #222;
                 padding: 0.12in;
-            }
-
-            .cat-icon {
-                background: #fff;
-                border: 1px solid #222;
-                box-shadow: none;
             }
 
             .count-badge {
@@ -1203,18 +996,7 @@
             </div>
         </section>
 
-        <section id="needs-banner" class="needs-banner no-print" aria-label="Remaining salad and side needs"
-            aria-live="polite" hidden></section>
-
         <div class="toolbar no-print">
-            <div class="notice dismissible-notice" id="mode-notice">
-                <span id="mode-notice-text"><strong>Static page note:</strong> GitHub Pages cannot save shared
-                    sign-ups by itself.
-                    This page saves entries in this browser/device and includes export/import/print tools for
-                    low-traffic
-                    coordination.</span>
-                <button type="button" class="notice-dismiss" data-dismiss-mode-notice>Dismiss</button>
-            </div>
             <div class="toolbar-actions">
                 <button type="button" id="settings-toggle" class="btn-secondary" data-owner-control>Customize</button>
                 <button type="button" id="export-json" class="btn-secondary" data-owner-control>Export JSON</button>
@@ -1288,17 +1070,6 @@
                     </p>
                 </div>
 
-                <div class="panel" id="workflow-panel">
-                    <div class="panel-heading-row">
-                        <h3>Low-traffic workflow</h3>
-                        <button type="button" class="notice-dismiss no-print"
-                            data-dismiss-workflow-notice>Dismiss</button>
-                    </div>
-                    <p class="hint" id="workflow-note">For a shared online list, export the JSON after collecting
-                        entries and upload the
-                        updated file, or use this at a signup table/kiosk. Static GitHub Pages does not provide a shared
-                        database.</p>
-                </div>
             </aside>
 
             <section aria-label="Current sign-ups">
@@ -1316,9 +1087,6 @@
     <script>
         const STORAGE_KEY = "trunk-or-treat-salad-signup-v1";
         const SHARED_CACHE_KEY = "trunk-or-treat-salad-shared-cache-v1";
-        const REMAINING_BANNER_DISMISS_KEY = "trunk-or-treat-remaining-banner-dismissed-v1";
-        const MODE_NOTICE_DISMISS_KEY = "trunk-or-treat-mode-notice-dismissed-v1";
-        const WORKFLOW_NOTICE_DISMISS_KEY = "trunk-or-treat-workflow-notice-dismissed-v1";
         // TODO: Paste this event's own deployed Google Apps Script Web app /exec URL here to enable
         // shared Google Sheet sign-ups. Deploy the script in ./google-apps-script/ first — it writes to
         // its own "Signups" tab. Do NOT reuse the Linger Longer endpoint: that deployment ignores any
@@ -1443,14 +1211,9 @@
             signupItemCustomLabel: $("signup-item-custom-label"),
             signupSubmit: $("signup-submit"),
             signupStatus: $("signup-status"),
-            needsBanner: $("needs-banner"),
             categoryCards: $("category-cards"),
             categoryEditor: $("category-editor"),
             summaryStrip: $("summary-strip"),
-            modeNotice: $("mode-notice"),
-            modeNoticeText: $("mode-notice-text"),
-            workflowPanel: $("workflow-panel"),
-            workflowNote: $("workflow-note"),
             settingsArea: $("settings-area"),
             importFile: $("import-file")
         };
@@ -1610,32 +1373,10 @@
             return Math.max(0, Number(category.needed || 0) - signupsFor(category.id).length);
         }
 
-        function noticeModeKey() {
-            return isSharedMode() ? "shared" : "static";
-        }
-
-        function isNoticeDismissed(storageKey, value = noticeModeKey()) {
-            try {
-                return localStorage.getItem(storageKey) === value;
-            } catch (error) {
-                return false;
-            }
-        }
-
-        function dismissNotice(storageKey, element, value = noticeModeKey()) {
-            try {
-                localStorage.setItem(storageKey, value);
-            } catch (error) {
-                console.warn("Could not save notice dismissal:", error);
-            }
-            if (element) element.hidden = true;
-        }
-
         function render() {
             setControlsForMode();
             renderEvent();
             renderSummary();
-            renderRemainingBanner();
             renderSignupCategoryOptions();
             renderCategoryCards();
             renderCategoryEditor();
@@ -1643,27 +1384,6 @@
 
         function setControlsForMode() {
             const shared = isSharedMode();
-            const modeKey = shared ? "shared" : "static";
-            if (els.modeNoticeText) {
-                els.modeNoticeText.innerHTML = shared
-                    ? `<strong>Shared mode:</strong> Visitors can add sign-ups, but only the organizer can customize the page from the private Google Sheet. Public view shows name and item only; email and phone stay private in the sheet.`
-                    : `<strong>Static page note:</strong> GitHub Pages cannot save shared sign-ups by itself. This page saves entries in this browser/device and includes export/import/print tools for low-traffic coordination.`;
-            }
-
-            if (els.modeNotice) {
-                els.modeNotice.hidden = isNoticeDismissed(MODE_NOTICE_DISMISS_KEY, modeKey);
-            }
-
-            if (els.workflowNote) {
-                els.workflowNote.textContent = shared
-                    ? "Organizer-only settings live in the private Google Sheet. Visitors can only add sign-ups and print the public sheet."
-                    : "For a shared online list, export the JSON after collecting entries and upload the updated file, or use this at a signup table/kiosk. Static GitHub Pages does not provide a shared database.";
-            }
-
-            if (els.workflowPanel) {
-                els.workflowPanel.hidden = isNoticeDismissed(WORKFLOW_NOTICE_DISMISS_KEY, modeKey);
-            }
-
             document.querySelectorAll("[data-owner-control]").forEach((element) => {
                 element.hidden = shared;
             });
@@ -1715,73 +1435,6 @@
 				<div class="stat"><strong>${remaining}</strong><span>Open slots</span></div>
 				<div class="stat"><strong>${state.categories.length}</strong><span>Categories</span></div>
 			`;
-        }
-
-        function remainingBannerSignature() {
-            return state.categories.map((cat) => `${cat.id}:${openSlots(cat)}`).join("|");
-        }
-
-        function isRemainingBannerDismissed(signature) {
-            try {
-                return localStorage.getItem(REMAINING_BANNER_DISMISS_KEY) === signature;
-            } catch (error) {
-                return false;
-            }
-        }
-
-        function needToneClass(remaining) {
-            if (remaining <= 0) return "need-full";
-            if (remaining <= 2) return "need-low";
-            if (remaining <= 4) return "need-medium";
-            return "need-high";
-        }
-
-        function renderRemainingBanner() {
-            if (!els.needsBanner) return;
-            if (!state.categories.length) {
-                els.needsBanner.hidden = true;
-                els.needsBanner.innerHTML = "";
-                return;
-            }
-
-            const signature = remainingBannerSignature();
-            if (isRemainingBannerDismissed(signature)) {
-                els.needsBanner.hidden = true;
-                return;
-            }
-
-            const chips = state.categories.map((cat) => {
-                const remaining = openSlots(cat);
-                const label = remaining === 0 ? "Full" : `${remaining} item${remaining === 1 ? "" : "s"} left`;
-                return `
-                    <span class="need-chip ${needToneClass(remaining)}" title="${escapeHtml(cat.name)}: ${escapeHtml(label)}">
-                        <span>${escapeHtml(cat.icon)} ${escapeHtml(cat.name)}</span>
-                        <strong>${escapeHtml(label)}</strong>
-                    </span>
-                `;
-            }).join("");
-
-            els.needsBanner.hidden = false;
-            els.needsBanner.innerHTML = `
-                <div class="needs-banner-head">
-                    <div>
-                        <p class="needs-banner-title">Still needed for the Trunk or Treat</p>
-                        <p class="needs-banner-note">Red = 5+ open, orange = 3–4 open, yellow = 1–2 open.</p>
-                    </div>
-                    <button type="button" class="needs-dismiss" data-dismiss-needs-banner>Dismiss</button>
-                </div>
-                <div class="needs-list">${chips}</div>
-            `;
-        }
-
-        function dismissRemainingBanner() {
-            const signature = remainingBannerSignature();
-            try {
-                localStorage.setItem(REMAINING_BANNER_DISMISS_KEY, signature);
-            } catch (error) {
-                console.warn("Could not save banner dismissal:", error);
-            }
-            if (els.needsBanner) els.needsBanner.hidden = true;
         }
 
         function suggestionsFor(categoryId) {
@@ -1875,7 +1528,6 @@
                 return `
 					<article class="${cardClass}">
 						<header class="category-head" role="button" tabindex="0" aria-expanded="${isExpanded ? "true" : "false"}" data-toggle-category="${escapeHtml(cat.id)}">
-							<div class="cat-icon" aria-hidden="true">${escapeHtml(cat.icon)}</div>
 							<div>
 								<h3>${escapeHtml(cat.name)}</h3>
 								<p>${needed} sign-up${needed === 1 ? "" : "s"} needed • ${isExpanded ? "Tap to collapse" : "Tap to expand"}</p>
@@ -2278,15 +1930,6 @@
         $("import-json").addEventListener("click", () => els.importFile.click());
         els.importFile.addEventListener("change", (event) => importJsonFile(event.target.files[0]));
         $("print-sheet").addEventListener("click", () => window.print());
-        els.needsBanner.addEventListener("click", (event) => {
-            if (event.target.closest("[data-dismiss-needs-banner]")) dismissRemainingBanner();
-        });
-        els.modeNotice.addEventListener("click", (event) => {
-            if (event.target.closest("[data-dismiss-mode-notice]")) dismissNotice(MODE_NOTICE_DISMISS_KEY, els.modeNotice);
-        });
-        els.workflowPanel.addEventListener("click", (event) => {
-            if (event.target.closest("[data-dismiss-workflow-notice]")) dismissNotice(WORKFLOW_NOTICE_DISMISS_KEY, els.workflowPanel);
-        });
         els.signupCategory.addEventListener("change", () => {
             renderSignupItemOptions();
             updateSignupFieldState();
