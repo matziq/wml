@@ -27,6 +27,7 @@ activity.
 ## Sign-ups
 
 - Linger Longer potluck: `https://wardmission.org/linger_longer/`
+- Trunk or Treat salads: `https://wardmission.org/trunkortreat/`
 - Ward fast: `https://wardmission.org/wardfast/`
   (short link for handouts and QR codes: `https://wardmission.org/wf/`)
 
