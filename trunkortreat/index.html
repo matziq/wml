@@ -254,6 +254,84 @@
             letter-spacing: 0.01em;
         }
 
+        [hidden] {
+            display: none !important;
+        }
+
+        .calendar-pill {
+            position: relative;
+            display: inline-flex;
+            min-width: 0;
+        }
+
+        button.pill {
+            color: inherit;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        button.pill:hover {
+            background: rgba(255, 255, 255, 0.26);
+        }
+
+        button.pill:focus-visible {
+            outline: 3px solid rgba(255, 255, 255, 0.85);
+            outline-offset: 2px;
+        }
+
+        .pill-caret {
+            font-size: 0.72em;
+            opacity: 0.9;
+        }
+
+        .calendar-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 30;
+            width: min(280px, calc(100vw - 1.5rem));
+            padding: 0.35rem;
+            border-radius: 14px;
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .calendar-menu[hidden] {
+            display: none;
+        }
+
+        .calendar-menu button {
+            width: 100%;
+            padding: 0.6rem 0.75rem;
+            border: 0;
+            border-radius: 10px;
+            background: transparent;
+            color: var(--primary-dark, #5b2f12);
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .calendar-menu button:hover,
+        .calendar-menu button:focus-visible {
+            background: rgba(232, 122, 34, 0.16);
+            outline: none;
+        }
+
+        .calendar-menu-note {
+            margin: 0.15rem 0.75rem 0.35rem;
+            color: #5c5c5c;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
         .hero-note {
             margin: 0;
             max-width: 760px;
@@ -723,6 +801,10 @@
                 gap: 0.45rem;
             }
 
+            .calendar-pill {
+                width: 100%;
+            }
+
             .pill {
                 width: 100%;
                 justify-content: flex-start;
@@ -856,6 +938,10 @@
                 display: none !important;
             }
 
+            .no-print {
+                display: none !important;
+            }
+
             #print-sheet-content {
                 display: block !important;
                 font-family: var(--font);
@@ -882,7 +968,7 @@
                 display: flex;
                 align-items: flex-end;
                 gap: 0.15in;
-                height: 0.62in;
+                height: 0.55in;
                 break-inside: avoid;
             }
 
@@ -904,12 +990,28 @@
                     <h1 id="event-title-display">October Trunk or Treat Sign-Up</h1>
                     <span class="title-flag" aria-hidden="true" title="Jack-o-lantern">🎃</span>
                 </div>
-                <p class="hero-note" id="event-note-display">Pulled pork sandwiches are provided. We need 5 salads
-                    and 5 sides to share. Dinner is at 5:30 PM, with a costume contest at 6:00 PM, trunk
+                <p class="hero-note" id="event-note-display">Pulled pork sandwiches are provided. We need 15 salads
+                    or sides to share. Dinner is at 5:30 PM, with a costume contest at 6:00 PM, trunk
                     decorating contest at 6:45 PM, and trunk or treating after.</p>
                 <div class="hero-details">
                     <span class="pill pill-provided" id="event-provided-display">🥪 Pulled pork sandwiches provided</span>
-                    <span class="pill" id="event-date-display">📅 Sat, Oct 24, 2026</span>
+                    <span class="calendar-pill no-print" id="event-date-calendar">
+                        <button type="button" class="pill" id="event-date-display" aria-haspopup="true"
+                            aria-expanded="false" aria-controls="add-to-calendar-menu">
+                            <span id="event-date-text">📅 Sat, Oct 24, 2026</span>
+                            <span class="pill-caret" aria-hidden="true">▾</span>
+                        </button>
+                        <div class="calendar-menu" id="add-to-calendar-menu" role="menu" hidden
+                            aria-label="Add Trunk or Treat to your calendar">
+                            <p class="calendar-menu-note">Saved with a 2.5-hour placeholder length; the evening winds
+                                down when trunk or treating ends.</p>
+                            <button type="button" role="menuitem" data-calendar="google">Google Calendar</button>
+                            <button type="button" role="menuitem" data-calendar="outlook">Outlook on the web</button>
+                            <button type="button" role="menuitem" data-calendar="ics">Apple, Outlook desktop, or other
+                                (.ics)</button>
+                        </div>
+                    </span>
+                    <span class="pill" id="event-date-static" hidden>📅 Sat, Oct 24, 2026</span>
                     <span class="pill" id="event-time-display">🕑 5:30 PM</span>
                     <span class="pill" id="event-location-display">📍 Sundance 1st Ward</span>
                     <span class="pill">👻 Costume contest 6:00 PM</span>
@@ -984,7 +1086,7 @@
                         <button type="submit" id="signup-submit">Add my sign-up</button>
                     </form>
                     <div id="signup-status" class="signup-status" role="status" aria-live="polite"></div>
-                    <p class="hint">Choose Salads or Sides, then enter your name, contact info, and what you are
+                    <p class="hint">Choose Salad or Side, then enter your name, contact info, and what you are
                         bringing. Full categories are hidden from the dropdown.
                     </p>
                 </div>
@@ -1004,20 +1106,22 @@
     <div id="print-sheet-content" hidden aria-label="Printable blank sign-up sheet">
         <h1>Trunk or Treat Sign-Up</h1>
         <section class="print-section">
-            <h2>Salads (5)</h2>
+            <h2>Salad or Side (15)</h2>
             <div class="print-row">1. <span></span></div>
             <div class="print-row">2. <span></span></div>
             <div class="print-row">3. <span></span></div>
             <div class="print-row">4. <span></span></div>
             <div class="print-row">5. <span></span></div>
-        </section>
-        <section class="print-section">
-            <h2>Sides (5)</h2>
-            <div class="print-row">1. <span></span></div>
-            <div class="print-row">2. <span></span></div>
-            <div class="print-row">3. <span></span></div>
-            <div class="print-row">4. <span></span></div>
-            <div class="print-row">5. <span></span></div>
+            <div class="print-row">6. <span></span></div>
+            <div class="print-row">7. <span></span></div>
+            <div class="print-row">8. <span></span></div>
+            <div class="print-row">9. <span></span></div>
+            <div class="print-row">10. <span></span></div>
+            <div class="print-row">11. <span></span></div>
+            <div class="print-row">12. <span></span></div>
+            <div class="print-row">13. <span></span></div>
+            <div class="print-row">14. <span></span></div>
+            <div class="print-row">15. <span></span></div>
         </section>
     </div>
 
@@ -1034,19 +1138,21 @@
         const SHARED_BACKEND_URL = "https://script.google.com/macros/s/AKfycbwr67nyGwbaY8v393ZueGupBq7NDEqLEXYWnid-jTVvJwg9SXq2NHH2mNIx3uKhMN8_/exec";
 
         const LEGACY_CATEGORY_BUCKETS = {
-            "cole-slaw": "salads",
-            "potato-salad": "salads",
-            "pasta-salad": "salads",
-            "green-salad": "salads",
-            "fruit-salad": "salads",
-            "other-salads": "sides"
+            "cole-slaw": "salad-or-side",
+            "potato-salad": "salad-or-side",
+            "pasta-salad": "salad-or-side",
+            "green-salad": "salad-or-side",
+            "fruit-salad": "salad-or-side",
+            "other-salads": "salad-or-side",
+            "salads": "salad-or-side",
+            "sides": "salad-or-side"
         };
 
         const DEFAULT_STATE = {
             event: {
                 eyebrow: "Sundance 1st Ward Trunk or Treat",
                 title: "Trunk or Treat Sign-Up",
-                note: "Pulled pork sandwiches are provided. We need 5 salads and 5 sides to share. Dinner is at 5:30 PM, with a costume contest at 6:00 PM, trunk decorating contest at 6:45 PM, and trunk or treating after.",
+                note: "Pulled pork sandwiches are provided. We need 15 salads or sides to share. Dinner is at 5:30 PM, with a costume contest at 6:00 PM, trunk decorating contest at 6:45 PM, and trunk or treating after.",
                 date: "October 24, 2026",
                 time: "5:30 PM",
                 location: "Sundance 1st Ward",
@@ -1054,8 +1160,7 @@
                 heroImage: "trunk-or-treat-hero.jpg"
             },
             categories: [
-                { id: "salads", name: "Salads", needed: 5, icon: "🥗" },
-                { id: "sides", name: "Sides", needed: 5, icon: "🍽️" }
+                { id: "salad-or-side", name: "Salad or Side", needed: 15, icon: "🥗" }
             ],
             signups: []
         };
@@ -1070,6 +1175,10 @@
             eventTitleDisplay: $("event-title-display"),
             eventNoteDisplay: $("event-note-display"),
             eventDateDisplay: $("event-date-display"),
+            eventDateText: $("event-date-text"),
+            eventDateCalendar: $("event-date-calendar"),
+            eventDateStatic: $("event-date-static"),
+            calendarMenu: $("add-to-calendar-menu"),
             eventTimeDisplay: $("event-time-display"),
             eventLocationDisplay: $("event-location-display"),
             eventTitle: $("event-title"),
@@ -1164,6 +1273,8 @@
                 needed: Math.max(0, parseInt(cat.needed, 10) || 0),
                 icon: String(cat.icon || "🍽️").trim() || "🍽️"
             }));
+            // Migrate saved sheets from the retired split salad/side buckets to one combined bucket.
+            if (next.categories.some((cat) => LEGACY_CATEGORY_BUCKETS[cat.id])) next.categories = base.categories;
             next.signups = next.signups.map((entry) => ({
                 id: entry.id || cryptoId(),
                 categoryId: LEGACY_CATEGORY_BUCKETS[entry.categoryId] || entry.categoryId,
@@ -1225,6 +1336,207 @@
             return text;
         }
 
+        // Arizona does not observe daylight saving time, so America/Phoenix is always UTC-7.
+        const EVENT_UTC_OFFSET_HOURS = 7;
+        const EVENT_DURATION_MINUTES = 150;
+
+        function parseEventDateParts(value) {
+            const text = String(value || "").trim();
+            if (!text || /^date\s+tbd$/i.test(text) || !/\b\d{4}\b/.test(text)) return null;
+            const parsed = new Date(text);
+            if (Number.isNaN(parsed.getTime())) return null;
+            return { year: parsed.getFullYear(), month: parsed.getMonth(), day: parsed.getDate() };
+        }
+
+        function parseEventTimeParts(value) {
+            const text = String(value || "").trim();
+            const match = /^(\d{1,2})(?::(\d{2}))?\s*(am|pm)?$/i.exec(text);
+            if (!match) return null;
+            let hour = parseInt(match[1], 10);
+            const minute = match[2] ? parseInt(match[2], 10) : 0;
+            const meridiem = (match[3] || "").toLowerCase();
+            if (hour > 23 || minute > 59) return null;
+            if (meridiem === "pm" && hour < 12) hour += 12;
+            if (meridiem === "am" && hour === 12) hour = 0;
+            if (!meridiem && hour > 23) return null;
+            return { hour, minute };
+        }
+
+        function eventCalendarWindow() {
+            const dateParts = parseEventDateParts(state.event.date);
+            const timeParts = parseEventTimeParts(state.event.time || DEFAULT_STATE.event.time);
+            if (!dateParts || !timeParts) return null;
+            const start = new Date(Date.UTC(
+                dateParts.year,
+                dateParts.month,
+                dateParts.day,
+                timeParts.hour + EVENT_UTC_OFFSET_HOURS,
+                timeParts.minute
+            ));
+            if (Number.isNaN(start.getTime())) return null;
+            const end = new Date(start.getTime() + EVENT_DURATION_MINUTES * 60000);
+            return { start, end };
+        }
+
+        function eventCalendarTitle() {
+            return titleWithEventMonth(state.event.title, state.event.date).replace(/\s*Sign-Up$/i, "").trim()
+                || DEFAULT_STATE.event.title;
+        }
+
+        function eventCalendarDescription() {
+            const time = state.event.time || DEFAULT_STATE.event.time;
+            return [
+                `Pulled pork dinner at ${time}.`,
+                "Costume contest at 6:00 PM.",
+                "Trunk decorating contest at 6:45 PM.",
+                "Trunk or treating after.",
+                "",
+                "End time is an estimate so the event fits on your calendar.",
+                `Sign-ups: ${window.location.origin}${window.location.pathname}`
+            ].join("\n");
+        }
+
+        function toCalendarStamp(date) {
+            return date.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+        }
+
+        function escapeIcsText(value) {
+            return String(value ?? "")
+                .replace(/\\/g, "\\\\")
+                .replace(/;/g, "\\;")
+                .replace(/,/g, "\\,")
+                .replace(/\r?\n/g, "\\n");
+        }
+
+        function foldIcsLine(line) {
+            if (line.length <= 73) return line;
+            const chunks = [line.slice(0, 73)];
+            let rest = line.slice(73);
+            while (rest.length > 72) {
+                chunks.push(` ${rest.slice(0, 72)}`);
+                rest = rest.slice(72);
+            }
+            if (rest) chunks.push(` ${rest}`);
+            return chunks.join("\r\n");
+        }
+
+        function buildIcs(window_) {
+            const lines = [
+                "BEGIN:VCALENDAR",
+                "VERSION:2.0",
+                "PRODID:-//Sundance 1st Ward//Trunk or Treat//EN",
+                "CALSCALE:GREGORIAN",
+                "METHOD:PUBLISH",
+                "BEGIN:VEVENT",
+                `UID:${cryptoId()}@sundance-1st-ward`,
+                `DTSTAMP:${toCalendarStamp(new Date())}`,
+                `DTSTART:${toCalendarStamp(window_.start)}`,
+                `DTEND:${toCalendarStamp(window_.end)}`,
+                `SUMMARY:${escapeIcsText(eventCalendarTitle())}`,
+                `LOCATION:${escapeIcsText(state.event.location || DEFAULT_STATE.event.location)}`,
+                `DESCRIPTION:${escapeIcsText(eventCalendarDescription())}`,
+                "END:VEVENT",
+                "END:VCALENDAR"
+            ];
+            return lines.map(foldIcsLine).join("\r\n");
+        }
+
+        function downloadIcs() {
+            const window_ = eventCalendarWindow();
+            if (!window_) return;
+            const blob = new Blob([buildIcs(window_)], { type: "text/calendar;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = `${slugify(eventCalendarTitle()) || "event"}.ics`;
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 2000);
+        }
+
+        function calendarLink(provider, window_) {
+            const title = eventCalendarTitle();
+            const location = state.event.location || DEFAULT_STATE.event.location;
+            const description = eventCalendarDescription();
+            if (provider === "google") {
+                const params = new URLSearchParams({
+                    action: "TEMPLATE",
+                    text: title,
+                    dates: `${toCalendarStamp(window_.start)}/${toCalendarStamp(window_.end)}`,
+                    details: description,
+                    location
+                });
+                return `https://calendar.google.com/calendar/render?${params.toString()}`;
+            }
+            const params = new URLSearchParams({
+                path: "/calendar/action/compose",
+                rru: "addevent",
+                subject: title,
+                startdt: window_.start.toISOString(),
+                enddt: window_.end.toISOString(),
+                body: description,
+                location
+            });
+            return `https://outlook.office.com/calendar/0/deeplink/compose?${params.toString()}`;
+        }
+
+        function updateCalendarAvailability() {
+            const available = Boolean(eventCalendarWindow());
+            els.eventDateCalendar.hidden = !available;
+            els.eventDateStatic.hidden = available;
+            if (!available) closeCalendarMenu();
+        }
+
+        function isCalendarMenuOpen() {
+            return !els.calendarMenu.hidden;
+        }
+
+        function positionCalendarMenu() {
+            const trigger = els.eventDateDisplay.getBoundingClientRect();
+            const menu = els.calendarMenu.getBoundingClientRect();
+            const margin = 8;
+            let left = Math.min(trigger.left, window.innerWidth - menu.width - margin);
+            left = Math.max(margin, left);
+            let top = trigger.bottom + 6;
+            if (top + menu.height > window.innerHeight - margin) {
+                top = Math.max(margin, trigger.top - menu.height - 6);
+            }
+            els.calendarMenu.style.left = `${left}px`;
+            els.calendarMenu.style.top = `${top}px`;
+        }
+
+        function openCalendarMenu() {
+            els.calendarMenu.hidden = false;
+            positionCalendarMenu();
+            els.eventDateDisplay.setAttribute("aria-expanded", "true");
+            const first = els.calendarMenu.querySelector("[role='menuitem']");
+            if (first) first.focus();
+        }
+
+        function closeCalendarMenu(options) {
+            if (els.calendarMenu.hidden) return;
+            els.calendarMenu.hidden = true;
+            els.eventDateDisplay.setAttribute("aria-expanded", "false");
+            if (options && options.focusTrigger) els.eventDateDisplay.focus();
+        }
+
+        function moveCalendarFocus(step) {
+            const items = Array.from(els.calendarMenu.querySelectorAll("[role='menuitem']"));
+            if (!items.length) return;
+            const current = items.indexOf(document.activeElement);
+            const next = (current + step + items.length) % items.length;
+            items[next].focus();
+        }
+
+        function handleCalendarChoice(provider) {
+            const window_ = eventCalendarWindow();
+            if (!window_) return;
+            closeCalendarMenu({ focusTrigger: true });
+            if (provider === "ics") downloadIcs();
+            else window.open(calendarLink(provider, window_), "_blank", "noopener");
+        }
+
         function eventMonthName(value) {
             const text = String(value || "").trim();
             if (!text || /^date\s+tbd$/i.test(text)) return "";
@@ -1282,7 +1594,9 @@
             const event = state.event;
             els.eventTitleDisplay.textContent = titleWithEventMonth(event.title, event.date);
             els.eventNoteDisplay.textContent = event.note || DEFAULT_STATE.event.note;
-            els.eventDateDisplay.textContent = `📅 ${formatEventDate(event.date)}`;
+            els.eventDateText.textContent = `📅 ${formatEventDate(event.date)}`;
+            els.eventDateStatic.textContent = `📅 ${formatEventDate(event.date)}`;
+            updateCalendarAvailability();
             els.eventTimeDisplay.textContent = `🕑 ${event.time || DEFAULT_STATE.event.time}`;
             els.eventLocationDisplay.textContent = `📍 ${event.location || "Location TBD"}`;
             els.eventTitle.value = event.title || "";
@@ -1327,7 +1641,7 @@
                 return;
             }
             const current = els.signupCategory.value;
-            els.signupCategory.innerHTML = `<option value="">Choose Salads or Sides...</option>` + available
+            els.signupCategory.innerHTML = `<option value="">Choose Salad or Side...</option>` + available
                 .map((cat) => `<option value="${escapeHtml(cat.id)}">${escapeHtml(cat.icon)} ${escapeHtml(cat.name)} (${openSlots(cat)} open)</option>`)
                 .join("");
             const keep = available.some((cat) => cat.id === current);
@@ -1678,7 +1992,7 @@
         function applySharedPayload(payload) {
             const categories = payload.categories;
             sharedCategoriesReady = Array.isArray(categories)
-                && categories.length === 2
+                && categories.length === DEFAULT_STATE.categories.length
                 && DEFAULT_STATE.categories.every((expected) =>
                     categories.some((cat) => cat.id === expected.id && Number(cat.needed) === expected.needed));
             state = normalizeState({
@@ -1774,6 +2088,34 @@
         $("import-json").addEventListener("click", () => els.importFile.click());
         els.importFile.addEventListener("change", (event) => importJsonFile(event.target.files[0]));
         $("print-sheet").addEventListener("click", () => window.print());
+        els.eventDateDisplay.addEventListener("click", () => {
+            if (isCalendarMenuOpen()) closeCalendarMenu({ focusTrigger: true });
+            else openCalendarMenu();
+        });
+        els.eventDateDisplay.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+                event.preventDefault();
+                if (!isCalendarMenuOpen()) openCalendarMenu();
+                else moveCalendarFocus(event.key === "ArrowDown" ? 1 : -1);
+            }
+        });
+        els.calendarMenu.addEventListener("click", (event) => {
+            const button = event.target.closest("[data-calendar]");
+            if (button) handleCalendarChoice(button.dataset.calendar);
+        });
+        els.calendarMenu.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowDown") { event.preventDefault(); moveCalendarFocus(1); }
+            else if (event.key === "ArrowUp") { event.preventDefault(); moveCalendarFocus(-1); }
+            else if (event.key === "Tab") closeCalendarMenu();
+        });
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && isCalendarMenuOpen()) closeCalendarMenu({ focusTrigger: true });
+        });
+        document.addEventListener("click", (event) => {
+            if (isCalendarMenuOpen() && !els.eventDateCalendar.contains(event.target)) closeCalendarMenu();
+        });
+        window.addEventListener("resize", () => { if (isCalendarMenuOpen()) positionCalendarMenu(); });
+        window.addEventListener("scroll", () => { if (isCalendarMenuOpen()) positionCalendarMenu(); }, true);
         els.signupCategory.addEventListener("change", () => {
             updateSignupFieldState();
             if (els.signupCategory.value) {
