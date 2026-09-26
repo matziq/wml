@@ -335,6 +335,8 @@
         .hero-note {
             margin: 0;
             max-width: 760px;
+            white-space: pre-line;
+            line-height: 1.45;
             font-size: clamp(1rem, 2vw, 1.17rem);
             opacity: 0.95;
         }
@@ -470,6 +472,11 @@
             margin: 0.4rem 0 0;
             color: var(--muted);
             font-size: 0.86rem;
+        }
+
+        .signup-availability {
+            margin: 0;
+            font-weight: 700;
         }
 
         .settings-area {
@@ -990,9 +997,8 @@
                     <h1 id="event-title-display">October Trunk or Treat Sign-Up</h1>
                     <span class="title-flag" aria-hidden="true" title="Jack-o-lantern">🎃</span>
                 </div>
-                <p class="hero-note" id="event-note-display">Pulled pork sandwiches are provided. We need 15 salads
-                    or sides to share. Dinner is at 5:30 PM, with a costume contest at 6:00 PM, trunk
-                    decorating contest at 6:45 PM, and trunk or treating after.</p>
+                <p class="hero-note" id="event-note-display">We need 15 people to bring sides and salads to share. For example: 🥗 coleslaw, potato salad, 🫘 baked beans, 🥔 chips (single-serving bags, please), 🍝 pasta salad, etc. Sign up below and tell us what you are bringing.
+Dinner is at 5:30 PM, with a costume contest at 6:00 PM, trunk decorating contest at 6:45 PM, and trunk or treating after.</p>
                 <div class="hero-details">
                     <span class="pill pill-provided" id="event-provided-display">🥪 Pulled pork sandwiches provided</span>
                     <span class="calendar-pill no-print" id="event-date-calendar">
@@ -1077,7 +1083,7 @@
                 <div class="panel">
                     <h2>Sign up</h2>
                     <form id="signup-form" class="form-grid">
-                        <label>Salad or side <select id="signup-category" required></select></label>
+                        <p id="signup-availability" class="signup-availability" aria-live="polite">Loading. Please wait...</p>
                         <label>Your name <input id="signup-name" type="text" autocomplete="name" required /></label>
                         <label>Email <input id="signup-email" type="email" autocomplete="email" required /></label>
                         <label>Phone <input id="signup-phone" type="tel" autocomplete="tel" required /></label>
@@ -1086,9 +1092,7 @@
                         <button type="submit" id="signup-submit">Add my sign-up</button>
                     </form>
                     <div id="signup-status" class="signup-status" role="status" aria-live="polite"></div>
-                    <p class="hint">Choose Salad or Side, then enter your name, contact info, and what you are
-                        bringing. Full categories are hidden from the dropdown.
-                    </p>
+                    <p class="hint">Enter your name, contact info, and the side or salad you are bringing.</p>
                 </div>
 
             </aside>
@@ -1152,7 +1156,7 @@
             event: {
                 eyebrow: "Sundance 1st Ward Trunk or Treat",
                 title: "Trunk or Treat Sign-Up",
-                note: "Pulled pork sandwiches are provided. We need 15 salads or sides to share. Dinner is at 5:30 PM, with a costume contest at 6:00 PM, trunk decorating contest at 6:45 PM, and trunk or treating after.",
+                note: "We need 15 people to bring sides and salads to share. For example: 🥗 coleslaw, potato salad, 🫘 baked beans, 🥔 chips (single-serving bags, please), 🍝 pasta salad, etc. Sign up below and tell us what you are bringing.\nDinner is at 5:30 PM, with a costume contest at 6:00 PM, trunk decorating contest at 6:45 PM, and trunk or treating after.",
                 date: "October 24, 2026",
                 time: "5:30 PM",
                 location: "Sundance 1st Ward",
@@ -1189,7 +1193,7 @@
             eventLocation: $("event-location"),
             eventHeroImage: $("event-hero-image"),
             organizerEmail: $("organizer-email"),
-            signupCategory: $("signup-category"),
+            signupAvailability: $("signup-availability"),
             signupForm: $("signup-form"),
             signupName: $("signup-name"),
             signupEmail: $("signup-email"),
@@ -1566,7 +1570,7 @@
             setControlsForMode();
             renderEvent();
             renderSummary();
-            renderSignupCategoryOptions();
+            renderSignupAvailability();
             renderCategoryCards();
             renderCategoryEditor();
         }
@@ -1628,35 +1632,34 @@
 			`;
         }
 
-        function renderSignupCategoryOptions() {
+        // The page has a single sign-up bucket, so new sign-ups are assigned to the
+        // first category with open slots instead of asking the user to pick one.
+        function activeSignupCategory() {
+            if (!sharedDataLoaded || !sharedCategoriesReady) return null;
+            return state.categories.find((cat) => openSlots(cat) > 0) || null;
+        }
+
+        function renderSignupAvailability() {
+            let message;
             if (!sharedDataLoaded) {
-                els.signupCategory.innerHTML = `<option value="">Loading. Please wait...</option>`;
-                updateSignupFieldState();
-                return;
+                message = "Loading. Please wait...";
+            } else if (!sharedCategoriesReady) {
+                message = "Sign-ups are temporarily unavailable.";
+            } else {
+                const category = activeSignupCategory();
+                if (category) {
+                    const open = openSlots(category);
+                    message = `${category.icon || "🥗"} ${open} of ${category.needed} spots open`;
+                } else {
+                    message = "All spots are full. Thank you!";
+                }
             }
-            if (!sharedCategoriesReady) {
-                els.signupCategory.innerHTML = `<option value="">Sign-ups temporarily unavailable</option>`;
-                updateSignupFieldState();
-                return;
-            }
-            const available = state.categories.filter((cat) => openSlots(cat) > 0);
-            if (!available.length) {
-                els.signupCategory.innerHTML = `<option value="">All categories are full</option>`;
-                els.signupSubmit.disabled = true;
-                updateSignupFieldState();
-                return;
-            }
-            const current = els.signupCategory.value;
-            els.signupCategory.innerHTML = `<option value="">Choose Salad or Side...</option>` + available
-                .map((cat) => `<option value="${escapeHtml(cat.id)}">${escapeHtml(cat.icon)} ${escapeHtml(cat.name)} (${openSlots(cat)} open)</option>`)
-                .join("");
-            const keep = available.some((cat) => cat.id === current);
-            els.signupCategory.value = keep ? current : "";
+            els.signupAvailability.textContent = message;
             updateSignupFieldState();
         }
 
         function updateSignupFieldState() {
-            const hasCategory = Boolean(els.signupCategory.value);
+            const hasCategory = Boolean(activeSignupCategory());
             [els.signupName, els.signupEmail, els.signupPhone, els.signupItem].forEach((field) => {
                 field.disabled = !hasCategory;
             });
@@ -1797,10 +1800,9 @@
 
         function addSignup(event) {
             event.preventDefault();
-            const categoryId = els.signupCategory.value;
-            const category = state.categories.find((cat) => cat.id === categoryId);
-            if (!category) return showStatus("Please choose a category.", "error");
-            if (openSlots(category) <= 0) return showStatus(`${category.name} is full. Please choose another category.`, "error");
+            const category = activeSignupCategory();
+            if (!category) return showStatus("Sorry, all spots are full.", "error");
+            const categoryId = category.id;
 
             const entry = {
                 id: cryptoId(),
@@ -2000,7 +2002,7 @@
         function markSharedDataLoaded() {
             if (sharedDataLoaded) return;
             sharedDataLoaded = true;
-            renderSignupCategoryOptions();
+            renderSignupAvailability();
         }
 
         function applySharedPayload(payload) {
@@ -2131,13 +2133,6 @@
         });
         window.addEventListener("resize", () => { if (isCalendarMenuOpen()) positionCalendarMenu(); });
         window.addEventListener("scroll", () => { if (isCalendarMenuOpen()) positionCalendarMenu(); }, true);
-        els.signupCategory.addEventListener("change", () => {
-            updateSignupFieldState();
-            if (els.signupCategory.value) {
-                expandedCategories.add(els.signupCategory.value);
-                renderCategoryCards();
-            }
-        });
         els.signupForm.addEventListener("submit", addSignup);
         window.addEventListener("message", handleSharedMessage);
 
