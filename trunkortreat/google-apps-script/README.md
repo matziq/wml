@@ -21,7 +21,7 @@ changes.
    manifest with `appsscript.json`.
 4. Run `setup` once and approve the permissions. This creates two tabs:
    - `TrunkOrTreatSignups` — Timestamp, SignupId, CategoryId, Name, Email, Phone, Item, UserAgent
-   - `TrunkOrTreatCategories` — CategoryId, Name, Needed, Icon (seeded with the salad categories)
+   - `TrunkOrTreatCategories` — CategoryId, Name, Needed, Icon (seeded with Salads and Sides, five each)
 5. Deploy as a **Web app** with **Execute as: Me** and **Who has access: Anyone**.
 6. Copy the `/exec` URL into `SHARED_BACKEND_URL` near the top of `../index.html` (replace the empty
    string next to the `TODO`). The page switches to shared mode automatically.

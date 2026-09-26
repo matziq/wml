@@ -1660,7 +1660,9 @@
                 }
 
                 applySharedPayload(response);
-                if (!options.quiet) showStatus("Loaded shared sign-ups from Google Sheets.", "success");
+                if (!options.quiet && sharedCategoriesReady) {
+                    showStatus("Loaded shared sign-ups from Google Sheets.", "success");
+                }
             };
 
             script.onerror = () => {

@@ -20,12 +20,8 @@ const SIGNUP_HEADERS = [
 ];
 const CATEGORY_HEADERS = ["CategoryId", "Name", "Needed", "Icon"];
 const DEFAULT_CATEGORIES = [
-  ["cole-slaw", "Cole Slaw", 4, "🥬"],
-  ["potato-salad", "Potato Salad", 4, "🥔"],
-  ["pasta-salad", "Pasta Salad", 4, "🍝"],
-  ["green-salad", "Green Salads", 4, "🥗"],
-  ["fruit-salad", "Fruit Salads", 3, "🍎"],
-  ["other-salads", "Other Salads & Sides (Bean, Broccoli, Corn, Chips)", 3, "🎃"]
+  ["salads", "Salads", 5, "🥗"],
+  ["sides", "Sides", 5, "🍽️"]
 ];
 
 function setup() {
@@ -79,7 +75,7 @@ function handleSignup_(e) {
 
     const category = readCategoryRows_().find((row) => row.id === categoryId);
     if (!category) {
-      return { success: false, error: "Please choose a salad or side type from the list." };
+      return { success: false, error: "Please choose Salads or Sides from the list." };
     }
     if (!name || !item) {
       return { success: false, error: "Please provide your name and what you are bringing." };
