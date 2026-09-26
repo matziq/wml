@@ -20,9 +20,13 @@ const SIGNUP_HEADERS = [
 ];
 const CATEGORY_HEADERS = ["CategoryId", "Name", "Needed", "Icon"];
 const DEFAULT_CATEGORIES = [
-  ["salads", "Salads", 5, "🥗"],
-  ["sides", "Sides", 5, "🍽️"]
+  ["salad-or-side", "Salad or Side", 15, "🥗"]
 ];
+// Sign-ups saved under the old two-bucket setup move into the combined bucket.
+const LEGACY_CATEGORY_IDS = {
+  salads: "salad-or-side",
+  sides: "salad-or-side"
+};
 
 function setup() {
   const spreadsheet = getSpreadsheet_();
@@ -75,7 +79,7 @@ function handleSignup_(e) {
 
     const category = readCategoryRows_().find((row) => row.id === categoryId);
     if (!category) {
-      return { success: false, error: "Please choose Salads or Sides from the list." };
+      return { success: false, error: "Please choose the Salad or Side option from the list." };
     }
     if (!name || !item) {
       return { success: false, error: "Please provide your name and what you are bringing." };
@@ -92,7 +96,7 @@ function handleSignup_(e) {
     if (taken >= category.needed) {
       return {
         success: false,
-        error: `${category.name} is full. Please choose another salad or side.`,
+        error: `${category.name} is full. All 15 spots are taken.`,
         payload: buildPublicPayload_()
       };
     }
@@ -160,7 +164,51 @@ function ensureSignupSheet_(spreadsheet) {
 }
 
 function ensureCategorySheet_(spreadsheet) {
-  return ensureSheet_(spreadsheet, CATEGORY_SHEET, CATEGORY_HEADERS, DEFAULT_CATEGORIES);
+  const sheet = ensureSheet_(spreadsheet, CATEGORY_SHEET, CATEGORY_HEADERS, DEFAULT_CATEGORIES);
+  reconcileCategories_(sheet);
+  return sheet;
+}
+
+/**
+ * Keeps the category tab matching DEFAULT_CATEGORIES and moves sign-ups off retired
+ * category ids, so changing the buckets here only needs a redeploy.
+ */
+function reconcileCategories_(sheet) {
+  const current = readCategoryRows_();
+  const matches = current.length === DEFAULT_CATEGORIES.length &&
+    DEFAULT_CATEGORIES.every((row, index) =>
+      current[index].id === row[0] &&
+      current[index].name === row[1] &&
+      current[index].needed === row[2]);
+  if (matches) return;
+
+  const lastRow = sheet.getLastRow();
+  if (lastRow > 1) sheet.getRange(2, 1, lastRow - 1, CATEGORY_HEADERS.length).clearContent();
+  sheet.getRange(2, 1, DEFAULT_CATEGORIES.length, CATEGORY_HEADERS.length)
+    .setValues(DEFAULT_CATEGORIES);
+  remapLegacySignups_();
+}
+
+function remapLegacySignups_() {
+  const sheet = getSpreadsheet_().getSheetByName(SIGNUP_SHEET);
+  if (!sheet || sheet.getLastRow() < 2) return;
+  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]
+    .map((header) => String(header || "").trim());
+  const column = headers.indexOf("CategoryId") + 1;
+  if (column < 1) return;
+  const range = sheet.getRange(2, column, sheet.getLastRow() - 1, 1);
+  const values = range.getValues();
+  let changed = false;
+  const next = values.map(([value]) => {
+    const id = clean_(value, 60);
+    const mapped = LEGACY_CATEGORY_IDS[id];
+    if (mapped && mapped !== id) {
+      changed = true;
+      return [mapped];
+    }
+    return [value];
+  });
+  if (changed) range.setValues(next);
 }
 
 function ensureSheet_(spreadsheet, name, headers, seedRows) {

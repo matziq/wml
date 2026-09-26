@@ -21,18 +21,22 @@ changes.
    manifest with `appsscript.json`.
 4. Run `setup` once and approve the permissions. This creates two tabs:
    - `TrunkOrTreatSignups` — Timestamp, SignupId, CategoryId, Name, Email, Phone, Item, UserAgent
-   - `TrunkOrTreatCategories` — CategoryId, Name, Needed, Icon (seeded with Salads and Sides, five each)
+   - `TrunkOrTreatCategories` — CategoryId, Name, Needed, Icon (seeded with one `Salad or Side` row, 15 slots)
 5. Deploy as a **Web app** with **Execute as: Me** and **Who has access: Anyone**.
 6. Copy the `/exec` URL into `SHARED_BACKEND_URL` near the top of `../index.html` (replace the empty
    string next to the `TODO`). The page switches to shared mode automatically.
 7. After backend code changes, create a new deployment version and update the URL if it changes.
 
-For the current page, update **only** `TrunkOrTreatCategories` to the header above and the
-two rows `salads | Salads | 5 | 🥗` and `sides | Sides | 5 | 🍽️`. Do not clear or
-delete `TrunkOrTreatSignups`: existing rows with earlier category IDs remain in the sheet and
-the page groups them into Salads or Sides. The deployed backend validates new sign-ups against
-the category tab, so update that tab before publishing the revised page. The default categories
-in `Code.gs` only seed *new* sheets; they do not modify an existing category tab.
+The page now uses a single combined bucket: `salad-or-side | Salad or Side | 15 | 🥗`. Redeploy
+this `Code.gs` after changing `DEFAULT_CATEGORIES` — on the next request the backend rewrites
+`TrunkOrTreatCategories` to match and rewrites any `salads` / `sides` rows in
+`TrunkOrTreatSignups` to `salad-or-side`, so earlier sign-ups are kept. Do not clear or delete
+`TrunkOrTreatSignups`. The deployed backend validates new sign-ups against the category tab, so
+deploy the updated script before publishing a page that changes the buckets.
+
+Quick alternative without redeploying: edit `TrunkOrTreatCategories` by hand so the only data row
+is `salad-or-side | Salad or Side | 15 | 🥗`, and change any `salads` / `sides` values in the
+`CategoryId` column of `TrunkOrTreatSignups` to `salad-or-side`.
 
 Privacy matches the other ward sign-ups: the public page shows **name and item only**. Email and
 phone are written to the Google Sheet for the organizers and are never returned to the website.
