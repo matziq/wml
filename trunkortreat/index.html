@@ -951,14 +951,81 @@
 
             #print-sheet-content {
                 display: block !important;
+                position: relative;
+                min-height: 9.9in;
                 font-family: var(--font);
                 font-size: 11pt;
                 line-height: 1.2;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
             }
+
+            #print-sheet-content > :not(.print-watermarks):not(.print-defs) {
+                position: relative;
+                z-index: 1;
+            }
+
+            .print-defs {
+                position: absolute;
+            }
+
+            .print-watermarks {
+                position: absolute;
+                inset: 0;
+                z-index: 0;
+                overflow: hidden;
+                pointer-events: none;
+            }
+
+            .wm {
+                position: absolute;
+                color: #6b5b95;
+                opacity: 0.22;
+            }
+
+            .wm-web-tl, .wm-web-tr, .wm-web-bl, .wm-web-br {
+                width: 2.3in;
+                height: 2.3in;
+            }
+
+            .wm-web-tl { top: -0.2in; left: -0.2in; }
+            .wm-web-tr { top: -0.2in; right: -0.2in; transform: scaleX(-1); }
+            .wm-web-bl { bottom: -0.2in; left: -0.2in; transform: scaleY(-1); width: 1.7in; height: 1.7in; }
+            .wm-web-br { bottom: -0.2in; right: -0.2in; transform: scale(-1, -1); }
+
+            .wm-spider {
+                top: 0;
+                right: 1.25in;
+                width: 0.45in;
+                height: 1.35in;
+                opacity: 0.2;
+            }
+
+            .wm-ghost {
+                color: #7a7a8c;
+                opacity: 0.11;
+            }
+
+            .wm-ghost-1 { top: 2.4in; right: 0.3in; width: 1.5in; height: 1.65in; transform: rotate(10deg); }
+            .wm-ghost-2 { top: 4.9in; left: 2.6in; width: 2.3in; height: 2.5in; transform: rotate(-6deg); opacity: 0.07; }
+            .wm-ghost-3 { bottom: 1.4in; right: 0.9in; width: 1in; height: 1.1in; transform: rotate(-12deg); }
+            .wm-ghost-4 { top: 1.6in; left: 3.2in; width: 0.8in; height: 0.88in; transform: rotate(8deg); }
 
             #print-sheet-content h1 {
                 font-size: 17pt;
                 margin: 0 0 0.3in;
+            }
+
+            .print-when {
+                font-size: 12pt;
+                font-weight: 600;
+                color: #444;
+                white-space: nowrap;
+            }
+
+            .print-when::before {
+                content: "• ";
+                color: #b35900;
             }
 
             .print-section {
@@ -1108,7 +1175,39 @@ Dinner is at 5:30 PM, with a costume contest at 6:00 PM, trunk decorating contes
     </main>
 
     <div id="print-sheet-content" hidden aria-label="Printable blank sign-up sheet">
-        <h1>Trunk or Treat Sign-Up</h1>
+        <svg class="print-defs" width="0" height="0" aria-hidden="true" focusable="false">
+            <defs>
+                <symbol id="wm-web" viewBox="0 0 200 200">
+                    <path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                        d="M0 0L190.0 0.0M0 0L183.5 49.2M0 0L164.5 95.0M0 0L134.4 134.4M0 0L95.0 164.5M0 0L49.2 183.5M0 0L0.0 190.0M35.0 0.0Q29.8 3.9 33.8 9.1Q27.8 11.5 30.3 17.5Q23.9 18.3 24.7 24.7Q18.3 23.9 17.5 30.3Q11.5 27.8 9.1 33.8Q3.9 29.8 0.0 35.0M70.0 0.0Q59.7 7.9 67.6 18.1Q55.6 23.0 60.6 35.0Q47.8 36.6 49.5 49.5Q36.6 47.8 35.0 60.6Q23.0 55.6 18.1 67.6Q7.9 59.7 0.0 70.0M105.0 0.0Q89.5 11.8 101.4 27.2Q83.4 34.6 90.9 52.5Q71.6 55.0 74.2 74.2Q55.0 71.6 52.5 90.9Q34.6 83.4 27.2 101.4Q11.8 89.5 0.0 105.0M140.0 0.0Q119.4 15.7 135.2 36.2Q111.2 46.1 121.2 70.0Q95.5 73.3 99.0 99.0Q73.3 95.5 70.0 121.2Q46.1 111.2 36.2 135.2Q15.7 119.4 0.0 140.0M175.0 0.0Q149.2 19.6 169.0 45.3Q139.0 57.6 151.6 87.5Q119.4 91.6 123.7 123.7Q91.6 119.4 87.5 151.6Q57.6 139.0 45.3 169.0Q19.6 149.2 0.0 175.0" />
+                </symbol>
+                <symbol id="wm-ghost" viewBox="0 0 100 110">
+                    <path fill="currentColor" fill-rule="evenodd"
+                        d="M50 4C24 4 10 24 10 50V104L22 94L34 104L46 94L58 104L70 94L82 104L90 97V50C90 24 76 4 50 4ZM36 34A7 9 0 1 0 36.01 34ZM64 34A7 9 0 1 0 64.01 34ZM50 58A8 10 0 1 0 50.01 58Z" />
+                </symbol>
+                <symbol id="wm-spider" viewBox="0 0 60 90">
+                    <path fill="none" stroke="currentColor" stroke-width="1.5" d="M30 0V52" />
+                    <g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+                        <path d="M26 58L12 48L6 56M26 62L8 62L4 70M26 66L12 74L10 84M34 58L48 48L54 56M34 62L52 62L56 70M34 66L48 74L50 84" />
+                    </g>
+                    <ellipse cx="30" cy="56" rx="6" ry="5" fill="currentColor" />
+                    <ellipse cx="30" cy="68" rx="9" ry="10" fill="currentColor" />
+                </symbol>
+            </defs>
+        </svg>
+        <div class="print-watermarks" aria-hidden="true">
+            <svg class="wm wm-web-tl"><use href="#wm-web" /></svg>
+            <svg class="wm wm-web-tr"><use href="#wm-web" /></svg>
+            <svg class="wm wm-web-bl"><use href="#wm-web" /></svg>
+            <svg class="wm wm-web-br"><use href="#wm-web" /></svg>
+            <svg class="wm wm-spider"><use href="#wm-spider" /></svg>
+            <svg class="wm wm-ghost wm-ghost-1"><use href="#wm-ghost" /></svg>
+            <svg class="wm wm-ghost wm-ghost-2"><use href="#wm-ghost" /></svg>
+            <svg class="wm wm-ghost wm-ghost-3"><use href="#wm-ghost" /></svg>
+            <svg class="wm wm-ghost wm-ghost-4"><use href="#wm-ghost" /></svg>
+        </div>
+        <h1>🎃 Trunk or Treat Sign-Up <span class="print-when" id="print-when">Saturday, Oct 24, 2026 at 5:30
+                PM</span></h1>
         <section class="print-section">
             <h2>Salad or Side (15)</h2>
             <div class="print-row">1. <span></span></div>
@@ -1324,6 +1423,16 @@ Dinner is at 5:30 PM, with a costume contest at 6:00 PM, trunk decorating contes
                 .replace(/>/g, "&gt;")
                 .replace(/"/g, "&quot;")
                 .replace(/'/g, "&#39;");
+        }
+
+        function printEventWhen(event) {
+            const text = String(event.date || "").trim();
+            const parsed = new Date(text);
+            const date = !Number.isNaN(parsed.getTime()) && /\b\d{4}\b/.test(text)
+                ? parsed.toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric", year: "numeric" })
+                : formatEventDate(text);
+            const time = event.time || DEFAULT_STATE.event.time;
+            return time ? `${date} at ${time}` : date;
         }
 
         function formatEventDate(value) {
@@ -1603,6 +1712,7 @@ Dinner is at 5:30 PM, with a costume contest at 6:00 PM, trunk decorating contes
             els.eventDateStatic.textContent = `📅 ${formatEventDate(event.date)}`;
             updateCalendarAvailability();
             els.eventTimeDisplay.textContent = `🕑 ${event.time || DEFAULT_STATE.event.time}`;
+            $("print-when").textContent = printEventWhen(event);
             els.eventLocationDisplay.textContent = `📍 ${event.location || "Location TBD"}`;
             els.eventTitle.value = event.title || "";
             els.eventNote.value = event.note || "";
