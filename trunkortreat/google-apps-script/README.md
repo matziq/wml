@@ -21,13 +21,18 @@ changes.
    manifest with `appsscript.json`.
 4. Run `setup` once and approve the permissions. This creates two tabs:
    - `TrunkOrTreatSignups` — Timestamp, SignupId, CategoryId, Name, Email, Phone, Item, UserAgent
-   - `TrunkOrTreatCategories` — CategoryId, Name, Needed, Icon (seeded with the salad categories)
+   - `TrunkOrTreatCategories` — CategoryId, Name, Needed, Icon (seeded with Salads and Sides, five each)
 5. Deploy as a **Web app** with **Execute as: Me** and **Who has access: Anyone**.
 6. Copy the `/exec` URL into `SHARED_BACKEND_URL` near the top of `../index.html` (replace the empty
    string next to the `TODO`). The page switches to shared mode automatically.
 7. After backend code changes, create a new deployment version and update the URL if it changes.
 
-Adjust how many of each salad are needed by editing the `Needed` column in `TrunkOrTreatCategories`.
+For the current page, update **only** `TrunkOrTreatCategories` to the header above and the
+two rows `salads | Salads | 5 | 🥗` and `sides | Sides | 5 | 🍽️`. Do not clear or
+delete `TrunkOrTreatSignups`: existing rows with earlier category IDs remain in the sheet and
+the page groups them into Salads or Sides. The deployed backend validates new sign-ups against
+the category tab, so update that tab before publishing the revised page. The default categories
+in `Code.gs` only seed *new* sheets; they do not modify an existing category tab.
 
 Privacy matches the other ward sign-ups: the public page shows **name and item only**. Email and
 phone are written to the Google Sheet for the organizers and are never returned to the website.

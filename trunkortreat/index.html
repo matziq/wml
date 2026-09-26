@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trunk or Treat Salad Sign-Up Sheet</title>
+    <title>Trunk or Treat Sign-Up Sheet</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <style>
         :root {
@@ -843,128 +843,52 @@
 
         @media print {
             @page {
-                margin: 0.45in;
+                size: letter portrait;
+                margin: 0.5in;
             }
 
-            body {
-                background: #fff;
-                color: #000;
+            body, html {
+                background: white !important;
+                color: black;
             }
 
-            .page {
-                width: 100%;
-                margin: 0;
-            }
-
-            .hero {
-                color: #000;
-                background: #fff;
-                box-shadow: none;
-                border: 2px solid #000;
-                border-radius: 0;
-                min-height: auto;
-                break-inside: avoid;
-            }
-
-            .hero::before,
-            .hero::after {
-                display: none;
-            }
-
-            .hero-content {
-                min-height: auto;
-                padding: 0.35in;
-            }
-
-            h1 {
-                font-size: 34pt;
-                letter-spacing: -0.03em;
-            }
-
-            .pill {
-                color: #000;
-                background: #fff;
-                border: 1px solid #000;
-            }
-
-            .pill-provided {
-                background: #fff;
-                border: 2px solid #000;
-                box-shadow: none;
-                font-weight: 800;
-            }
-
-            .toolbar,
-            .panel-stack,
-            .slot-actions,
-            .footer-note {
+            .page, #import-file {
                 display: none !important;
             }
 
-            .grid {
-                display: block;
+            #print-sheet-content {
+                display: block !important;
+                font-family: var(--font);
+                font-size: 11pt;
+                line-height: 1.2;
             }
 
-            .summary-strip {
-                grid-template-columns: repeat(3, 1fr);
-                margin: 0.18in 0;
+            #print-sheet-content h1 {
+                font-size: 17pt;
+                margin: 0 0 0.3in;
             }
 
-            .stat,
-            .category-card {
-                box-shadow: none;
-                border: 1px solid #222;
-                background: #fff;
-            }
-
-            .cards {
-                display: block;
-            }
-
-            .category-card.collapsed .slots {
-                display: grid;
-            }
-
-            .category-card {
-                margin: 0 0 0.18in;
+            .print-section {
+                margin-bottom: 0.3in;
                 break-inside: avoid;
-                border-radius: 0;
             }
 
-            .category-head {
-                background: #fff;
-                border-bottom: 1px solid #222;
-                padding: 0.12in;
+            .print-section h2 {
+                font-size: 13pt;
+                margin: 0 0 0.08in;
             }
 
-            .count-badge {
-                color: #000;
-                background: #fff;
-                border: 1px solid #222;
+            .print-row {
+                display: flex;
+                align-items: flex-end;
+                gap: 0.15in;
+                height: 0.62in;
+                break-inside: avoid;
             }
 
-            .slots {
-                padding: 0;
-                gap: 0;
-            }
-
-            .slot {
-                border: 0;
-                border-bottom: 1px solid #bbb;
-                border-radius: 0;
-                min-height: 0.48in;
-                padding: 0.08in 0.12in;
-                background: #fff;
-            }
-
-            .slot-number {
-                background: #fff;
-                border: 1px solid #222;
-                color: #000;
-            }
-
-            .slot-empty {
-                color: #222;
+            .print-row span {
+                flex: 1;
+                border-bottom: 1px solid #555;
             }
         }
     </style>
@@ -977,12 +901,11 @@
                 <p class="eyebrow" id="event-eyebrow">Sundance 1st Ward Trunk or Treat</p>
                 <div class="title-row">
                     <span class="title-flag" aria-hidden="true" title="Jack-o-lantern">🎃</span>
-                    <h1 id="event-title-display">October Trunk or Treat Salad Sign-Up</h1>
+                    <h1 id="event-title-display">October Trunk or Treat Sign-Up</h1>
                     <span class="title-flag" aria-hidden="true" title="Jack-o-lantern">🎃</span>
                 </div>
-                <p class="hero-note" id="event-note-display">Pulled pork sandwiches are provided. Families are invited
-                    to bring a salad or side to share &mdash; cole slaw, potato salad, pasta salad, green salad, fruit
-                    salad, or a family favorite. Dinner is at 5:30 PM, with a costume contest at 6:00 PM, trunk
+                <p class="hero-note" id="event-note-display">Pulled pork sandwiches are provided. We need 5 salads
+                    and 5 sides to share. Dinner is at 5:30 PM, with a costume contest at 6:00 PM, trunk
                     decorating contest at 6:45 PM, and trunk or treating after.</p>
                 <div class="hero-details">
                     <span class="pill pill-provided" id="event-provided-display">🥪 Pulled pork sandwiches provided</span>
@@ -1052,21 +975,17 @@
                 <div class="panel">
                     <h2>Sign up</h2>
                     <form id="signup-form" class="form-grid">
-                        <label>Salad or side type <select id="signup-category" required></select></label>
+                        <label>Salad or side <select id="signup-category" required></select></label>
                         <label>Your name <input id="signup-name" type="text" autocomplete="name" required /></label>
                         <label>Email <input id="signup-email" type="email" autocomplete="email" required /></label>
                         <label>Phone <input id="signup-phone" type="tel" autocomplete="tel" required /></label>
-                        <label id="signup-item-choice-label">What are you bringing? <select
-                                id="signup-item-choice"></select></label>
-                        <label id="signup-item-custom-label" hidden>Describe your salad or side <input id="signup-item"
-                                type="text"
-                                placeholder="e.g., creamy cole slaw, mustard potato salad, Italian pasta salad, garden salad" /></label>
+                        <label>What are you bringing? <input id="signup-item" type="text"
+                                placeholder="What are you bringing?" required /></label>
                         <button type="submit" id="signup-submit">Add my sign-up</button>
                     </form>
                     <div id="signup-status" class="signup-status" role="status" aria-live="polite"></div>
-                    <p class="hint">Choose a salad or side type first, then fill out your name, contact info, and what you are
-                        bringing. Pick an idea from the list or choose &ldquo;Something else&rdquo; to describe your own.
-                        Full categories are hidden from the dropdown.
+                    <p class="hint">Choose Salads or Sides, then enter your name, contact info, and what you are
+                        bringing. Full categories are hidden from the dropdown.
                     </p>
                 </div>
 
@@ -1082,6 +1001,26 @@
             GitHub Pages.</p>
     </main>
 
+    <div id="print-sheet-content" hidden aria-label="Printable blank sign-up sheet">
+        <h1>Trunk or Treat Sign-Up</h1>
+        <section class="print-section">
+            <h2>Salads (5)</h2>
+            <div class="print-row">1. <span></span></div>
+            <div class="print-row">2. <span></span></div>
+            <div class="print-row">3. <span></span></div>
+            <div class="print-row">4. <span></span></div>
+            <div class="print-row">5. <span></span></div>
+        </section>
+        <section class="print-section">
+            <h2>Sides (5)</h2>
+            <div class="print-row">1. <span></span></div>
+            <div class="print-row">2. <span></span></div>
+            <div class="print-row">3. <span></span></div>
+            <div class="print-row">4. <span></span></div>
+            <div class="print-row">5. <span></span></div>
+        </section>
+    </div>
+
     <input id="import-file" type="file" accept="application/json,.json" hidden />
 
     <script>
@@ -1094,77 +1033,20 @@
         // Example: const SHARED_BACKEND_URL = "https://script.google.com/macros/s/AKfycb.../exec";
         const SHARED_BACKEND_URL = "https://script.google.com/macros/s/AKfycbwr67nyGwbaY8v393ZueGupBq7NDEqLEXYWnid-jTVvJwg9SXq2NHH2mNIx3uKhMN8_/exec";
 
-        const CUSTOM_ITEM_VALUE = "__custom__";
-        // Long-form category labels shown on cards. Keyed by category id.
-        const TOPPING_CATEGORY_LABELS = {
-            "other-salads": "Other Salads & Sides (Bean, Broccoli, Corn, Chips)"
-        };
-
-        // Salad ideas offered per category. Keyed by category id; a category with no
-        // entry here simply falls back to the free-text box.
-        const ITEM_SUGGESTIONS = {
-            "cole-slaw": [
-                "Classic Creamy Cole Slaw",
-                "Vinegar Cole Slaw",
-                "Apple Cole Slaw",
-                "Broccoli Slaw",
-                "Spicy Jalapeno Slaw",
-                "Cilantro Lime Slaw",
-                "Dairy-Free Cole Slaw"
-            ],
-            "potato-salad": [
-                "Classic Potato Salad",
-                "Mustard Potato Salad",
-                "Red Potato Salad",
-                "German Potato Salad",
-                "Loaded Baked Potato Salad",
-                "Dill Potato Salad",
-                "Egg-Free Potato Salad"
-            ],
-            "pasta-salad": [
-                "Italian Pasta Salad",
-                "Creamy Ranch Pasta Salad",
-                "Macaroni Salad",
-                "Bow Tie Pasta Salad",
-                "Greek Pasta Salad",
-                "Tortellini Salad",
-                "Gluten-Free Pasta Salad"
-            ],
-            "green-salad": [
-                "Garden Salad",
-                "Caesar Salad",
-                "Spinach Salad",
-                "Chopped Salad",
-                "Southwest Salad",
-                "Strawberry Spinach Salad",
-                "Salad Dressings & Toppings"
-            ],
-            "fruit-salad": [
-                "Classic Fruit Salad",
-                "Watermelon & Berry Salad",
-                "Apple Harvest Salad",
-                "Creamy Fruit Salad",
-                "Grape Salad",
-                "Fall Fruit Tray",
-                "Ambrosia Salad"
-            ],
-            "other-salads": [
-                "Baked Beans",
-                "Three Bean Salad",
-                "Broccoli Salad",
-                "Corn Salad",
-                "Cucumber Salad",
-                "Chips & Dip",
-                "Rolls & Butter",
-                "Pickles & Relish Tray"
-            ]
+        const LEGACY_CATEGORY_BUCKETS = {
+            "cole-slaw": "salads",
+            "potato-salad": "salads",
+            "pasta-salad": "salads",
+            "green-salad": "salads",
+            "fruit-salad": "salads",
+            "other-salads": "sides"
         };
 
         const DEFAULT_STATE = {
             event: {
                 eyebrow: "Sundance 1st Ward Trunk or Treat",
-                title: "Trunk or Treat Salad Sign-Up",
-                note: "Pulled pork sandwiches are provided. Families are invited to bring a salad or side to share — cole slaw, potato salad, pasta salad, green salad, fruit salad, or a family favorite. Dinner is at 5:30 PM, with a costume contest at 6:00 PM, trunk decorating contest at 6:45 PM, and trunk or treating after.",
+                title: "Trunk or Treat Sign-Up",
+                note: "Pulled pork sandwiches are provided. We need 5 salads and 5 sides to share. Dinner is at 5:30 PM, with a costume contest at 6:00 PM, trunk decorating contest at 6:45 PM, and trunk or treating after.",
                 date: "October 24, 2026",
                 time: "5:30 PM",
                 location: "Sundance 1st Ward",
@@ -1172,17 +1054,14 @@
                 heroImage: "trunk-or-treat-hero.jpg"
             },
             categories: [
-                { id: "cole-slaw", name: "Cole Slaw", needed: 4, icon: "🥬" },
-                { id: "potato-salad", name: "Potato Salad", needed: 4, icon: "🥔" },
-                { id: "pasta-salad", name: "Pasta Salad", needed: 4, icon: "🍝" },
-                { id: "green-salad", name: "Green Salads", needed: 4, icon: "🥗" },
-                { id: "fruit-salad", name: "Fruit Salads", needed: 3, icon: "🍎" },
-                { id: "other-salads", name: TOPPING_CATEGORY_LABELS["other-salads"], needed: 3, icon: "🎃" }
+                { id: "salads", name: "Salads", needed: 5, icon: "🥗" },
+                { id: "sides", name: "Sides", needed: 5, icon: "🍽️" }
             ],
             signups: []
         };
 
         let state = loadInitialState();
+        let sharedCategoriesReady = !isSharedMode();
         const expandedCategories = new Set();
 
         const $ = (id) => document.getElementById(id);
@@ -1206,9 +1085,6 @@
             signupEmail: $("signup-email"),
             signupPhone: $("signup-phone"),
             signupItem: $("signup-item"),
-            signupItemChoice: $("signup-item-choice"),
-            signupItemChoiceLabel: $("signup-item-choice-label"),
-            signupItemCustomLabel: $("signup-item-custom-label"),
             signupSubmit: $("signup-submit"),
             signupStatus: $("signup-status"),
             categoryCards: $("category-cards"),
@@ -1248,7 +1124,7 @@
                     // Event details (title/date/note/hero) are owned by this HTML, not the
                     // Google Sheet — so the published page controls them each month.
                     event: DEFAULT_STATE.event,
-                    categories: cached.categories || DEFAULT_STATE.categories,
+                    categories: DEFAULT_STATE.categories,
                     signups: cached.signups || []
                 });
             } catch (error) {
@@ -1284,13 +1160,13 @@
             next.signups = Array.isArray(next.signups) ? next.signups : [];
             next.categories = next.categories.map((cat, index) => ({
                 id: cat.id || slugify(cat.name || `category-${index + 1}`),
-                name: TOPPING_CATEGORY_LABELS[cat.id] || String(cat.name || `Category ${index + 1}`).trim() || `Category ${index + 1}`,
+                name: String(cat.name || `Category ${index + 1}`).trim() || `Category ${index + 1}`,
                 needed: Math.max(0, parseInt(cat.needed, 10) || 0),
                 icon: String(cat.icon || "🍽️").trim() || "🍽️"
             }));
             next.signups = next.signups.map((entry) => ({
                 id: entry.id || cryptoId(),
-                categoryId: entry.categoryId,
+                categoryId: LEGACY_CATEGORY_BUCKETS[entry.categoryId] || entry.categoryId,
                 name: String(entry.name || "").trim(),
                 email: String(entry.email || "").trim(),
                 phone: String(entry.phone || "").trim(),
@@ -1428,7 +1304,7 @@
 
         function renderSummary() {
             const totalNeeded = state.categories.reduce((sum, cat) => sum + Number(cat.needed || 0), 0);
-            const filled = state.signups.length;
+            const filled = state.categories.reduce((sum, cat) => sum + signupsFor(cat.id).length, 0);
             const remaining = Math.max(0, totalNeeded - filled);
             els.summaryStrip.innerHTML = `
 				<div class="stat"><strong>${filled}</strong><span>Signed up</span></div>
@@ -1437,74 +1313,34 @@
 			`;
         }
 
-        function suggestionsFor(categoryId) {
-            const list = ITEM_SUGGESTIONS[categoryId];
-            return Array.isArray(list) ? list : [];
-        }
-
-        function renderSignupItemOptions() {
-            const categoryId = els.signupCategory.value;
-            const suggestions = suggestionsFor(categoryId);
-
-            if (!suggestions.length) {
-                // No ideas for this category, so go straight to the free-text box.
-                els.signupItemChoice.innerHTML = "";
-                els.signupItemChoiceLabel.hidden = true;
-                els.signupItemCustomLabel.hidden = false;
-                els.signupItemCustomLabel.firstChild.nodeValue = "What are you bringing? ";
+        function renderSignupCategoryOptions() {
+            if (!sharedCategoriesReady) {
+                els.signupCategory.innerHTML = `<option value="">Sign-ups temporarily unavailable</option>`;
+                updateSignupFieldState();
                 return;
             }
-
-            els.signupItemChoiceLabel.hidden = false;
-            els.signupItemCustomLabel.firstChild.nodeValue = "Describe your salad or side ";
-            els.signupItemChoice.innerHTML = `<option value="">Choose or add your own...</option>`
-                + suggestions.map((name) => `<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`).join("")
-                + `<option value="${CUSTOM_ITEM_VALUE}">Something else (type my own)</option>`;
-            els.signupItemChoice.value = "";
-            syncItemFromChoice();
-        }
-
-        function syncItemFromChoice() {
-            const choice = els.signupItemChoice.value;
-            const isCustom = choice === CUSTOM_ITEM_VALUE;
-            const usingDropdown = !els.signupItemChoiceLabel.hidden;
-
-            els.signupItemCustomLabel.hidden = usingDropdown && !isCustom;
-
-            if (isCustom) {
-                els.signupItem.value = "";
-            } else if (usingDropdown) {
-                els.signupItem.value = choice;
-            }
-        }
-
-        function renderSignupCategoryOptions() {
             const available = state.categories.filter((cat) => openSlots(cat) > 0);
             if (!available.length) {
                 els.signupCategory.innerHTML = `<option value="">All categories are full</option>`;
                 els.signupSubmit.disabled = true;
-                renderSignupItemOptions();
                 updateSignupFieldState();
                 return;
             }
             const current = els.signupCategory.value;
-            els.signupCategory.innerHTML = `<option value="">Choose a salad or side type...</option>` + available
+            els.signupCategory.innerHTML = `<option value="">Choose Salads or Sides...</option>` + available
                 .map((cat) => `<option value="${escapeHtml(cat.id)}">${escapeHtml(cat.icon)} ${escapeHtml(cat.name)} (${openSlots(cat)} open)</option>`)
                 .join("");
             const keep = available.some((cat) => cat.id === current);
             els.signupCategory.value = keep ? current : "";
-            if (!keep) renderSignupItemOptions();
             updateSignupFieldState();
         }
 
         function updateSignupFieldState() {
             const hasCategory = Boolean(els.signupCategory.value);
-            [els.signupName, els.signupEmail, els.signupPhone, els.signupItem, els.signupItemChoice].forEach((field) => {
+            [els.signupName, els.signupEmail, els.signupPhone, els.signupItem].forEach((field) => {
                 field.disabled = !hasCategory;
             });
-            // Only require the control the person can actually see.
-            els.signupItemChoice.required = hasCategory && !els.signupItemChoiceLabel.hidden;
-            els.signupItem.required = hasCategory && !els.signupItemCustomLabel.hidden;
+            els.signupItem.required = hasCategory;
             els.signupSubmit.disabled = !hasCategory;
         }
 
@@ -1667,7 +1503,6 @@
             state.signups.push(entry);
             saveState();
             els.signupForm.reset();
-            renderSignupItemOptions();
             render();
             showStatus(`Thanks, ${entry.name}! You are signed up for ${category.name}.`, "success");
             if (state.event.organizerEmail) emailSignup(entry.id, true);
@@ -1825,7 +1660,9 @@
                 }
 
                 applySharedPayload(response);
-                if (!options.quiet) showStatus("Loaded shared sign-ups from Google Sheets.", "success");
+                if (!options.quiet && sharedCategoriesReady) {
+                    showStatus("Loaded shared sign-ups from Google Sheets.", "success");
+                }
             };
 
             script.onerror = () => {
@@ -1839,15 +1676,23 @@
         }
 
         function applySharedPayload(payload) {
+            const categories = payload.categories;
+            sharedCategoriesReady = Array.isArray(categories)
+                && categories.length === 2
+                && DEFAULT_STATE.categories.every((expected) =>
+                    categories.some((cat) => cat.id === expected.id && Number(cat.needed) === expected.needed));
             state = normalizeState({
                 // Event details (title/date/note/hero) come from this published HTML,
                 // not the Google Sheet; only categories and sign-ups are shared.
                 event: DEFAULT_STATE.event,
-                categories: payload.categories || DEFAULT_STATE.categories,
+                categories: sharedCategoriesReady ? categories : DEFAULT_STATE.categories,
                 signups: payload.signups || []
             });
             saveSharedCache(state);
             render();
+            if (!sharedCategoriesReady) {
+                showStatus("Sign-ups are temporarily unavailable while the shared sheet categories are updated.", "error");
+            }
         }
 
         function appendHiddenInput(form, name, value) {
@@ -1905,7 +1750,6 @@
 
             if (data.success) {
                 els.signupForm.reset();
-                renderSignupItemOptions();
                 if (data.payload) applySharedPayload(data.payload);
                 else loadSharedData({ quiet: true });
                 showStatus(data.message || "Your shared sign-up was saved.", "success");
@@ -1931,17 +1775,11 @@
         els.importFile.addEventListener("change", (event) => importJsonFile(event.target.files[0]));
         $("print-sheet").addEventListener("click", () => window.print());
         els.signupCategory.addEventListener("change", () => {
-            renderSignupItemOptions();
             updateSignupFieldState();
             if (els.signupCategory.value) {
                 expandedCategories.add(els.signupCategory.value);
                 renderCategoryCards();
             }
-        });
-        els.signupItemChoice.addEventListener("change", () => {
-            syncItemFromChoice();
-            updateSignupFieldState();
-            if (els.signupItemChoice.value === CUSTOM_ITEM_VALUE) els.signupItem.focus();
         });
         els.signupForm.addEventListener("submit", addSignup);
         window.addEventListener("message", handleSharedMessage);
