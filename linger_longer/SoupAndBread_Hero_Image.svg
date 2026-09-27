@@ -1,0 +1,175 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="Placeholder fall soup and bread scene: a steaming pot and bowls of soup, a crusty bread loaf, baguette and rolls, pumpkins, and falling autumn leaves on a plaid tablecloth">
+  <defs>
+    <linearGradient id="sb-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5a2412"/>
+      <stop offset="0.5" stop-color="#a8481c"/>
+      <stop offset="1" stop-color="#e59a3d"/>
+    </linearGradient>
+    <radialGradient id="sb-glow" cx="0.5" cy="0.55" r="0.6">
+      <stop offset="0" stop-color="#ffd58a" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#ffd58a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sb-cloth" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6e2a16"/>
+      <stop offset="0.5" stop-color="#94401e"/>
+      <stop offset="1" stop-color="#6a2714"/>
+    </linearGradient>
+    <pattern id="sb-plaid" width="140" height="140" patternUnits="userSpaceOnUse">
+      <rect width="140" height="140" fill="url(#sb-cloth)"/>
+      <path d="M0 70h140M70 0v140" stroke="#e8b25c" stroke-width="14" opacity="0.55"/>
+      <path d="M0 35h140M35 0v140M0 105h140M105 0v140" stroke="#3b1a0e" stroke-width="4" opacity="0.45"/>
+    </pattern>
+    <linearGradient id="sb-pot" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#1f2a30"/>
+      <stop offset="0.4" stop-color="#4b5a63"/>
+      <stop offset="1" stop-color="#161e23"/>
+    </linearGradient>
+    <radialGradient id="sb-soup" cx="0.45" cy="0.4" r="0.7">
+      <stop offset="0" stop-color="#f39a3a"/>
+      <stop offset="1" stop-color="#b8521a"/>
+    </radialGradient>
+    <radialGradient id="sb-soup-red" cx="0.45" cy="0.4" r="0.7">
+      <stop offset="0" stop-color="#e2553a"/>
+      <stop offset="1" stop-color="#9c2a1a"/>
+    </radialGradient>
+    <linearGradient id="sb-bowl" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f6ead4"/>
+      <stop offset="1" stop-color="#c9b491"/>
+    </linearGradient>
+    <linearGradient id="sb-crust" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e3a553"/>
+      <stop offset="1" stop-color="#9a5a22"/>
+    </linearGradient>
+    <radialGradient id="sb-pumpkin" cx="0.4" cy="0.35" r="0.75">
+      <stop offset="0" stop-color="#ffab45"/>
+      <stop offset="1" stop-color="#c35a12"/>
+    </radialGradient>
+    <g id="sb-leaf">
+      <path d="M0 -26 C10 -16 22 -14 26 -2 C16 0 18 12 10 20 C4 14 -4 14 -10 20 C-18 12 -16 0 -26 -2 C-22 -14 -10 -16 0 -26 Z"/>
+      <path d="M0 -20 V26" stroke="#3b1a0e" stroke-width="2" fill="none" opacity="0.5"/>
+    </g>
+    <g id="sb-steam" fill="none" stroke="#fff4e0" stroke-width="10" stroke-linecap="round" opacity="0.55">
+      <path d="M0 0 C-22 -30 22 -50 0 -85 C-22 -118 18 -135 0 -165"/>
+    </g>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#sb-sky)"/>
+  <rect width="1600" height="900" fill="url(#sb-glow)"/>
+
+  <!-- Background trees and hills -->
+  <path d="M0 560 C220 470 420 520 640 480 C860 440 1080 520 1300 470 C1440 440 1540 470 1600 460 V620 H0 Z" fill="#6b2d12" opacity="0.7"/>
+  <g opacity="0.85">
+    <rect x="120" y="360" width="18" height="220" fill="#3a1a0c"/>
+    <circle cx="129" cy="340" r="110" fill="#c4521c"/>
+    <circle cx="70" cy="390" r="70" fill="#e07a24"/>
+    <circle cx="190" cy="380" r="80" fill="#a63d16"/>
+    <rect x="1440" y="340" width="20" height="240" fill="#3a1a0c"/>
+    <circle cx="1450" cy="320" r="120" fill="#d8862a"/>
+    <circle cx="1380" cy="370" r="80" fill="#b5461a"/>
+    <circle cx="1530" cy="370" r="85" fill="#e9a23a"/>
+  </g>
+
+  <!-- Falling leaves -->
+  <g>
+    <use href="#sb-leaf" transform="translate(300 120) rotate(20) scale(1.2)" fill="#e9a23a"/>
+    <use href="#sb-leaf" transform="translate(520 220) rotate(-35)" fill="#c4521c"/>
+    <use href="#sb-leaf" transform="translate(760 90) rotate(60) scale(0.9)" fill="#f2c14e"/>
+    <use href="#sb-leaf" transform="translate(1040 180) rotate(-10) scale(1.1)" fill="#a63d16"/>
+    <use href="#sb-leaf" transform="translate(1250 110) rotate(40)" fill="#e07a24"/>
+    <use href="#sb-leaf" transform="translate(1180 330) rotate(-60) scale(0.8)" fill="#f2c14e"/>
+    <use href="#sb-leaf" transform="translate(420 380) rotate(75) scale(0.8)" fill="#d8862a"/>
+    <use href="#sb-leaf" transform="translate(900 300) rotate(15) scale(0.7)" fill="#c4521c"/>
+    <use href="#sb-leaf" transform="translate(200 250) rotate(-25) scale(0.75)" fill="#f2c14e"/>
+    <use href="#sb-leaf" transform="translate(1380 230) rotate(95) scale(0.85)" fill="#e9a23a"/>
+  </g>
+
+  <!-- Table -->
+  <path d="M0 600 H1600 V900 H0 Z" fill="url(#sb-plaid)"/>
+  <path d="M0 600 H1600 V618 H0 Z" fill="#3b1a0e" opacity="0.35"/>
+
+  <!-- Pumpkins (left) -->
+  <g transform="translate(150 640)">
+    <ellipse cx="0" cy="70" rx="120" ry="18" fill="#2a120a" opacity="0.35"/>
+    <ellipse cx="-40" cy="10" rx="55" ry="62" fill="url(#sb-pumpkin)"/>
+    <ellipse cx="40" cy="10" rx="55" ry="62" fill="url(#sb-pumpkin)"/>
+    <ellipse cx="0" cy="10" rx="58" ry="66" fill="url(#sb-pumpkin)"/>
+    <path d="M0 -54 C-6 -70 -2 -84 10 -92" stroke="#4d3014" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <path d="M10 -70 C40 -96 70 -80 60 -60 C44 -64 26 -62 10 -70 Z" fill="#5f7a2a"/>
+  </g>
+  <g transform="translate(300 700) scale(0.6)">
+    <ellipse cx="0" cy="10" rx="70" ry="60" fill="url(#sb-pumpkin)"/>
+    <path d="M-30 -40 C-40 10 -40 50 -30 66 M30 -40 C40 10 40 50 30 66" stroke="#a84a10" stroke-width="5" fill="none" opacity="0.6"/>
+    <path d="M0 -48 V-78" stroke="#4d3014" stroke-width="12" stroke-linecap="round"/>
+  </g>
+
+  <!-- Big soup pot (center) -->
+  <g transform="translate(800 560)">
+    <use href="#sb-steam" transform="translate(-70 -60)"/>
+    <use href="#sb-steam" transform="translate(10 -70) scale(1.1)"/>
+    <use href="#sb-steam" transform="translate(90 -55) scale(0.9)"/>
+    <ellipse cx="0" cy="190" rx="260" ry="30" fill="#2a120a" opacity="0.4"/>
+    <path d="M-250 -10 C-290 -10 -300 50 -250 50" stroke="#1a2125" stroke-width="22" fill="none"/>
+    <path d="M250 -10 C290 -10 300 50 250 50" stroke="#1a2125" stroke-width="22" fill="none"/>
+    <path d="M-230 -20 H230 V140 C230 180 180 200 0 200 C-180 200 -230 180 -230 140 Z" fill="url(#sb-pot)"/>
+    <ellipse cx="0" cy="-20" rx="230" ry="44" fill="#11181c"/>
+    <ellipse cx="0" cy="-16" rx="210" ry="34" fill="url(#sb-soup)"/>
+    <circle cx="-80" cy="-18" r="12" fill="#f7d36a"/>
+    <circle cx="-30" cy="-8" r="10" fill="#e56a24"/>
+    <circle cx="40" cy="-22" r="11" fill="#6f8f2c"/>
+    <circle cx="100" cy="-10" r="12" fill="#f7d36a"/>
+    <rect x="-10" y="-30" width="22" height="12" rx="4" fill="#e56a24"/>
+    <path d="M120 -30 L230 -170" stroke="#7a4a20" stroke-width="16" stroke-linecap="round"/>
+    <ellipse cx="110" cy="-22" rx="30" ry="12" fill="#6a3d18"/>
+    <path d="M-200 40 C-100 60 100 60 200 40" stroke="#ffffff" stroke-width="6" opacity="0.12" fill="none"/>
+  </g>
+
+  <!-- Soup bowl (left of pot) -->
+  <g transform="translate(470 745)">
+    <use href="#sb-steam" transform="translate(0 -40) scale(0.6)"/>
+    <ellipse cx="0" cy="70" rx="140" ry="16" fill="#2a120a" opacity="0.35"/>
+    <path d="M-130 -10 H130 C130 60 80 80 0 80 C-80 80 -130 60 -130 -10 Z" fill="url(#sb-bowl)"/>
+    <ellipse cx="0" cy="-10" rx="130" ry="26" fill="#e7d6b6"/>
+    <ellipse cx="0" cy="-8" rx="114" ry="19" fill="url(#sb-soup-red)"/>
+    <path d="M-30 -12 C-10 -20 10 -4 30 -12" stroke="#f5efe0" stroke-width="5" fill="none" opacity="0.8"/>
+    <circle cx="50" cy="-12" r="6" fill="#5f7a2a"/>
+    <circle cx="62" cy="-6" r="5" fill="#5f7a2a"/>
+    <path d="M150 -60 L60 -6" stroke="#cfd6e2" stroke-width="10" stroke-linecap="round"/>
+  </g>
+
+  <!-- Bread board with loaf, baguette, rolls (right) -->
+  <g transform="translate(1210 730)">
+    <ellipse cx="0" cy="90" rx="250" ry="22" fill="#2a120a" opacity="0.4"/>
+    <rect x="-240" y="30" width="480" height="50" rx="24" fill="#8a5a2c"/>
+    <rect x="-240" y="30" width="480" height="14" rx="7" fill="#a8743e"/>
+    <!-- Baguette -->
+    <g transform="rotate(-14) translate(-10 -40)">
+      <path d="M-230 20 C-230 -10 -200 -22 -160 -22 H170 C210 -22 230 -10 230 20 C230 44 210 50 170 50 H-160 C-200 50 -230 44 -230 20 Z" fill="url(#sb-crust)"/>
+      <path d="M-150 -6 L-110 20 M-70 -8 L-30 20 M10 -8 L50 20 M90 -8 L130 20" stroke="#f4d28c" stroke-width="10" stroke-linecap="round"/>
+    </g>
+    <!-- Round loaf -->
+    <g transform="translate(-90 -10)">
+      <path d="M-110 30 C-110 -60 -50 -100 0 -100 C50 -100 110 -60 110 30 Z" fill="url(#sb-crust)"/>
+      <path d="M-60 -40 L-10 -70 M-50 -10 L20 -50 M-20 20 L50 -20" stroke="#f4d28c" stroke-width="9" stroke-linecap="round"/>
+    </g>
+    <!-- Rolls -->
+    <g transform="translate(110 10)">
+      <ellipse cx="0" cy="0" rx="52" ry="36" fill="url(#sb-crust)"/>
+      <path d="M-24 -10 C-8 -20 8 -20 24 -10" stroke="#f4d28c" stroke-width="6" fill="none" stroke-linecap="round"/>
+    </g>
+    <g transform="translate(190 20)">
+      <ellipse cx="0" cy="0" rx="46" ry="32" fill="url(#sb-crust)"/>
+      <path d="M-20 -8 C-6 -18 6 -18 20 -8" stroke="#f4d28c" stroke-width="6" fill="none" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <!-- Leaves scattered on table -->
+  <use href="#sb-leaf" transform="translate(640 860) rotate(30) scale(0.9)" fill="#e9a23a"/>
+  <use href="#sb-leaf" transform="translate(980 840) rotate(-40)" fill="#c4521c"/>
+  <use href="#sb-leaf" transform="translate(60 830) rotate(80) scale(0.8)" fill="#f2c14e"/>
+  <use href="#sb-leaf" transform="translate(1540 850) rotate(-15) scale(0.9)" fill="#a63d16"/>
+
+  <!-- Placeholder tag -->
+  <g transform="translate(1590 890)" text-anchor="end" font-family="Segoe UI, system-ui, sans-serif">
+    <text x="0" y="0" font-size="20" fill="#fff4e0" opacity="0.55">Placeholder art</text>
+  </g>
+</svg>

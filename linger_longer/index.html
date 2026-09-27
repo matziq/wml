@@ -1221,7 +1221,7 @@
                                 <circle cx="13" cy="8.6" r="0.9" />
                             </g>
                         </svg></span>
-                    <h1 id="event-title-display">September Linger Longer Potluck Sign-Up</h1>
+                    <h1 id="event-title-display">October Linger Longer Potluck Sign-Up</h1>
                     <span class="title-flag" aria-hidden="true" title="American flag"><svg viewBox="0 0 38 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <rect width="38" height="20" fill="#fff" />
@@ -1251,12 +1251,12 @@
                             </g>
                         </svg></span>
                 </div>
-                <p class="hero-note" id="event-note-display">September's theme is a Macaroni &amp; Cheese Bar. Bring a
-                    big batch of macaroni &amp; cheese or a favorite topping to pile on top, plus desserts and beverages
-                    to round out the meal!</p>
+                <p class="hero-note"                 id="event-note-display">October's theme is Soup &amp; Bread. Bring a pot of your
+                                    favorite soup, chili, or chowder, or some fresh bread, rolls, or cornbread to go with it, plus fall
+                                    desserts and warm drinks to round out the meal!</p>
                 <div class="hero-details">
-                    <span class="pill pill-provided" id="event-provided-display">Macaroni &amp; Cheese Bar</span>
-                    <span class="pill" id="event-date-display">📅 Sun, Sep 06, 2026</span>
+                                    <span class="pill pill-provided" id="event-provided-display">Soup &amp; Bread</span>
+                                    <span class="pill" id="event-date-display">📅 Sun, Oct 11, 2026</span>
                     <span class="pill" id="event-time-display">🕑 2 PM</span>
                     <span class="pill" id="event-location-display">📍 Sundance 1st Ward Cultural Hall</span>
                     <button type="button" id="print-sheet" class="hero-print-btn no-print">🖨️ Print</button>
@@ -1292,7 +1292,7 @@
                         <label>Title <input id="event-title" type="text" /></label>
                         <label>Subtitle / note <textarea id="event-note"></textarea></label>
                         <div class="two-col form-grid">
-                            <label>Date <input id="event-date" type="text" placeholder="September 6, 2026" /></label>
+                            <label>Date <input id="event-date" type="text" placeholder="October 11, 2026" /></label>
                             <label>Time <input id="event-time" type="text" placeholder="2 PM" /></label>
                         </div>
                         <div class="two-col form-grid">
@@ -1339,7 +1339,7 @@
                                 id="signup-item-choice"></select></label>
                         <label id="signup-item-custom-label" hidden>Describe your dish <input id="signup-item"
                                 type="text"
-                                placeholder="e.g., white cheddar mac, crispy bacon, roasted broccoli, brownies" /></label>
+                                placeholder="e.g., chicken noodle soup, broccoli cheddar, cornbread, apple crisp" /></label>
                         <button type="submit" id="signup-submit">Add my sign-up</button>
                     </form>
                     <div id="signup-status" class="signup-status" role="status" aria-live="polite"></div>
@@ -1384,77 +1384,92 @@
         const SHARED_BACKEND_URL = "https://script.google.com/macros/s/AKfycbwZt-lr6VcrglwwyfHsqIW_an3_NZe9gaUHWm1UunIfuLGkAevqTMYvRll18W9KAq87GQ/exec";
 
         const CUSTOM_ITEM_VALUE = "__custom__";
-        const TOPPING_CATEGORY_LABELS = {
-            "toppings-meat": "Meat Toppings (Bacon, Ham, Pulled Pork, Chicken)",
-            "toppings-veggie": "Veggie Toppings (Broccoli, Tomatoes, Mushrooms, Onions)",
-            "toppings-crunchy": "Crunchy & Cheesy Toppings (Breadcrumbs, Ritz Crackers, Cheddar, Parmesan)"
+        // Full display names by category id. These override the shorter names stored in the
+        // Google Sheet's Categories tab so the cards stay descriptive.
+        const CATEGORY_LABELS = {
+            "soups-hearty": "Hearty Soups & Chili (Chicken Noodle, Beef Stew, Chili)",
+            "soups-creamy": "Creamy Soups & Chowders (Potato, Broccoli Cheddar, Clam Chowder)",
+            "soups-veggie": "Vegetarian Soups (Tomato Basil, Minestrone, Butternut Squash)",
+            "breads": "Breads & Rolls (Rolls, Cornbread, Breadsticks, Bread Bowls)",
+            "soup-toppings": "Soup Toppings (Shredded Cheese, Sour Cream, Crackers, Croutons)"
         };
 
         // Dish ideas offered per category. Keyed by category id; a category with no
         // entry here simply falls back to the free-text box.
         const ITEM_SUGGESTIONS = {
-            "macaroni-cheese": [
-                "Classic Mac & Cheese",
-                "White Cheddar Mac & Cheese",
-                "Three-Cheese Mac & Cheese",
-                "Baked Mac & Cheese",
-                "Creamy Stovetop Mac & Cheese",
-                "Smoked Gouda Mac & Cheese",
-                "Pepper Jack Mac & Cheese (spicy)",
-                "Buffalo Mac & Cheese",
-                "Gluten-Free Mac & Cheese",
-                "Dairy-Free Mac & Cheese"
+            "soups-hearty": [
+                "Chicken Noodle Soup",
+                "Beef Stew",
+                "Beef Chili",
+                "White Chicken Chili",
+                "Chicken Tortilla Soup",
+                "Zuppa Toscana",
+                "Split Pea & Ham Soup",
+                "Taco Soup",
+                "Italian Wedding Soup"
             ],
-            "toppings-meat": [
+            "soups-creamy": [
+                "Loaded Baked Potato Soup",
+                "Broccoli Cheddar Soup",
+                "Clam Chowder",
+                "Corn Chowder",
+                "Creamy Chicken & Wild Rice Soup",
+                "Cream of Mushroom Soup",
+                "Chicken Pot Pie Soup"
+            ],
+            "soups-veggie": [
+                "Tomato Basil Soup",
+                "Minestrone",
+                "Butternut Squash Soup",
+                "Vegetable Soup",
+                "Lentil Soup",
+                "Black Bean Soup",
+                "Pumpkin Soup",
+                "Gluten-Free Soup",
+                "Dairy-Free Soup"
+            ],
+            "breads": [
+                "Dinner Rolls",
+                "Cornbread",
+                "Breadsticks",
+                "Garlic Bread",
+                "French Bread / Baguette",
+                "Sourdough Loaf",
+                "Bread Bowls",
+                "Biscuits",
+                "Homemade Wheat Bread",
+                "Gluten-Free Bread"
+            ],
+            "soup-toppings": [
+                "Shredded Cheddar Cheese",
+                "Sour Cream",
+                "Oyster Crackers",
+                "Saltine Crackers",
+                "Croutons",
                 "Crispy Bacon Bits",
-                "Diced Ham",
-                "Pulled Pork",
-                "Shredded Chicken",
-                "Buffalo Chicken",
-                "Sliced Smoked Sausage",
-                "Crumbled Italian Sausage",
-                "Seasoned Ground Beef"
-            ],
-            "toppings-veggie": [
-                "Steamed Broccoli",
-                "Diced Tomatoes",
-                "Sauteed Mushrooms",
-                "Caramelized Onions",
                 "Sliced Green Onions",
-                "Roasted Red Peppers",
-                "Sliced Jalapenos",
-                "Baby Spinach",
-                "Sweet Peas"
-            ],
-            "toppings-crunchy": [
-                "Buttered Breadcrumbs",
-                "Crushed Ritz Crackers",
-                "French Fried Onions",
-                "Crushed Potato Chips",
-                "Toasted Panko",
-                "Extra Shredded Cheddar",
-                "Grated Parmesan",
-                "Garlic Croutons"
+                "Tortilla Strips",
+                "Butter & Honey Butter"
             ],
             "desserts": [
+                "Apple Crisp",
+                "Pumpkin Bars",
+                "Pumpkin Pie",
+                "Apple Pie",
+                "Snickerdoodles",
+                "Caramel Apples",
                 "Brownies",
                 "Chocolate Chip Cookies",
-                "Cupcakes",
-                "Apple Crisp",
-                "Rice Krispie Treats",
-                "Cheesecake Bars",
-                "Fruit Salad",
                 "Gluten-Free Dessert"
             ],
             "beverages": [
+                "Hot Apple Cider",
+                "Hot Cocoa",
                 "Lemonade",
-                "Fruit Punch",
                 "Ice Water with Lemon",
-                "Sparkling Water",
-                "Apple Juice",
-                "Root Beer",
-                "Iced Herbal Tea",
-                "Hot Cocoa"
+                "Sparkling Cider",
+                "Fruit Punch",
+                "Herbal Tea"
             ]
         };
 
@@ -1462,20 +1477,21 @@
             event: {
                 eyebrow: "Linger Longer Potluck",
                 title: "Linger Longer Potluck Sign-Up",
-                note: "September's theme is a Macaroni & Cheese Bar. Bring a big batch of macaroni & cheese or a favorite topping to pile on top, plus desserts and beverages to round out the meal!",
-                date: "September 6, 2026",
+                note: "October's theme is Soup & Bread. Bring a pot of your favorite soup, chili, or chowder, or some fresh bread, rolls, or cornbread to go with it, plus fall desserts and warm drinks to round out the meal!",
+                date: "October 11, 2026",
                 time: "2 PM",
                 location: "Sundance 1st Ward Cultural Hall",
                 organizerEmail: "",
-                heroImage: "MacAndCheese_Hero_Image.svg"
+                heroImage: "SoupAndBread_Hero_Image.svg"
             },
             categories: [
-                { id: "macaroni-cheese", name: "Macaroni & Cheese", needed: 8, icon: "🧀" },
-                { id: "toppings-meat", name: TOPPING_CATEGORY_LABELS["toppings-meat"], needed: 4, icon: "🥓" },
-                { id: "toppings-veggie", name: TOPPING_CATEGORY_LABELS["toppings-veggie"], needed: 4, icon: "🥦" },
-                { id: "toppings-crunchy", name: TOPPING_CATEGORY_LABELS["toppings-crunchy"], needed: 4, icon: "🍞" },
-                { id: "desserts", name: "Desserts", needed: 6, icon: "🍰" },
-                { id: "beverages", name: "Beverages", needed: 4, icon: "🥤" }
+                { id: "soups-hearty", name: CATEGORY_LABELS["soups-hearty"], needed: 6, icon: "🍲" },
+                { id: "soups-creamy", name: CATEGORY_LABELS["soups-creamy"], needed: 5, icon: "🥣" },
+                { id: "soups-veggie", name: CATEGORY_LABELS["soups-veggie"], needed: 3, icon: "🥕" },
+                { id: "breads", name: CATEGORY_LABELS["breads"], needed: 8, icon: "🍞" },
+                { id: "soup-toppings", name: CATEGORY_LABELS["soup-toppings"], needed: 4, icon: "🧀" },
+                { id: "desserts", name: "Fall Desserts", needed: 6, icon: "🥧" },
+                { id: "beverages", name: "Beverages", needed: 4, icon: "☕" }
             ],
             signups: []
         };
@@ -1581,13 +1597,13 @@
             next.event.time = String(next.event.time || base.event.time).trim() || base.event.time;
             if (/^time\s+tbd$/i.test(next.event.time)) next.event.time = base.event.time;
             next.event.heroImage = String(next.event.heroImage || base.event.heroImage).trim() || base.event.heroImage;
-            // Migrate cached state from previous default hero images to the current Macaroni & Cheese Bar theme image.
-            if (next.event.heroImage === "lingerlonger.png" || next.event.heroImage === "June_Hero_Image.jpg" || next.event.heroImage === "July_Hero_Image.svg" || next.event.heroImage === "August_Hero_Image.svg" || next.event.heroImage === "September_Hero_Image.svg") next.event.heroImage = base.event.heroImage;
+            // Migrate cached state from previous default hero images to the current Soup & Bread theme image.
+            if (next.event.heroImage === "lingerlonger.png" || next.event.heroImage === "June_Hero_Image.jpg" || next.event.heroImage === "July_Hero_Image.svg" || next.event.heroImage === "August_Hero_Image.svg" || next.event.heroImage === "September_Hero_Image.svg" || next.event.heroImage === "MacAndCheese_Hero_Image.svg") next.event.heroImage = base.event.heroImage;
             next.categories = Array.isArray(next.categories) && next.categories.length ? next.categories : base.categories;
             next.signups = Array.isArray(next.signups) ? next.signups : [];
             next.categories = next.categories.map((cat, index) => ({
                 id: cat.id || slugify(cat.name || `category-${index + 1}`),
-                name: TOPPING_CATEGORY_LABELS[cat.id] || String(cat.name || `Category ${index + 1}`).trim() || `Category ${index + 1}`,
+                name: CATEGORY_LABELS[cat.id] || String(cat.name || `Category ${index + 1}`).trim() || `Category ${index + 1}`,
                 needed: Math.max(0, parseInt(cat.needed, 10) || 0),
                 icon: String(cat.icon || "🍽️").trim() || "🍽️"
             }));
