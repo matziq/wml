@@ -516,14 +516,14 @@
                         <input id="signup-name" type="text" autocomplete="name" required />
                     </label>
                     <div class="row-2">
-                        <label>Email
-                            <input id="signup-email" type="email" autocomplete="email" inputmode="email" required />
+                        <label><span>Email <span class="optional">(optional)</span></span>
+                            <input id="signup-email" type="email" autocomplete="email" inputmode="email" />
                         </label>
-                        <label>Phone
-                            <input id="signup-phone" type="tel" autocomplete="tel" inputmode="tel" required />
+                        <label><span>Phone <span class="optional">(optional)</span></span>
+                            <input id="signup-phone" type="tel" autocomplete="tel" inputmode="tel" />
                         </label>
                     </div>
-                    <p class="privacy">Your email and phone are only shared with the organizer.</p>
+                    <p class="privacy">Email and phone are optional, and only shared with the organizer.</p>
                     <fieldset class="type-picker">
                         <legend>I'm bringing a...</legend>
                         <div class="type-options" id="type-options"></div>
@@ -602,6 +602,8 @@
         // Google Apps Script web app backed by the Linger Longer Google Sheet.
         const SHARED_BACKEND_URL = "https://script.google.com/macros/s/AKfycbwZt-lr6VcrglwwyfHsqIW_an3_NZe9gaUHWm1UunIfuLGkAevqTMYvRll18W9KAq87GQ/exec";
         const CACHE_KEY = "linger-longer-october-2026-cache-v1";
+        // The sheet rejects blank fields, so optional ones are sent as this instead.
+        const NOT_PROVIDED = "Not provided";
 
         const EVENT = {
             title: "October Linger Longer: Soup & Bread",
@@ -821,23 +823,25 @@
             event.preventDefault();
             const categoryId = selectedType();
             const type = TYPES.find((t) => t.id === categoryId);
+            const email = $("signup-email").value.trim();
+            const phone = $("signup-phone").value.trim();
             const entry = {
                 categoryId,
                 name: $("signup-name").value.trim(),
-                email: $("signup-email").value.trim(),
-                phone: $("signup-phone").value.trim(),
-                // The sheet requires an item, so fall back to the category name when left blank.
+                // The sheet requires every field, so send a placeholder for anything left blank.
+                email: email || NOT_PROVIDED,
+                phone: phone || NOT_PROVIDED,
                 item: $("signup-item").value.trim() || (type ? type.label : "")
             };
 
             if (!entry.name) return fail("Please enter your name.", "signup-name");
-            if (!/^\S+@\S+\.\S+$/.test(entry.email)) return fail("Please enter a valid email.", "signup-email");
-            if (entry.phone.replace(/\D/g, "").length < 7) return fail("Please enter a phone number.", "signup-phone");
             if (!type) {
                 showStatus("Please choose Soup, Bread, Dessert, or Beverage.", "error");
                 document.querySelector('input[name="signup-type"]').focus();
                 return;
             }
+            if (email && !/^\S+@\S+\.\S+$/.test(email)) return fail("That email doesn't look right. Correct it or leave it blank.", "signup-email");
+            if (phone && phone.replace(/\D/g, "").length < 7) return fail("That phone number doesn't look right. Correct it or leave it blank.", "signup-phone");
             // The sheet rejects any category it doesn't list, so catch that before a slow round trip.
             if (backendCategoryIds && !backendCategoryIds.includes(categoryId)) {
                 showStatus("Sign-ups aren't open yet for this month's categories. Please check back soon.", "error");
