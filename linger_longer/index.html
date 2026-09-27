@@ -255,6 +255,10 @@
 
         .optional { font-weight: 400; color: var(--muted); }
 
+        #item-fields { display: grid; gap: 14px; }
+
+        #item-fields:empty { display: none; }
+
         .tag {
             display: inline-block;
             margin-right: 6px;
@@ -347,6 +351,8 @@
         .signup-list .who { font-weight: 600; }
 
         .signup-list .what { color: var(--muted); text-align: right; }
+
+        .signup-list .sep { display: block; height: 2px; }
 
         .empty { color: var(--muted); margin: 0; }
 
@@ -525,13 +531,10 @@
                     </div>
                     <p class="privacy">Email and phone are optional, and only shared with the organizer.</p>
                     <fieldset class="type-picker">
-                        <legend>I'm bringing a...</legend>
+                        <legend>I'm bringing <span class="optional">(choose one or more)</span></legend>
                         <div class="type-options" id="type-options"></div>
                     </fieldset>
-                    <label><span>What are you bringing? <span class="optional">(optional)</span></span>
-                        <input id="signup-item" type="text" maxlength="80"
-                            placeholder="e.g., chicken noodle soup, cornbread, apple crisp" />
-                    </label>
+                    <div id="item-fields"></div>
                     <button type="submit" class="btn" id="signup-submit">Sign me up</button>
                     <div id="signup-status" class="status" role="status" aria-live="polite"></div>
                 </form>
@@ -616,16 +619,16 @@
         // `id` must match a CategoryId row in the Google Sheet's Categories tab.
         const TYPES = [
             {
-                id: "soup", label: "Soup", plural: "Soups"
+                id: "soup", label: "Soup", plural: "Soups", placeholder: "e.g., chicken noodle"
             },
             {
-                id: "bread", label: "Bread", plural: "Breads"
+                id: "bread", label: "Bread", plural: "Breads", placeholder: "e.g., cornbread"
             },
             {
-                id: "desserts", label: "Dessert", plural: "Desserts"
+                id: "desserts", label: "Dessert", plural: "Desserts", placeholder: "e.g., apple crisp"
             },
             {
-                id: "beverages", label: "Beverage", plural: "Beverages"
+                id: "beverages", label: "Beverage", plural: "Beverages", placeholder: "e.g., apple cider"
             }
         ];
 
@@ -655,18 +658,41 @@
             return String(value ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
         }
 
+        function listWords(words) {
+            if (words.length <= 1) return words[0] || "";
+            if (words.length === 2) return `${words[0]} and ${words[1]}`;
+            return `${words.slice(0, -1).join(", ")}, and ${words[words.length - 1]}`;
+        }
+
         function renderTypeOptions() {
             $("type-options").innerHTML = TYPES.map((type) => `
                 <label class="type-option">
-                    <input type="radio" name="signup-type" value="${type.id}" />
+                    <input type="checkbox" name="signup-type" value="${type.id}" />
                     <span class="type-box" aria-hidden="true"></span>
                     <span>${type.label}</span>
                 </label>`).join("");
+
+            $("type-options").addEventListener("change", renderItemFields);
         }
 
-        function selectedType() {
-            const checked = document.querySelector('input[name="signup-type"]:checked');
-            return checked ? checked.value : "";
+        function selectedTypes() {
+            return Array.from(document.querySelectorAll('input[name="signup-type"]:checked')).map((el) => el.value);
+        }
+
+        // One text field per chosen category, because each becomes its own row in the sheet.
+        function renderItemFields() {
+            const chosen = selectedTypes();
+            const previous = {};
+            document.querySelectorAll("[data-item-for]").forEach((el) => { previous[el.dataset.itemFor] = el.value; });
+
+            $("item-fields").innerHTML = chosen.map((id) => {
+                const type = TYPES.find((t) => t.id === id);
+                return `
+                    <label><span>What ${type.label.toLowerCase()} are you bringing? <span class="optional">(optional)</span></span>
+                        <input type="text" maxlength="80" data-item-for="${type.id}"
+                            placeholder="${type.placeholder}" value="${escapeHtml(previous[type.id] || "")}" />
+                    </label>`;
+            }).join("");
         }
 
         function render() {
@@ -677,7 +703,7 @@
             });
 
             $("stats").innerHTML = `
-                <div class="stat stat-total"><strong>${signups.length}</strong><span>signed up</span></div>
+                <div class="stat stat-total"><strong>${new Set(signups.map((e) => e.name.toLowerCase())).size}</strong><span>signed up</span></div>
                 ${TYPES.map((type) => `<div class="stat"><strong>${counts[type.id]}</strong><span>${counts[type.id] === 1 ? type.label : type.plural}</span></div>`).join("")}`;
 
             const list = $("signup-list");
@@ -685,14 +711,27 @@
                 list.innerHTML = `<li><p class="empty">No one has signed up yet. Be the first!</p></li>`;
                 return;
             }
-            list.innerHTML = signups
+
+            // One person can bring several dishes, so show them on a single line.
+            const people = new Map();
+            signups
                 .slice()
                 .sort((a, b) => String(a.createdAt || "").localeCompare(String(b.createdAt || "")))
-                .map((entry) => {
+                .forEach((entry) => {
+                    const key = entry.name.toLowerCase();
+                    if (!people.has(key)) people.set(key, { name: entry.name, items: [] });
                     const type = TYPES.find((t) => t.id === typeFor(entry.categoryId));
                     const label = type ? type.label : "";
                     const detail = entry.item && entry.item.toLowerCase() !== label.toLowerCase() ? entry.item : "";
-                    return `<li><span class="who">${escapeHtml(entry.name)}</span><span class="what">${label ? `<span class="tag">${label}</span>` : ""}${escapeHtml(detail)}</span></li>`;
+                    people.get(key).items.push({ label, detail });
+                });
+
+            list.innerHTML = Array.from(people.values())
+                .map((person) => {
+                    const what = person.items
+                        .map(({ label, detail }) => `${label ? `<span class="tag">${label}</span>` : ""}${escapeHtml(detail)}`)
+                        .join('<span class="sep"></span>');
+                    return `<li><span class="who">${escapeHtml(person.name)}</span><span class="what">${what}</span></li>`;
                 })
                 .join("");
         }
@@ -716,7 +755,7 @@
                     item: String(entry.item || "").trim(),
                     createdAt: entry.createdAt || ""
                 }))
-                .filter((entry) => entry.name && entry.item);
+                .filter((entry) => entry.name);
             saveCache();
             render();
         }
@@ -747,12 +786,8 @@
             document.querySelectorAll("[data-shared-submit]").forEach((el) => el.remove());
         }
 
-        function submitSignup(entry) {
-            cleanupSubmitForms();
-            $("signup-submit").disabled = true;
-            showStatus("Saving your sign-up...", "success");
-
-            const frameName = `signup-frame-${Date.now()}`;
+        function postEntry(entry, index) {
+            const frameName = `signup-frame-${Date.now()}-${index}`;
             const iframe = document.createElement("iframe");
             iframe.name = frameName;
             iframe.hidden = true;
@@ -774,22 +809,41 @@
 
             document.body.append(iframe, form);
             form.submit();
+        }
+
+        const signatureOf = (row) => `${row.categoryId}|${String(row.name).toLowerCase()}`;
+
+        function submitSignup(entries) {
+            cleanupSubmitForms();
+            $("signup-submit").disabled = true;
+            showStatus(entries.length > 1 ? "Saving your sign-ups..." : "Saving your sign-up...", "success");
+
+            // The backend locks the sheet per write, so stagger the posts rather than firing them at once.
+            entries.forEach((entry, index) => window.setTimeout(() => postEntry(entry, index), index * 600));
 
             // Apps Script renders its reply inside its own sandbox iframe, so window.parent.postMessage
-            // reaches Google's wrapper page instead of this one. Confirm the write by re-reading the sheet.
-            const signature = (entry_) => `${entry_.categoryId}|${String(entry_.name).toLowerCase()}`;
-            const previous = new Set(signups.map(signature));
-            const target = signature(entry);
-            let attempts = 0;
+            // reaches Google's wrapper page instead of this one. Confirm the writes by re-reading the sheet.
+            const previous = new Set(signups.map(signatureOf));
+            const targets = entries.map(signatureOf).filter((sig) => !previous.has(sig));
+            const deadline = Date.now() + 30000 + entries.length * 600;
+            let done = false;
 
             window.clearInterval(submitSignup.timer);
             submitSignup.timer = window.setInterval(() => {
-                attempts += 1;
-                const lastTry = attempts >= 12;
+                const expired = Date.now() > deadline;
                 loadSharedData(() => {
-                    const saved = signups.some((row) => signature(row) === target && !previous.has(target));
-                    if (saved) finishSubmit(true);
-                    else if (lastTry) finishSubmit(false);
+                    if (done) return;
+                    const present = new Set(signups.map(signatureOf));
+                    const saved = targets.filter((sig) => present.has(sig));
+                    if (saved.length === targets.length) {
+                        done = true;
+                        finishSubmit(true);
+                    } else if (expired) {
+                        done = true;
+                        finishSubmit(false, saved.length
+                            ? "Only part of your sign-up saved. Please refresh the page to see what went through."
+                            : null);
+                    }
                 });
             }, 2000);
         }
@@ -802,6 +856,7 @@
             if (saved) {
                 const name = $("signup-name").value.trim().split(/\s+/)[0];
                 $("signup-form").reset();
+                renderItemFields();
                 showStatus(`Thanks${name ? `, ${name}` : ""}! You're signed up. See you on October 11.`, "success");
             } else {
                 showStatus(message || "We couldn't confirm your sign-up. Please refresh the page to check whether it saved, then try again.", "error");
@@ -821,33 +876,47 @@
 
         function onSubmit(event) {
             event.preventDefault();
-            const categoryId = selectedType();
-            const type = TYPES.find((t) => t.id === categoryId);
+            const chosen = selectedTypes();
+            const name = $("signup-name").value.trim();
             const email = $("signup-email").value.trim();
             const phone = $("signup-phone").value.trim();
-            const entry = {
-                categoryId,
-                name: $("signup-name").value.trim(),
-                // The sheet requires every field, so send a placeholder for anything left blank.
-                email: email || NOT_PROVIDED,
-                phone: phone || NOT_PROVIDED,
-                item: $("signup-item").value.trim() || (type ? type.label : "")
-            };
 
-            if (!entry.name) return fail("Please enter your name.", "signup-name");
-            if (!type) {
-                showStatus("Please choose Soup, Bread, Dessert, or Beverage.", "error");
+            if (!name) return fail("Please enter your name.", "signup-name");
+            if (!chosen.length) {
+                showStatus("Please choose at least one of Soup, Bread, Dessert, or Beverage.", "error");
                 document.querySelector('input[name="signup-type"]').focus();
                 return;
             }
             if (email && !/^\S+@\S+\.\S+$/.test(email)) return fail("That email doesn't look right. Correct it or leave it blank.", "signup-email");
             if (phone && phone.replace(/\D/g, "").length < 7) return fail("That phone number doesn't look right. Correct it or leave it blank.", "signup-phone");
             // The sheet rejects any category it doesn't list, so catch that before a slow round trip.
-            if (backendCategoryIds && !backendCategoryIds.includes(categoryId)) {
+            if (backendCategoryIds && chosen.some((id) => !backendCategoryIds.includes(id))) {
                 showStatus("Sign-ups aren't open yet for this month's categories. Please check back soon.", "error");
                 return;
             }
-            submitSignup(entry);
+            const already = chosen.filter((id) =>
+                signups.some((row) => row.categoryId === id && row.name.toLowerCase() === name.toLowerCase()));
+            if (already.length === chosen.length) {
+                const labels = already.map((id) => TYPES.find((t) => t.id === id).label);
+                showStatus(`${name} is already signed up for ${listWords(labels)}.`, "error");
+                return;
+            }
+
+            // The sheet stores one category per row, so each chosen category is its own sign-up.
+            const entries = chosen.map((categoryId) => {
+                const type = TYPES.find((t) => t.id === categoryId);
+                const field = document.querySelector(`[data-item-for="${categoryId}"]`);
+                return {
+                    categoryId,
+                    name,
+                    // The sheet requires every field, so send a placeholder for anything left blank.
+                    email: email || NOT_PROVIDED,
+                    phone: phone || NOT_PROVIDED,
+                    item: (field ? field.value.trim() : "") || type.label
+                };
+            });
+
+            submitSignup(entries);
         }
 
         function fail(message, fieldId) {
