@@ -629,6 +629,7 @@
 
         const $ = (id) => document.getElementById(id);
         let signups = loadCache();
+        let backendCategoryIds = null;
 
         function loadCache() {
             try { return JSON.parse(localStorage.getItem(CACHE_KEY) || "[]"); } catch (error) { return []; }
@@ -701,6 +702,11 @@
         }
 
         function applyPayload(payload) {
+            if (Array.isArray(payload.categories)) {
+                backendCategoryIds = payload.categories
+                    .filter((cat) => cat && cat.active !== false)
+                    .map((cat) => String(cat.id));
+            }
             signups = (payload.signups || [])
                 .map((entry) => ({
                     categoryId: entry.categoryId,
@@ -713,17 +719,19 @@
             render();
         }
 
-        function loadSharedData() {
+        function loadSharedData(done) {
             const callbackName = `lingerLonger_${Date.now()}_${Math.random().toString(16).slice(2)}`;
             const script = document.createElement("script");
             window[callbackName] = (response) => {
                 delete window[callbackName];
                 script.remove();
                 if (response && response.success !== false) applyPayload(response);
+                if (done) done(true);
             };
             script.onerror = () => {
                 delete window[callbackName];
                 script.remove();
+                if (done) done(false);
             };
             const url = new URL(SHARED_BACKEND_URL);
             url.searchParams.set("action", "list");
@@ -765,12 +773,37 @@
             document.body.append(iframe, form);
             form.submit();
 
-            window.clearTimeout(submitSignup.timer);
-            submitSignup.timer = window.setTimeout(() => {
-                if (!$("signup-submit").disabled) return;
-                $("signup-submit").disabled = false;
-                showStatus("This is taking longer than usual. Refresh in a moment to check whether your sign-up saved.", "error");
-            }, 20000);
+            // Apps Script renders its reply inside its own sandbox iframe, so window.parent.postMessage
+            // reaches Google's wrapper page instead of this one. Confirm the write by re-reading the sheet.
+            const signature = (entry_) => `${entry_.categoryId}|${String(entry_.name).toLowerCase()}`;
+            const previous = new Set(signups.map(signature));
+            const target = signature(entry);
+            let attempts = 0;
+
+            window.clearInterval(submitSignup.timer);
+            submitSignup.timer = window.setInterval(() => {
+                attempts += 1;
+                const lastTry = attempts >= 12;
+                loadSharedData(() => {
+                    const saved = signups.some((row) => signature(row) === target && !previous.has(target));
+                    if (saved) finishSubmit(true);
+                    else if (lastTry) finishSubmit(false);
+                });
+            }, 2000);
+        }
+
+        function finishSubmit(saved, message) {
+            window.clearInterval(submitSignup.timer);
+            cleanupSubmitForms();
+            $("signup-submit").disabled = false;
+
+            if (saved) {
+                const name = $("signup-name").value.trim().split(/\s+/)[0];
+                $("signup-form").reset();
+                showStatus(`Thanks${name ? `, ${name}` : ""}! You're signed up. See you on October 11.`, "success");
+            } else {
+                showStatus(message || "We couldn't confirm your sign-up. Please refresh the page to check whether it saved, then try again.", "error");
+            }
         }
 
         function handleSharedMessage(event) {
@@ -780,18 +813,8 @@
             }
             if (!data || data.source !== "linger-longer-potluck") return;
 
-            window.clearTimeout(submitSignup.timer);
-            cleanupSubmitForms();
-            $("signup-submit").disabled = false;
             if (data.payload) applyPayload(data.payload); else loadSharedData();
-
-            if (data.success) {
-                const name = $("signup-name").value.trim().split(/\s+/)[0];
-                $("signup-form").reset();
-                showStatus(`Thanks${name ? `, ${name}` : ""}! You're signed up. See you on October 11.`, "success");
-            } else {
-                showStatus(data.error || "Could not save that sign-up. Please try again.", "error");
-            }
+            finishSubmit(Boolean(data.success), data.error);
         }
 
         function onSubmit(event) {
@@ -813,6 +836,11 @@
             if (!type) {
                 showStatus("Please choose Soup, Bread, Dessert, or Beverage.", "error");
                 document.querySelector('input[name="signup-type"]').focus();
+                return;
+            }
+            // The sheet rejects any category it doesn't list, so catch that before a slow round trip.
+            if (backendCategoryIds && !backendCategoryIds.includes(categoryId)) {
+                showStatus("Sign-ups aren't open yet for this month's categories. Please check back soon.", "error");
                 return;
             }
             submitSignup(entry);
