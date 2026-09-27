@@ -213,6 +213,59 @@
             border-color: var(--pumpkin);
         }
 
+        .type-picker { margin: 0; padding: 0; border: 0; min-width: 0; }
+
+        .type-picker legend { padding: 0; margin-bottom: 6px; font-weight: 600; font-size: 0.95rem; }
+
+        .type-options { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+
+        .type-option {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 48px;
+            padding: 10px 12px;
+            border: 1px solid #cdb99d;
+            border-radius: 10px;
+            background: #fff;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .type-option input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+
+        .type-box {
+            flex: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #a8875f;
+            border-radius: 5px;
+            background: #fff;
+        }
+
+        .type-option:has(input:checked) { border-color: var(--rust); background: #fbeee2; }
+
+        .type-option input:checked + .type-box {
+            border-color: var(--rust);
+            background: var(--rust) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 14px no-repeat;
+        }
+
+        .type-option input:focus-visible + .type-box { outline: 3px solid rgba(212, 105, 28, 0.45); outline-offset: 2px; }
+
+        .optional { font-weight: 400; color: var(--muted); }
+
+        .tag {
+            display: inline-block;
+            margin-right: 6px;
+            padding: 1px 8px;
+            border-radius: 999px;
+            background: #f7ecdc;
+            color: var(--rust);
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
         .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
         .privacy { margin: -4px 0 0; font-size: 0.85rem; color: var(--muted); }
@@ -307,6 +360,7 @@
             .panel { padding: 18px; }
             .stats { grid-template-columns: repeat(2, 1fr); }
             .needs { font-size: 1rem; }
+            .type-options { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (max-width: 420px) {
@@ -470,12 +524,13 @@
                         </label>
                     </div>
                     <p class="privacy">Your email and phone are only shared with the organizer.</p>
-                    <label>What are you bringing?
-                        <select id="signup-dish" required></select>
-                    </label>
-                    <label id="custom-label" hidden>Describe your dish
-                        <input id="signup-custom" type="text" maxlength="80"
-                            placeholder="e.g., Grandma's chicken & dumplings" />
+                    <fieldset class="type-picker">
+                        <legend>I'm bringing a...</legend>
+                        <div class="type-options" id="type-options"></div>
+                    </fieldset>
+                    <label><span>What are you bringing? <span class="optional">(optional)</span></span>
+                        <input id="signup-item" type="text" maxlength="80"
+                            placeholder="e.g., chicken noodle soup, cornbread, apple crisp" />
                     </label>
                     <button type="submit" class="btn" id="signup-submit">Sign me up</button>
                     <div id="signup-status" class="status" role="status" aria-live="polite"></div>
@@ -559,29 +614,16 @@
         // `id` must match a CategoryId row in the Google Sheet's Categories tab.
         const TYPES = [
             {
-                id: "soup", label: "Soup", plural: "Soups", dishes: [
-                    "Chicken Noodle Soup", "Beef Stew", "Beef Chili", "White Chicken Chili", "Chicken Tortilla Soup",
-                    "Zuppa Toscana", "Loaded Baked Potato Soup", "Broccoli Cheddar Soup", "Clam Chowder", "Corn Chowder",
-                    "Creamy Chicken & Wild Rice Soup", "Split Pea & Ham Soup", "Taco Soup", "Tomato Basil Soup",
-                    "Minestrone", "Butternut Squash Soup", "Lentil Soup", "Vegetable Soup"
-                ]
+                id: "soup", label: "Soup", plural: "Soups"
             },
             {
-                id: "bread", label: "Bread", plural: "Breads", dishes: [
-                    "Dinner Rolls", "Cornbread", "Breadsticks", "Garlic Bread", "French Bread / Baguette",
-                    "Sourdough Loaf", "Bread Bowls", "Biscuits", "Homemade Wheat Bread", "Gluten-Free Bread"
-                ]
+                id: "bread", label: "Bread", plural: "Breads"
             },
             {
-                id: "desserts", label: "Dessert", plural: "Desserts", dishes: [
-                    "Apple Crisp", "Pumpkin Bars", "Pumpkin Pie", "Apple Pie", "Snickerdoodles", "Caramel Apples",
-                    "Brownies", "Chocolate Chip Cookies", "Gluten-Free Dessert"
-                ]
+                id: "desserts", label: "Dessert", plural: "Desserts"
             },
             {
-                id: "beverages", label: "Beverage", plural: "Beverages", dishes: [
-                    "Hot Apple Cider", "Hot Cocoa", "Lemonade", "Ice Water with Lemon", "Sparkling Cider", "Herbal Tea"
-                ]
+                id: "beverages", label: "Beverage", plural: "Beverages"
             }
         ];
 
@@ -610,13 +652,18 @@
             return String(value ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
         }
 
-        function renderDishOptions() {
-            const groups = TYPES.map((type) => `
-                <optgroup label="${type.label}">
-                    ${type.dishes.map((dish) => `<option value="${type.id}|${escapeHtml(dish)}">${escapeHtml(dish)}</option>`).join("")}
-                    <option value="${type.id}|">Other ${type.label.toLowerCase()}...</option>
-                </optgroup>`).join("");
-            $("signup-dish").innerHTML = `<option value="">Choose a soup, bread, dessert, or beverage</option>${groups}`;
+        function renderTypeOptions() {
+            $("type-options").innerHTML = TYPES.map((type) => `
+                <label class="type-option">
+                    <input type="radio" name="signup-type" value="${type.id}" />
+                    <span class="type-box" aria-hidden="true"></span>
+                    <span>${type.label}</span>
+                </label>`).join("");
+        }
+
+        function selectedType() {
+            const checked = document.querySelector('input[name="signup-type"]:checked');
+            return checked ? checked.value : "";
         }
 
         function render() {
@@ -638,7 +685,12 @@
             list.innerHTML = signups
                 .slice()
                 .sort((a, b) => String(a.createdAt || "").localeCompare(String(b.createdAt || "")))
-                .map((entry) => `<li><span class="who">${escapeHtml(entry.name)}</span><span class="what">${escapeHtml(entry.item)}</span></li>`)
+                .map((entry) => {
+                    const type = TYPES.find((t) => t.id === typeFor(entry.categoryId));
+                    const label = type ? type.label : "";
+                    const detail = entry.item && entry.item.toLowerCase() !== label.toLowerCase() ? entry.item : "";
+                    return `<li><span class="who">${escapeHtml(entry.name)}</span><span class="what">${label ? `<span class="tag">${label}</span>` : ""}${escapeHtml(detail)}</span></li>`;
+                })
                 .join("");
         }
 
@@ -736,7 +788,6 @@
             if (data.success) {
                 const name = $("signup-name").value.trim().split(/\s+/)[0];
                 $("signup-form").reset();
-                $("custom-label").hidden = true;
                 showStatus(`Thanks${name ? `, ${name}` : ""}! You're signed up. See you on October 11.`, "success");
             } else {
                 showStatus(data.error || "Could not save that sign-up. Please try again.", "error");
@@ -745,21 +796,25 @@
 
         function onSubmit(event) {
             event.preventDefault();
-            const [categoryId, presetDish] = $("signup-dish").value.split("|");
-            const item = (presetDish || $("signup-custom").value).trim();
+            const categoryId = selectedType();
+            const type = TYPES.find((t) => t.id === categoryId);
             const entry = {
                 categoryId,
                 name: $("signup-name").value.trim(),
                 email: $("signup-email").value.trim(),
                 phone: $("signup-phone").value.trim(),
-                item
+                // The sheet requires an item, so fall back to the category name when left blank.
+                item: $("signup-item").value.trim() || (type ? type.label : "")
             };
 
             if (!entry.name) return fail("Please enter your name.", "signup-name");
             if (!/^\S+@\S+\.\S+$/.test(entry.email)) return fail("Please enter a valid email.", "signup-email");
             if (entry.phone.replace(/\D/g, "").length < 7) return fail("Please enter a phone number.", "signup-phone");
-            if (!categoryId) return fail("Please choose what you're bringing.", "signup-dish");
-            if (!entry.item) return fail("Please describe your dish.", "signup-custom");
+            if (!type) {
+                showStatus("Please choose Soup, Bread, Dessert, or Beverage.", "error");
+                document.querySelector('input[name="signup-type"]').focus();
+                return;
+            }
             submitSignup(entry);
         }
 
@@ -807,16 +862,11 @@
             });
         }
 
-        $("signup-dish").addEventListener("change", () => {
-            const isOther = $("signup-dish").value.endsWith("|");
-            $("custom-label").hidden = !isOther;
-            if (isOther) $("signup-custom").focus();
-        });
         $("signup-form").addEventListener("submit", onSubmit);
         $("print-btn").addEventListener("click", () => window.print());
         window.addEventListener("message", handleSharedMessage);
 
-        renderDishOptions();
+        renderTypeOptions();
         buildPrintRows();
         setupCalendar();
         render();
