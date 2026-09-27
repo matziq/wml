@@ -3,2301 +3,694 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Linger Longer Potluck Sign-Up Sheet</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>October Linger Longer: Soup &amp; Bread Sign-Up</title>
+    <meta name="description" content="Sign up to bring soup, bread, a dessert, or a beverage to the October Linger Longer on Sunday, October 11, 2026 at 2 PM." />
+    <meta name="theme-color" content="#5a2412" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet" />
     <style>
         :root {
-            --bg: #f4f7ff;
-            --paper: #ffffff;
-            --ink: #1c2440;
-            --muted: #5b6680;
-            --line: #dfe4f2;
-            --primary: #c8102e;
-            --primary-dark: #9c0c24;
-            --primary-soft: #fbdfe3;
-            --accent: #1d3461;
-            --accent-soft: #dce6f7;
-            --danger: #a93535;
-            --danger-soft: #ffe8e8;
-            --success: #2d7a3f;
-            --success-soft: #e9f7ec;
-            --shadow: 0 18px 45px rgba(29, 52, 97, 0.16);
-            --radius: 18px;
-            --font: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+            --bark: #3b1a0e;
+            --rust: #8e3a17;
+            --pumpkin: #d4691c;
+            --gold: #e9a23a;
+            --cream: #fbf5ea;
+            --paper: #fffdf8;
+            --ink: #2a1a12;
+            --muted: #6b574a;
+            --line: #e6d8c3;
+            --ok: #2f6b3a;
+            --err: #a3261b;
+            --radius: 14px;
+            --display: "Young Serif", Georgia, "Times New Roman", serif;
+            --body: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
         }
 
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
-        img,
-        svg {
-            max-width: 100%;
-            height: auto;
-        }
+        [hidden] { display: none !important; }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { -webkit-text-size-adjust: 100%; }
 
         body {
             margin: 0;
-            min-height: 100vh;
-            background:
-                radial-gradient(circle at top left, rgba(91, 141, 255, 0.20), transparent 36rem),
-                radial-gradient(circle at top right, rgba(200, 16, 46, 0.16), transparent 34rem),
-                linear-gradient(135deg, #ffffff 0%, var(--bg) 56%, #e7edff 100%);
-            color: var(--ink);
-            font-family: var(--font);
+            font-family: var(--body);
+            font-size: 16px;
             line-height: 1.5;
-        }
-
-        button,
-        input,
-        select,
-        textarea {
-            font: inherit;
-        }
-
-        button {
-            border: 0;
-            border-radius: 999px;
-            padding: 0.72rem 1rem;
-            background: var(--primary);
-            color: #fff;
-            cursor: pointer;
-            font-weight: 700;
-            max-width: 100%;
-            line-height: 1.2;
-            white-space: normal;
-            box-shadow: 0 8px 18px rgba(111, 54, 15, 0.18);
-            transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
-        }
-
-        button:hover {
-            background: var(--primary-dark);
-            transform: translateY(-1px);
-        }
-
-        button:active {
-            transform: translateY(0);
-        }
-
-        button:disabled {
-            cursor: not-allowed;
-            opacity: 0.52;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .btn-secondary {
-            background: #ffffff;
-            color: var(--primary-dark);
-            border: 1px solid var(--line);
-            box-shadow: none;
-        }
-
-        .btn-secondary:hover {
-            background: #fff7ed;
-        }
-
-        .btn-accent {
-            background: var(--accent);
-        }
-
-        .btn-accent:hover {
-            background: #245f55;
-        }
-
-        .btn-danger {
-            background: var(--danger);
-        }
-
-        .btn-danger:hover {
-            background: #842929;
-        }
-
-        .btn-small {
-            padding: 0.45rem 0.7rem;
-            font-size: 0.86rem;
-        }
-
-        .btn-icon {
-            min-width: 2.35rem;
-            padding-inline: 0.65rem;
+            color: var(--ink);
+            background: var(--cream);
         }
 
         .page {
-            width: min(1180px, calc(100% - 28px));
-            margin: 20px auto 42px;
-            overflow-x: clip;
+            width: min(1080px, 100%);
+            margin: 0 auto;
+            padding: 16px 16px calc(40px + env(safe-area-inset-bottom));
         }
 
+        /* Hero */
         .hero {
             position: relative;
             overflow: hidden;
-            background: linear-gradient(135deg, rgba(200, 16, 46, 0.94), rgba(29, 52, 97, 0.92));
+            border-radius: 20px;
+            min-height: 340px;
+            display: flex;
+            align-items: flex-end;
             color: #fff;
-            border-radius: 28px;
-            box-shadow: var(--shadow);
-            min-height: 270px;
-        }
-
-        .hero.has-image::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background-image: var(--hero-image);
-            background-position: center 55%;
-            background-size: cover;
-            filter: saturate(1.08);
-            opacity: 0.7;
-            transform: scale(1.04);
+            background: var(--bark) url("SoupAndBread_Hero_Image.svg") center / cover no-repeat;
         }
 
         .hero::after {
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(90deg, rgba(12, 22, 48, 0.92), rgba(16, 28, 60, 0.72) 42%, rgba(120, 16, 36, 0.26));
+            background: linear-gradient(180deg, rgba(40, 16, 6, 0.05) 0%, rgba(40, 16, 6, 0.55) 45%, rgba(40, 16, 6, 0.9) 100%);
         }
 
         .hero-content {
             position: relative;
             z-index: 1;
-            padding: clamp(1.45rem, 4vw, 3.2rem);
-            display: grid;
-            gap: 1rem;
-            align-content: center;
-            min-height: 270px;
-            text-shadow: 0 2px 16px rgba(0, 0, 0, 0.38);
+            padding: 28px;
+            width: 100%;
         }
 
         .eyebrow {
-            margin: 0;
-            letter-spacing: 0.16em;
-            text-transform: uppercase;
+            margin: 0 0 4px;
             font-size: 0.8rem;
-            font-weight: 800;
-            opacity: 0.88;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #ffd9a0;
         }
 
-        h1 {
+        h1, h2 {
+            font-family: var(--display);
+            font-weight: 400;
+            line-height: 1.1;
             margin: 0;
-            font-size: clamp(2.2rem, 7vw, 5.2rem);
-            line-height: 0.95;
-            letter-spacing: -0.06em;
-            max-width: 860px;
-            overflow-wrap: anywhere;
         }
 
-        .title-row {
-            display: flex;
-            align-items: center;
-            gap: clamp(0.5rem, 2vw, 1.1rem);
-            flex-wrap: wrap;
-        }
+        h1 { font-size: clamp(2rem, 5.5vw, 3.4rem); }
 
-        .title-flag {
-            flex: 0 0 auto;
-            width: clamp(2rem, 5vw, 3.4rem);
-            height: clamp(1.33rem, 3.33vw, 2.27rem);
-            border-radius: 4px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            display: block;
-        }
-
-        .title-flag svg {
-            width: 100%;
-            height: 100%;
-            display: block;
-            border-radius: inherit;
+        .hero-note {
+            margin: 10px 0 18px;
+            max-width: 60ch;
+            font-size: 1.05rem;
+            color: #fbeede;
         }
 
         .hero-details {
             display: flex;
             flex-wrap: wrap;
+            gap: 10px;
             align-items: center;
-            gap: 0.7rem;
-            margin-top: 0.25rem;
         }
 
-        .hero-print-btn {
-            margin-left: auto;
-            padding: 0.5rem 1rem;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.96);
-            color: var(--primary-dark, #5b2f12);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-            font-weight: 700;
-            font-size: 0.95rem;
-        }
-
-        .hero-print-btn:hover {
-            background: #ffffff;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
-        }
-
-        .pill {
+        .chip {
             display: inline-flex;
             align-items: center;
-            gap: 0.45rem;
-            padding: 0.5rem 0.82rem;
+            gap: 8px;
+            min-height: 44px;
+            padding: 8px 16px;
             border-radius: 999px;
-            background: rgba(255, 255, 255, 0.16);
-            border: 1px solid rgba(255, 255, 255, 0.26);
-            backdrop-filter: blur(8px);
-            font-weight: 700;
-            min-width: 0;
-            overflow-wrap: anywhere;
-        }
-
-        .pill-provided {
-            background: linear-gradient(135deg, rgba(200, 16, 46, 0.92), rgba(232, 122, 34, 0.92));
-            border-color: rgba(255, 255, 255, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.14);
             color: #fff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
-            letter-spacing: 0.01em;
+            font: 600 0.95rem var(--body);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
         }
 
-        .hero-note {
-            margin: 0;
-            max-width: 760px;
-            font-size: clamp(1rem, 2vw, 1.17rem);
-            opacity: 0.95;
+        button.chip { cursor: pointer; }
+
+        button.chip:hover, button.chip:focus-visible { background: rgba(255, 255, 255, 0.26); }
+
+        .chip svg { width: 18px; height: 18px; flex: none; }
+
+        .chip-primary {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--bark);
         }
 
-        .toolbar {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.7rem;
-            align-items: center;
-            justify-content: space-between;
-            margin: 18px 0;
-        }
+        button.chip-primary:hover, button.chip-primary:focus-visible { background: #f4b858; }
 
-        .toolbar-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-            min-width: 0;
-        }
+        .cal-wrap { position: relative; }
 
-        .notice {
-            flex: 1 1 320px;
-            margin: 0;
-            color: var(--muted);
-            font-size: 0.94rem;
-        }
-
-        .dismissible-notice {
-            display: flex;
-            align-items: start;
-            justify-content: space-between;
-            gap: 0.7rem;
-            min-width: 0;
-        }
-
-        .dismissible-notice[hidden] {
-            display: none;
-        }
-
-        .notice-dismiss {
-            flex: 0 0 auto;
-            padding: 0.38rem 0.62rem;
-            background: #ffffff;
-            color: var(--primary-dark);
-            border: 1px solid var(--line);
-            box-shadow: none;
-            font-size: 0.8rem;
-        }
-
-        .panel-heading-row {
-            display: flex;
-            align-items: start;
-            justify-content: space-between;
-            gap: 0.7rem;
-        }
-
-        .panel-heading-row h2,
-        .panel-heading-row h3 {
-            margin-bottom: 0;
-        }
-
-        .needs-banner {
-            display: grid;
-            gap: 0.75rem;
-            margin: 18px 0;
-            padding: 0.95rem;
-            border: 1px solid rgba(234, 223, 206, 0.95);
-            border-radius: var(--radius);
-            background: rgba(255, 255, 255, 0.94);
-            box-shadow: 0 10px 28px rgba(97, 62, 28, 0.08);
-        }
-
-        .needs-banner[hidden] {
-            display: none;
-        }
-
-        .needs-banner-head {
-            display: flex;
-            align-items: start;
-            justify-content: space-between;
-            gap: 0.75rem;
-        }
-
-        .needs-banner-title {
-            margin: 0;
-            color: var(--primary-dark);
-            font-size: 1rem;
-            font-weight: 900;
-            letter-spacing: -0.01em;
-        }
-
-        .needs-banner-note {
-            margin: 0.15rem 0 0;
-            color: var(--muted);
-            font-size: 0.86rem;
-            font-weight: 700;
-        }
-
-        .needs-dismiss {
-            flex: 0 0 auto;
-            padding: 0.42rem 0.7rem;
-            background: #fff7ed;
-            color: var(--primary-dark);
-            border: 1px solid var(--line);
-            box-shadow: none;
-            font-size: 0.84rem;
-        }
-
-        .needs-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .need-chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.38rem;
-            min-width: 0;
-            padding: 0.44rem 0.62rem;
-            border: 1px solid var(--line);
-            border-radius: 999px;
-            background: #fffdf9;
-            color: var(--muted);
-            font-weight: 900;
-            font-size: 0.9rem;
-            line-height: 1.2;
-        }
-
-        .need-chip strong {
-            color: inherit;
-            font-size: 1.02em;
-        }
-
-        .need-chip.need-high {
-            color: #b3261e;
-            border-color: rgba(179, 38, 30, 0.28);
-            background: #fff3f1;
-        }
-
-        .need-chip.need-medium {
-            color: #b45309;
-            border-color: rgba(180, 83, 9, 0.3);
-            background: #fff7ed;
-        }
-
-        .need-chip.need-low {
-            color: #a16207;
-            border-color: rgba(161, 98, 7, 0.34);
-            background: #fffbeb;
-        }
-
-        .need-chip.need-full {
-            color: var(--success);
-            border-color: rgba(45, 122, 63, 0.24);
-            background: var(--success-soft);
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: minmax(280px, 390px) 1fr;
-            gap: 18px;
-            align-items: start;
-            min-width: 0;
-        }
-
-        .signup-layout {
-            grid-template-columns: 1fr;
-        }
-
-        .signup-top {
-            order: -1;
-        }
-
-        .signup-top #signup-form {
-            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
-            align-items: end;
-        }
-
-        .signup-top #signup-form button[type="submit"] {
-            min-height: 3rem;
-        }
-
-        .grid>* {
-            min-width: 0;
-        }
-
-        .panel,
-        .category-card {
-            background: rgba(255, 255, 255, 0.92);
-            border: 1px solid rgba(234, 223, 206, 0.9);
-            border-radius: var(--radius);
-            box-shadow: 0 10px 28px rgba(97, 62, 28, 0.08);
-        }
-
-        .panel {
-            padding: 1rem;
-        }
-
-        .panel+.panel {
-            margin-top: 14px;
-        }
-
-        .panel h2,
-        .panel h3 {
-            margin: 0 0 0.8rem;
-            color: var(--primary-dark);
-            letter-spacing: -0.02em;
-        }
-
-        .panel h2 {
-            font-size: 1.16rem;
-        }
-
-        .panel h3 {
-            font-size: 1rem;
-        }
-
-        .form-grid {
-            display: grid;
-            gap: 0.78rem;
-        }
-
-        .two-col {
-            grid-template-columns: 1fr 1fr;
-        }
-
-        label {
-            display: grid;
-            gap: 0.28rem;
-            color: var(--muted);
-            font-size: 0.82rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-        }
-
-        label[hidden] {
-            display: none;
-        }
-
-        input,
-        select,
-        textarea {
-            width: 100%;
-            min-width: 0;
-            border: 1px solid var(--line);
+        .cal-menu {
+            position: absolute;
+            z-index: 20;
+            top: calc(100% + 8px);
+            left: 0;
+            min-width: 230px;
+            padding: 6px;
             border-radius: 12px;
-            padding: 0.74rem 0.82rem;
-            background: #fffdf9;
+            background: var(--paper);
+            box-shadow: 0 12px 32px rgba(40, 16, 6, 0.3);
+        }
+
+        .cal-menu a {
+            display: block;
+            padding: 12px 14px;
+            border-radius: 8px;
             color: var(--ink);
-            outline: none;
-            text-transform: none;
-            letter-spacing: normal;
+            text-decoration: none;
             font-weight: 600;
         }
 
-        textarea {
-            min-height: 82px;
-            resize: vertical;
-        }
+        .cal-menu a:hover, .cal-menu a:focus-visible { background: #f5e8d4; }
 
-        input:focus,
-        select:focus,
-        textarea:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 4px rgba(46, 125, 111, 0.12);
-        }
+        .cal-menu small { display: block; font-weight: 400; color: var(--muted); }
 
-        .hint {
-            margin: 0.4rem 0 0;
-            color: var(--muted);
-            font-size: 0.86rem;
-        }
-
-        .settings-area {
-            display: none;
-        }
-
-        .settings-area.open {
-            display: block;
-        }
-
-        .category-editor {
-            display: grid;
-            gap: 0.65rem;
-            max-height: 440px;
-            overflow: auto;
-            padding-right: 0.2rem;
-        }
-
-        .category-edit-row {
-            display: grid;
-            grid-template-columns: 3.5rem 1fr 5rem auto;
-            gap: 0.45rem;
-            align-items: end;
-            padding: 0.55rem;
-            background: #fffaf2;
+        /* Layout */
+        .needs {
+            margin: 20px 0;
+            padding: 16px 20px;
+            border-radius: var(--radius);
+            background: var(--paper);
             border: 1px solid var(--line);
-            border-radius: 14px;
+            font-size: 1.1rem;
         }
 
-        .category-edit-row label {
-            font-size: 0.68rem;
-        }
+        .needs strong { color: var(--rust); }
 
-        .category-edit-row input {
-            padding: 0.55rem;
-            border-radius: 10px;
-        }
-
-        .signup-status {
-            margin: 0.85rem 0 0;
-            padding: 0.75rem 0.85rem;
-            border-radius: 14px;
-            background: var(--accent-soft);
-            color: #1e5d52;
-            font-weight: 700;
-            display: none;
-        }
-
-        .signup-status.error {
-            background: var(--danger-soft);
-            color: var(--danger);
-        }
-
-        .signup-status.success {
-            background: var(--success-soft);
-            color: var(--success);
-        }
-
-        .signup-status.visible {
-            display: block;
-        }
-
-        .summary-strip {
+        .layout {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-bottom: 14px;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 20px;
+            align-items: start;
+        }
+
+        .panel {
+            padding: 22px;
+            border-radius: var(--radius);
+            background: var(--paper);
+            border: 1px solid var(--line);
+        }
+
+        .panel h2 { font-size: 1.5rem; margin-bottom: 14px; color: var(--bark); }
+
+        /* Form */
+        form { display: grid; gap: 14px; }
+
+        label { display: grid; gap: 6px; font-weight: 600; font-size: 0.95rem; }
+
+        input, select {
+            width: 100%;
+            min-height: 48px;
+            padding: 10px 12px;
+            border: 1px solid #cdb99d;
+            border-radius: 10px;
+            background: #fff;
+            color: var(--ink);
+            font: 400 16px var(--body);
+        }
+
+        input:focus, select:focus {
+            outline: 3px solid rgba(212, 105, 28, 0.35);
+            border-color: var(--pumpkin);
+        }
+
+        .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+        .privacy { margin: -4px 0 0; font-size: 0.85rem; color: var(--muted); }
+
+        .btn {
+            min-height: 50px;
+            border: 0;
+            border-radius: 12px;
+            background: var(--rust);
+            color: #fff;
+            font: 700 1.05rem var(--body);
+            cursor: pointer;
+        }
+
+        .btn:hover, .btn:focus-visible { background: #a4461d; }
+
+        .btn:disabled { opacity: 0.6; cursor: wait; }
+
+        .status {
+            display: none;
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .status.visible { display: block; }
+        .status.success { background: #e5f2e3; color: var(--ok); }
+        .status.error { background: #fbe5e1; color: var(--err); }
+
+        /* Stats and list */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 18px;
         }
 
         .stat {
-            padding: 0.9rem;
-            border-radius: 16px;
-            background: rgba(255, 255, 255, 0.86);
-            border: 1px solid var(--line);
+            padding: 12px 8px;
+            border-radius: 12px;
+            background: #f7ecdc;
+            text-align: center;
         }
 
         .stat strong {
             display: block;
-            font-size: 1.55rem;
-            color: var(--primary-dark);
-            line-height: 1;
-        }
-
-        .stat span {
-            color: var(--muted);
-            font-weight: 700;
-            font-size: 0.86rem;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-            gap: 14px;
-        }
-
-        .category-card {
-            overflow: hidden;
-            min-width: 0;
-        }
-
-        .category-head {
-            display: grid;
-            grid-template-columns: auto minmax(0, 1fr) auto;
-            gap: 0.75rem;
-            align-items: center;
-            padding: 1rem;
-            background: linear-gradient(135deg, #fff8ec, #ffffff);
-            border-bottom: 1px solid var(--line);
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .category-head:focus-visible {
-            outline: 3px solid rgba(46, 125, 111, 0.28);
-            outline-offset: -3px;
-        }
-
-        .cat-icon {
-            width: 3.1rem;
-            height: 3.1rem;
-            display: grid;
-            place-items: center;
-            border-radius: 16px;
-            background: var(--primary-soft);
+            font-family: var(--display);
             font-size: 1.8rem;
-            box-shadow: inset 0 0 0 1px rgba(139, 69, 19, 0.08);
+            line-height: 1.1;
+            color: var(--rust);
         }
 
-        .category-head h3 {
-            margin: 0;
-            font-size: 1.12rem;
-            color: var(--primary-dark);
-            overflow-wrap: anywhere;
-        }
+        .stat span { font-size: 0.85rem; color: var(--muted); font-weight: 600; }
 
-        .category-head p {
-            margin: 0.12rem 0 0;
-            color: var(--muted);
-            font-size: 0.88rem;
-            font-weight: 700;
-            overflow-wrap: anywhere;
-        }
-
-        .count-badge {
-            border-radius: 999px;
-            padding: 0.45rem 0.7rem;
-            background: var(--accent-soft);
-            color: #1f5f55;
-            font-size: 0.84rem;
-            font-weight: 900;
-            white-space: nowrap;
-        }
-
-        .count-badge.full {
-            background: var(--success-soft);
-            color: var(--success);
-        }
-
-        .category-meta {
+        .stat-total {
+            grid-column: 1 / -1;
             display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            gap: 0.45rem;
-            min-width: 0;
+            align-items: baseline;
+            justify-content: center;
+            gap: 10px;
+            background: var(--rust);
         }
 
-        .collapse-indicator {
-            width: 1.85rem;
-            height: 1.85rem;
-            display: inline-grid;
-            place-items: center;
-            border-radius: 999px;
-            background: #fffaf2;
-            border: 1px solid var(--line);
-            color: var(--primary-dark);
-            font-weight: 900;
-            line-height: 1;
-        }
+        .stat-total strong { color: #fff; font-size: 2.2rem; }
+        .stat-total span { color: #fbeede; font-size: 1rem; }
 
-        .slots {
-            padding: 0.8rem;
-            display: grid;
-            gap: 0.55rem;
-        }
+        .signup-list { list-style: none; margin: 0; padding: 0; }
 
-        .category-card.collapsed .slots {
-            display: none;
-        }
-
-        .slot {
-            display: grid;
-            grid-template-columns: 2rem minmax(0, 1fr) auto;
-            gap: 0.65rem;
-            align-items: center;
-            padding: 0.68rem;
-            border: 1px dashed #d8c5aa;
-            border-radius: 14px;
-            background: #fffdf9;
-            min-height: 72px;
-        }
-
-        .slot.filled {
-            border-style: solid;
-            background: #fffaf0;
-        }
-
-        .slot-number {
-            width: 2rem;
-            height: 2rem;
-            display: grid;
-            place-items: center;
-            border-radius: 999px;
-            background: #f1e4d3;
-            color: var(--primary-dark);
-            font-weight: 900;
-        }
-
-        .slot-empty {
-            color: var(--muted);
-            font-weight: 800;
-        }
-
-        .slot-name {
-            font-weight: 900;
-            color: var(--ink);
-            overflow-wrap: anywhere;
-        }
-
-        .slot-item {
-            color: var(--primary-dark);
-            font-weight: 800;
-            overflow-wrap: anywhere;
-        }
-
-        .slot-contact {
-            color: var(--muted);
-            font-size: 0.84rem;
-            word-break: break-word;
-        }
-
-        .slot-actions {
+        .signup-list li {
             display: flex;
-            gap: 0.35rem;
-            flex-wrap: wrap;
-            justify-content: flex-end;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 10px 2px;
+            border-bottom: 1px solid var(--line);
         }
 
-        .empty-state {
-            padding: 2rem;
-            text-align: center;
-            color: var(--muted);
-            border: 2px dashed var(--line);
-            border-radius: var(--radius);
-            background: rgba(255, 255, 255, 0.7);
+        .signup-list li:last-child { border-bottom: 0; }
+
+        .signup-list .who { font-weight: 600; }
+
+        .signup-list .what { color: var(--muted); text-align: right; }
+
+        .empty { color: var(--muted); margin: 0; }
+
+        .print-sheet { display: none; }
+
+        @media (max-width: 760px) {
+            .page { padding: 10px 10px 32px; }
+            .hero { min-height: 300px; border-radius: 16px; }
+            .hero-content { padding: 20px 18px; }
+            .layout { grid-template-columns: 1fr; }
+            .panel { padding: 18px; }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+            .needs { font-size: 1rem; }
         }
 
-        .file-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-            align-items: center;
+        @media (max-width: 420px) {
+            .row-2 { grid-template-columns: 1fr; }
+            .chip { font-size: 0.9rem; padding: 8px 12px; }
+            .signup-list li { flex-direction: column; gap: 0; }
+            .signup-list .what { text-align: left; }
         }
 
-        .file-row input[type="file"] {
-            display: none;
+        @media (prefers-reduced-motion: no-preference) {
+            .btn, .chip, .cal-menu a { transition: background-color 0.15s ease; }
         }
 
-        .footer-note {
-            margin: 22px 0 0;
-            color: var(--muted);
-            text-align: center;
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 900px) {
-            .grid {
-                grid-template-columns: 1fr;
-            }
-
-            .panel-stack {
-                order: -1;
-            }
-
-            .summary-strip {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 560px) {
-            body {
-                background: linear-gradient(180deg, #fffdf8 0%, var(--bg) 100%);
-            }
-
-            .page {
-                width: min(100% - 12px, 1180px);
-                margin-top: 6px;
-            }
-
-            .hero {
-                border-radius: 18px;
-                min-height: auto;
-            }
-
-            .hero.has-image::before {
-                background-position: center bottom;
-                filter: saturate(0.8) blur(2px);
-                opacity: 0.08;
-                transform: scale(1.08);
-            }
-
-            .hero::after {
-                background: linear-gradient(180deg, rgba(12, 22, 48, 0.97), rgba(12, 22, 48, 0.9));
-            }
-
-            .hero-content {
-                min-height: auto;
-                padding: 1.25rem;
-                gap: 0.85rem;
-            }
-
-            .eyebrow {
-                font-size: 0.72rem;
-                letter-spacing: 0.12em;
-            }
-
-            h1 {
-                font-size: clamp(2rem, 13vw, 3.2rem);
-                line-height: 1;
-                letter-spacing: -0.04em;
-                max-width: 100%;
-            }
-
-            .hero-note {
-                font-size: 0.98rem;
-            }
-
-            .hero-details {
-                display: grid;
-                grid-template-columns: 1fr;
-                gap: 0.45rem;
-            }
-
-            .pill {
-                width: 100%;
-                justify-content: flex-start;
-                border-radius: 14px;
-                padding: 0.48rem 0.65rem;
-            }
-
-            .toolbar {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .notice {
-                flex: none;
-                width: 100%;
-            }
-
-            .toolbar-actions {
-                display: grid;
-                grid-template-columns: 1fr;
-                width: 100%;
-            }
-
-            .dismissible-notice,
-            .panel-heading-row {
-                display: grid;
-            }
-
-            .notice-dismiss {
-                width: 100%;
-            }
-
-            .needs-banner-head {
-                display: grid;
-            }
-
-            .needs-dismiss {
-                width: 100%;
-            }
-
-            .needs-list {
-                display: grid;
-                grid-template-columns: 1fr;
-            }
-
-            .need-chip {
-                border-radius: 14px;
-                justify-content: space-between;
-            }
-
-            .toolbar-actions button,
-            .file-row button,
-            .file-row label.btn-secondary {
-                width: 100%;
-                justify-content: center;
-                text-align: center;
-            }
-
-            .signup-top #signup-form {
-                grid-template-columns: 1fr;
-            }
-
-            .panel {
-                padding: 0.9rem;
-                border-radius: 16px;
-            }
-
-            .two-col,
-            .category-edit-row {
-                grid-template-columns: 1fr;
-            }
-
-            .category-edit-row {
-                align-items: stretch;
-            }
-
-            .summary-strip {
-                gap: 8px;
-            }
-
-            .stat {
-                padding: 0.75rem;
-            }
-
-            .category-head {
-                grid-template-columns: 2.55rem minmax(0, 1fr);
-                gap: 0.65rem;
-                align-items: start;
-                padding: 0.85rem;
-            }
-
-            .cat-icon {
-                width: 2.55rem;
-                height: 2.55rem;
-                border-radius: 13px;
-                font-size: 1.45rem;
-            }
-
-            .count-badge {
-                justify-self: start;
-                white-space: normal;
-                text-align: center;
-            }
-
-            .category-meta {
-                grid-column: 1 / -1;
-                justify-content: flex-start;
-                flex-wrap: wrap;
-            }
-
-            .slots {
-                padding: 0.65rem;
-            }
-
-            .slot {
-                grid-template-columns: 1.8rem minmax(0, 1fr);
-                align-items: start;
-                gap: 0.55rem;
-                padding: 0.62rem;
-            }
-
-            .slot-number {
-                width: 1.8rem;
-                height: 1.8rem;
-            }
-
-            .slot-actions {
-                grid-column: 1 / -1;
-                justify-content: flex-start;
-                padding-left: 2.35rem;
-            }
-
-            .cards {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .page {
-                width: min(100% - 8px, 1180px);
-            }
-
-            .hero-content {
-                padding: 1rem;
-            }
-
-            h1 {
-                font-size: clamp(1.8rem, 12vw, 2.65rem);
-            }
-
-            .category-head {
-                grid-template-columns: 1fr;
-            }
-
-            .cat-icon {
-                width: 2.4rem;
-                height: 2.4rem;
-            }
-
-            .slot {
-                grid-template-columns: 1fr;
-            }
-
-            .slot-actions {
-                padding-left: 0;
-            }
-        }
+        /* Printable sign-up sheet */
+        @page { size: letter portrait; margin: 0.45in; }
 
         @media print {
-            @page {
-                margin: 0.45in;
+            body { background: #fff; }
+            .page { display: none !important; }
+
+            .print-sheet {
+                display: block;
+                position: relative;
+                min-height: 10in;
+                color: #2a1a12;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
             }
 
-            body {
-                background: #fff;
-                color: #000;
+            .print-watermarks {
+                position: absolute;
+                inset: 0;
+                z-index: 0;
+                pointer-events: none;
             }
 
-            .page {
+            .print-watermarks svg { position: absolute; opacity: 0.13; }
+
+            .print-inner { position: relative; z-index: 1; }
+
+            .print-head {
+                text-align: center;
+                border-bottom: 3px double #8e3a17;
+                padding-bottom: 10px;
+                margin-bottom: 14px;
+            }
+
+            .print-head h1 { font-size: 30pt; color: #5a2412; }
+
+            .print-head .print-theme {
+                margin: 2px 0 4px;
+                font-family: var(--display);
+                font-size: 17pt;
+                color: #8e3a17;
+            }
+
+            .print-head p { margin: 0; font-size: 12pt; }
+
+            .print-needs { margin: 6px 0 0; font-size: 11pt; color: #6b574a; }
+
+            .print-table {
                 width: 100%;
-                margin: 0;
+                border-collapse: collapse;
+                table-layout: fixed;
+                font-size: 11pt;
+                background: transparent;
             }
 
-            .hero {
-                color: #000;
-                background: #fff;
-                box-shadow: none;
-                border: 2px solid #000;
-                border-radius: 0;
-                min-height: auto;
-                break-inside: avoid;
+            .print-table th {
+                padding: 6px 4px;
+                border-bottom: 2px solid #5a2412;
+                text-align: left;
+                font-size: 10.5pt;
+                color: #5a2412;
             }
 
-            .hero::before,
-            .hero::after {
-                display: none;
+            .print-table th.cb { text-align: center; font-size: 9pt; }
+
+            .print-table td {
+                height: 0.5in;
+                padding: 0 4px;
+                border-bottom: 1px solid #b99f82;
+                vertical-align: middle;
             }
 
-            .hero-content {
-                min-height: auto;
-                padding: 0.35in;
+            .print-table td.num { width: 0.3in; color: #8a7565; font-size: 9pt; }
+
+            .print-table td.cb { text-align: center; }
+
+            .box {
+                display: inline-block;
+                width: 0.19in;
+                height: 0.19in;
+                border: 1.5px solid #5a2412;
+                border-radius: 3px;
+                background: rgba(255, 255, 255, 0.6);
             }
 
-            h1 {
-                font-size: 34pt;
-                letter-spacing: -0.03em;
-            }
-
-            .pill {
-                color: #000;
-                background: #fff;
-                border: 1px solid #000;
-            }
-
-            .pill-provided {
-                background: #fff;
-                border: 2px solid #000;
-                box-shadow: none;
-                font-weight: 800;
-            }
-
-            .toolbar,
-            .needs-banner,
-            .panel-stack,
-            .slot-actions,
-            .footer-note,
-            .notice {
-                display: none !important;
-            }
-
-            .grid {
-                display: block;
-            }
-
-            .summary-strip {
-                grid-template-columns: repeat(3, 1fr);
-                margin: 0.18in 0;
-            }
-
-            .stat,
-            .category-card {
-                box-shadow: none;
-                border: 1px solid #222;
-                background: #fff;
-            }
-
-            .cards {
-                display: block;
-            }
-
-            .category-card.collapsed .slots {
-                display: grid;
-            }
-
-            .category-card {
-                margin: 0 0 0.18in;
-                break-inside: avoid;
-                border-radius: 0;
-            }
-
-            .category-head {
-                background: #fff;
-                border-bottom: 1px solid #222;
-                padding: 0.12in;
-            }
-
-            .cat-icon {
-                background: #fff;
-                border: 1px solid #222;
-                box-shadow: none;
-            }
-
-            .count-badge {
-                color: #000;
-                background: #fff;
-                border: 1px solid #222;
-            }
-
-            .slots {
-                padding: 0;
-                gap: 0;
-            }
-
-            .slot {
-                border: 0;
-                border-bottom: 1px solid #bbb;
-                border-radius: 0;
-                min-height: 0.48in;
-                padding: 0.08in 0.12in;
-                background: #fff;
-            }
-
-            .slot-number {
-                background: #fff;
-                border: 1px solid #222;
-                color: #000;
-            }
-
-            .slot-empty {
-                color: #222;
-            }
+            .print-foot { margin-top: 12px; text-align: center; font-size: 9.5pt; color: #6b574a; }
         }
     </style>
 </head>
 
 <body>
     <main class="page">
-        <section id="hero" class="hero" aria-label="Potluck sign-up header">
+        <section class="hero" aria-labelledby="event-title">
             <div class="hero-content">
-                <p class="eyebrow" id="event-eyebrow">Linger Longer Potluck</p>
-                <div class="title-row">
-                    <span class="title-flag" aria-hidden="true" title="American flag"><svg viewBox="0 0 38 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <rect width="38" height="20" fill="#fff" />
-                            <g fill="#c8102e">
-                                <rect width="38" height="1.54" y="0" />
-                                <rect width="38" height="1.54" y="3.08" />
-                                <rect width="38" height="1.54" y="6.16" />
-                                <rect width="38" height="1.54" y="9.24" />
-                                <rect width="38" height="1.54" y="12.32" />
-                                <rect width="38" height="1.54" y="15.4" />
-                                <rect width="38" height="1.54" y="18.46" />
-                            </g>
-                            <rect width="16" height="10.77" fill="#1d3461" />
-                            <g fill="#fff">
-                                <circle cx="3" cy="2" r="0.9" />
-                                <circle cx="7" cy="2" r="0.9" />
-                                <circle cx="11" cy="2" r="0.9" />
-                                <circle cx="5" cy="4.2" r="0.9" />
-                                <circle cx="9" cy="4.2" r="0.9" />
-                                <circle cx="13" cy="4.2" r="0.9" />
-                                <circle cx="3" cy="6.4" r="0.9" />
-                                <circle cx="7" cy="6.4" r="0.9" />
-                                <circle cx="11" cy="6.4" r="0.9" />
-                                <circle cx="5" cy="8.6" r="0.9" />
-                                <circle cx="9" cy="8.6" r="0.9" />
-                                <circle cx="13" cy="8.6" r="0.9" />
-                            </g>
-                        </svg></span>
-                    <h1 id="event-title-display">October Linger Longer Potluck Sign-Up</h1>
-                    <span class="title-flag" aria-hidden="true" title="American flag"><svg viewBox="0 0 38 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <rect width="38" height="20" fill="#fff" />
-                            <g fill="#c8102e">
-                                <rect width="38" height="1.54" y="0" />
-                                <rect width="38" height="1.54" y="3.08" />
-                                <rect width="38" height="1.54" y="6.16" />
-                                <rect width="38" height="1.54" y="9.24" />
-                                <rect width="38" height="1.54" y="12.32" />
-                                <rect width="38" height="1.54" y="15.4" />
-                                <rect width="38" height="1.54" y="18.46" />
-                            </g>
-                            <rect width="16" height="10.77" fill="#1d3461" />
-                            <g fill="#fff">
-                                <circle cx="3" cy="2" r="0.9" />
-                                <circle cx="7" cy="2" r="0.9" />
-                                <circle cx="11" cy="2" r="0.9" />
-                                <circle cx="5" cy="4.2" r="0.9" />
-                                <circle cx="9" cy="4.2" r="0.9" />
-                                <circle cx="13" cy="4.2" r="0.9" />
-                                <circle cx="3" cy="6.4" r="0.9" />
-                                <circle cx="7" cy="6.4" r="0.9" />
-                                <circle cx="11" cy="6.4" r="0.9" />
-                                <circle cx="5" cy="8.6" r="0.9" />
-                                <circle cx="9" cy="8.6" r="0.9" />
-                                <circle cx="13" cy="8.6" r="0.9" />
-                            </g>
-                        </svg></span>
-                </div>
-                <p class="hero-note"                 id="event-note-display">October's theme is Soup &amp; Bread. Bring a pot of your
-                                    favorite soup, chili, or chowder, or some fresh bread, rolls, or cornbread to go with it, plus fall
-                                    desserts and warm drinks to round out the meal!</p>
+                <p class="eyebrow">Linger Longer Potluck</p>
+                <h1 id="event-title">October Linger Longer</h1>
+                <p class="hero-note">This month's theme is <strong>Soup &amp; Bread</strong>. Bring a pot of your
+                    favorite soup, chili, or chowder, some fresh bread or rolls, a fall dessert, or a warm drink to
+                    share.</p>
                 <div class="hero-details">
-                                    <span class="pill pill-provided" id="event-provided-display">Soup &amp; Bread</span>
-                                    <span class="pill" id="event-date-display">📅 Sun, Oct 11, 2026</span>
-                    <span class="pill" id="event-time-display">🕑 2 PM</span>
-                    <span class="pill" id="event-location-display">📍 Sundance 1st Ward Cultural Hall</span>
-                    <button type="button" id="print-sheet" class="hero-print-btn no-print">🖨️ Print</button>
+                    <div class="cal-wrap">
+                        <button type="button" class="chip chip-primary" id="calendar-btn" aria-haspopup="true"
+                            aria-expanded="false" aria-controls="calendar-menu" title="Add to your calendar">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" aria-hidden="true">
+                                <rect x="3" y="5" width="18" height="16" rx="2" />
+                                <path d="M3 10h18M8 3v4M16 3v4M12 13v5M9.5 15.5h5" />
+                            </svg>
+                            Sun, Oct 11, 2026
+                        </button>
+                        <div class="cal-menu" id="calendar-menu" role="menu" hidden>
+                            <a role="menuitem" href="linger-longer-october-2026.ics" download="linger-longer-october-2026.ics">
+                                Apple, Outlook, or other calendar<small>Downloads a calendar file (.ics)</small></a>
+                            <a role="menuitem" id="google-cal-link" target="_blank" rel="noopener" href="#">
+                                Google Calendar<small>Opens in a new tab</small></a>
+                        </div>
+                    </div>
+                    <span class="chip">2 PM</span>
+                    <span class="chip">Sundance 1st Ward Cultural Hall</span>
+                    <button type="button" class="chip" id="print-btn" title="Print a paper sign-up sheet">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linejoin="round" aria-hidden="true">
+                            <path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2" />
+                            <rect x="6" y="14" width="12" height="7" />
+                        </svg>
+                        Print sign-up sheet
+                    </button>
                 </div>
             </div>
         </section>
 
-        <section id="needs-banner" class="needs-banner no-print" aria-label="Remaining dish type needs"
-            aria-live="polite" hidden></section>
+        <p class="needs">We need <strong>12 soups</strong>, <strong>5 breads</strong>, <strong>5 desserts</strong>, and
+            <strong>2 beverages</strong>.</p>
 
-        <div class="toolbar no-print">
-            <div class="notice dismissible-notice" id="mode-notice">
-                <span id="mode-notice-text"><strong>Static page note:</strong> GitHub Pages cannot save shared
-                    sign-ups by itself.
-                    This page saves entries in this browser/device and includes export/import/print tools for
-                    low-traffic
-                    coordination.</span>
-                <button type="button" class="notice-dismiss" data-dismiss-mode-notice>Dismiss</button>
-            </div>
-            <div class="toolbar-actions">
-                <button type="button" id="settings-toggle" class="btn-secondary" data-owner-control>Customize</button>
-                <button type="button" id="export-json" class="btn-secondary" data-owner-control>Export JSON</button>
-                <button type="button" id="export-csv" class="btn-secondary" data-owner-control>Export CSV</button>
-                <button type="button" id="import-json" class="btn-secondary" data-owner-control>Import</button>
-            </div>
-        </div>
-
-        <section id="settings-area" class="settings-area no-print" aria-label="Customize sign-up sheet">
-            <div class="grid" style="margin-bottom: 18px;">
-                <div class="panel">
-                    <h2>Event details</h2>
-                    <div class="form-grid">
-                        <label>Title <input id="event-title" type="text" /></label>
-                        <label>Subtitle / note <textarea id="event-note"></textarea></label>
-                        <div class="two-col form-grid">
-                            <label>Date <input id="event-date" type="text" placeholder="October 11, 2026" /></label>
-                            <label>Time <input id="event-time" type="text" placeholder="2 PM" /></label>
-                        </div>
-                        <div class="two-col form-grid">
-                            <label>Location <input id="event-location" type="text"
-                                    placeholder="Cultural Hall" /></label>
-                            <label>Hero image URL <input id="event-hero-image" type="text"
-                                    placeholder="lingerlonger.png or https://..." /></label>
-                        </div>
-                        <label>Organizer email (optional, for mailto reminders) <input id="organizer-email" type="email"
-                                placeholder="name@example.com" /></label>
-                        <div class="file-row">
-                            <label for="hero-image-upload" class="btn-secondary"
-                                style="display:inline-flex; cursor:pointer;">Add top image</label>
-                            <input id="hero-image-upload" type="file" accept="image/*" />
-                            <button type="button" id="clear-hero-image" class="btn-secondary">Clear image</button>
-                        </div>
-                        <button type="button" id="save-event-settings">Save event details</button>
+        <div class="layout">
+            <section class="panel" aria-labelledby="signup-heading">
+                <h2 id="signup-heading">Sign up</h2>
+                <form id="signup-form" novalidate>
+                    <label>Your name
+                        <input id="signup-name" type="text" autocomplete="name" required />
+                    </label>
+                    <div class="row-2">
+                        <label>Email
+                            <input id="signup-email" type="email" autocomplete="email" inputmode="email" required />
+                        </label>
+                        <label>Phone
+                            <input id="signup-phone" type="tel" autocomplete="tel" inputmode="tel" required />
+                        </label>
                     </div>
-                </div>
-
-                <div class="panel">
-                    <h2>Categories &amp; needed sign-ups</h2>
-                    <div id="category-editor" class="category-editor"></div>
-                    <div class="toolbar-actions" style="margin-top: 0.8rem;">
-                        <button type="button" id="add-category" class="btn-secondary">Add category</button>
-                        <button type="button" id="reset-categories" class="btn-danger">Reset defaults</button>
-                    </div>
-                    <p class="hint">Icons can be emoji or short text. Increase/decrease needed sign-ups anytime;
-                        existing names are preserved.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="grid signup-layout" aria-label="Potluck sign-up form and list">
-            <aside class="panel-stack signup-top no-print">
-                <div class="panel">
-                    <h2>Sign up</h2>
-                    <form id="signup-form" class="form-grid">
-                        <label>Dish type <select id="signup-category" required></select></label>
-                        <label>Your name <input id="signup-name" type="text" autocomplete="name" required /></label>
-                        <label>Email <input id="signup-email" type="email" autocomplete="email" required /></label>
-                        <label>Phone <input id="signup-phone" type="tel" autocomplete="tel" required /></label>
-                        <label id="signup-item-choice-label">What are you bringing? <select
-                                id="signup-item-choice"></select></label>
-                        <label id="signup-item-custom-label" hidden>Describe your dish <input id="signup-item"
-                                type="text"
-                                placeholder="e.g., chicken noodle soup, broccoli cheddar, cornbread, apple crisp" /></label>
-                        <button type="submit" id="signup-submit">Add my sign-up</button>
-                    </form>
-                    <div id="signup-status" class="signup-status" role="status" aria-live="polite"></div>
-                    <p class="hint">Choose a dish type first, then fill out your name, contact info, and what you are
-                        bringing. Pick an idea from the list or choose &ldquo;Something else&rdquo; to describe your own.
-                        Full dish types are hidden from the dropdown.
-                    </p>
-                </div>
-
-                <div class="panel" id="workflow-panel">
-                    <div class="panel-heading-row">
-                        <h3>Low-traffic workflow</h3>
-                        <button type="button" class="notice-dismiss no-print"
-                            data-dismiss-workflow-notice>Dismiss</button>
-                    </div>
-                    <p class="hint" id="workflow-note">For a shared online list, export the JSON after collecting
-                        entries and upload the
-                        updated file, or use this at a signup table/kiosk. Static GitHub Pages does not provide a shared
-                        database.</p>
-                </div>
-            </aside>
-
-            <section aria-label="Current sign-ups">
-                <div class="summary-strip" id="summary-strip"></div>
-                <div id="category-cards" class="cards"></div>
+                    <p class="privacy">Your email and phone are only shared with the organizer.</p>
+                    <label>What are you bringing?
+                        <select id="signup-dish" required></select>
+                    </label>
+                    <label id="custom-label" hidden>Describe your dish
+                        <input id="signup-custom" type="text" maxlength="80"
+                            placeholder="e.g., Grandma's chicken & dumplings" />
+                    </label>
+                    <button type="submit" class="btn" id="signup-submit">Sign me up</button>
+                    <div id="signup-status" class="status" role="status" aria-live="polite"></div>
+                </form>
             </section>
-        </section>
 
-        <p class="footer-note">Made for a Linger Longer Potluck • Printable, responsive, and ready for GitHub Pages.</p>
+            <section class="panel" aria-labelledby="coming-heading">
+                <h2 id="coming-heading">Who's coming</h2>
+                <div class="stats" id="stats"></div>
+                <ul class="signup-list" id="signup-list"></ul>
+            </section>
+        </div>
     </main>
 
-    <input id="import-file" type="file" accept="application/json,.json" hidden />
+    <!-- Printable sheet: hidden on screen, the only thing shown when printing. -->
+    <section class="print-sheet" aria-hidden="true">
+        <div class="print-watermarks">
+            <!-- Maple leaf -->
+            <svg style="top:0.1in;left:-0.2in;width:1.9in;transform:rotate(-18deg)" viewBox="0 0 100 100"><path fill="#c4521c" d="M50 4l7 17 13-7-3 18 17-4-8 15 16 6-18 10 4 12-18-6-6 19v16h-8V80l-6-19-18 6 4-12-18-10 16-6-8-15 17 4-3-18 13 7z"/></svg>
+            <svg style="top:4.3in;right:-0.25in;width:1.7in;transform:rotate(24deg)" viewBox="0 0 100 100"><path fill="#e9a23a" d="M50 4l7 17 13-7-3 18 17-4-8 15 16 6-18 10 4 12-18-6-6 19v16h-8V80l-6-19-18 6 4-12-18-10 16-6-8-15 17 4-3-18 13 7z"/></svg>
+            <svg style="bottom:0.2in;left:3.3in;width:1.1in;transform:rotate(40deg)" viewBox="0 0 100 100"><path fill="#a63d16" d="M50 4l7 17 13-7-3 18 17-4-8 15 16 6-18 10 4 12-18-6-6 19v16h-8V80l-6-19-18 6 4-12-18-10 16-6-8-15 17 4-3-18 13 7z"/></svg>
+            <!-- Soup bowl with steam -->
+            <svg style="top:2.2in;left:0.6in;width:2.4in" viewBox="0 0 120 100"><g fill="none" stroke="#8e3a17" stroke-width="5" stroke-linecap="round"><path d="M40 30c-8-10 8-14 0-26M60 30c-8-10 8-14 0-26M80 30c-8-10 8-14 0-26"/></g><path fill="#8e3a17" d="M8 44h104c0 28-22 46-52 46S8 72 8 44z"/><rect x="36" y="88" width="48" height="8" rx="4" fill="#8e3a17"/></svg>
+            <!-- Bread loaf -->
+            <svg style="top:1.2in;right:0.4in;width:2.3in;transform:rotate(-8deg)" viewBox="0 0 140 80"><path fill="#b56a28" d="M10 60c0-30 26-50 60-50s60 20 60 50v10H10z"/><g stroke="#fff" stroke-width="6" stroke-linecap="round"><path d="M40 30l14 18M66 24l14 20M92 30l14 18"/></g></svg>
+            <!-- Pie slice (dessert) -->
+            <svg style="bottom:1.4in;left:0.3in;width:2in;transform:rotate(6deg)" viewBox="0 0 120 90"><path fill="#d4691c" d="M6 78L110 20v58z"/><path fill="#8e3a17" d="M6 78L110 20l4 8L14 82z"/><rect x="6" y="78" width="104" height="8" rx="3" fill="#8e3a17"/></svg>
+            <!-- Mug (beverage) -->
+            <svg style="bottom:2.2in;right:0.5in;width:1.8in" viewBox="0 0 110 110"><g fill="none" stroke="#5a2412" stroke-width="5" stroke-linecap="round"><path d="M34 26c-6-8 6-12 0-20M52 26c-6-8 6-12 0-20"/><path d="M78 50h8a12 12 0 0 1 0 24h-8"/></g><path fill="#5a2412" d="M16 36h64v44a20 20 0 0 1-20 20H36a20 20 0 0 1-20-20z"/></svg>
+            <!-- Pumpkin -->
+            <svg style="top:6.3in;left:2.6in;width:1.8in" viewBox="0 0 120 100"><path fill="#d4691c" d="M60 26c30 0 52 14 52 36s-22 34-52 34S8 84 8 62s22-36 52-36z"/><path d="M60 26v70M34 30c-10 20-10 44 0 62M86 30c10 20 10 44 0 62" stroke="#fff" stroke-width="4" fill="none"/><path d="M58 28c0-12 4-20 12-24" stroke="#5a2412" stroke-width="7" fill="none" stroke-linecap="round"/></svg>
+        </div>
+
+        <div class="print-inner">
+            <header class="print-head">
+                <h1>October Linger Longer</h1>
+                <p class="print-theme">Soup &amp; Bread Potluck</p>
+                <p><strong>Sunday, October 11, 2026 &middot; 2 PM</strong> &middot; Sundance 1st Ward Cultural Hall</p>
+                <p class="print-needs">We need 12 soups, 5 breads, 5 desserts, and 2 beverages.</p>
+            </header>
+            <table class="print-table">
+                <colgroup>
+                    <col style="width:0.3in" />
+                    <col style="width:2.25in" />
+                    <col style="width:0.62in" />
+                    <col style="width:0.62in" />
+                    <col style="width:0.72in" />
+                    <col style="width:0.74in" />
+                    <col />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th class="cb">Soup</th>
+                        <th class="cb">Bread</th>
+                        <th class="cb">Dessert</th>
+                        <th class="cb">Beverage</th>
+                        <th>What are you bringing?</th>
+                    </tr>
+                </thead>
+                <tbody id="print-rows"></tbody>
+            </table>
+            <p class="print-foot">You can also sign up online at wardmission.org/linger_longer</p>
+        </div>
+    </section>
 
     <script>
-        const STORAGE_KEY = "linger-longer-potluck-signup-v1";
-        const SHARED_CACHE_KEY = "linger-longer-potluck-shared-cache-v1";
-        const REMAINING_BANNER_DISMISS_KEY = "linger-longer-remaining-banner-dismissed-v1";
-        const MODE_NOTICE_DISMISS_KEY = "linger-longer-mode-notice-dismissed-v1";
-        const WORKFLOW_NOTICE_DISMISS_KEY = "linger-longer-workflow-notice-dismissed-v1";
-        // Paste your deployed Google Apps Script Web app /exec URL here to enable shared Google Sheet sign-ups.
-        // Example: const SHARED_BACKEND_URL = "https://script.google.com/macros/s/AKfycb.../exec";
+        // Google Apps Script web app backed by the Linger Longer Google Sheet.
         const SHARED_BACKEND_URL = "https://script.google.com/macros/s/AKfycbwZt-lr6VcrglwwyfHsqIW_an3_NZe9gaUHWm1UunIfuLGkAevqTMYvRll18W9KAq87GQ/exec";
+        const CACHE_KEY = "linger-longer-october-2026-cache-v1";
 
-        const CUSTOM_ITEM_VALUE = "__custom__";
-        // Full display names by category id. These override the shorter names stored in the
-        // Google Sheet's Categories tab so the cards stay descriptive.
-        const CATEGORY_LABELS = {
-            "soups-hearty": "Hearty Soups & Chili (Chicken Noodle, Beef Stew, Chili)",
-            "soups-creamy": "Creamy Soups & Chowders (Potato, Broccoli Cheddar, Clam Chowder)",
-            "soups-veggie": "Vegetarian Soups (Tomato Basil, Minestrone, Butternut Squash)",
-            "breads": "Breads & Rolls (Rolls, Cornbread, Breadsticks, Bread Bowls)",
-            "soup-toppings": "Soup Toppings (Shredded Cheese, Sour Cream, Crackers, Croutons)"
+        const EVENT = {
+            title: "October Linger Longer: Soup & Bread",
+            location: "Sundance 1st Ward Cultural Hall",
+            startUtc: "20261011T200000Z",
+            endUtc: "20261011T213000Z",
+            details: "Bring a pot of soup, some bread, a dessert, or a beverage to share. Sign up at https://www.wardmission.org/linger_longer/"
         };
 
-        // Dish ideas offered per category. Keyed by category id; a category with no
-        // entry here simply falls back to the free-text box.
-        const ITEM_SUGGESTIONS = {
-            "soups-hearty": [
-                "Chicken Noodle Soup",
-                "Beef Stew",
-                "Beef Chili",
-                "White Chicken Chili",
-                "Chicken Tortilla Soup",
-                "Zuppa Toscana",
-                "Split Pea & Ham Soup",
-                "Taco Soup",
-                "Italian Wedding Soup"
-            ],
-            "soups-creamy": [
-                "Loaded Baked Potato Soup",
-                "Broccoli Cheddar Soup",
-                "Clam Chowder",
-                "Corn Chowder",
-                "Creamy Chicken & Wild Rice Soup",
-                "Cream of Mushroom Soup",
-                "Chicken Pot Pie Soup"
-            ],
-            "soups-veggie": [
-                "Tomato Basil Soup",
-                "Minestrone",
-                "Butternut Squash Soup",
-                "Vegetable Soup",
-                "Lentil Soup",
-                "Black Bean Soup",
-                "Pumpkin Soup",
-                "Gluten-Free Soup",
-                "Dairy-Free Soup"
-            ],
-            "breads": [
-                "Dinner Rolls",
-                "Cornbread",
-                "Breadsticks",
-                "Garlic Bread",
-                "French Bread / Baguette",
-                "Sourdough Loaf",
-                "Bread Bowls",
-                "Biscuits",
-                "Homemade Wheat Bread",
-                "Gluten-Free Bread"
-            ],
-            "soup-toppings": [
-                "Shredded Cheddar Cheese",
-                "Sour Cream",
-                "Oyster Crackers",
-                "Saltine Crackers",
-                "Croutons",
-                "Crispy Bacon Bits",
-                "Sliced Green Onions",
-                "Tortilla Strips",
-                "Butter & Honey Butter"
-            ],
-            "desserts": [
-                "Apple Crisp",
-                "Pumpkin Bars",
-                "Pumpkin Pie",
-                "Apple Pie",
-                "Snickerdoodles",
-                "Caramel Apples",
-                "Brownies",
-                "Chocolate Chip Cookies",
-                "Gluten-Free Dessert"
-            ],
-            "beverages": [
-                "Hot Apple Cider",
-                "Hot Cocoa",
-                "Lemonade",
-                "Ice Water with Lemon",
-                "Sparkling Cider",
-                "Fruit Punch",
-                "Herbal Tea"
-            ]
-        };
-
-        const DEFAULT_STATE = {
-            event: {
-                eyebrow: "Linger Longer Potluck",
-                title: "Linger Longer Potluck Sign-Up",
-                note: "October's theme is Soup & Bread. Bring a pot of your favorite soup, chili, or chowder, or some fresh bread, rolls, or cornbread to go with it, plus fall desserts and warm drinks to round out the meal!",
-                date: "October 11, 2026",
-                time: "2 PM",
-                location: "Sundance 1st Ward Cultural Hall",
-                organizerEmail: "",
-                heroImage: "SoupAndBread_Hero_Image.svg"
+        // `id` must match a CategoryId row in the Google Sheet's Categories tab.
+        const TYPES = [
+            {
+                id: "soup", label: "Soup", plural: "Soups", dishes: [
+                    "Chicken Noodle Soup", "Beef Stew", "Beef Chili", "White Chicken Chili", "Chicken Tortilla Soup",
+                    "Zuppa Toscana", "Loaded Baked Potato Soup", "Broccoli Cheddar Soup", "Clam Chowder", "Corn Chowder",
+                    "Creamy Chicken & Wild Rice Soup", "Split Pea & Ham Soup", "Taco Soup", "Tomato Basil Soup",
+                    "Minestrone", "Butternut Squash Soup", "Lentil Soup", "Vegetable Soup"
+                ]
             },
-            categories: [
-                { id: "soups-hearty", name: CATEGORY_LABELS["soups-hearty"], needed: 6, icon: "🍲" },
-                { id: "soups-creamy", name: CATEGORY_LABELS["soups-creamy"], needed: 5, icon: "🥣" },
-                { id: "soups-veggie", name: CATEGORY_LABELS["soups-veggie"], needed: 3, icon: "🥕" },
-                { id: "breads", name: CATEGORY_LABELS["breads"], needed: 8, icon: "🍞" },
-                { id: "soup-toppings", name: CATEGORY_LABELS["soup-toppings"], needed: 4, icon: "🧀" },
-                { id: "desserts", name: "Fall Desserts", needed: 6, icon: "🥧" },
-                { id: "beverages", name: "Beverages", needed: 4, icon: "☕" }
-            ],
-            signups: []
-        };
-
-        let state = loadInitialState();
-        const expandedCategories = new Set();
+            {
+                id: "bread", label: "Bread", plural: "Breads", dishes: [
+                    "Dinner Rolls", "Cornbread", "Breadsticks", "Garlic Bread", "French Bread / Baguette",
+                    "Sourdough Loaf", "Bread Bowls", "Biscuits", "Homemade Wheat Bread", "Gluten-Free Bread"
+                ]
+            },
+            {
+                id: "desserts", label: "Dessert", plural: "Desserts", dishes: [
+                    "Apple Crisp", "Pumpkin Bars", "Pumpkin Pie", "Apple Pie", "Snickerdoodles", "Caramel Apples",
+                    "Brownies", "Chocolate Chip Cookies", "Gluten-Free Dessert"
+                ]
+            },
+            {
+                id: "beverages", label: "Beverage", plural: "Beverages", dishes: [
+                    "Hot Apple Cider", "Hot Cocoa", "Lemonade", "Ice Water with Lemon", "Sparkling Cider", "Herbal Tea"
+                ]
+            }
+        ];
 
         const $ = (id) => document.getElementById(id);
-        const els = {
-            hero: $("hero"),
-            eventTitleDisplay: $("event-title-display"),
-            eventNoteDisplay: $("event-note-display"),
-            eventDateDisplay: $("event-date-display"),
-            eventTimeDisplay: $("event-time-display"),
-            eventLocationDisplay: $("event-location-display"),
-            eventTitle: $("event-title"),
-            eventNote: $("event-note"),
-            eventDate: $("event-date"),
-            eventTime: $("event-time"),
-            eventLocation: $("event-location"),
-            eventHeroImage: $("event-hero-image"),
-            organizerEmail: $("organizer-email"),
-            signupCategory: $("signup-category"),
-            signupForm: $("signup-form"),
-            signupName: $("signup-name"),
-            signupEmail: $("signup-email"),
-            signupPhone: $("signup-phone"),
-            signupItem: $("signup-item"),
-            signupItemChoice: $("signup-item-choice"),
-            signupItemChoiceLabel: $("signup-item-choice-label"),
-            signupItemCustomLabel: $("signup-item-custom-label"),
-            signupSubmit: $("signup-submit"),
-            signupStatus: $("signup-status"),
-            needsBanner: $("needs-banner"),
-            categoryCards: $("category-cards"),
-            categoryEditor: $("category-editor"),
-            summaryStrip: $("summary-strip"),
-            modeNotice: $("mode-notice"),
-            modeNoticeText: $("mode-notice-text"),
-            workflowPanel: $("workflow-panel"),
-            workflowNote: $("workflow-note"),
-            settingsArea: $("settings-area"),
-            importFile: $("import-file")
-        };
+        let signups = loadCache();
 
-        function cloneDefaultState() {
-            return JSON.parse(JSON.stringify(DEFAULT_STATE));
+        function loadCache() {
+            try { return JSON.parse(localStorage.getItem(CACHE_KEY) || "[]"); } catch (error) { return []; }
         }
 
-        function loadState() {
-            try {
-                const raw = localStorage.getItem(STORAGE_KEY);
-                if (!raw) return cloneDefaultState();
-                const saved = JSON.parse(raw);
-                return normalizeState(saved);
-            } catch (error) {
-                console.warn("Could not load saved sign-up sheet:", error);
-                return cloneDefaultState();
-            }
+        function saveCache() {
+            try { localStorage.setItem(CACHE_KEY, JSON.stringify(signups)); } catch (error) { /* storage unavailable */ }
         }
 
-        function loadInitialState() {
-            if (!isSharedMode()) return loadState();
-            return loadSharedCache() || cloneDefaultState();
-        }
-
-        function loadSharedCache() {
-            try {
-                const raw = localStorage.getItem(SHARED_CACHE_KEY);
-                if (!raw) return null;
-                const cached = JSON.parse(raw);
-                return normalizeState({
-                    // Event details (title/date/note/hero) are owned by this HTML, not the
-                    // Google Sheet — so the published page controls them each month.
-                    event: DEFAULT_STATE.event,
-                    categories: cached.categories || DEFAULT_STATE.categories,
-                    signups: cached.signups || []
-                });
-            } catch (error) {
-                console.warn("Could not load cached shared sign-up sheet:", error);
-                return null;
-            }
-        }
-
-        function saveSharedCache(nextState) {
-            if (!isSharedMode()) return;
-            try {
-                localStorage.setItem(SHARED_CACHE_KEY, JSON.stringify({
-                    cachedAt: new Date().toISOString(),
-                    event: nextState.event,
-                    categories: nextState.categories,
-                    signups: nextState.signups
-                }));
-            } catch (error) {
-                console.warn("Could not cache shared sign-up sheet:", error);
-            }
-        }
-
-        function normalizeState(input) {
-            const base = cloneDefaultState();
-            const next = { ...base, ...(input || {}) };
-            next.event = { ...base.event, ...(input && input.event ? input.event : {}) };
-            next.event.time = String(next.event.time || base.event.time).trim() || base.event.time;
-            if (/^time\s+tbd$/i.test(next.event.time)) next.event.time = base.event.time;
-            next.event.heroImage = String(next.event.heroImage || base.event.heroImage).trim() || base.event.heroImage;
-            // Migrate cached state from previous default hero images to the current Soup & Bread theme image.
-            if (next.event.heroImage === "lingerlonger.png" || next.event.heroImage === "June_Hero_Image.jpg" || next.event.heroImage === "July_Hero_Image.svg" || next.event.heroImage === "August_Hero_Image.svg" || next.event.heroImage === "September_Hero_Image.svg" || next.event.heroImage === "MacAndCheese_Hero_Image.svg") next.event.heroImage = base.event.heroImage;
-            next.categories = Array.isArray(next.categories) && next.categories.length ? next.categories : base.categories;
-            next.signups = Array.isArray(next.signups) ? next.signups : [];
-            next.categories = next.categories.map((cat, index) => ({
-                id: cat.id || slugify(cat.name || `category-${index + 1}`),
-                name: CATEGORY_LABELS[cat.id] || String(cat.name || `Category ${index + 1}`).trim() || `Category ${index + 1}`,
-                needed: Math.max(0, parseInt(cat.needed, 10) || 0),
-                icon: String(cat.icon || "🍽️").trim() || "🍽️"
-            }));
-            next.signups = next.signups.map((entry) => ({
-                id: entry.id || cryptoId(),
-                categoryId: entry.categoryId,
-                name: String(entry.name || "").trim(),
-                email: String(entry.email || "").trim(),
-                phone: String(entry.phone || "").trim(),
-                item: String(entry.item || "").trim(),
-                createdAt: entry.createdAt || new Date().toISOString()
-            })).filter((entry) => entry.categoryId && entry.name && entry.item);
-            return next;
-        }
-
-        function saveState() {
-            try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-            } catch (error) {
-                console.warn("Could not save sign-up sheet locally:", error);
-            }
-        }
-
-        function isSharedMode() {
-            return /^https:\/\//i.test(SHARED_BACKEND_URL.trim());
-        }
-
-        function slugify(value) {
-            const slug = String(value || "")
-                .toLowerCase()
-                .replace(/[^a-z0-9]+/g, "-")
-                .replace(/^-+|-+$/g, "");
-            return slug || `category-${Date.now()}`;
-        }
-
-        function cryptoId() {
-            if (window.crypto && window.crypto.randomUUID) return window.crypto.randomUUID();
-            return `id-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+        // Maps any sheet category id (including older ones like "soups-hearty") to one of the four types.
+        function typeFor(categoryId) {
+            const id = String(categoryId || "").toLowerCase();
+            if (id.startsWith("soup")) return "soup";
+            if (id.startsWith("bread")) return "bread";
+            if (id.startsWith("dessert")) return "desserts";
+            if (id.startsWith("beverage") || id.startsWith("drink")) return "beverages";
+            return "";
         }
 
         function escapeHtml(value) {
-            return String(value ?? "")
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#39;");
+            return String(value ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
         }
 
-        function formatEventDate(value) {
-            const text = String(value || "").trim();
-            if (!text || /^date\s+tbd$/i.test(text)) return "Date TBD";
-            const parsed = new Date(text);
-            if (!Number.isNaN(parsed.getTime()) && /\b\d{4}\b/.test(text)) {
-                return parsed.toLocaleDateString(undefined, {
-                    weekday: "short",
-                    month: "short",
-                    day: "2-digit",
-                    year: "numeric"
-                });
-            }
-            return text;
-        }
-
-        function eventMonthName(value) {
-            const text = String(value || "").trim();
-            if (!text || /^date\s+tbd$/i.test(text)) return "";
-            const parsed = new Date(text);
-            if (Number.isNaN(parsed.getTime())) return "";
-            return parsed.toLocaleDateString(undefined, { month: "long" });
-        }
-
-        function titleWithEventMonth(title, dateValue) {
-            const baseTitle = String(title || DEFAULT_STATE.event.title).trim() || DEFAULT_STATE.event.title;
-            const month = eventMonthName(dateValue);
-            if (!month) return baseTitle;
-            const titleWithoutMonth = baseTitle.replace(/^(January|February|March|April|May|June|July|August|September|October|November|December)\s+/i, "");
-            return `${month} ${titleWithoutMonth}`;
-        }
-
-        function signupsFor(categoryId) {
-            return state.signups.filter((entry) => entry.categoryId === categoryId);
-        }
-
-        function openSlots(category) {
-            return Math.max(0, Number(category.needed || 0) - signupsFor(category.id).length);
-        }
-
-        function noticeModeKey() {
-            return isSharedMode() ? "shared" : "static";
-        }
-
-        function isNoticeDismissed(storageKey, value = noticeModeKey()) {
-            try {
-                return localStorage.getItem(storageKey) === value;
-            } catch (error) {
-                return false;
-            }
-        }
-
-        function dismissNotice(storageKey, element, value = noticeModeKey()) {
-            try {
-                localStorage.setItem(storageKey, value);
-            } catch (error) {
-                console.warn("Could not save notice dismissal:", error);
-            }
-            if (element) element.hidden = true;
+        function renderDishOptions() {
+            const groups = TYPES.map((type) => `
+                <optgroup label="${type.label}">
+                    ${type.dishes.map((dish) => `<option value="${type.id}|${escapeHtml(dish)}">${escapeHtml(dish)}</option>`).join("")}
+                    <option value="${type.id}|">Other ${type.label.toLowerCase()}...</option>
+                </optgroup>`).join("");
+            $("signup-dish").innerHTML = `<option value="">Choose a soup, bread, dessert, or beverage</option>${groups}`;
         }
 
         function render() {
-            setControlsForMode();
-            renderEvent();
-            renderSummary();
-            renderRemainingBanner();
-            renderSignupCategoryOptions();
-            renderCategoryCards();
-            renderCategoryEditor();
-        }
-
-        function setControlsForMode() {
-            const shared = isSharedMode();
-            const modeKey = shared ? "shared" : "static";
-            if (els.modeNoticeText) {
-                els.modeNoticeText.innerHTML = shared
-                    ? `<strong>Shared mode:</strong> Visitors can add sign-ups, but only the organizer can customize the page from the private Google Sheet. Public view shows name and item only; email and phone stay private in the sheet.`
-                    : `<strong>Static page note:</strong> GitHub Pages cannot save shared sign-ups by itself. This page saves entries in this browser/device and includes export/import/print tools for low-traffic coordination.`;
-            }
-
-            if (els.modeNotice) {
-                els.modeNotice.hidden = isNoticeDismissed(MODE_NOTICE_DISMISS_KEY, modeKey);
-            }
-
-            if (els.workflowNote) {
-                els.workflowNote.textContent = shared
-                    ? "Organizer-only settings live in the private Google Sheet. Visitors can only add sign-ups and print the public sheet."
-                    : "For a shared online list, export the JSON after collecting entries and upload the updated file, or use this at a signup table/kiosk. Static GitHub Pages does not provide a shared database.";
-            }
-
-            if (els.workflowPanel) {
-                els.workflowPanel.hidden = isNoticeDismissed(WORKFLOW_NOTICE_DISMISS_KEY, modeKey);
-            }
-
-            document.querySelectorAll("[data-owner-control]").forEach((element) => {
-                element.hidden = shared;
+            const counts = Object.fromEntries(TYPES.map((type) => [type.id, 0]));
+            signups.forEach((entry) => {
+                const type = typeFor(entry.categoryId);
+                if (type) counts[type] += 1;
             });
 
-            if (shared) {
-                els.settingsArea.classList.remove("open");
-                $("settings-toggle").textContent = "Customize";
-            }
+            $("stats").innerHTML = `
+                <div class="stat stat-total"><strong>${signups.length}</strong><span>signed up</span></div>
+                ${TYPES.map((type) => `<div class="stat"><strong>${counts[type.id]}</strong><span>${counts[type.id] === 1 ? type.label : type.plural}</span></div>`).join("")}`;
 
-            ["add-category", "reset-categories", "import-json", "save-event-settings", "clear-hero-image"].forEach((id) => {
-                const element = $(id);
-                if (element) element.disabled = shared;
-            });
-            [els.eventTitle, els.eventNote, els.eventDate, els.eventTime, els.eventLocation, els.eventHeroImage, els.organizerEmail, $("hero-image-upload")]
-                .filter(Boolean)
-                .forEach((element) => { element.disabled = shared; });
-        }
-
-        function renderEvent() {
-            const event = state.event;
-            els.eventTitleDisplay.textContent = titleWithEventMonth(event.title, event.date);
-            els.eventNoteDisplay.textContent = event.note || DEFAULT_STATE.event.note;
-            els.eventDateDisplay.textContent = `📅 ${formatEventDate(event.date)}`;
-            els.eventTimeDisplay.textContent = `🕑 ${event.time || DEFAULT_STATE.event.time}`;
-            els.eventLocationDisplay.textContent = `📍 ${event.location || "Location TBD"}`;
-            els.eventTitle.value = event.title || "";
-            els.eventNote.value = event.note || "";
-            els.eventDate.value = event.date || "";
-            els.eventTime.value = event.time || "";
-            els.eventLocation.value = event.location || "";
-            els.eventHeroImage.value = event.heroImage || "";
-            els.organizerEmail.value = event.organizerEmail || "";
-
-            if (event.heroImage) {
-                els.hero.classList.add("has-image");
-                els.hero.style.setProperty("--hero-image", `url(${event.heroImage})`);
-            } else {
-                els.hero.classList.remove("has-image");
-                els.hero.style.removeProperty("--hero-image");
-            }
-        }
-
-        function renderSummary() {
-            const totalNeeded = state.categories.reduce((sum, cat) => sum + Number(cat.needed || 0), 0);
-            const filled = state.signups.length;
-            const remaining = Math.max(0, totalNeeded - filled);
-            els.summaryStrip.innerHTML = `
-				<div class="stat"><strong>${filled}</strong><span>Signed up</span></div>
-				<div class="stat"><strong>${remaining}</strong><span>Open slots</span></div>
-				<div class="stat"><strong>${state.categories.length}</strong><span>Categories</span></div>
-			`;
-        }
-
-        function remainingBannerSignature() {
-            return state.categories.map((cat) => `${cat.id}:${openSlots(cat)}`).join("|");
-        }
-
-        function isRemainingBannerDismissed(signature) {
-            try {
-                return localStorage.getItem(REMAINING_BANNER_DISMISS_KEY) === signature;
-            } catch (error) {
-                return false;
-            }
-        }
-
-        function needToneClass(remaining) {
-            if (remaining <= 0) return "need-full";
-            if (remaining <= 2) return "need-low";
-            if (remaining <= 4) return "need-medium";
-            return "need-high";
-        }
-
-        function renderRemainingBanner() {
-            if (!els.needsBanner) return;
-            if (!state.categories.length) {
-                els.needsBanner.hidden = true;
-                els.needsBanner.innerHTML = "";
+            const list = $("signup-list");
+            if (!signups.length) {
+                list.innerHTML = `<li><p class="empty">No one has signed up yet. Be the first!</p></li>`;
                 return;
             }
-
-            const signature = remainingBannerSignature();
-            if (isRemainingBannerDismissed(signature)) {
-                els.needsBanner.hidden = true;
-                return;
-            }
-
-            const chips = state.categories.map((cat) => {
-                const remaining = openSlots(cat);
-                const label = remaining === 0 ? "Full" : `${remaining} item${remaining === 1 ? "" : "s"} left`;
-                return `
-                    <span class="need-chip ${needToneClass(remaining)}" title="${escapeHtml(cat.name)}: ${escapeHtml(label)}">
-                        <span>${escapeHtml(cat.icon)} ${escapeHtml(cat.name)}</span>
-                        <strong>${escapeHtml(label)}</strong>
-                    </span>
-                `;
-            }).join("");
-
-            els.needsBanner.hidden = false;
-            els.needsBanner.innerHTML = `
-                <div class="needs-banner-head">
-                    <div>
-                        <p class="needs-banner-title">Still needed for the potluck</p>
-                        <p class="needs-banner-note">Red = 5+ open, orange = 3–4 open, yellow = 1–2 open.</p>
-                    </div>
-                    <button type="button" class="needs-dismiss" data-dismiss-needs-banner>Dismiss</button>
-                </div>
-                <div class="needs-list">${chips}</div>
-            `;
-        }
-
-        function dismissRemainingBanner() {
-            const signature = remainingBannerSignature();
-            try {
-                localStorage.setItem(REMAINING_BANNER_DISMISS_KEY, signature);
-            } catch (error) {
-                console.warn("Could not save banner dismissal:", error);
-            }
-            if (els.needsBanner) els.needsBanner.hidden = true;
-        }
-
-        function suggestionsFor(categoryId) {
-            const list = ITEM_SUGGESTIONS[categoryId];
-            return Array.isArray(list) ? list : [];
-        }
-
-        function renderSignupItemOptions() {
-            const categoryId = els.signupCategory.value;
-            const suggestions = suggestionsFor(categoryId);
-
-            if (!suggestions.length) {
-                // No ideas for this category, so go straight to the free-text box.
-                els.signupItemChoice.innerHTML = "";
-                els.signupItemChoiceLabel.hidden = true;
-                els.signupItemCustomLabel.hidden = false;
-                els.signupItemCustomLabel.firstChild.nodeValue = "What are you bringing? ";
-                return;
-            }
-
-            els.signupItemChoiceLabel.hidden = false;
-            els.signupItemCustomLabel.firstChild.nodeValue = "Describe your dish ";
-            els.signupItemChoice.innerHTML = `<option value="">Choose or add your own...</option>`
-                + suggestions.map((name) => `<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`).join("")
-                + `<option value="${CUSTOM_ITEM_VALUE}">Something else (type my own)</option>`;
-            els.signupItemChoice.value = "";
-            syncItemFromChoice();
-        }
-
-        function syncItemFromChoice() {
-            const choice = els.signupItemChoice.value;
-            const isCustom = choice === CUSTOM_ITEM_VALUE;
-            const usingDropdown = !els.signupItemChoiceLabel.hidden;
-
-            els.signupItemCustomLabel.hidden = usingDropdown && !isCustom;
-
-            if (isCustom) {
-                els.signupItem.value = "";
-            } else if (usingDropdown) {
-                els.signupItem.value = choice;
-            }
-        }
-
-        function renderSignupCategoryOptions() {
-            const available = state.categories.filter((cat) => openSlots(cat) > 0);
-            if (!available.length) {
-                els.signupCategory.innerHTML = `<option value="">All categories are full</option>`;
-                els.signupSubmit.disabled = true;
-                renderSignupItemOptions();
-                updateSignupFieldState();
-                return;
-            }
-            const current = els.signupCategory.value;
-            els.signupCategory.innerHTML = `<option value="">Choose a dish type...</option>` + available
-                .map((cat) => `<option value="${escapeHtml(cat.id)}">${escapeHtml(cat.icon)} ${escapeHtml(cat.name)} (${openSlots(cat)} open)</option>`)
+            list.innerHTML = signups
+                .slice()
+                .sort((a, b) => String(a.createdAt || "").localeCompare(String(b.createdAt || "")))
+                .map((entry) => `<li><span class="who">${escapeHtml(entry.name)}</span><span class="what">${escapeHtml(entry.item)}</span></li>`)
                 .join("");
-            const keep = available.some((cat) => cat.id === current);
-            els.signupCategory.value = keep ? current : "";
-            if (!keep) renderSignupItemOptions();
-            updateSignupFieldState();
         }
 
-        function updateSignupFieldState() {
-            const hasCategory = Boolean(els.signupCategory.value);
-            [els.signupName, els.signupEmail, els.signupPhone, els.signupItem, els.signupItemChoice].forEach((field) => {
-                field.disabled = !hasCategory;
-            });
-            // Only require the control the person can actually see.
-            els.signupItemChoice.required = hasCategory && !els.signupItemChoiceLabel.hidden;
-            els.signupItem.required = hasCategory && !els.signupItemCustomLabel.hidden;
-            els.signupSubmit.disabled = !hasCategory;
+        function showStatus(message, type) {
+            const el = $("signup-status");
+            el.textContent = message;
+            el.className = `status visible ${type}`;
         }
 
-        function renderCategoryCards() {
-            if (!state.categories.length) {
-                els.categoryCards.innerHTML = `<div class="empty-state">Add categories to begin building the sign-up sheet.</div>`;
-                return;
-            }
-
-            els.categoryCards.innerHTML = state.categories.map((cat) => {
-                const entries = signupsFor(cat.id);
-                const needed = Number(cat.needed || 0);
-                const isFull = entries.length >= needed && needed > 0;
-                const isExpanded = expandedCategories.has(cat.id);
-                const cardClass = isExpanded ? "category-card" : "category-card collapsed";
-                const slots = [];
-                for (let index = 0; index < Math.max(needed, entries.length); index += 1) {
-                    const entry = entries[index];
-                    slots.push(renderSlot(cat, entry, index));
-                }
-                return `
-					<article class="${cardClass}">
-						<header class="category-head" role="button" tabindex="0" aria-expanded="${isExpanded ? "true" : "false"}" data-toggle-category="${escapeHtml(cat.id)}">
-							<div class="cat-icon" aria-hidden="true">${escapeHtml(cat.icon)}</div>
-							<div>
-								<h3>${escapeHtml(cat.name)}</h3>
-								<p>${needed} sign-up${needed === 1 ? "" : "s"} needed • ${isExpanded ? "Tap to collapse" : "Tap to expand"}</p>
-							</div>
-							<div class="category-meta">
-								<span class="count-badge ${isFull ? "full" : ""}">${entries.length}/${needed}${isFull ? " Full" : ""}</span>
-								<span class="collapse-indicator" aria-hidden="true">${isExpanded ? "−" : "+"}</span>
-							</div>
-						</header>
-						<div class="slots">${slots.join("") || `<div class="slot"><span class="slot-number">–</span><span class="slot-empty">No slots configured.</span></div>`}</div>
-					</article>
-				`;
-            }).join("");
-
-            els.categoryCards.querySelectorAll("[data-toggle-category]").forEach((header) => {
-                header.addEventListener("click", () => toggleCategory(header.dataset.toggleCategory));
-                header.addEventListener("keydown", (event) => {
-                    if (event.key !== "Enter" && event.key !== " ") return;
-                    event.preventDefault();
-                    toggleCategory(header.dataset.toggleCategory);
-                });
-            });
-
-            els.categoryCards.querySelectorAll("[data-delete]").forEach((button) => {
-                button.addEventListener("click", () => deleteSignup(button.dataset.delete));
-            });
-            els.categoryCards.querySelectorAll("[data-email]").forEach((button) => {
-                button.addEventListener("click", () => emailSignup(button.dataset.email));
-            });
-        }
-
-        function toggleCategory(id) {
-            if (!id) return;
-            if (expandedCategories.has(id)) expandedCategories.delete(id);
-            else expandedCategories.add(id);
-            renderCategoryCards();
-        }
-
-        function renderSlot(cat, entry, index) {
-            if (!entry) {
-                return `
-					<div class="slot">
-						<span class="slot-number">${index + 1}</span>
-						<span class="slot-empty">Open slot for ${escapeHtml(cat.name)}</span>
-					</div>
-				`;
-            }
-            const contact = [entry.email, entry.phone].filter(Boolean).map(escapeHtml).join(" • ");
-            const actions = isSharedMode() ? "" : `
-                    <div class="slot-actions no-print">
-                        <button type="button" class="btn-secondary btn-small btn-icon" title="Email this sign-up" data-email="${escapeHtml(entry.id)}">✉</button>
-                        <button type="button" class="btn-danger btn-small btn-icon" title="Remove this sign-up" data-delete="${escapeHtml(entry.id)}">×</button>
-                    </div>
-            `;
-            return `
-				<div class="slot filled">
-					<span class="slot-number">${index + 1}</span>
-					<div>
-						<div class="slot-name">${escapeHtml(entry.name)}</div>
-						<div class="slot-item">${escapeHtml(entry.item)}</div>
-                        ${contact ? `<div class="slot-contact">${contact}</div>` : ""}
-					</div>
-                    ${actions}
-				</div>
-			`;
-        }
-
-        function renderCategoryEditor() {
-            const shared = isSharedMode();
-            els.categoryEditor.innerHTML = state.categories.map((cat) => `
-				<div class="category-edit-row" data-category-row="${escapeHtml(cat.id)}">
-                    <label>Icon <input type="text" value="${escapeHtml(cat.icon)}" data-cat-field="icon" maxlength="8" ${shared ? "disabled" : ""} /></label>
-                    <label>Name <input type="text" value="${escapeHtml(cat.name)}" data-cat-field="name" ${shared ? "disabled" : ""} /></label>
-                    <label>Needed <input type="number" min="0" max="99" value="${Number(cat.needed || 0)}" data-cat-field="needed" ${shared ? "disabled" : ""} /></label>
-                    ${shared ? `<span class="hint">Sheet-managed</span>` : `<button type="button" class="btn-danger btn-small" data-remove-category="${escapeHtml(cat.id)}">Remove</button>`}
-				</div>
-            `).join("") + (shared ? `<p class="hint"><strong>Shared mode:</strong> categories and limits are managed in the Google Sheet's <em>Categories</em> tab.</p>` : "");
-
-            els.categoryEditor.querySelectorAll("[data-cat-field]").forEach((input) => {
-                input.addEventListener("change", handleCategoryChange);
-            });
-            els.categoryEditor.querySelectorAll("[data-remove-category]").forEach((button) => {
-                button.addEventListener("click", () => removeCategory(button.dataset.removeCategory));
-            });
-        }
-
-        function handleCategoryChange(event) {
-            const row = event.target.closest("[data-category-row]");
-            const cat = state.categories.find((item) => item.id === row.dataset.categoryRow);
-            if (!cat) return;
-            const field = event.target.dataset.catField;
-            if (field === "needed") {
-                cat.needed = Math.max(0, Math.min(99, parseInt(event.target.value, 10) || 0));
-            } else if (field === "name") {
-                cat.name = event.target.value.trim() || cat.name;
-            } else if (field === "icon") {
-                cat.icon = event.target.value.trim() || "🍽️";
-            }
-            saveState();
+        function applyPayload(payload) {
+            signups = (payload.signups || [])
+                .map((entry) => ({
+                    categoryId: entry.categoryId,
+                    name: String(entry.name || "").trim(),
+                    item: String(entry.item || "").trim(),
+                    createdAt: entry.createdAt || ""
+                }))
+                .filter((entry) => entry.name && entry.item);
+            saveCache();
             render();
         }
 
-        function showStatus(message, type = "success") {
-            els.signupStatus.textContent = message;
-            els.signupStatus.className = `signup-status visible ${type}`;
-            window.clearTimeout(showStatus.timer);
-            showStatus.timer = window.setTimeout(() => {
-                els.signupStatus.classList.remove("visible");
-            }, 5200);
-        }
-
-        function addSignup(event) {
-            event.preventDefault();
-            const categoryId = els.signupCategory.value;
-            const category = state.categories.find((cat) => cat.id === categoryId);
-            if (!category) return showStatus("Please choose a category.", "error");
-            if (openSlots(category) <= 0) return showStatus(`${category.name} is full. Please choose another category.`, "error");
-
-            const entry = {
-                id: cryptoId(),
-                categoryId,
-                name: els.signupName.value.trim(),
-                email: els.signupEmail.value.trim(),
-                phone: els.signupPhone.value.trim(),
-                item: els.signupItem.value.trim(),
-                createdAt: new Date().toISOString()
-            };
-            if (!entry.name || !entry.email || !entry.phone || !entry.item) {
-                return showStatus("Please fill in name, email, phone, and item.", "error");
-            }
-
-            if (isSharedMode()) {
-                submitSharedSignup(entry);
-                return;
-            }
-
-            state.signups.push(entry);
-            saveState();
-            els.signupForm.reset();
-            renderSignupItemOptions();
-            render();
-            showStatus(`Thanks, ${entry.name}! You are signed up for ${category.name}.`, "success");
-            if (state.event.organizerEmail) emailSignup(entry.id, true);
-        }
-
-        function deleteSignup(id) {
-            const entry = state.signups.find((item) => item.id === id);
-            if (!entry) return;
-            if (!confirm(`Remove ${entry.name}'s sign-up for ${entry.item}?`)) return;
-            state.signups = state.signups.filter((item) => item.id !== id);
-            saveState();
-            render();
-            showStatus("Sign-up removed.", "success");
-        }
-
-        function emailSignup(id, optional = false) {
-            const entry = state.signups.find((item) => item.id === id);
-            if (!entry) return;
-            const category = state.categories.find((cat) => cat.id === entry.categoryId);
-            const to = state.event.organizerEmail || "";
-            if (!to && optional) return;
-            const subject = encodeURIComponent(`${state.event.title}: ${entry.name} signed up`);
-            const body = encodeURIComponent([
-                `${entry.name} signed up for ${category ? category.name : "Potluck"}.`,
-                "",
-                `Item: ${entry.item}`,
-                `Email: ${entry.email}`,
-                `Phone: ${entry.phone}`,
-                `Event: ${state.event.title}`,
-                `Date: ${state.event.date}`,
-                `Time: ${state.event.time}`,
-                `Location: ${state.event.location}`
-            ].join("\n"));
-            window.location.href = `mailto:${encodeURIComponent(to)}?subject=${subject}&body=${body}`;
-        }
-
-        function removeCategory(id) {
-            const cat = state.categories.find((item) => item.id === id);
-            if (!cat) return;
-            const existing = signupsFor(id).length;
-            const warning = existing ? ` This will also remove ${existing} sign-up${existing === 1 ? "" : "s"}.` : "";
-            if (!confirm(`Remove category "${cat.name}"?${warning}`)) return;
-            state.categories = state.categories.filter((item) => item.id !== id);
-            state.signups = state.signups.filter((entry) => entry.categoryId !== id);
-            saveState();
-            render();
-        }
-
-        function addCategory() {
-            const baseName = "New Category";
-            const id = `${slugify(baseName)}-${Date.now()}`;
-            state.categories.push({ id, name: baseName, needed: 3, icon: "🍽️" });
-            saveState();
-            render();
-        }
-
-        function resetCategories() {
-            if (!confirm("Reset categories to the defaults? Existing sign-ups will be kept only where category names still match.")) return;
-            const oldSignups = state.signups;
-            const defaults = cloneDefaultState().categories;
-            state.categories = defaults;
-            state.signups = oldSignups.filter((entry) => defaults.some((cat) => cat.id === entry.categoryId));
-            saveState();
-            render();
-        }
-
-        function saveEventSettings() {
-            state.event.title = els.eventTitle.value.trim() || DEFAULT_STATE.event.title;
-            state.event.note = els.eventNote.value.trim() || DEFAULT_STATE.event.note;
-            state.event.date = els.eventDate.value.trim() || "Date TBD";
-            state.event.time = els.eventTime.value.trim() || DEFAULT_STATE.event.time;
-            state.event.location = els.eventLocation.value.trim() || "Location TBD";
-            state.event.heroImage = els.eventHeroImage.value.trim();
-            state.event.organizerEmail = els.organizerEmail.value.trim();
-            saveState();
-            render();
-            showStatus("Event details saved.", "success");
-        }
-
-        function handleHeroImage(file) {
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = () => {
-                state.event.heroImage = reader.result;
-                saveState();
-                render();
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function exportJson() {
-            downloadFile("linger-longer-signup.json", JSON.stringify(state, null, 2), "application/json");
-        }
-
-        function exportCsv() {
-            const rows = [["Category", "Name", "Email", "Phone", "Item", "Signed Up At"]];
-            state.signups.forEach((entry) => {
-                const cat = state.categories.find((item) => item.id === entry.categoryId);
-                rows.push([cat ? cat.name : entry.categoryId, entry.name, entry.email, entry.phone, entry.item, entry.createdAt]);
-            });
-            const csv = rows.map((row) => row.map((cell) => `"${String(cell ?? "").replace(/"/g, '""')}"`).join(",")).join("\n");
-            downloadFile("linger-longer-signups.csv", csv, "text/csv");
-        }
-
-        function downloadFile(filename, content, type) {
-            const blob = new Blob([content], { type });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement("a");
-            link.href = url;
-            link.download = filename;
-            document.body.appendChild(link);
-            link.click();
-            link.remove();
-            URL.revokeObjectURL(url);
-        }
-
-        function importJsonFile(file) {
-            if (isSharedMode()) {
-                showStatus("Import is disabled in shared mode. Edit the Google Sheet directly instead.", "error");
-                return;
-            }
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = () => {
-                try {
-                    state = normalizeState(JSON.parse(reader.result));
-                    saveState();
-                    render();
-                    showStatus("Imported sign-up sheet data.", "success");
-                } catch (error) {
-                    showStatus("Could not import that JSON file.", "error");
-                }
-            };
-            reader.readAsText(file);
-        }
-
-        function buildSharedUrl(params = {}) {
-            const url = new URL(SHARED_BACKEND_URL.trim());
-            Object.entries(params).forEach(([key, value]) => url.searchParams.set(key, value));
-            return url.toString();
-        }
-
-        function loadSharedData(options = {}) {
-            if (!isSharedMode()) return;
-            const callbackName = `lingerLongerShared_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+        function loadSharedData() {
+            const callbackName = `lingerLonger_${Date.now()}_${Math.random().toString(16).slice(2)}`;
             const script = document.createElement("script");
-
             window[callbackName] = (response) => {
                 delete window[callbackName];
                 script.remove();
-
-                if (!response || response.success === false) {
-                    showStatus(response && response.error ? response.error : "Could not load shared sign-ups.", "error");
-                    return;
-                }
-
-                applySharedPayload(response);
-                if (!options.quiet) showStatus("Loaded shared sign-ups from Google Sheets.", "success");
+                if (response && response.success !== false) applyPayload(response);
             };
-
             script.onerror = () => {
                 delete window[callbackName];
                 script.remove();
-                showStatus("Could not reach the Google Sheets backend. Local fallback data is still visible.", "error");
             };
-
-            script.src = buildSharedUrl({ action: "list", callback: callbackName, _: Date.now() });
+            const url = new URL(SHARED_BACKEND_URL);
+            url.searchParams.set("action", "list");
+            url.searchParams.set("callback", callbackName);
+            url.searchParams.set("_", Date.now());
+            script.src = url.toString();
             document.body.appendChild(script);
         }
 
-        function applySharedPayload(payload) {
-            state = normalizeState({
-                // Event details (title/date/note/hero) come from this published HTML,
-                // not the Google Sheet; only categories and sign-ups are shared.
-                event: DEFAULT_STATE.event,
-                categories: payload.categories || DEFAULT_STATE.categories,
-                signups: payload.signups || []
-            });
-            saveSharedCache(state);
-            render();
+        function cleanupSubmitForms() {
+            document.querySelectorAll("[data-shared-submit]").forEach((el) => el.remove());
         }
 
-        function appendHiddenInput(form, name, value) {
-            const input = document.createElement("input");
-            input.type = "hidden";
-            input.name = name;
-            input.value = value == null ? "" : String(value);
-            form.appendChild(input);
-        }
+        function submitSignup(entry) {
+            cleanupSubmitForms();
+            $("signup-submit").disabled = true;
+            showStatus("Saving your sign-up...", "success");
 
-        function cleanupSharedSubmitForms() {
-            document.querySelectorAll("[data-shared-submit]").forEach((element) => element.remove());
-        }
-
-        function submitSharedSignup(entry) {
-            cleanupSharedSubmitForms();
-            showStatus("Submitting your shared sign-up...", "success");
-            els.signupSubmit.disabled = true;
-
-            const frameName = `shared-signup-frame-${Date.now()}`;
+            const frameName = `signup-frame-${Date.now()}`;
             const iframe = document.createElement("iframe");
             iframe.name = frameName;
             iframe.hidden = true;
@@ -2305,22 +698,27 @@
 
             const form = document.createElement("form");
             form.method = "POST";
-            form.action = SHARED_BACKEND_URL.trim();
+            form.action = SHARED_BACKEND_URL;
             form.target = frameName;
             form.hidden = true;
             form.dataset.sharedSubmit = "true";
+            Object.entries({ action: "signup", ...entry, userAgent: navigator.userAgent || "" }).forEach(([name, value]) => {
+                const input = document.createElement("input");
+                input.type = "hidden";
+                input.name = name;
+                input.value = value;
+                form.appendChild(input);
+            });
 
-            appendHiddenInput(form, "action", "signup");
-            appendHiddenInput(form, "categoryId", entry.categoryId);
-            appendHiddenInput(form, "name", entry.name);
-            appendHiddenInput(form, "email", entry.email);
-            appendHiddenInput(form, "phone", entry.phone);
-            appendHiddenInput(form, "item", entry.item);
-            appendHiddenInput(form, "userAgent", navigator.userAgent || "");
-
-            document.body.appendChild(iframe);
-            document.body.appendChild(form);
+            document.body.append(iframe, form);
             form.submit();
+
+            window.clearTimeout(submitSignup.timer);
+            submitSignup.timer = window.setTimeout(() => {
+                if (!$("signup-submit").disabled) return;
+                $("signup-submit").disabled = false;
+                showStatus("This is taking longer than usual. Refresh in a moment to check whether your sign-up saved.", "error");
+            }, 20000);
         }
 
         function handleSharedMessage(event) {
@@ -2330,63 +728,99 @@
             }
             if (!data || data.source !== "linger-longer-potluck") return;
 
-            cleanupSharedSubmitForms();
-            els.signupSubmit.disabled = false;
+            window.clearTimeout(submitSignup.timer);
+            cleanupSubmitForms();
+            $("signup-submit").disabled = false;
+            if (data.payload) applyPayload(data.payload); else loadSharedData();
 
             if (data.success) {
-                els.signupForm.reset();
-                renderSignupItemOptions();
-                if (data.payload) applySharedPayload(data.payload);
-                else loadSharedData({ quiet: true });
-                showStatus(data.message || "Your shared sign-up was saved.", "success");
+                const name = $("signup-name").value.trim().split(/\s+/)[0];
+                $("signup-form").reset();
+                $("custom-label").hidden = true;
+                showStatus(`Thanks${name ? `, ${name}` : ""}! You're signed up. See you on October 11.`, "success");
             } else {
-                if (data.payload) applySharedPayload(data.payload);
-                else loadSharedData({ quiet: true });
-                showStatus(data.error || "Could not save that sign-up.", "error");
+                showStatus(data.error || "Could not save that sign-up. Please try again.", "error");
             }
         }
 
-        $("settings-toggle").addEventListener("click", () => {
-            els.settingsArea.classList.toggle("open");
-            $("settings-toggle").textContent = els.settingsArea.classList.contains("open") ? "Hide customize" : "Customize";
+        function onSubmit(event) {
+            event.preventDefault();
+            const [categoryId, presetDish] = $("signup-dish").value.split("|");
+            const item = (presetDish || $("signup-custom").value).trim();
+            const entry = {
+                categoryId,
+                name: $("signup-name").value.trim(),
+                email: $("signup-email").value.trim(),
+                phone: $("signup-phone").value.trim(),
+                item
+            };
+
+            if (!entry.name) return fail("Please enter your name.", "signup-name");
+            if (!/^\S+@\S+\.\S+$/.test(entry.email)) return fail("Please enter a valid email.", "signup-email");
+            if (entry.phone.replace(/\D/g, "").length < 7) return fail("Please enter a phone number.", "signup-phone");
+            if (!categoryId) return fail("Please choose what you're bringing.", "signup-dish");
+            if (!entry.item) return fail("Please describe your dish.", "signup-custom");
+            submitSignup(entry);
+        }
+
+        function fail(message, fieldId) {
+            showStatus(message, "error");
+            $(fieldId).focus();
+        }
+
+        function buildPrintRows() {
+            const box = `<span class="box"></span>`;
+            $("print-rows").innerHTML = Array.from({ length: 15 }, (_, i) =>
+                `<tr><td class="num">${i + 1}</td><td></td><td class="cb">${box}</td><td class="cb">${box}</td><td class="cb">${box}</td><td class="cb">${box}</td><td></td></tr>`
+            ).join("");
+        }
+
+        function setupCalendar() {
+            const google = new URL("https://calendar.google.com/calendar/render");
+            google.searchParams.set("action", "TEMPLATE");
+            google.searchParams.set("text", EVENT.title);
+            google.searchParams.set("dates", `${EVENT.startUtc}/${EVENT.endUtc}`);
+            google.searchParams.set("details", EVENT.details);
+            google.searchParams.set("location", EVENT.location);
+            $("google-cal-link").href = google.toString();
+
+            const btn = $("calendar-btn");
+            const menu = $("calendar-menu");
+            const setOpen = (open) => {
+                menu.hidden = !open;
+                btn.setAttribute("aria-expanded", String(open));
+            };
+            btn.addEventListener("click", (event) => {
+                event.stopPropagation();
+                setOpen(menu.hidden);
+                if (!menu.hidden) menu.querySelector("a").focus();
+            });
+            menu.addEventListener("click", () => setOpen(false));
+            document.addEventListener("click", (event) => {
+                if (!menu.hidden && !menu.contains(event.target)) setOpen(false);
+            });
+            document.addEventListener("keydown", (event) => {
+                if (event.key === "Escape" && !menu.hidden) {
+                    setOpen(false);
+                    btn.focus();
+                }
+            });
+        }
+
+        $("signup-dish").addEventListener("change", () => {
+            const isOther = $("signup-dish").value.endsWith("|");
+            $("custom-label").hidden = !isOther;
+            if (isOther) $("signup-custom").focus();
         });
-        $("save-event-settings").addEventListener("click", saveEventSettings);
-        $("hero-image-upload").addEventListener("change", (event) => handleHeroImage(event.target.files[0]));
-        $("clear-hero-image").addEventListener("click", () => { state.event.heroImage = ""; saveState(); render(); });
-        $("add-category").addEventListener("click", addCategory);
-        $("reset-categories").addEventListener("click", resetCategories);
-        $("export-json").addEventListener("click", exportJson);
-        $("export-csv").addEventListener("click", exportCsv);
-        $("import-json").addEventListener("click", () => els.importFile.click());
-        els.importFile.addEventListener("change", (event) => importJsonFile(event.target.files[0]));
-        $("print-sheet").addEventListener("click", () => window.print());
-        els.needsBanner.addEventListener("click", (event) => {
-            if (event.target.closest("[data-dismiss-needs-banner]")) dismissRemainingBanner();
-        });
-        els.modeNotice.addEventListener("click", (event) => {
-            if (event.target.closest("[data-dismiss-mode-notice]")) dismissNotice(MODE_NOTICE_DISMISS_KEY, els.modeNotice);
-        });
-        els.workflowPanel.addEventListener("click", (event) => {
-            if (event.target.closest("[data-dismiss-workflow-notice]")) dismissNotice(WORKFLOW_NOTICE_DISMISS_KEY, els.workflowPanel);
-        });
-        els.signupCategory.addEventListener("change", () => {
-            renderSignupItemOptions();
-            updateSignupFieldState();
-            if (els.signupCategory.value) {
-                expandedCategories.add(els.signupCategory.value);
-                renderCategoryCards();
-            }
-        });
-        els.signupItemChoice.addEventListener("change", () => {
-            syncItemFromChoice();
-            updateSignupFieldState();
-            if (els.signupItemChoice.value === CUSTOM_ITEM_VALUE) els.signupItem.focus();
-        });
-        els.signupForm.addEventListener("submit", addSignup);
+        $("signup-form").addEventListener("submit", onSubmit);
+        $("print-btn").addEventListener("click", () => window.print());
         window.addEventListener("message", handleSharedMessage);
 
+        renderDishOptions();
+        buildPrintRows();
+        setupCalendar();
         render();
-        loadSharedData({ quiet: true });
+        loadSharedData();
     </script>
 </body>
 

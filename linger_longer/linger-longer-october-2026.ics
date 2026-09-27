@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//wardmission.org//Linger Longer//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:linger-longer-2026-10-11@wardmission.org
+DTSTAMP:20260927T150000Z
+DTSTART:20261011T200000Z
+DTEND:20261011T213000Z
+SUMMARY:October Linger Longer: Soup & Bread
+DESCRIPTION:Bring a pot of soup\, some bread\, a dessert\, or a beverage to share. Sign up at https://www.wardmission.org/linger_longer/
+LOCATION:Sundance 1st Ward Cultural Hall
+URL:https://www.wardmission.org/linger_longer/
+BEGIN:VALARM
+TRIGGER:-PT2H
+ACTION:DISPLAY
+DESCRIPTION:Linger Longer: Soup & Bread today at 2 PM
+END:VALARM
+END:VEVENT
+END:VCALENDAR
