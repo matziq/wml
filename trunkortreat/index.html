@@ -2144,7 +2144,8 @@ Dinner is at 5:30 PM, with a costume contest at 6:00 PM, trunk decorating contes
             // people up for exists, so editing "Needed" in the sheet does not disable sign-ups.
             sharedCategoriesReady = Array.isArray(categories)
                 && DEFAULT_STATE.categories.every((expected) =>
-                    categories.some((cat) => cat && cat.id === expected.id && Number(cat.needed) > 0));
+                    categories.some((cat) => cat && cat.id === expected.id
+                        && Number.isInteger(Number(cat.needed)) && Number(cat.needed) >= 0));
             state = normalizeState({
                 // Event details (title/date/note/hero) come from this published HTML,
                 // not the Google Sheet; only categories and sign-ups are shared.

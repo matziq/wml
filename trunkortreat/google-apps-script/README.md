@@ -40,3 +40,24 @@ is `salad-or-side | Salad or Side | 15 | 🥗`, and change any `salads` / `sides
 
 Privacy matches the other ward sign-ups: the public page shows **name and item only**. Email and
 phone are written to the Google Sheet for the organizers and are never returned to the website.
+
+## Troubleshooting shared sign-ups
+
+The page gives each shared-sheet load 15 seconds and retries failed or stalled requests up to
+three times (after 2, 5, and 10 seconds). Sign-ups stay disabled until a valid response arrives;
+cached entries are for display only and never authorize an offline submission. After all
+attempts fail, the page displays an error asking the visitor to refresh.
+
+The `salad-or-side` category must exist in the backend response. Its nonnegative whole-number
+`Needed` value controls capacity; it does not have to match the HTML default of 15. A value of
+zero closes sign-ups. Unrelated category rows are not offered by this page.
+
+If loading still fails, check the browser's network errors and confirm the deployed web app is
+accessible to **Anyone**. If the required category is missing, reconcile the sheet using the
+setup instructions above. The frontend loading fix does not require a backend redeployment.
+
+Run the frontend regression tests from the repository root:
+
+```sh
+node --test trunkortreat/shared-load.test.cjs
+```
