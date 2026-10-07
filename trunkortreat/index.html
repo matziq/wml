@@ -1754,7 +1754,7 @@ Dinner is at 5:30 PM, with a costume contest at 6:00 PM, trunk decorating contes
             if (!sharedDataLoaded) {
                 message = "Loading. Please wait...";
             } else if (!sharedCategoriesReady) {
-                message = "Sign-ups are temporarily unavailable.";
+                message = "Could not load sign-ups. Please refresh the page.";
             } else {
                 const category = activeSignupCategory();
                 if (category) {
@@ -2077,20 +2077,46 @@ Dinner is at 5:30 PM, with a costume contest at 6:00 PM, trunk decorating contes
             return url.toString();
         }
 
+        const SHARED_LOAD_TIMEOUT_MS = 15000;
+        const SHARED_LOAD_RETRY_DELAYS_MS = [2000, 5000, 10000];
+
         function loadSharedData(options = {}) {
             if (!isSharedMode()) return;
+            const attempt = options.attempt || 0;
             const callbackName = `trunkOrTreatShared_${Date.now()}_${Math.random().toString(16).slice(2)}`;
             const script = document.createElement("script");
+            let settled = false;
+            let timeoutId;
 
-            window[callbackName] = (response) => {
-                delete window[callbackName];
+            const finish = () => {
+                if (settled) return false;
+                settled = true;
+                clearTimeout(timeoutId);
+                // Leave a no-op in place so a late JSONP response does not throw.
+                window[callbackName] = () => { delete window[callbackName]; };
                 script.remove();
+                return true;
+            };
 
-                if (!response || response.success === false) {
-                    markSharedDataLoaded();
-                    showStatus(response && response.error ? response.error : "Could not load shared sign-ups.", "error");
+            // Apps Script cold starts and transient errors are common; retry before giving up
+            // so one failed request does not leave sign-ups disabled.
+            const fail = (message) => {
+                if (!finish()) return;
+                if (attempt < SHARED_LOAD_RETRY_DELAYS_MS.length) {
+                    if (!sharedCategoriesReady) els.signupAvailability.textContent = "Loading. Please wait...";
+                    setTimeout(() => loadSharedData({ ...options, attempt: attempt + 1 }), SHARED_LOAD_RETRY_DELAYS_MS[attempt]);
                     return;
                 }
+                markSharedDataLoaded();
+                showStatus(message, "error");
+            };
+
+            window[callbackName] = (response) => {
+                if (!response || response.success === false) {
+                    fail(response && response.error ? response.error : "Could not load shared sign-ups. Please refresh the page.");
+                    return;
+                }
+                if (!finish()) return;
 
                 applySharedPayload(response);
                 if (!options.quiet && sharedCategoriesReady) {
@@ -2098,12 +2124,8 @@ Dinner is at 5:30 PM, with a costume contest at 6:00 PM, trunk decorating contes
                 }
             };
 
-            script.onerror = () => {
-                delete window[callbackName];
-                script.remove();
-                markSharedDataLoaded();
-                showStatus("Could not reach the Google Sheets backend. Local fallback data is still visible.", "error");
-            };
+            script.onerror = () => fail("Could not reach the sign-up sheet. Please check your connection and refresh the page.");
+            timeoutId = setTimeout(() => fail("The sign-up sheet is taking too long to respond. Please refresh the page."), SHARED_LOAD_TIMEOUT_MS);
 
             script.src = buildSharedUrl({ action: "list", callback: callbackName, _: Date.now() });
             document.body.appendChild(script);
@@ -2118,15 +2140,18 @@ Dinner is at 5:30 PM, with a costume contest at 6:00 PM, trunk decorating contes
         function applySharedPayload(payload) {
             sharedDataLoaded = true;
             const categories = payload.categories;
+            // Trust the sheet's slot counts; only require that every bucket this page signs
+            // people up for exists, so editing "Needed" in the sheet does not disable sign-ups.
             sharedCategoriesReady = Array.isArray(categories)
-                && categories.length === DEFAULT_STATE.categories.length
                 && DEFAULT_STATE.categories.every((expected) =>
-                    categories.some((cat) => cat.id === expected.id && Number(cat.needed) === expected.needed));
+                    categories.some((cat) => cat && cat.id === expected.id && Number(cat.needed) > 0));
             state = normalizeState({
                 // Event details (title/date/note/hero) come from this published HTML,
                 // not the Google Sheet; only categories and sign-ups are shared.
                 event: DEFAULT_STATE.event,
-                categories: sharedCategoriesReady ? categories : DEFAULT_STATE.categories,
+                categories: sharedCategoriesReady
+                    ? categories.filter((cat) => DEFAULT_STATE.categories.some((expected) => expected.id === cat.id))
+                    : DEFAULT_STATE.categories,
                 signups: payload.signups || []
             });
             saveSharedCache(state);
