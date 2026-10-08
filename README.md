@@ -19,6 +19,10 @@ activity.
 
 - Idea generator: `https://wardmission.org/love-share-invite.html`
 
+## Conference quotes
+
+- Notable quotes page: `https://wardmission.org/conference-quotes/`
+
 ## Lessons
 
 - Fifth Sunday lesson: `https://wardmission.org/fifth-sunday/`

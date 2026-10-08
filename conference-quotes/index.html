@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Notable quotes from the October 2026 General Conference, curated from The Salt Lake Tribune article.">
+  <meta name="theme-color" content="#5a3d2a">
+  <title>General Conference Quotes | WML</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <style>
+    :root {
+      --bg: #f5efe8;
+      --panel: rgba(255, 255, 255, 0.76);
+      --panel-strong: rgba(255, 255, 255, 0.92);
+      --ink: #2f201a;
+      --muted: #695c55;
+      --line: rgba(91, 64, 56, 0.18);
+      --accent: #8c5d3d;
+      --accent-strong: #5a3d2a;
+      --accent-soft: rgba(140, 93, 61, 0.12);
+      --gold: #c9a35f;
+      --gold-soft: rgba(201, 163, 95, 0.18);
+      --shadow: 0 24px 60px rgba(34, 23, 18, 0.08);
+      --link: #355d8a;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top, rgba(201, 163, 95, 0.2), transparent 28%),
+        linear-gradient(180deg, rgba(255,255,255,0.1), rgba(255,255,255,0.2)),
+        var(--bg);
+      line-height: 1.6;
+    }
+
+    a { color: var(--link); }
+    a:focus-visible {
+      outline: 3px solid rgba(53, 93, 138, 0.5);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(245, 239, 232, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar-inner,
+    main,
+    footer {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.9rem 0;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 0.9rem;
+      background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+      color: #fff;
+      box-shadow: 0 10px 18px rgba(90, 61, 42, 0.2);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1rem;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.92rem;
+      padding: 0.45rem 0.8rem;
+      border: 1px solid transparent;
+      border-radius: 999px;
+    }
+
+    .nav a:hover,
+    .nav a:focus-visible {
+      background: rgba(255,255,255,0.5);
+      border-color: var(--line);
+      color: var(--ink);
+    }
+
+    .nav .primary {
+      background: var(--accent-strong);
+      border-color: var(--accent-strong);
+      color: #fff;
+    }
+
+    main {
+      padding: 2.5rem 0 3.5rem;
+    }
+
+    .hero {
+      background: linear-gradient(180deg, rgba(255,255,255,0.58), rgba(255,255,255,0.72));
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: clamp(1.5rem, 3vw, 3rem);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "“";
+      position: absolute;
+      right: 2rem;
+      top: -1.3rem;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(7rem, 16vw, 15rem);
+      line-height: 1;
+      color: rgba(201, 163, 95, 0.15);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      margin: 0 0 0.8rem 0;
+      color: var(--accent-strong);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-size: 0.74rem;
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.6rem, 6vw, 5.1rem);
+      line-height: 0.97;
+      letter-spacing: -0.05em;
+      max-width: 14ch;
+    }
+
+    .lede {
+      max-width: 60ch;
+      margin-top: 1rem;
+      color: var(--muted);
+      font-size: 1.06rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1.6rem;
+    }
+
+    .chip {
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      background: var(--gold-soft);
+      border: 1px solid rgba(201, 163, 95, 0.45);
+      color: var(--accent-strong);
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .section-header {
+      margin: 2.4rem 0 1.2rem;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .section-header h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      letter-spacing: -0.04em;
+    }
+
+    .section-header p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .quotes {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .quote-card {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: start;
+      gap: 1rem;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 1.1rem 1rem 1rem 0.9rem;
+      box-shadow: 0 12px 35px rgba(43, 26, 20, 0.05);
+    }
+
+    .quote-number {
+      width: 2.3rem;
+      height: 2.3rem;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--gold-soft), rgba(255,255,255,0.6));
+      border: 1px solid rgba(201, 163, 95, 0.45);
+      color: var(--accent-strong);
+      font-weight: 800;
+      font-size: 0.86rem;
+    }
+
+    blockquote {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.15rem, 2vw, 1.5rem);
+      line-height: 1.38;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+    }
+
+    .attribution {
+      margin: 0.85rem 0 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+      font-weight: 600;
+    }
+
+    .source-note {
+      margin-top: 2.4rem;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 1.1rem 1.2rem;
+      background: rgba(255,255,255,0.62);
+      color: var(--muted);
+    }
+
+    .source-note strong {
+      color: var(--ink);
+    }
+
+    .disclaimer {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    footer {
+      padding: 0 0 3rem 0;
+      color: var(--muted);
+    }
+
+    .footline {
+      border-top: 1px solid var(--line);
+      padding-top: 1rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 640px) {
+      .topbar-inner,
+      .section-header,
+      .footline {
+        align-items: flex-start;
+      }
+
+      .quote-card {
+        grid-template-columns: 1fr;
+      }
+
+      .quote-number {
+        width: 2rem;
+        height: 2rem;
+      }
+
+      .nav {
+        width: 100%;
+      }
+
+      .nav a {
+        flex: 1 1 auto;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="../" aria-label="Return to WML home page">
+        <span class="brand-mark" aria-hidden="true">W</span>
+        <span>WML</span>
+      </a>
+      <nav class="nav" aria-label="Section navigation">
+        <a href="../">Home</a>
+        <a class="primary" href="https://www.sltrib.com/religion/2026/10/08/lds-general-conference-notable/" target="_blank" rel="noreferrer">Source article</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <p class="eyebrow">October 2026 General Conference</p>
+      <h1 id="page-title">General Conference Quotes</h1>
+      <p class="lede">A warm, reverent collection of notable remarks from the October 2026 LDS General Conference, as highlighted in The Salt Lake Tribune’s article on notable quotes.</p>
+      <div class="hero-meta" aria-label="Collection details">
+        <span class="chip">13 quotations</span>
+        <span class="chip">Curated and attributed</span>
+        <span class="chip">Unofficial reading list</span>
+      </div>
+    </section>
+
+    <div class="section-header">
+      <h2>Notable remarks</h2>
+      <p>Selected from the published conference highlights.</p>
+    </div>
+
+    <ol class="quotes" aria-label="Selected conference quotations">
+      <li class="quote-card">
+        <div class="quote-number" aria-hidden="true">1</div>
+        <div>
+          <blockquote>“Never let your secular learning limit your spiritual horizons.”</blockquote>
+          <p class="attribution">— President Dallin Oaks.</p>
+        </div>
+      </li>
+      <li class="quote-card">
+        <div class="quote-number" aria-hidden="true">2</div>
+        <div>
+          <blockquote>“[Prediction markets] could be tied to anything: interest rates, elections, sports, wildfires or even, if you can imagine, the timing of the Second Coming. Where do you go to collect on that bet?”</blockquote>
+          <p class="attribution">— President D. Todd Christofferson.</p>
+        </div>
+      </li>
+      <li class="quote-card">
+        <div class="quote-number" aria-hidden="true">3</div>
+        <div>
+          <blockquote>“I see you. More importantly, your Heavenly Father sees you.”</blockquote>
+          <p class="attribution">— Primary President Rosemary Chibota.</p>
+        </div>
+      </li>
+      <li class="quote-card">
+        <div class="quote-number" aria-hidden="true">4</div>
+        <div>
+          <blockquote>“It takes courage to stand for truth. It takes even more courage to stand for truth with love.”</blockquote>
+          <p class="attribution">— Apostle Clark Gilbert.</p>
+        </div>
+      </li>
+      <li class="quote-card">
+        <div class="quote-number" aria-hidden="true">5</div>
+        <div>
+          <blockquote>“We’re all going to get rained on. And sometimes we’re going to get pelted.”</blockquote>
+          <p class="attribution">— Young Women leader Tamara Ruina.</p>
+        </div>
+      </li>
+      <li class="quote-card">
+        <div class="quote-number" aria-hidden="true">6</div>
+        <div>
+          <blockquote>“Some may ask, ‘How can I teach everything in 25 minutes?’ Perhaps the better question is ‘How can I help those I teach connect to the Savior sooner?’”</blockquote>
+          <p class="attribution">— Sunday School leader Gabriel Reid.</p>
+        </div>
+      </li>
+      <li class="quote-card">
+        <div class="quote-number" aria-hidden="true">7</div>
+        <div>
+          <blockquote>“It is not our political views, culture or personal interests that unite us. It is our love for God and neighbor.”</blockquote>
+          <p class="attribution">— Apostle Dieter Uchtdorf.</p>
+        </div>
+      </li>
+      <li class="quote-card">
+        <div class="quote-number" aria-hidden="true">8</div>
+        <div>
+          <blockquote>“A few weeks ago, President Uchtdorf took me aside and said, ‘Patrick, your talks — they’re OK. But where’s the aviation?’”</blockquote>
+          <p class="attribution">— Apostle Patrick Kearon.</p>
+        </div>
+      </li>
+      <li class="quote-card">
+        <div class="quote-number" aria-hidden="true">9</div>
+        <div>
+          <blockquote>“A faithful spouse may ask, ‘Can the unrighteous exercise of moral agency by another person rob me of what God has promised?’ The answer to this question is an emphatic no!”</blockquote>
+          <p class="attribution">— Apostle David Bednar.</p>
+        </div>
+      </li>
+      <li class="quote-card">
+        <div class="quote-number" aria-hidden="true">10</div>
+        <div>
+          <blockquote>“Never, never, give up on those you love.”</blockquote>
+          <p class="attribution">— Apostle Ronald Rasband.</p>
+        </div>
+      </li>
+      <li class="quote-card">
+        <div class="quote-number" aria-hidden="true">11</div>
+        <div>
+          <blockquote>“Any use of the internet to bully, destroy a reputation or place a person in a bad light is reprehensible.”</blockquote>
+          <p class="attribution">— Apostle Quentin Cook.</p>
+        </div>
+      </li>
+      <li class="quote-card">
+        <div class="quote-number" aria-hidden="true">12</div>
+        <div>
+          <blockquote>“[Christ] turned ordinary encounters with people into extraordinary moments of healing, encouragement and transformation. To Jesus, these people were not interrupting his mission. They were his mission.”</blockquote>
+          <p class="attribution">— Seventy Timothy Farnes.</p>
+        </div>
+      </li>
+      <li class="quote-card">
+        <div class="quote-number" aria-hidden="true">13</div>
+        <div>
+          <blockquote>“Let us never speak of a temple as big or small, elaborate or plain.”</blockquote>
+          <p class="attribution">— Apostle Gerrit Gong.</p>
+        </div>
+      </li>
+    </ol>
+
+    <aside class="source-note" aria-label="Source note and disclaimer">
+      <strong>Source:</strong> <a href="https://www.sltrib.com/religion/2026/10/08/lds-general-conference-notable/" target="_blank" rel="noreferrer">Notable quotes from the October 2026 General Conference</a>, published by The Salt Lake Tribune on Oct. 8, 2026.
+      <p class="disclaimer">This is an unofficial curated collection for convenient reading and sharing. The quotations remain the property of their speakers and source article, and this page is provided as a reading aid rather than an official church publication.</p>
+    </aside>
+  </main>
+
+  <footer>
+    <div class="footline">
+      <span>WML conference quotes</span>
+      <span><a href="../">Back to WML</a></span>
+    </div>
+  </footer>
+</body>
+</html>
