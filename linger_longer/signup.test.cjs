@@ -10,7 +10,7 @@ const ids = ["chips", "beans", "guacamole", "toppings"].map((id) => `2026-11-01-
 const november = { categoryId: ids[0], name: "November Person", item: "Tortilla chips" };
 const october = { categoryId: "soup", name: "October Person", item: "Chowder" };
 const payload = (signups = []) => ({
-    success: true, categories: ids.map((id) => ({ id, active: true })), signups
+    success: true, categories: ids.map((id) => ({ id, name: id.split("-").at(-1), needed: 4, active: true })), signups
 });
 
 function harness(cache = {}) {
@@ -150,7 +150,7 @@ test("legacy backend never enables submission or carries October entries into di
     h.choose(ids[0]);
     h.submit();
     assert.equal(h.forms.length, 0);
-    assert.equal(h.storage.get("linger-longer-2026-11-01-cache-v1"), "[]");
+    assert.deepEqual(JSON.parse(h.storage.get("linger-longer-2026-11-01-cache-v1")).signups, []);
 });
 
 test("fresh complete categories enable submission and only exact November IDs are displayed and printed", () => {
@@ -167,8 +167,8 @@ test("fresh complete categories enable submission and only exact November IDs ar
 test("missing, inactive, malformed, and error responses fail closed", () => {
     for (const response of [
         null, { success: false }, {}, { categories: ids.map((id) => ({ id })) },
-        { ...payload(), categories: ids.slice(1).map((id) => ({ id })) },
-        { ...payload(), categories: ids.map((id) => ({ id, active: id !== ids[0] })) }
+        { ...payload(), categories: [] },
+        { ...payload(), categories: payload().categories.map((cat) => ({ ...cat, active: false })) }
     ]) {
         const h = harness();
         h.respond(payload());
@@ -255,7 +255,7 @@ test("validation and duplicate detection prevent unintended posts", () => {
     assert.match(h.get("signup-status").textContent, /enter your name/);
     h.get("signup-name").value = "November Person";
     h.submit();
-    assert.match(h.get("signup-status").textContent, /choose chips, beans, guacamole/);
+    assert.match(h.get("signup-status").textContent, /choose at least one contribution category/);
     h.choose(ids[0]);
     h.get("signup-email").value = "bad";
     h.submit();
@@ -264,4 +264,70 @@ test("validation and duplicate detection prevent unintended posts", () => {
     h.submit();
     assert.match(h.get("signup-status").textContent, /already signed up/);
     assert.equal(h.forms.length, 0);
+});
+
+const configuredCategories = [
+    ["sourcream", "Sour Cream", 2], ["beans", "Beans", 2],
+    ["jalapenos", "Jalapenos", 2], ["olives", "Black Olives", 1],
+    ["chips", "Tortilla Chips", 4], ["drinks", "Drinks", 3],
+    ["toppings", "Other Toppings", 2], ["guacamole", "Guacamole", 3]
+].map(([id, name, needed]) => ({ id: `2026-11-01-${id}`, name, needed, active: true }));
+
+test("all eight organizer categories use exact names and capacities across choices, stats, print, and cache", () => {
+    const h = harness();
+    const categories = configuredCategories.concat([
+        { id: "2026-10-11-soup", name: "Old soup", needed: 12 },
+        { id: "chips", name: "Legacy chips", needed: 4 },
+        { id: "2026-11-01-retired", name: "Retired", needed: 3, active: false }
+    ]);
+    h.respond({ categories, signups: [october] });
+    assert.equal(h.read("TYPES.length"), 8);
+    assert.equal(h.get("signup-submit").disabled, false);
+    for (const cat of configuredCategories) {
+        assert.match(h.get("type-options").innerHTML, new RegExp(`${cat.name} \\(${cat.needed} open\\)`));
+        assert.match(h.get("stats").innerHTML, new RegExp(`0 / ${cat.needed}`));
+        assert.match(h.get("print-needs").textContent, new RegExp(`${cat.name} \\(${cat.needed} needed\\)`));
+    }
+    const cached = JSON.parse(h.storage.get("linger-longer-2026-11-01-cache-v1"));
+    assert.equal(cached.categories.length, 8);
+    const offline = harness({ "linger-longer-2026-11-01-cache-v1": JSON.stringify(cached) });
+    assert.equal(offline.read("TYPES.length"), 8);
+    assert.equal(offline.get("signup-submit").disabled, true);
+});
+
+test("new November categories submit and print exact labels while full categories cannot post", () => {
+    const h = harness();
+    const categoryId = configuredCategories[0].id;
+    h.respond({ categories: configuredCategories, signups: [] });
+    h.get("signup-name").value = "New Person";
+    h.choose(categoryId);
+    h.submit();
+    h.fire(0);
+    const post = Object.fromEntries(h.forms[0].children.map((input) => [input.name, input.value]));
+    assert.equal(post.categoryId, categoryId);
+    assert.equal(post.item, "Sour Cream");
+    h.fire(2000);
+    h.respond({ categories: configuredCategories, signups: [{ ...post, item: "Sour Cream" }] });
+    assert.match(h.get("print-rows").innerHTML, /Sour Cream/);
+    assert.match(h.get("signup-status").textContent, /You're signed up/);
+    h.context.loadSharedData();
+    h.respond({ categories: configuredCategories.map((cat) => ({ ...cat, needed: 0 })), signups: [] });
+    assert.equal(h.get("signup-submit").disabled, true);
+    assert.match(h.get("signup-status").textContent, /All contribution spots are filled/);
+    h.choose(categoryId);
+    h.submit();
+    assert.match(h.get("signup-status").textContent, /category is full|categories is full/);
+    assert.equal(h.forms.length, 1);
+});
+
+test("invalid category capacities and injected labels do not bypass gating or HTML escaping", () => {
+    for (const needed of [-1, 1.5, "2", null]) {
+        const h = harness();
+        h.respond({ categories: [{ ...configuredCategories[0], needed }], signups: [] });
+        assert.equal(h.get("signup-submit").disabled, true);
+    }
+    const h = harness();
+    h.respond({ categories: [{ ...configuredCategories[0], name: '<img src=x onerror="bad">' }], signups: [] });
+    assert.doesNotMatch(h.get("type-options").innerHTML, /<img/);
+    assert.doesNotMatch(h.get("stats").innerHTML, /<img/);
 });

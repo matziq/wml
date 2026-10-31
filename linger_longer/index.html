@@ -584,27 +584,19 @@
                 <h1>November Linger Longer</h1>
                 <p class="print-theme">Nacho Bar</p>
                 <p><strong>Sunday, November 1, 2026 &middot; 2 PM</strong> &middot; Sundance 1st Ward Cultural Hall</p>
-                <p class="print-needs">Queso is provided! Bring chips, beans, guacamole, or other nacho toppings.</p>
+                <p class="print-needs" id="print-needs">Queso is provided! Bring chips, beans, guacamole, or other nacho toppings.</p>
                 <p class="print-count" id="print-count"></p>
             </header>
             <table class="print-table">
                 <colgroup>
                     <col style="width:0.3in" />
                     <col style="width:2.25in" />
-                    <col style="width:0.62in" />
-                    <col style="width:0.62in" />
-                    <col style="width:0.72in" />
-                    <col style="width:0.74in" />
                     <col />
                 </colgroup>
                 <thead>
                     <tr>
                         <th></th>
                         <th>Name</th>
-                        <th class="cb">Chips</th>
-                        <th class="cb">Beans</th>
-                        <th class="cb">Guac</th>
-                        <th class="cb">Other toppings</th>
                         <th>What are you bringing?</th>
                     </tr>
                 </thead>
@@ -635,7 +627,7 @@
 
         // Date-scoped CategoryIds isolate events even though the legacy backend ignores event parameters.
         // Never reuse or remap an earlier month's ids or commitments.
-        const TYPES = [
+        let TYPES = [
             {
                 id: `${EVENT_ID}-chips`, label: "Chips", plural: "Chips", placeholder: "e.g., tortilla chips"
             },
@@ -658,12 +650,43 @@
         function loadCache() {
             try {
                 const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || "[]");
+                if (cached && !Array.isArray(cached) && Array.isArray(cached.categories)) {
+                    const categories = normalizeCategories(cached.categories);
+                    if (categories.length) TYPES = categories;
+                    return normalizeSignups(cached.signups);
+                }
                 return normalizeSignups(cached);
             } catch (error) { return []; }
         }
 
         function saveCache() {
-            try { localStorage.setItem(CACHE_KEY, JSON.stringify(signups)); } catch (error) { /* storage unavailable */ }
+            try { localStorage.setItem(CACHE_KEY, JSON.stringify({
+                categories: TYPES.map((type) => ({ id: type.id, name: type.label, needed: type.needed })),
+                signups
+            })); } catch (error) { /* storage unavailable */ }
+        }
+
+        function normalizeCategories(categories) {
+            const seen = new Set();
+            return categories.filter((cat) => cat && typeof cat.id === "string"
+                && cat.id.startsWith(`${EVENT_ID}-`)
+                && /^[a-z0-9][a-z0-9-]*$/i.test(cat.id.slice(EVENT_ID.length + 1))
+                && cat.active !== false && cat.active !== "FALSE")
+                .filter((cat) => {
+                    if (seen.has(cat.id) || typeof cat.name !== "string" || !cat.name.trim()
+                        || !Number.isInteger(cat.needed) || cat.needed < 0) return false;
+                    seen.add(cat.id);
+                    return true;
+                })
+                .map((cat) => ({
+                    id: cat.id, label: cat.name.trim(), plural: cat.name.trim(),
+                    needed: cat.needed, placeholder: "Describe what you'll bring"
+                }));
+        }
+
+        function remaining(type) {
+            return type.needed === undefined ? null
+                : Math.max(0, type.needed - signups.filter((entry) => entry.categoryId === type.id).length);
         }
 
         function typeFor(categoryId) {
@@ -693,14 +716,15 @@
         }
 
         function renderTypeOptions() {
+            const chosen = selectedTypes();
             $("type-options").innerHTML = TYPES.map((type) => `
                 <label class="type-option">
-                    <input type="checkbox" name="signup-type" value="${type.id}" />
+                    <input type="checkbox" name="signup-type" value="${escapeHtml(type.id)}"
+                        ${chosen.includes(type.id) && remaining(type) !== 0 ? "checked" : ""}
+                        ${remaining(type) === 0 ? "disabled" : ""} />
                     <span class="type-box" aria-hidden="true"></span>
-                    <span>${type.label}</span>
+                    <span>${escapeHtml(type.label)}${remaining(type) === null ? "" : ` (${remaining(type)} open)`}</span>
                 </label>`).join("");
-
-            $("type-options").addEventListener("change", renderItemFields);
         }
 
         function selectedTypes() {
@@ -715,10 +739,11 @@
 
             $("item-fields").innerHTML = chosen.map((id) => {
                 const type = TYPES.find((t) => t.id === id);
+                if (!type) return "";
                 return `
-                    <label><span>What ${type.label.toLowerCase()} are you bringing? <span class="optional">(optional)</span></span>
-                        <input type="text" maxlength="80" data-item-for="${type.id}"
-                            placeholder="${type.placeholder}" value="${escapeHtml(previous[type.id] || "")}" />
+                    <label><span>What are you bringing for ${escapeHtml(type.label)}? <span class="optional">(optional)</span></span>
+                        <input type="text" maxlength="80" data-item-for="${escapeHtml(type.id)}"
+                            placeholder="${escapeHtml(type.placeholder)}" value="${escapeHtml(previous[type.id] || "")}" />
                     </label>`;
             }).join("");
         }
@@ -732,7 +757,7 @@
 
             $("stats").innerHTML = `
                 <div class="stat stat-total"><strong>${new Set(signups.map((e) => e.name.toLowerCase())).size}</strong><span>signed up</span></div>
-                ${TYPES.map((type) => `<div class="stat"><strong>${counts[type.id]}</strong><span>${counts[type.id] === 1 ? type.label : type.plural}</span></div>`).join("")}`;
+                ${TYPES.map((type) => `<div class="stat"><strong>${counts[type.id]}${type.needed === undefined ? "" : ` / ${type.needed}`}</strong><span>${escapeHtml(type.label)}</span></div>`).join("")}`;
 
             const list = $("signup-list");
             if (!signups.length) {
@@ -757,7 +782,7 @@
             list.innerHTML = Array.from(people.values())
                 .map((person) => {
                     const what = person.items
-                        .map(({ label, detail }) => `${label ? `<span class="tag">${label}</span>` : ""}${escapeHtml(detail)}`)
+                        .map(({ label, detail }) => `${label ? `<span class="tag">${escapeHtml(label)}</span>` : ""}${escapeHtml(detail)}`)
                         .join('<span class="sep"></span>');
                     return `<li><span class="who">${escapeHtml(person.name)}</span><span class="what">${what}</span></li>`;
                 })
@@ -777,12 +802,14 @@
                 $("signup-submit").disabled = true;
                 return false;
             }
-            backendCategoryIds = payload.categories
-                .filter((cat) => cat && cat.active !== false)
-                .map((cat) => String(cat.id));
-            backendReady = TYPES.every((type) => backendCategoryIds.includes(type.id));
-            $("signup-submit").disabled = !backendReady || Boolean(submitSignup.timer);
+            const categories = normalizeCategories(payload.categories);
+            backendReady = categories.length > 0;
+            backendCategoryIds = categories.map((type) => type.id);
+            if (backendReady) TYPES = categories;
             signups = normalizeSignups(payload.signups);
+            $("signup-submit").disabled = !backendReady || !TYPES.some((type) => remaining(type) !== 0) || Boolean(submitSignup.timer);
+            renderTypeOptions();
+            renderItemFields();
             saveCache();
             render();
             buildPrintRows();
@@ -803,7 +830,8 @@
                 const ready = applyPayload(response);
                 if (!ready) showStatus(response && response.success !== false ? UNAVAILABLE_MESSAGE
                     : "Couldn't load November sign-ups. Any displayed entries are cached. Refresh to try again, or use the printable sign-up sheet.", "error");
-                else if (!submitSignup.timer) showStatus("", "");
+                else if (!submitSignup.timer) showStatus(TYPES.some((type) => remaining(type) > 0)
+                    ? "" : "All contribution spots are filled. Thank you!", "");
                 if (done) done(ready);
             };
             const timeout = window.setTimeout(() => finish(null), 15000);
@@ -890,7 +918,7 @@
             window.clearInterval(submitSignup.timer);
             submitSignup.timer = null;
             cleanupSubmitForms();
-            $("signup-submit").disabled = !backendReady;
+            $("signup-submit").disabled = !backendReady || !TYPES.some((type) => remaining(type) !== 0);
 
             if (saved) {
                 const name = $("signup-name").value.trim().split(/\s+/)[0];
@@ -915,7 +943,7 @@
 
             if (!name) return fail("Please enter your name.", "signup-name");
             if (!chosen.length) {
-                showStatus("Please choose chips, beans, guacamole, or other toppings.", "error");
+                showStatus("Please choose at least one contribution category.", "error");
                 document.querySelector('input[name="signup-type"]').focus();
                 return;
             }
@@ -924,6 +952,10 @@
             // The sheet rejects any category it doesn't list, so catch that before a slow round trip.
             if (backendCategoryIds && chosen.some((id) => !backendCategoryIds.includes(id))) {
                 showStatus("Sign-ups aren't open yet for this month's categories. Please check back soon.", "error");
+                return;
+            }
+            if (chosen.some((id) => remaining(TYPES.find((type) => type.id === id)) === 0)) {
+                showStatus("One of your selected categories is full. Please choose another contribution.", "error");
                 return;
             }
             const already = chosen.filter((id) =>
@@ -935,7 +967,7 @@
             }
 
             // The sheet stores one category per row, so each chosen category is its own sign-up.
-            const entries = chosen.map((categoryId) => {
+            const entries = chosen.filter((id) => !already.includes(id)).map((categoryId) => {
                 const type = TYPES.find((t) => t.id === categoryId);
                 const field = document.querySelector(`[data-item-for="${categoryId}"]`);
                 return {
@@ -958,7 +990,8 @@
 
         // Prints everyone who has already signed up, then blank lines for the rest.
         function buildPrintRows() {
-            const box = (checked) => `<span class="box${checked ? " checked" : ""}"></span>`;
+            $("print-needs").textContent = "Queso is provided! " + TYPES.map((type) =>
+                `${type.label}${type.needed === undefined ? "" : ` (${type.needed} needed)`}`).join(", ") + ".";
             const people = new Map();
 
             signups
@@ -971,14 +1004,13 @@
                     const type = TYPES.find((t) => t.id === typeFor(entry.categoryId));
                     if (type) person.types.add(type.id);
                     const label = type ? type.label : "";
-                    if (entry.item && entry.item.toLowerCase() !== label.toLowerCase()) person.items.push(entry.item);
+                    person.items.push(label + (entry.item && entry.item.toLowerCase() !== label.toLowerCase() ? `: ${entry.item}` : ""));
                 });
 
             const filled = Array.from(people.values()).map((person, i) => `
                 <tr>
                     <td class="num">${i + 1}</td>
                     <td class="filled">${escapeHtml(person.name)}</td>
-                    ${TYPES.map((t) => `<td class="cb">${box(person.types.has(t.id))}</td>`).join("")}
                     <td class="filled">${escapeHtml(person.items.join(", "))}</td>
                 </tr>`);
 
@@ -987,7 +1019,6 @@
                 <tr>
                     <td class="num">${filled.length + i + 1}</td>
                     <td></td>
-                    ${TYPES.map(() => `<td class="cb">${box(false)}</td>`).join("")}
                     <td></td>
                 </tr>`);
 
@@ -1030,6 +1061,7 @@
         }
 
         $("signup-form").addEventListener("submit", onSubmit);
+        $("type-options").addEventListener("change", renderItemFields);
         $("print-btn").addEventListener("click", () => {
             buildPrintRows();
             window.print();
