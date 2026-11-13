@@ -116,8 +116,8 @@ test("December content and printable sheet show only confirmed event details", (
     assert.doesNotMatch(html, /November 1|Nacho Bar|Queso|linger-longer-november-2026\.ics/);
     assert.doesNotMatch(html, /calendar-btn|google-cal-link/);
     assert.equal(h.read("TYPES.length"), 4);
-    assert.match(html, /class="provided">Baked Potato's Provided/);
-    assert.match(h.get("print-needs").textContent, /Baked Potato's Provided/);
+    assert.match(html, /class="provided">Baked Potatoes Provided/);
+    assert.match(h.get("print-needs").textContent, /Baked Potatoes Provided/);
     assert.deepEqual(Array.from(h.read("TYPES"), (type) => [type.label, type.needed]), [
         ["Baked Potato Toppings", 8], ["Desserts", 8], ["Drinks", 7], ["Chips", 8]
     ]);

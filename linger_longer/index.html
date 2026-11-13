@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>December Linger Longer: Baked Potato Bar &amp; Christmas Cookie Exchange</title>
-    <meta name="description" content="Join the December Linger Longer on Sunday, December 6, 2026 at 2:00 PM in the Gym for a Baked Potato Bar and Christmas Cookie Exchange. Baked Potato's Provided." />
+    <meta name="description" content="Join the December Linger Longer on Sunday, December 6, 2026 at 2:00 PM in the Gym for a Baked Potato Bar and Christmas Cookie Exchange. Baked Potatoes Provided." />
     <meta name="theme-color" content="#09243a" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -504,7 +504,7 @@
                 <p class="eyebrow">Linger Longer Potluck</p>
                 <h1 id="event-title">December Linger Longer</h1>
                 <p class="hero-note"><strong>Baked Potato Bar &amp; Christmas Cookie Exchange</strong></p>
-                <p class="provided">Baked Potato's Provided</p>
+                <p class="provided">Baked Potatoes Provided</p>
                 <div class="hero-details">
                     <span class="chip chip-primary">Sunday, December 6, 2026</span>
                     <span class="chip">2:00 PM</span>
@@ -521,7 +521,7 @@
             </div>
         </section>
 
-        <p class="needs"><strong>Baked Potato's Provided</strong> &mdash; Sign up to bring toppings, desserts, drinks, or chips.</p>
+        <p class="needs"><strong>Baked Potatoes Provided</strong> &mdash; Sign up to bring toppings, desserts, drinks, or chips.</p>
 
         <img class="flyer" src="december-linger-longer-flyer.jpg" alt="December Linger Longer: Baked Potato Bar and Christmas Cookie Exchange, 2:00 PM in the Gym." />
 
@@ -576,7 +576,7 @@
                 <h1>December Linger Longer</h1>
                 <p class="print-theme">Baked Potato Bar &amp; Christmas Cookie Exchange</p>
                 <p><strong>Sunday, December 6, 2026 &middot; 2:00 PM</strong> &middot; In the Gym</p>
-                <p><strong>Baked Potato's Provided</strong></p>
+                <p><strong>Baked Potatoes Provided</strong></p>
                 <p class="print-needs" id="print-needs">Baked Potato Toppings: 8; Desserts: 8; Drinks: 7; Chips: 8 contributions needed.</p>
                 <p>About 10 servings per food contribution or 12 drinks per drink contribution.</p>
                 <p class="print-count" id="print-count"></p>
@@ -976,7 +976,7 @@
         // Prints everyone who has already signed up, then blank lines for the rest.
         function buildPrintRows() {
             $("print-needs").textContent = TYPES.length
-                ? "Baked Potato's Provided. Contribution categories: " + TYPES.map((type) =>
+                ? "Baked Potatoes Provided. Contribution categories: " + TYPES.map((type) =>
                     `${type.label}${type.needed === undefined ? "" : ` (${type.needed} needed)`}`).join(", ") + "."
                 : "Online sign-ups are not available yet.";
             const people = new Map();

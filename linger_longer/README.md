@@ -4,7 +4,7 @@ The public page is <https://wardmission.org/linger_longer/>; `/lingerlonger/`
 redirects there. The flyer announces a Baked Potato Bar and Christmas Cookie
 Exchange at **2:00 PM in the Gym**. The organizer confirmed **Sunday,
 December 6, 2026**, and that baked potatoes are provided. The page and printable
-sheet display the requested prominent note, "Baked Potato's Provided."
+sheet display the prominent note, "Baked Potatoes Provided."
 No calendar links are offered until the event duration is confirmed.
 
 ## Sign-up setup
