@@ -80,7 +80,7 @@ function harness(cache = {}, configured = true) {
         }
     });
     get("signup-submit").disabled = /id="signup-submit" disabled/.test(html);
-    vm.runInContext(configured ? script.replace('const EVENT_ID = null;', 'const EVENT_ID = "2026-11-01";') : script, context);
+    vm.runInContext(configured ? script.replace('const EVENT_ID = "2026-12-06";', 'const EVENT_ID = "2026-11-01";') : script, context);
     return {
         context, nodes, scripts, forms, timers, storage, get,
         read: (expression) => vm.runInContext(expression, context),
@@ -124,16 +124,30 @@ test("December content and printable sheet show only confirmed event details", (
     assert.equal(h.get("print-rows").innerHTML.match(/<tr>/g).length, 15);
 });
 
-test("unconfigured December cannot read, display, or submit prior event data", () => {
+test("December only enables submission after fresh December categories and excludes prior event data", () => {
     const h = harness({ "linger-longer-null-cache-v1": JSON.stringify([november]) }, false);
-    assert.equal(h.scripts.length, 0);
+    assert.equal(h.scripts.length, 1);
+    assert.equal(h.get("signup-submit").disabled, true);
     assert.equal(h.read("signups.length"), 0);
-    assert.equal(h.context.applyPayload(payload([november, october])), false);
+    h.respond(payload([november, october]));
+    assert.equal(h.read("backendReady"), false);
     h.get("signup-name").value = "New Person";
     h.choose(ids[0]);
     h.submit();
     assert.equal(h.forms.length, 0);
     assert.equal(h.get("signup-submit").disabled, true);
+    assert.doesNotMatch(h.get("print-rows").innerHTML, /November Person|October Person/);
+    const categories = Array.from(h.read("TYPES"), (type) => ({
+        id: type.id, name: type.label, needed: type.needed, active: true
+    }));
+    h.context.loadSharedData();
+    h.respond({ success: true, categories, signups: [november, october] });
+    assert.equal(h.get("signup-submit").disabled, false);
+    assert.equal(h.read("backendReady"), true);
+    assert.equal(h.read("signups.length"), 0);
+    assert.equal(h.forms.length, 0);
+    assert.equal(h.get("signup-form").hidden, false);
+    assert.equal(h.get("signup-pending").hidden, true);
     assert.doesNotMatch(h.get("print-rows").innerHTML, /November Person|October Person/);
 });
 

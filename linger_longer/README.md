@@ -9,9 +9,10 @@ No calendar links are offered until the event duration is confirmed.
 
 ## Sign-up setup
 
-Online sign-up is deliberately disabled: `EVENT_ID` is `null`, so the page
-does not query the backend, load event caches, or submit entries. A blank
-printable sign-up sheet is available instead. For about 75 attendees, the
+Online sign-up uses `EVENT_ID = "2026-12-06"`. Submission stays disabled until
+a fresh valid backend response provides active December categories. The page
+filters all reads, caches, print output, and writes to this event's category IDs.
+A printable sign-up sheet is also available. For about 75 attendees, the
 organizer approved these contribution quantities, planning for about 10 food
 servings or 12 drinks per contribution:
 
@@ -24,11 +25,10 @@ servings or 12 drinks per contribution:
 
 The existing Apps Script deployment ignores event/sheet parameters. Categories
 are managed in the private [Linger Longer Google Sheet](https://docs.google.com/spreadsheets/d/18HJiZ4goU4xTla5U9ICGlbZp7EpHWKMiV1d0XRbY-ZE/edit).
-Google Sheet browser access was denied during this update; no sheet changes were
-made. Before enabling December online sign-ups, add the four active, date-scoped
-categories above to the sheet. Set `EVENT_ID` to `2026-12-06` after that setup
-and verify the live categories and availability. Never submit fake production
-records to verify it.
+Direct Google Sheet browser access was denied; no sheet changes were made by this
+update. A subsequent read-only check of the public backend confirmed all four
+active December categories with the approved names and capacities above, allowing
+the frontend to be enabled. Never submit fake production records to verify it.
 Do not clear, delete, overwrite, or remap prior sign-up rows or category IDs.
 Backend source and deployment credentials are not stored in this repository.
 
@@ -42,7 +42,7 @@ node --test linger_longer/signup.test.cjs
 ```
 
 Tests execute the inline frontend script with a fake DOM and backend. They
-cover the disabled December state, event isolation, dynamic categories,
+cover December submission gating, event isolation, dynamic categories,
 capacities, cache behavior, submission gating and confirmation, print content,
 and load errors. Configured-backend tests use November fixture IDs only in the
 test harness, not in the live page.

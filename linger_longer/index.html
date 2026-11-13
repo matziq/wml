@@ -536,7 +536,7 @@
                     <li><strong>Chips:</strong> 8 contributions</li>
                 </ul>
                 <p>Please plan for about 10 servings per food contribution or about 12 drinks per drink contribution.</p>
-                <p id="signup-pending">Online sign-ups are not available yet. Please use the printable sign-up sheet in the meantime.</p>
+                <p id="signup-pending">Online sign-ups require JavaScript. Please use the printable sign-up sheet if online sign-up is unavailable.</p>
                 <noscript>Use your browser's print command to print the sign-up sheet.</noscript>
                 <form id="signup-form" novalidate hidden>
                     <label>Your name
@@ -603,7 +603,7 @@
     <script>
         // Google Apps Script web app backed by the Linger Longer Google Sheet.
         const SHARED_BACKEND_URL = "https://script.google.com/macros/s/AKfycbwZt-lr6VcrglwwyfHsqIW_an3_NZe9gaUHWm1UunIfuLGkAevqTMYvRll18W9KAq87GQ/exec";
-        const EVENT_ID = null;
+        const EVENT_ID = "2026-12-06";
         const CACHE_KEY = `linger-longer-${EVENT_ID}-cache-v1`;
         const UNAVAILABLE_MESSAGE = "Online sign-ups for December aren't open yet. The organizer needs to enable this event's categories. Please use the printable sign-up sheet in the meantime.";
         // The sheet rejects blank fields, so optional ones are sent as this instead.
@@ -1012,7 +1012,7 @@
             $("print-rows").innerHTML = filled.concat(empty).join("");
             $("print-count").textContent = filled.length
                 ? `${filled.length} signed up so far. Add your name on a blank line.`
-                : "Add your name on any line.";
+                : "Add your name on any line. Online commitments appear after December sign-ups load.";
         }
 
         $("signup-form").addEventListener("submit", onSubmit);
