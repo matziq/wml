@@ -109,14 +109,18 @@ function harness(cache = {}, configured = true) {
 
 test("December content and printable sheet show only confirmed event details", () => {
     const h = harness({}, false);
-    assert.match(html, /December 2026 &middot; date to be announced/);
+    assert.match(html, /Sunday, December 6, 2026/);
     assert.match(html, /Baked Potato Bar &amp; Christmas Cookie Exchange/);
     assert.match(html, /2:00 PM/);
     assert.match(html, /In the Gym/);
     assert.doesNotMatch(html, /November 1|Nacho Bar|Queso|linger-longer-november-2026\.ics/);
     assert.doesNotMatch(html, /calendar-btn|google-cal-link/);
-    assert.equal(h.read("TYPES.length"), 0);
-    assert.equal(h.get("print-needs").textContent, "Online sign-ups are not available yet.");
+    assert.equal(h.read("TYPES.length"), 4);
+    assert.match(html, /class="provided">Baked Potato's Provided/);
+    assert.match(h.get("print-needs").textContent, /Baked Potato's Provided/);
+    assert.deepEqual(Array.from(h.read("TYPES"), (type) => [type.label, type.needed]), [
+        ["Baked Potato Toppings", 8], ["Desserts", 8], ["Drinks", 7], ["Chips", 8]
+    ]);
     assert.equal(h.get("print-rows").innerHTML.match(/<tr>/g).length, 15);
 });
 

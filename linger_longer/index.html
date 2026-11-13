@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>December Linger Longer: Baked Potato Bar &amp; Christmas Cookie Exchange</title>
-    <meta name="description" content="Join the December 2026 Linger Longer for a Baked Potato Bar and Christmas Cookie Exchange at 2:00 PM in the Gym. The date is to be announced." />
+    <meta name="description" content="Join the December Linger Longer on Sunday, December 6, 2026 at 2:00 PM in the Gym for a Baked Potato Bar and Christmas Cookie Exchange. Baked Potato's Provided." />
     <meta name="theme-color" content="#09243a" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -175,6 +175,17 @@
         }
 
         .needs strong { color: var(--rust); }
+
+        .provided {
+            margin: 14px 0;
+            padding: 12px 18px;
+            border: 2px solid var(--gold);
+            border-radius: var(--radius);
+            background: var(--gold);
+            color: var(--bark);
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            font-weight: 700;
+        }
 
         .flyer { display: block; width: 100%; height: auto; margin: 20px 0; border-radius: var(--radius); }
 
@@ -493,8 +504,9 @@
                 <p class="eyebrow">Linger Longer Potluck</p>
                 <h1 id="event-title">December Linger Longer</h1>
                 <p class="hero-note"><strong>Baked Potato Bar &amp; Christmas Cookie Exchange</strong></p>
+                <p class="provided">Baked Potato's Provided</p>
                 <div class="hero-details">
-                    <span class="chip chip-primary">December 2026 &middot; date to be announced</span>
+                    <span class="chip chip-primary">Sunday, December 6, 2026</span>
                     <span class="chip">2:00 PM</span>
                     <span class="chip">In the Gym</span>
                     <button type="button" class="chip" id="print-btn" title="Print a paper sign-up sheet">
@@ -509,13 +521,21 @@
             </div>
         </section>
 
-        <p class="needs"><strong>Save the month!</strong> The exact date and online sign-up details have not yet been announced.</p>
+        <p class="needs"><strong>Baked Potato's Provided</strong> &mdash; Sign up to bring toppings, desserts, drinks, or chips.</p>
 
         <img class="flyer" src="december-linger-longer-flyer.jpg" alt="December Linger Longer: Baked Potato Bar and Christmas Cookie Exchange, 2:00 PM in the Gym." />
 
         <div class="layout">
             <section class="panel" aria-labelledby="signup-heading">
                 <h2 id="signup-heading">Sign up</h2>
+                <p>For about 75 people, we're looking for:</p>
+                <ul>
+                    <li><strong>Baked Potato Toppings:</strong> 8 contributions</li>
+                    <li><strong>Desserts:</strong> 8 contributions</li>
+                    <li><strong>Drinks:</strong> 7 contributions</li>
+                    <li><strong>Chips:</strong> 8 contributions</li>
+                </ul>
+                <p>Please plan for about 10 servings per food contribution or about 12 drinks per drink contribution.</p>
                 <p id="signup-pending">Online sign-ups are not available yet. Please use the printable sign-up sheet in the meantime.</p>
                 <noscript>Use your browser's print command to print the sign-up sheet.</noscript>
                 <form id="signup-form" novalidate hidden>
@@ -555,8 +575,10 @@
             <header class="print-head">
                 <h1>December Linger Longer</h1>
                 <p class="print-theme">Baked Potato Bar &amp; Christmas Cookie Exchange</p>
-                <p><strong>December 2026 (date to be announced) &middot; 2:00 PM</strong> &middot; In the Gym</p>
-                <p class="print-needs" id="print-needs">Online sign-ups are not available yet.</p>
+                <p><strong>Sunday, December 6, 2026 &middot; 2:00 PM</strong> &middot; In the Gym</p>
+                <p><strong>Baked Potato's Provided</strong></p>
+                <p class="print-needs" id="print-needs">Baked Potato Toppings: 8; Desserts: 8; Drinks: 7; Chips: 8 contributions needed.</p>
+                <p>About 10 servings per food contribution or 12 drinks per drink contribution.</p>
                 <p class="print-count" id="print-count"></p>
             </header>
             <table class="print-table">
@@ -591,7 +613,12 @@
 
         // Date-scoped CategoryIds isolate events even though the legacy backend ignores event parameters.
         // Never reuse or remap an earlier month's ids or commitments.
-        let TYPES = [];
+        let TYPES = [
+            { id: "2026-12-06-toppings", label: "Baked Potato Toppings", needed: 8 },
+            { id: "2026-12-06-desserts", label: "Desserts", needed: 8 },
+            { id: "2026-12-06-drinks", label: "Drinks", needed: 7 },
+            { id: "2026-12-06-chips", label: "Chips", needed: 8 }
+        ];
 
         const $ = (id) => document.getElementById(id);
         let signups = loadCache();
@@ -949,7 +976,7 @@
         // Prints everyone who has already signed up, then blank lines for the rest.
         function buildPrintRows() {
             $("print-needs").textContent = TYPES.length
-                ? "Contribution categories: " + TYPES.map((type) =>
+                ? "Baked Potato's Provided. Contribution categories: " + TYPES.map((type) =>
                     `${type.label}${type.needed === undefined ? "" : ` (${type.needed} needed)`}`).join(", ") + "."
                 : "Online sign-ups are not available yet.";
             const people = new Map();
