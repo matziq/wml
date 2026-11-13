@@ -14,14 +14,20 @@ a fresh valid backend response provides active December categories. The page
 filters all reads, caches, print output, and writes to this event's category IDs.
 A printable sign-up sheet is also available. For about 75 attendees, the
 organizer approved these contribution quantities, planning for about 10 food
-servings or 12 drinks per contribution:
+servings per topping or side contribution, or 12 drinks per drink contribution:
 
 | CategoryId | Name | Needed |
 |---|---|---|
-| `2026-12-06-toppings` | Baked Potato Toppings | 8 |
-| `2026-12-06-desserts` | Desserts | 8 |
-| `2026-12-06-drinks` | Drinks | 7 |
-| `2026-12-06-chips` | Chips | 8 |
+| `2026-12-06-toppings` | Baked Potato Toppings | 10 |
+| `2026-12-06-desserts` | Christmas Cookies | 20 |
+| `2026-12-06-drinks` | Drinks | 6 |
+| `2026-12-06-chips` | Sides | 4 |
+
+The organizer updated the existing dessert row to Christmas Cookies with 20
+total spots and confirmed the sheet's additional topping, drink, and side
+changes. Keep the existing `desserts` and `chips` IDs despite the new labels so
+existing commitments remain attached to their categories. No cookie serving
+quantity is specified.
 
 The existing Apps Script deployment ignores event/sheet parameters. Categories
 are managed in the private [Linger Longer Google Sheet](https://docs.google.com/spreadsheets/d/18HJiZ4goU4xTla5U9ICGlbZp7EpHWKMiV1d0XRbY-ZE/edit).

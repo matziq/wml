@@ -521,7 +521,7 @@
             </div>
         </section>
 
-        <p class="needs"><strong>Baked Potatoes Provided</strong> &mdash; Sign up to bring toppings, desserts, drinks, or chips.</p>
+        <p class="needs"><strong>Baked Potatoes Provided</strong> &mdash; Sign up to bring toppings, Christmas cookies, drinks, or sides.</p>
 
         <img class="flyer" src="december-linger-longer-flyer.jpg" alt="December Linger Longer: Baked Potato Bar and Christmas Cookie Exchange, 2:00 PM in the Gym." />
 
@@ -530,12 +530,12 @@
                 <h2 id="signup-heading">Sign up</h2>
                 <p>For about 75 people, we're looking for:</p>
                 <ul>
-                    <li><strong>Baked Potato Toppings:</strong> 8 contributions</li>
-                    <li><strong>Desserts:</strong> 8 contributions</li>
-                    <li><strong>Drinks:</strong> 7 contributions</li>
-                    <li><strong>Chips:</strong> 8 contributions</li>
+                    <li><strong>Baked Potato Toppings:</strong> 10 contributions</li>
+                    <li><strong>Christmas Cookies:</strong> 20 total signups</li>
+                    <li><strong>Drinks:</strong> 6 contributions</li>
+                    <li><strong>Sides:</strong> 4 contributions</li>
                 </ul>
-                <p>Please plan for about 10 servings per food contribution or about 12 drinks per drink contribution.</p>
+                <p>Please plan for about 10 servings per topping or side contribution, or about 12 drinks per drink contribution.</p>
                 <p id="signup-pending">Online sign-ups require JavaScript. Please use the printable sign-up sheet if online sign-up is unavailable.</p>
                 <noscript>Use your browser's print command to print the sign-up sheet.</noscript>
                 <form id="signup-form" novalidate hidden>
@@ -577,8 +577,8 @@
                 <p class="print-theme">Baked Potato Bar &amp; Christmas Cookie Exchange</p>
                 <p><strong>Sunday, December 6, 2026 &middot; 2:00 PM</strong> &middot; In the Gym</p>
                 <p><strong>Baked Potatoes Provided</strong></p>
-                <p class="print-needs" id="print-needs">Baked Potato Toppings: 8; Desserts: 8; Drinks: 7; Chips: 8 contributions needed.</p>
-                <p>About 10 servings per food contribution or 12 drinks per drink contribution.</p>
+                <p class="print-needs" id="print-needs">Baked Potato Toppings: 10; Christmas Cookies: 20; Drinks: 6; Sides: 4 contributions needed.</p>
+                <p>About 10 servings per topping or side contribution, or 12 drinks per drink contribution.</p>
                 <p class="print-count" id="print-count"></p>
             </header>
             <table class="print-table">
@@ -614,10 +614,10 @@
         // Date-scoped CategoryIds isolate events even though the legacy backend ignores event parameters.
         // Never reuse or remap an earlier month's ids or commitments.
         let TYPES = [
-            { id: "2026-12-06-toppings", label: "Baked Potato Toppings", needed: 8 },
-            { id: "2026-12-06-desserts", label: "Desserts", needed: 8 },
-            { id: "2026-12-06-drinks", label: "Drinks", needed: 7 },
-            { id: "2026-12-06-chips", label: "Chips", needed: 8 }
+            { id: "2026-12-06-toppings", label: "Baked Potato Toppings", needed: 10 },
+            { id: "2026-12-06-desserts", label: "Christmas Cookies", needed: 20 },
+            { id: "2026-12-06-drinks", label: "Drinks", needed: 6 },
+            { id: "2026-12-06-chips", label: "Sides", needed: 4 }
         ];
 
         const $ = (id) => document.getElementById(id);
