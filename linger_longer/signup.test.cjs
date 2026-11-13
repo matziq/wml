@@ -13,7 +13,7 @@ const payload = (signups = []) => ({
     success: true, categories: ids.map((id) => ({ id, name: id.split("-").at(-1), needed: 4, active: true })), signups
 });
 
-function harness(cache = {}) {
+function harness(cache = {}, configured = true) {
     const nodes = new Map();
     const scripts = [];
     const forms = [];
@@ -80,7 +80,7 @@ function harness(cache = {}) {
         }
     });
     get("signup-submit").disabled = /id="signup-submit" disabled/.test(html);
-    vm.runInContext(script, context);
+    vm.runInContext(configured ? script.replace('const EVENT_ID = null;', 'const EVENT_ID = "2026-11-01";') : script, context);
     return {
         context, nodes, scripts, forms, timers, storage, get,
         read: (expression) => vm.runInContext(expression, context),
@@ -107,36 +107,30 @@ function harness(cache = {}) {
     };
 }
 
-test("November content, categories, and print sheet consistently offer nacho contributions, not queso", () => {
-    const h = harness();
-    assert.match(html, /Sunday, November 1, 2026/);
-    assert.match(html, /<title>November Linger Longer: Nacho Bar Sign-Up/);
-    assert.match(html, /Queso will be provided/);
-    assert.match(html, /Queso is provided/);
-    assert.doesNotMatch(html, /October|Soup|Bread|Dessert|Beverage/);
-    assert.deepEqual(Array.from(h.read("TYPES"), (type) => type.id), ids);
-    assert.match(h.get("type-options").innerHTML, /Guacamole/);
-    assert.doesNotMatch(h.get("type-options").innerHTML, /Queso/);
+test("December content and printable sheet show only confirmed event details", () => {
+    const h = harness({}, false);
+    assert.match(html, /December 2026 &middot; date to be announced/);
+    assert.match(html, /Baked Potato Bar &amp; Christmas Cookie Exchange/);
+    assert.match(html, /2:00 PM/);
+    assert.match(html, /In the Gym/);
+    assert.doesNotMatch(html, /November 1|Nacho Bar|Queso|linger-longer-november-2026\.ics/);
+    assert.doesNotMatch(html, /calendar-btn|google-cal-link/);
+    assert.equal(h.read("TYPES.length"), 0);
+    assert.equal(h.get("print-needs").textContent, "Online sign-ups are not available yet.");
     assert.equal(h.get("print-rows").innerHTML.match(/<tr>/g).length, 15);
 });
 
-test("both calendars preserve 2 PM Phoenix, location, 90 minutes, and provided queso", () => {
-    const h = harness();
-    const google = new URL(h.get("google-cal-link").href);
-    assert.equal(google.searchParams.get("dates"), "20261101T210000Z/20261101T223000Z");
-    assert.equal(google.searchParams.get("text"), "November Linger Longer: Nacho Bar");
-    assert.match(google.searchParams.get("details"), /Queso is provided/);
-    assert.equal(google.searchParams.get("location"), "Sundance 1st Ward Cultural Hall");
-    const ics = fs.readFileSync(path.join(__dirname, "linger-longer-november-2026.ics"), "utf8");
-    assert.match(html, /href="linger-longer-november-2026.ics"/);
-    assert.match(ics, /DTSTART:20261101T210000Z/);
-    assert.match(ics, /DTEND:20261101T223000Z/);
-    assert.match(ics, /UID:linger-longer-2026-11-01@wardmission.org/);
-    assert.match(ics, /SUMMARY:November Linger Longer: Nacho Bar/);
-    const local = new Intl.DateTimeFormat("en-US", {
-        timeZone: "America/Phoenix", hour: "numeric", minute: "numeric", weekday: "long"
-    }).format(new Date("2026-11-01T21:00:00Z"));
-    assert.equal(local, "Sunday 2:00 PM");
+test("unconfigured December cannot read, display, or submit prior event data", () => {
+    const h = harness({ "linger-longer-null-cache-v1": JSON.stringify([november]) }, false);
+    assert.equal(h.scripts.length, 0);
+    assert.equal(h.read("signups.length"), 0);
+    assert.equal(h.context.applyPayload(payload([november, october])), false);
+    h.get("signup-name").value = "New Person";
+    h.choose(ids[0]);
+    h.submit();
+    assert.equal(h.forms.length, 0);
+    assert.equal(h.get("signup-submit").disabled, true);
+    assert.doesNotMatch(h.get("print-rows").innerHTML, /November Person|October Person/);
 });
 
 test("legacy backend never enables submission or carries October entries into display, print, or cache", () => {
@@ -186,7 +180,7 @@ test("event cache is filtered and never authorizes offline writes; October cache
         [oldKey]: oldValue,
         "linger-longer-2026-11-01-cache-v1": JSON.stringify([october, november])
     });
-    assert.equal(h.read("signups.length"), 1);
+    assert.equal(h.read("signups.length"), 0);
     assert.equal(h.get("signup-submit").disabled, true);
     h.scripts[0].onerror();
     assert.match(h.get("signup-status").textContent, /cached/);
@@ -230,7 +224,7 @@ test("real submit path sends date-scoped categories, preserves optional fields, 
     assert.doesNotMatch(h.get("signup-status").textContent, /You're signed up/);
     h.fire(2000);
     h.respond(payload(ids.slice(0, 2).map((categoryId) => ({ categoryId, name: "New Person", item: "Test contribution" }))));
-    assert.match(h.get("signup-status").textContent, /You're signed up. See you on November 1/);
+    assert.match(h.get("signup-status").textContent, /You're signed up for the December Linger Longer/);
     assert.equal(h.get("signup-submit").disabled, false);
     assert.equal(h.read("submitSignup.timer"), null);
 });
