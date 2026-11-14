@@ -19,13 +19,12 @@ servings per topping or side contribution, or 12 drinks per drink contribution:
 | CategoryId | Name | Needed |
 |---|---|---|
 | `2026-12-06-toppings` | Baked Potato Toppings | 10 |
-| `2026-12-06-desserts` | Christmas Cookies | 20 |
-| `2026-12-06-drinks` | Drinks | 6 |
-| `2026-12-06-chips` | Sides | 4 |
+| `2026-12-06-desserts` | Christmas Cookies | 99 |
+| `2026-12-06-drinks` | Drinks | 5 |
+| `2026-12-06-chips` | Sides | 5 |
 
-The organizer updated the existing dessert row to Christmas Cookies with 20
-total spots and confirmed the sheet's additional topping, drink, and side
-changes. Keep the existing `desserts` and `chips` IDs despite the new labels so
+The organizer updated the existing dessert row to Christmas Cookies. Keep the
+existing `desserts` and `chips` IDs despite the new labels so
 existing commitments remain attached to their categories. No cookie serving
 quantity is specified.
 

@@ -120,7 +120,7 @@ test("December content and printable sheet show only confirmed event details", (
     assert.match(html, /class="provided">Baked Potatoes Provided/);
     assert.match(h.get("print-needs").textContent, /Baked Potatoes Provided/);
     assert.deepEqual(Array.from(h.read("TYPES"), (type) => [type.label, type.needed]), [
-        ["Baked Potato Toppings", 10], ["Christmas Cookies", 20], ["Drinks", 6], ["Sides", 4]
+        ["Baked Potato Toppings", 10], ["Christmas Cookies", 99], ["Drinks", 5], ["Sides", 5]
     ]);
     assert.equal(h.get("print-rows").innerHTML.match(/<tr>/g).length, 15);
 });
@@ -138,7 +138,21 @@ test("topping guidance can be toggled without submitting a signup", () => {
     assert.equal(h.forms.length, 0);
 });
 
-test("cookie exchange preserves dessert category IDs and commitments while using 20 total spots", () => {
+test("cookie exchange guidance opens independently without submitting a signup", () => {
+    const h = harness({}, false);
+    const cookie = h.get("cookie-help-button");
+    const topping = h.get("topping-help-button");
+    assert.match(html, /aria-describedby="cookie-help-box"/);
+    assert.match(html, /For the Christmas cookie exchange, the idea is to bring a dozen cookies and swap for a dozen cookies\./);
+    cookie.listeners.click();
+    assert.equal(cookie.getAttribute("aria-expanded"), "true");
+    assert.notEqual(topping.getAttribute("aria-expanded"), "true");
+    cookie.listeners.click();
+    assert.equal(cookie.getAttribute("aria-expanded"), "false");
+    assert.equal(h.forms.length, 0);
+});
+
+test("cookie exchange preserves dessert category IDs and commitments while using 99 total spots", () => {
     const h = harness({}, false);
     const categoryId = "2026-12-06-desserts";
     const categories = Array.from(h.read("TYPES"), (type) => ({
@@ -146,9 +160,9 @@ test("cookie exchange preserves dessert category IDs and commitments while using
     }));
     const signups = [{ categoryId, name: "Existing Person", item: "Shortbread" }];
     h.respond({ success: true, categories, signups });
-    assert.match(h.get("type-options").innerHTML, /Christmas Cookies \(19 open\)/);
-    assert.match(h.get("stats").innerHTML, /1 \/ 20/);
-    assert.match(h.get("print-needs").textContent, /Christmas Cookies \(20 needed\)/);
+    assert.match(h.get("type-options").innerHTML, /Christmas Cookies \(98 open\)/);
+    assert.match(h.get("stats").innerHTML, /1 \/ 99/);
+    assert.match(h.get("print-needs").textContent, /Christmas Cookies \(99 needed\)/);
     assert.match(h.get("print-rows").innerHTML, /Existing Person/);
     assert.match(h.get("print-rows").innerHTML, /Christmas Cookies: Shortbread/);
     assert.equal(h.read("signups[0].categoryId"), categoryId);

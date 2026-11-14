@@ -205,9 +205,9 @@
 
         .panel h2 { font-size: 1.5rem; margin-bottom: 14px; color: var(--bark); }
 
-        .topping-help { position: relative; display: inline-block; }
+        .contribution-help { position: relative; display: inline-block; }
 
-        .topping-help button {
+        .contribution-help button {
             padding: 4px 0;
             border: 0;
             background: transparent;
@@ -219,9 +219,9 @@
             cursor: pointer;
         }
 
-        .topping-help button:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+        .contribution-help button:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
 
-        .topping-help-box {
+        .contribution-help-box {
             display: none;
             position: absolute;
             z-index: 5;
@@ -238,8 +238,8 @@
             font-weight: 400;
         }
 
-        .topping-help:hover .topping-help-box,
-        .topping-help button[aria-expanded="true"] + .topping-help-box { display: block; }
+        .contribution-help:hover .contribution-help-box,
+        .contribution-help button[aria-expanded="true"] + .contribution-help-box { display: block; }
 
         /* Form */
         form { display: grid; gap: 14px; }
@@ -566,13 +566,16 @@
                 <h2 id="signup-heading">Sign up</h2>
                 <p>We're looking for:</p>
                 <ul>
-                    <li><span class="topping-help">
+                    <li><span class="contribution-help">
                         <button type="button" id="topping-help-button" aria-expanded="false" aria-describedby="topping-help-box">Baked Potato Toppings:</button>
-                        <span class="topping-help-box" id="topping-help-box">Examples: bacon, cheese, sour cream, chives, ranch dressing, crispy onions, broccoli, and more. Please include what you are bringing so we can make sure we have enough toppings.</span>
+                        <span class="contribution-help-box" id="topping-help-box">Examples: bacon, cheese, sour cream, chives, ranch dressing, crispy onions, broccoli, and more. Please include what you are bringing so we can make sure we have enough toppings.</span>
                     </span> 10 contributions</li>
-                    <li><strong>Christmas Cookies:</strong> 20 total signups</li>
-                    <li><strong>Drinks:</strong> 6 contributions</li>
-                    <li><strong>Sides:</strong> 4 contributions</li>
+                    <li><span class="contribution-help">
+                        <button type="button" id="cookie-help-button" aria-expanded="false" aria-describedby="cookie-help-box">Christmas Cookies:</button>
+                        <span class="contribution-help-box" id="cookie-help-box">For the Christmas cookie exchange, the idea is to bring a dozen cookies and swap for a dozen cookies.</span>
+                    </span> 99 total signups</li>
+                    <li><strong>Drinks:</strong> 5 contributions</li>
+                    <li><strong>Sides:</strong> 5 contributions</li>
                 </ul>
                 <p>Please plan for about 10 servings per topping or side contribution, or about 12 drinks per drink contribution.</p>
                 <p id="signup-pending">Online sign-ups require JavaScript. Please use the printable sign-up sheet if online sign-up is unavailable.</p>
@@ -616,7 +619,7 @@
                 <p class="print-theme">Baked Potato Bar &amp; Christmas Cookie Exchange</p>
                 <p><strong>Sunday, December 6, 2026 &middot; 2:00 PM</strong> &middot; In the Gym</p>
                 <p><strong>Baked Potatoes Provided</strong></p>
-                <p class="print-needs" id="print-needs">Baked Potato Toppings: 10; Christmas Cookies: 20; Drinks: 6; Sides: 4 contributions needed.</p>
+                <p class="print-needs" id="print-needs">Baked Potato Toppings: 10; Christmas Cookies: 99; Drinks: 5; Sides: 5 contributions needed.</p>
                 <p>About 10 servings per topping or side contribution, or 12 drinks per drink contribution.</p>
                 <p class="print-count" id="print-count"></p>
             </header>
@@ -654,9 +657,9 @@
         // Never reuse or remap an earlier month's ids or commitments.
         let TYPES = [
             { id: "2026-12-06-toppings", label: "Baked Potato Toppings", needed: 10 },
-            { id: "2026-12-06-desserts", label: "Christmas Cookies", needed: 20 },
-            { id: "2026-12-06-drinks", label: "Drinks", needed: 6 },
-            { id: "2026-12-06-chips", label: "Sides", needed: 4 }
+            { id: "2026-12-06-desserts", label: "Christmas Cookies", needed: 99 },
+            { id: "2026-12-06-drinks", label: "Drinks", needed: 5 },
+            { id: "2026-12-06-chips", label: "Sides", needed: 5 }
         ];
 
         const $ = (id) => document.getElementById(id);
@@ -1056,9 +1059,11 @@
 
         $("signup-form").addEventListener("submit", onSubmit);
         $("type-options").addEventListener("change", renderItemFields);
-        $("topping-help-button").addEventListener("click", () => {
-            const button = $("topping-help-button");
-            button.setAttribute("aria-expanded", String(button.getAttribute("aria-expanded") !== "true"));
+        ["topping-help-button", "cookie-help-button"].forEach((id) => {
+            const button = $(id);
+            button.addEventListener("click", () => {
+                button.setAttribute("aria-expanded", String(button.getAttribute("aria-expanded") !== "true"));
+            });
         });
         $("print-btn").addEventListener("click", () => {
             buildPrintRows();
