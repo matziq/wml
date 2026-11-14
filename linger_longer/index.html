@@ -205,6 +205,42 @@
 
         .panel h2 { font-size: 1.5rem; margin-bottom: 14px; color: var(--bark); }
 
+        .topping-help { position: relative; display: inline-block; }
+
+        .topping-help button {
+            padding: 4px 0;
+            border: 0;
+            background: transparent;
+            color: inherit;
+            font: inherit;
+            font-weight: 700;
+            text-decoration: underline dotted;
+            text-underline-offset: 3px;
+            cursor: pointer;
+        }
+
+        .topping-help button:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+        .topping-help-box {
+            display: none;
+            position: absolute;
+            z-index: 5;
+            top: 100%;
+            left: 0;
+            width: min(320px, 75vw);
+            padding: 12px 14px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: var(--paper);
+            color: var(--ink);
+            box-shadow: 0 8px 24px rgba(9, 36, 58, 0.2);
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        .topping-help:hover .topping-help-box,
+        .topping-help button[aria-expanded="true"] + .topping-help-box { display: block; }
+
         /* Form */
         form { display: grid; gap: 14px; }
 
@@ -530,7 +566,10 @@
                 <h2 id="signup-heading">Sign up</h2>
                 <p>We're looking for:</p>
                 <ul>
-                    <li><strong>Baked Potato Toppings:</strong> 10 contributions</li>
+                    <li><span class="topping-help">
+                        <button type="button" id="topping-help-button" aria-expanded="false" aria-describedby="topping-help-box">Baked Potato Toppings:</button>
+                        <span class="topping-help-box" id="topping-help-box">Examples: bacon, cheese, sour cream, chives, ranch dressing, crispy onions, broccoli, and more. Please include what you are bringing so we can make sure we have enough toppings.</span>
+                    </span> 10 contributions</li>
                     <li><strong>Christmas Cookies:</strong> 20 total signups</li>
                     <li><strong>Drinks:</strong> 6 contributions</li>
                     <li><strong>Sides:</strong> 4 contributions</li>
@@ -1017,6 +1056,10 @@
 
         $("signup-form").addEventListener("submit", onSubmit);
         $("type-options").addEventListener("change", renderItemFields);
+        $("topping-help-button").addEventListener("click", () => {
+            const button = $("topping-help-button");
+            button.setAttribute("aria-expanded", String(button.getAttribute("aria-expanded") !== "true"));
+        });
         $("print-btn").addEventListener("click", () => {
             buildPrintRows();
             window.print();

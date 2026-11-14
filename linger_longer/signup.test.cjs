@@ -25,8 +25,9 @@ function harness(cache = {}, configured = true) {
     let now = Date.now();
     const node = () => ({
         innerHTML: "", textContent: "", value: "", disabled: false, hidden: true,
-        dataset: {}, children: [], attributes: {},
-        addEventListener() {}, focus() { this.focused = true; },
+        dataset: {}, children: [], attributes: {}, listeners: {},
+        addEventListener(name, callback) { this.listeners[name] = callback; }, focus() { this.focused = true; },
+        getAttribute(name) { return this.attributes[name] ?? null; },
         setAttribute(name, value) { this.attributes[name] = value; },
         appendChild(child) { this.children.push(child); },
         remove() { this.removed = true; },
@@ -122,6 +123,19 @@ test("December content and printable sheet show only confirmed event details", (
         ["Baked Potato Toppings", 10], ["Christmas Cookies", 20], ["Drinks", 6], ["Sides", 4]
     ]);
     assert.equal(h.get("print-rows").innerHTML.match(/<tr>/g).length, 15);
+});
+
+test("topping guidance can be toggled without submitting a signup", () => {
+    const h = harness({}, false);
+    const button = h.get("topping-help-button");
+    assert.match(html, /aria-describedby="topping-help-box"/);
+    assert.match(html, /bacon, cheese, sour cream, chives, ranch dressing, crispy onions, broccoli/);
+    assert.match(html, /Please include what you are bringing/);
+    button.listeners.click();
+    assert.equal(button.getAttribute("aria-expanded"), "true");
+    button.listeners.click();
+    assert.equal(button.getAttribute("aria-expanded"), "false");
+    assert.equal(h.forms.length, 0);
 });
 
 test("cookie exchange preserves dessert category IDs and commitments while using 20 total spots", () => {
