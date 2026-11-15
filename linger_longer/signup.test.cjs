@@ -151,7 +151,7 @@ test("cookie exchange guidance opens independently without submitting a signup",
     const cookie = h.get("cookie-help-button");
     const topping = h.get("topping-help-button");
     assert.match(html, /aria-describedby="cookie-help-box"/);
-    assert.match(html, /For the Christmas cookie exchange, the idea is to bring a dozen cookies and swap for a dozen cookies\./);
+    assert.match(html, /Each family brings:<br>•2–3 dozen cookies<br>•A serving plate<br>•A take-home container<br><br>Put all cookies on tables\. People sample the cookies\. Finally, everyone fills a container to take home\./);
     cookie.listeners.click();
     assert.equal(cookie.getAttribute("aria-expanded"), "true");
     assert.notEqual(topping.getAttribute("aria-expanded"), "true");
