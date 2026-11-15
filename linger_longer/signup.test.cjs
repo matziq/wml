@@ -146,6 +146,18 @@ test("topping guidance can be toggled without submitting a signup", () => {
     assert.equal(h.forms.length, 0);
 });
 
+test("link preview metadata advertises the December event with a compact JPEG", () => {
+    const meta = (attr, key) => html.match(new RegExp(`<meta ${attr}="${key}" content="([^"]+)"`))?.[1];
+    assert.match(meta("property", "og:title"), /^December Linger Longer/);
+    assert.match(meta("property", "og:description"), /December 6, 2026/);
+    const image = meta("property", "og:image");
+    assert.equal(image, meta("name", "twitter:image"));
+    const file = path.join(__dirname, path.basename(new URL(image).pathname));
+    const bytes = fs.readFileSync(file);
+    assert.deepEqual([...bytes.subarray(0, 3)], [0xff, 0xd8, 0xff]);
+    assert.ok(bytes.length < 600 * 1024);
+});
+
 test("cookie exchange guidance opens independently without submitting a signup", () => {
     const h = harness({}, false);
     const cookie = h.get("cookie-help-button");

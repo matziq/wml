@@ -7,6 +7,12 @@ December 6, 2026**, and that baked potatoes are provided. The page and printable
 sheet display the prominent note, "Baked Potatoes Provided."
 No calendar links are offered until the event duration is confirmed.
 
+Link previews use the Open Graph/Twitter tags in `index.html`, pointing to
+`december-linger-longer-preview.jpg` (1200×628 JPEG, under 600 KB). Update the
+tags and preview image with each new event. Preview services cache old scrapes;
+refresh them with a tool such as the Facebook Sharing Debugger, or share the
+link with a query string (for example `?dec`).
+
 ## Sign-up setup
 
 Online sign-up uses `EVENT_ID = "2026-12-06"`. Submission stays disabled until
