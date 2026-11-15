@@ -118,11 +118,19 @@ test("December content and printable sheet show only confirmed event details", (
     assert.doesNotMatch(html, /calendar-btn|google-cal-link/);
     assert.equal(h.read("TYPES.length"), 4);
     assert.match(html, /class="provided">Baked Potatoes Provided/);
+    assert.match(html, /<main class="page">\s*<h1 class="flyer"><img/);
+    assert.ok(html.indexOf('class="flyer"') < html.indexOf('class="provided"'));
+    assert.ok(html.indexOf('class="provided"') < html.indexOf('id="signup-heading"'));
+    assert.match(html, /id="print-btn">Print sign-up sheet<\/button>/);
     assert.match(h.get("print-needs").textContent, /Baked Potatoes Provided/);
     assert.deepEqual(Array.from(h.read("TYPES"), (type) => [type.label, type.needed]), [
         ["Baked Potato Toppings", 10], ["Christmas Cookies", 99], ["Drinks", 5], ["Sides", 5]
     ]);
     assert.equal(h.get("print-rows").innerHTML.match(/<tr>/g).length, 15);
+    let printed = false;
+    h.context.window.print = () => { printed = true; };
+    h.get("print-btn").listeners.click();
+    assert.equal(printed, true);
 });
 
 test("topping guidance can be toggled without submitting a signup", () => {

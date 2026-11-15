@@ -50,41 +50,6 @@
             padding: 16px 16px calc(40px + env(safe-area-inset-bottom));
         }
 
-        /* Hero */
-        .hero {
-            position: relative;
-            overflow: hidden;
-            border-radius: 20px;
-            min-height: 340px;
-            display: flex;
-            align-items: flex-end;
-            color: #fff;
-            background: var(--bark);
-        }
-
-        .hero::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, #123f51, #09243a 70%);
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            padding: 28px;
-            width: 100%;
-        }
-
-        .eyebrow {
-            margin: 0 0 4px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            color: #ffd9a0;
-        }
-
         h1, h2 {
             font-family: var(--display);
             font-weight: 400;
@@ -94,88 +59,7 @@
 
         h1 { font-size: clamp(2rem, 5.5vw, 3.4rem); }
 
-        .hero-note {
-            margin: 10px 0 18px;
-            max-width: 60ch;
-            font-size: 1.05rem;
-            color: #fbeede;
-        }
-
-        .hero-details {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            min-height: 44px;
-            padding: 8px 16px;
-            border-radius: 999px;
-            border: 1px solid rgba(255, 255, 255, 0.35);
-            background: rgba(255, 255, 255, 0.14);
-            color: #fff;
-            font: 600 0.95rem var(--body);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-        }
-
-        button.chip { cursor: pointer; }
-
-        button.chip:hover, button.chip:focus-visible { background: rgba(255, 255, 255, 0.26); }
-
-        .chip svg { width: 18px; height: 18px; flex: none; }
-
-        .chip-primary {
-            background: var(--gold);
-            border-color: var(--gold);
-            color: var(--bark);
-        }
-
-        button.chip-primary:hover, button.chip-primary:focus-visible { background: #f4b858; }
-
-        .cal-wrap { position: relative; }
-
-        .cal-menu {
-            position: absolute;
-            z-index: 20;
-            top: calc(100% + 8px);
-            left: 0;
-            min-width: 230px;
-            padding: 6px;
-            border-radius: 12px;
-            background: var(--paper);
-            box-shadow: 0 12px 32px rgba(40, 16, 6, 0.3);
-        }
-
-        .cal-menu a {
-            display: block;
-            padding: 12px 14px;
-            border-radius: 8px;
-            color: var(--ink);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .cal-menu a:hover, .cal-menu a:focus-visible { background: #f5e8d4; }
-
-        .cal-menu small { display: block; font-weight: 400; color: var(--muted); }
-
         /* Layout */
-        .needs {
-            margin: 20px 0;
-            padding: 16px 20px;
-            border-radius: var(--radius);
-            background: var(--paper);
-            border: 1px solid var(--line);
-            font-size: 1.1rem;
-        }
-
-        .needs strong { color: var(--rust); }
-
         .provided {
             margin: 14px 0;
             padding: 12px 18px;
@@ -187,7 +71,12 @@
             font-weight: 700;
         }
 
-        .flyer { display: block; width: 100%; height: auto; margin: 20px 0; border-radius: var(--radius); }
+        .provided-date { display: block; margin-top: 4px; font-size: 1rem; font-weight: 600; }
+
+        .flyer { margin: 0; }
+        .flyer img { display: block; width: 100%; height: auto; border-radius: var(--radius); }
+
+        .print-action { margin: 0 0 20px; padding: 0 18px; }
 
         .layout {
             display: grid;
@@ -409,24 +298,20 @@
 
         @media (max-width: 760px) {
             .page { padding: 10px 10px 32px; }
-            .hero { min-height: 300px; border-radius: 16px; }
-            .hero-content { padding: 20px 18px; }
             .layout { grid-template-columns: 1fr; }
             .panel { padding: 18px; }
             .stats { grid-template-columns: repeat(2, 1fr); }
-            .needs { font-size: 1rem; }
             .type-options { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (max-width: 420px) {
             .row-2 { grid-template-columns: 1fr; }
-            .chip { font-size: 0.9rem; padding: 8px 12px; }
             .signup-list li { flex-direction: column; gap: 0; }
             .signup-list .what { text-align: left; }
         }
 
         @media (prefers-reduced-motion: no-preference) {
-            .btn, .chip, .cal-menu a { transition: background-color 0.15s ease; }
+            .btn { transition: background-color 0.15s ease; }
         }
 
         /* Printable sign-up sheet */
@@ -535,31 +420,9 @@
 
 <body>
     <main class="page">
-        <section class="hero" aria-labelledby="event-title">
-            <div class="hero-content">
-                <p class="eyebrow">Linger Longer Potluck</p>
-                <h1 id="event-title">December Linger Longer</h1>
-                <p class="hero-note"><strong>Baked Potato Bar &amp; Christmas Cookie Exchange</strong></p>
-                <p class="provided">Baked Potatoes Provided</p>
-                <div class="hero-details">
-                    <span class="chip chip-primary">Sunday, December 6, 2026</span>
-                    <span class="chip">2:00 PM</span>
-                    <span class="chip">In the Gym</span>
-                    <button type="button" class="chip" id="print-btn" title="Print a paper sign-up sheet">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linejoin="round" aria-hidden="true">
-                            <path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2" />
-                            <rect x="6" y="14" width="12" height="7" />
-                        </svg>
-                        Print sign-up sheet
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <p class="needs"><strong>Baked Potatoes Provided</strong> &mdash; Sign up to bring toppings, Christmas cookies, drinks, or sides.</p>
-
-        <img class="flyer" src="december-linger-longer-flyer.jpg" alt="December Linger Longer: Baked Potato Bar and Christmas Cookie Exchange, 2:00 PM in the Gym." />
+        <h1 class="flyer"><img src="december-linger-longer-flyer.jpg" alt="December Linger Longer: Baked Potato Bar and Christmas Cookie Exchange, 2:00 PM in the Gym." /></h1>
+        <p class="provided">Baked Potatoes Provided <span class="provided-date">Sunday, December 6, 2026</span></p>
+        <button type="button" class="btn print-action" id="print-btn">Print sign-up sheet</button>
 
         <div class="layout">
             <section class="panel" aria-labelledby="signup-heading">
